@@ -1,3 +1,5 @@
 package org.jetbrains.kotlin.compiler.plugin.template
 
-public annotation class SomeAnnotation
+@MustBeDocumented
+@Target(AnnotationTarget.TYPE, AnnotationTarget.VALUE_PARAMETER)
+public annotation class K<A>
