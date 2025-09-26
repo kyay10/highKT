@@ -1,0 +1,73 @@
+FILE: simple.kt
+    package foo.bar
+
+    public abstract interface Functor<F> : R|kotlin/Any| {
+        public abstract fun <A, B> R|KindAttribute(coneType=A) F|.fmap(f: R|(A) -> B|): R|KindAttribute(coneType=B) F|
+
+    }
+    public abstract interface Monad<M> : R|foo/bar/Functor<M>| {
+        public abstract fun <A> pure(a: R|A|): R|KindAttribute(coneType=A) M|
+
+        public abstract fun <A, B> R|KindAttribute(coneType=A) M|.bind(f: R|(A) -> KindAttribute(coneType=B) M|): R|KindAttribute(coneType=B) M|
+
+        public open override fun <A, B> R|KindAttribute(coneType=A) M|.fmap(f: R|(A) -> B|): R|KindAttribute(coneType=B) M| {
+            ^fmap (this@R|foo/bar/Monad|, this@R|foo/bar/Monad.fmap|).R|foo/bar/Monad.bind|<R|A|, R|B|>(<L> = bind@fun <anonymous>(a: R|A|): R|KindAttribute(coneType=B) M| <inline=NoInline>  {
+                ^ this@R|foo/bar/Monad|.R|foo/bar/Monad.pure|<R|B|>(R|<local>/f|.R|SubstitutionOverride<kotlin/Function1.invoke: R|B|>|(R|<local>/a|))
+            }
+            )
+        }
+
+    }
+    public final object ListMonad : R|foo/bar/Monad<kotlin/collections/List<*>>| {
+        private constructor(): R|foo/bar/ListMonad| {
+            super<R|kotlin/Any|>()
+        }
+
+        public open override fun <A> pure(a: R|A|): R|kotlin/collections/List<A>| {
+            ^pure R|kotlin/collections/listOf|<R|A|>(R|<local>/a|)
+        }
+
+        public open override fun <A, B> R|KindAttribute(coneType=A) kotlin/collections/List<*>|.bind(f: R|(A) -> KindAttribute(coneType=B) kotlin/collections/List<*>|): R|kotlin/collections/List<B>| {
+            ^bind this@R|foo/bar/ListMonad.bind|.R|kotlin/collections/flatMap|<R|A|, R|B|>(R|<local>/f|)
+        }
+
+    }
+    public final fun box(): R|kotlin/String| {
+        ^box R|kotlin/context|<R|foo/bar/Functor<kotlin/collections/List<*>>|, R|kotlin/Nothing|>((Q|foo/bar/ListMonad| as R|foo/bar/Functor<kotlin/collections/List<*>>|), <L> = context(<unused var>: R|foo/bar/Functor<kotlin/collections/List<*>>|) context@fun <anonymous>(): R|kotlin/Nothing| <inline=Inline, kind=EXACTLY_ONCE>  {
+            lval result: R|kotlin/String| = context(R|<local>/<unused var>|) R|kotlin/collections/listOf|<R|kotlin/String|>(String(Hello)).R|foo/bar/fmap|<R|kotlin/collections/List<*>|, R|kotlin/String|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/String|): R|kotlin/String| <inline=NoInline>  {
+                ^ <strcat>(R|<local>/it|, String( world))
+            }
+            ).R|kotlin/collections/first|<R|kotlin/String|>()
+            ^box when () {
+                ==(R|<local>/result|, String(Hello world)) ->  {
+                    String(OK)
+                }
+                else ->  {
+                    <strcat>(String(Fail: ), R|<local>/result|)
+                }
+            }
+
+        }
+        )
+    }
+    context(functor: R|foo/bar/Functor<F>|)
+    public final fun <F, A, B> R|KindAttribute(coneType=A) F|.fmap(f: R|(A) -> B|): R|KindAttribute(coneType=B) F| {
+        ^fmap R|kotlin/with|<R|foo/bar/Functor<F>|, R|KindAttribute(coneType=B) F|>(R|<local>/functor|, <L> = with@fun R|foo/bar/Functor<F>|.<anonymous>(): R|KindAttribute(coneType=B) F| <inline=Inline, kind=EXACTLY_ONCE>  {
+            ^ (this@R|special/anonymous|, this@R|foo/bar/fmap|).R|SubstitutionOverride<foo/bar/Functor.fmap: R|KindAttribute(coneType=B) F|>|<R|A|, R|B|>(R|<local>/f|)
+        }
+        )
+    }
+    context(monad: R|foo/bar/Monad<M>|)
+    public final fun <M, A> pure(a: R|A|): R|KindAttribute(coneType=A) M| {
+        ^pure R|kotlin/with|<R|foo/bar/Monad<M>|, R|KindAttribute(coneType=A) M|>(R|<local>/monad|, <L> = with@fun R|foo/bar/Monad<M>|.<anonymous>(): R|KindAttribute(coneType=A) M| <inline=Inline, kind=EXACTLY_ONCE>  {
+            ^ this@R|special/anonymous|.R|SubstitutionOverride<foo/bar/Monad.pure: R|KindAttribute(coneType=A) M|>|<R|A|>(R|<local>/a|)
+        }
+        )
+    }
+    context(monad: R|foo/bar/Monad<M>|)
+    public final fun <M, A, B> R|KindAttribute(coneType=A) M|.bind(f: R|(A) -> KindAttribute(coneType=B) M|): R|KindAttribute(coneType=B) M| {
+        ^bind R|kotlin/with|<R|foo/bar/Monad<M>|, R|KindAttribute(coneType=B) M|>(R|<local>/monad|, <L> = with@fun R|foo/bar/Monad<M>|.<anonymous>(): R|KindAttribute(coneType=B) M| <inline=Inline, kind=EXACTLY_ONCE>  {
+            ^ (this@R|special/anonymous|, this@R|foo/bar/bind|).R|SubstitutionOverride<foo/bar/Monad.bind: R|KindAttribute(coneType=B) M|>|<R|A|, R|B|>(R|<local>/f|)
+        }
+        )
+    }

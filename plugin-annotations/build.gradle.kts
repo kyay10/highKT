@@ -21,6 +21,7 @@ kotlin {
 
     js().nodejs()
 
+    jvmToolchain(8)
     jvm()
 
     linuxArm64()
