@@ -9,7 +9,13 @@ import kotlin.contracts.contract
 @Target(AnnotationTarget.TYPE, AnnotationTarget.VALUE_PARAMETER)
 public annotation class K<A>
 
-public inline fun fixAll(vararg casts: Unit) {}
+public object FixAll {
+  public val fixAll: FixAll = FixAll
+}
+
+public inline fun fixAll(vararg casts: Unit): FixAll {
+  return FixAll
+}
 
 public inline fun <reified T> assertIsType(x: Any?) {
   contract {

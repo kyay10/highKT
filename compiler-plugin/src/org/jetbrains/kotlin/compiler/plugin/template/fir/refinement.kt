@@ -1,12 +1,32 @@
 package org.jetbrains.kotlin.compiler.plugin.template.fir
 
 import org.jetbrains.kotlin.KtSourceElement
+import org.jetbrains.kotlin.compiler.plugin.template.fir.KindReturnTypeRefinementExtension.Companion.ASSERT_IS_TYPE
+import org.jetbrains.kotlin.compiler.plugin.template.fir.KindReturnTypeRefinementExtension.Companion.PACKAGE_FQN
 import org.jetbrains.kotlin.fir.FirSession
+import org.jetbrains.kotlin.fir.declarations.FirDeclaration
+import org.jetbrains.kotlin.fir.declarations.FirDeclarationDataKey
+import org.jetbrains.kotlin.fir.declarations.FirDeclarationDataRegistry
+import org.jetbrains.kotlin.fir.declarations.FirFunction
 import org.jetbrains.kotlin.fir.expressions.FirFunctionCall
+import org.jetbrains.kotlin.fir.expressions.FirPropertyAccessExpression
+import org.jetbrains.kotlin.fir.expressions.FirStatement
+import org.jetbrains.kotlin.fir.expressions.FirVariableAssignment
 import org.jetbrains.kotlin.fir.expressions.UnresolvedExpressionTypeAccess
+import org.jetbrains.kotlin.fir.expressions.builder.buildArgumentList
+import org.jetbrains.kotlin.fir.expressions.builder.buildArgumentListCopy
+import org.jetbrains.kotlin.fir.expressions.builder.buildFunctionCall
+import org.jetbrains.kotlin.fir.expressions.builder.buildFunctionCallCopy
+import org.jetbrains.kotlin.fir.expressions.builder.buildPropertyAccessExpression
+import org.jetbrains.kotlin.fir.expressions.builder.buildThisReceiverExpression
+import org.jetbrains.kotlin.fir.extensions.FirAssignExpressionAltererExtension
 import org.jetbrains.kotlin.fir.extensions.FirExtensionApiInternals
 import org.jetbrains.kotlin.fir.extensions.FirFunctionCallRefinementExtension
+import org.jetbrains.kotlin.fir.references.FirResolvedNamedReference
+import org.jetbrains.kotlin.fir.references.builder.buildExplicitThisReference
+import org.jetbrains.kotlin.fir.references.builder.buildImplicitThisReference
 import org.jetbrains.kotlin.fir.references.builder.buildResolvedNamedReference
+import org.jetbrains.kotlin.fir.references.builder.buildSimpleNamedReference
 import org.jetbrains.kotlin.fir.resolve.calls.candidate.CallInfo
 import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.resolve.providers.symbolProvider
@@ -15,22 +35,32 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
+import org.jetbrains.kotlin.fir.types.builder.buildTypeProjectionWithVariance
+import org.jetbrains.kotlin.fir.types.coneType
 import org.jetbrains.kotlin.fir.types.coneTypeOrNull
 import org.jetbrains.kotlin.fir.types.isStarProjection
 import org.jetbrains.kotlin.fir.types.resolvedType
 import org.jetbrains.kotlin.fir.types.withArguments
 import org.jetbrains.kotlin.fir.types.withAttributes
+import org.jetbrains.kotlin.fir.types.withReplacedConeType
 import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.types.Variance
+
+internal object ContainingDeclarationsKey : FirDeclarationDataKey()
+
+internal var FirDeclaration.containingDeclarationsAtInterceptionPoint: Pair<FirNamedFunctionSymbol, List<FirDeclaration>>? by FirDeclarationDataRegistry.data(
+  ContainingDeclarationsKey
+)
+
 
 @OptIn(FirExtensionApiInternals::class)
 class KindReturnTypeRefinementExtension(session: FirSession) : FirFunctionCallRefinementExtension(session) {
   companion object {
-    private val PACKAGE_FQN = FqName("org.jetbrains.kotlin.compiler.plugin.template")
-    private val FIX_ALL = CallableId(PACKAGE_FQN, callableName = Name.identifier("fixAll"))
-    private val ASSERT_IS_TYPE = Name.identifier("assertIsType")
-    private val ASSERT_IS_TYPE_ID = CallableId(PACKAGE_FQN, callableName = ASSERT_IS_TYPE)
+    val PACKAGE_FQN = FqName("org.jetbrains.kotlin.compiler.plugin.template")
+    val FIX_ALL = CallableId(PACKAGE_FQN, callableName = Name.identifier("fixAll"))
+    val ASSERT_IS_TYPE = Name.identifier("assertIsType")
   }
 
   @OptIn(UnresolvedExpressionTypeAccess::class, SymbolInternals::class)
@@ -38,54 +68,25 @@ class KindReturnTypeRefinementExtension(session: FirSession) : FirFunctionCallRe
     callInfo: CallInfo,
     symbol: FirNamedFunctionSymbol
   ): CallReturnType? {
-    /*if (symbol.callableId == FIX_ALL) {
-      val assertTypeCalls = callInfo.containingDeclarations.flatMap {
-        if(it !is FirFunction) return@flatMap emptyList()
-        it.valueParameters.mapNotNull { valueParam ->
-          val newType = valueParam.returnTypeRef.coneType.applyKSomewhere(session) ?: return@mapNotNull null
-          buildFunctionCall {
-            source = callInfo.callSite.source
-            coneTypeOrNull = session.builtinTypes.unitType.coneType
-            calleeReference = buildResolvedNamedReference {
-              name = ASSERT_IS_TYPE
-              resolvedSymbol = assertIsTypeSymbol
-              source = callInfo.callSite.source
-            }
-            argumentList = buildArgumentListCopy(callInfo.argumentList) {
-              arguments.add(buildPropertyAccessExpression {
-                coneTypeOrNull = valueParam.returnTypeRef.coneType
-                calleeReference = buildResolvedNamedReference {
-                  name = valueParam.name
-                  resolvedSymbol = valueParam.symbol
-                }
-              })
-            }
-            typeArguments += listOf(buildTypeProjectionWithVariance {
-              typeRef = valueParam.returnTypeRef.withReplacedConeType(newType)
-              variance = Variance.INVARIANT
-            })
-          }
-        }
+    if (symbol.callableId == FIX_ALL) {
+      val declarations = callInfo.containingDeclarations
+      return CallReturnType(symbol.resolvedReturnTypeRef) {
+        it.fir.containingDeclarationsAtInterceptionPoint = symbol to declarations
       }
-      //(callInfo.argumentList.arguments as MutableList).addAll(assertTypeCalls)
-      return null
-    }*/
-    (callInfo.arguments + callInfo.explicitReceiver).forEach {
-      it ?: return@forEach
-      val newType = it.coneTypeOrNull?.applyKSomewhere(session) ?: return@forEach
-      it.replaceConeTypeOrNull(newType)
     }
     val returnType = symbol.fir.returnTypeRef.coneTypeOrNull
     returnType?.attributes?.kind ?: return null
-    return CallReturnType(symbol.resolvedReturnTypeRef) {
-
-    }
+    return CallReturnType(symbol.resolvedReturnTypeRef) {}
   }
 
   override fun transform(
     call: FirFunctionCall,
     originalSymbol: FirNamedFunctionSymbol
   ): FirFunctionCall {
+    if (originalSymbol.callableId == FIX_ALL) {
+      // will be handled in assignment alterer
+      return call
+    }
     call.replaceCalleeReference(buildResolvedNamedReference {
       name = originalSymbol.name
       source = originalSymbol.source
@@ -107,10 +108,6 @@ class KindReturnTypeRefinementExtension(session: FirSession) : FirFunctionCallRe
     call: FirFunctionCall,
     name: Name
   ) = null
-
-  val assertIsTypeSymbol by lazy {
-    session.symbolProvider.getTopLevelFunctionSymbols(PACKAGE_FQN, ASSERT_IS_TYPE).first() as FirFunctionSymbol<*>
-  }
 }
 
 private fun ConeKotlinType.applyKOnce(): ConeKotlinType? {
@@ -136,4 +133,75 @@ private fun ConeKotlinType.applyKSomewhere(session: FirSession): ConeKotlinType?
     }
   }.toTypedArray()
   return if (replacedAny) withArguments(replacedTypeArgs) else null
+}
+
+class FixAllAssignmentAlterer(session: FirSession) : FirAssignExpressionAltererExtension(session) {
+  @OptIn(SymbolInternals::class)
+  override fun transformVariableAssignment(variableAssignment: FirVariableAssignment): FirStatement? {
+    val fixAllCall = (variableAssignment.lValue as? FirPropertyAccessExpression)?.explicitReceiver as? FirFunctionCall
+      ?: return null
+    val (originalSymbol, containingDeclarations) =
+      ((fixAllCall.calleeReference as? FirResolvedNamedReference)?.resolvedSymbol as? FirFunctionSymbol<*>)
+        ?.fir?.containingDeclarationsAtInterceptionPoint
+        ?: return null
+    return buildFunctionCall {
+      coneTypeOrNull = variableAssignment.lValue.resolvedType
+      calleeReference = buildSimpleNamedReference {
+        name = originalSymbol.name
+      }
+      argumentList = buildArgumentList {
+        containingDeclarations.forEach {
+          if (it !is FirFunction) return@forEach
+          arguments.addAll((it.contextParameters + it.valueParameters).mapNotNull { valueParam ->
+            val newType = valueParam.returnTypeRef.coneType.applyKSomewhere(session) ?: return@mapNotNull null
+            buildFunctionCall {
+              coneTypeOrNull = session.builtinTypes.unitType.coneType
+              calleeReference = buildSimpleNamedReference {
+                name = ASSERT_IS_TYPE
+              }
+              argumentList = buildArgumentList {
+                arguments.add(buildPropertyAccessExpression {
+                  coneTypeOrNull = valueParam.returnTypeRef.coneType
+                  calleeReference = buildResolvedNamedReference {
+                    name = valueParam.name
+                    resolvedSymbol = valueParam.symbol
+                  }
+                })
+              }
+              typeArguments += listOf(buildTypeProjectionWithVariance {
+                typeRef = valueParam.returnTypeRef.withReplacedConeType(newType)
+                variance = Variance.INVARIANT
+              })
+            }
+          })
+          it.receiverParameter?.let { receiverParam ->
+            val newType = receiverParam.typeRef.coneType.applyKSomewhere(session) ?: return@let
+            arguments.add(buildFunctionCall {
+              coneTypeOrNull = session.builtinTypes.unitType.coneType
+              calleeReference = buildSimpleNamedReference {
+                name = ASSERT_IS_TYPE
+              }
+              argumentList = buildArgumentList {
+                arguments.add(buildThisReceiverExpression {
+                  coneTypeOrNull = receiverParam.typeRef.coneType
+                  calleeReference = buildExplicitThisReference {
+                  }.apply {
+                    replaceBoundSymbol(receiverParam.symbol)
+                  }
+                })
+              }
+              typeArguments += listOf(buildTypeProjectionWithVariance {
+                typeRef = receiverParam.typeRef.withReplacedConeType(newType)
+                variance = Variance.INVARIANT
+              })
+            })
+          }
+        }
+      }
+    }
+  }
+
+  val assertIsTypeSymbol by lazy {
+    session.symbolProvider.getTopLevelFunctionSymbols(PACKAGE_FQN, ASSERT_IS_TYPE).first() as FirFunctionSymbol<*>
+  }
 }

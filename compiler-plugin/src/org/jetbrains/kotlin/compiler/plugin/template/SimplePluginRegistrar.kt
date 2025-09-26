@@ -1,5 +1,6 @@
 package org.jetbrains.kotlin.compiler.plugin.template
 
+import org.jetbrains.kotlin.compiler.plugin.template.fir.FixAllAssignmentAlterer
 import org.jetbrains.kotlin.compiler.plugin.template.fir.KindAttributeExtension
 import org.jetbrains.kotlin.compiler.plugin.template.fir.KindReturnTypeRefinementExtension
 import org.jetbrains.kotlin.fir.extensions.FirExtensionApiInternals
@@ -10,5 +11,6 @@ class SimplePluginRegistrar : FirExtensionRegistrar() {
     override fun ExtensionRegistrarContext.configurePlugin() {
         +::KindAttributeExtension
         +::KindReturnTypeRefinementExtension
+        +::FixAllAssignmentAlterer
     }
 }

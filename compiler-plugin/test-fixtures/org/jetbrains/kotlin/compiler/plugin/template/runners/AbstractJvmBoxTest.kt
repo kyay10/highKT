@@ -2,6 +2,7 @@ package org.jetbrains.kotlin.compiler.plugin.template.runners
 
 import org.jetbrains.kotlin.compiler.plugin.template.services.ExtensionRegistrarConfigurator
 import org.jetbrains.kotlin.compiler.plugin.template.services.PluginAnnotationsProvider
+import org.jetbrains.kotlin.compiler.plugin.template.services.PluginRuntimeAnnotationsProvider
 import org.jetbrains.kotlin.test.FirParser
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
 import org.jetbrains.kotlin.test.directives.CodegenTestDirectives
@@ -42,6 +43,10 @@ open class AbstractJvmBoxTest : AbstractFirBlackBoxCodegenTestBase(FirParser.Lig
             useConfigurators(
                 ::PluginAnnotationsProvider,
                 ::ExtensionRegistrarConfigurator
+            )
+
+            useCustomRuntimeClasspathProviders(
+                ::PluginRuntimeAnnotationsProvider
             )
         }
     }

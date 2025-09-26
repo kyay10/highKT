@@ -1,4 +1,58 @@
 FILE fqName:foo.bar fileName:/simple.kt
+  CLASS CLASS name:PairFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<kotlin.Pair<L of foo.bar.PairFunctor, *>>]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.PairFunctor<L of foo.bar.PairFunctor>
+    TYPE_PARAMETER name:L index:0 variance: superTypes:[kotlin.Any?] reified:false
+    CONSTRUCTOR visibility:public returnType:foo.bar.PairFunctor<L of foo.bar.PairFunctor> [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:PairFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<kotlin.Pair<L of foo.bar.PairFunctor, *>>]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.Functor
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in foo.bar.Functor
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in foo.bar.Functor
+    FUN name:fmap visibility:public modality:OPEN returnType:@[K<B of foo.bar.PairFunctor.fmap>] kotlin.Pair<L of foo.bar.PairFunctor, *>
+      TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.PairFunctor<L of foo.bar.PairFunctor>
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:@[K<A of foo.bar.PairFunctor.fmap>] kotlin.Pair<L of foo.bar.PairFunctor, *>
+      VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.PairFunctor.fmap, B of foo.bar.PairFunctor.fmap>
+      overridden:
+        public abstract fun fmap <A, B> (<this>: @[K<A of foo.bar.Functor.fmap>] F of foo.bar.Functor, f: kotlin.Function1<A of foo.bar.Functor.fmap, B of foo.bar.Functor.fmap>): @[K<B of foo.bar.Functor.fmap>] F of foo.bar.Functor declared in foo.bar.Functor
+      BLOCK_BODY
+        TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
+          CALL 'public final fun fixAll (vararg casts: kotlin.Unit): org.jetbrains.kotlin.compiler.plugin.template.FixAll declared in org.jetbrains.kotlin.compiler.plugin.template' type=org.jetbrains.kotlin.compiler.plugin.template.FixAll origin=null
+            ARG casts: VARARG type=kotlin.Array<out kotlin.Unit> varargElementType=kotlin.Unit
+              CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in org.jetbrains.kotlin.compiler.plugin.template' type=kotlin.Unit origin=null
+                TYPE_ARG T: kotlin.Pair<L of foo.bar.PairFunctor, A of foo.bar.PairFunctor.fmap>
+                ARG x: GET_VAR '<this>(index:1): @[K<A of foo.bar.PairFunctor.fmap>] kotlin.Pair<L of foo.bar.PairFunctor, *> declared in foo.bar.PairFunctor.fmap' type=@[K<A of foo.bar.PairFunctor.fmap>] kotlin.Pair<L of foo.bar.PairFunctor, *> origin=null
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlin.Pair<L of foo.bar.PairFunctor, *> [val]
+          TYPE_OP type=kotlin.Pair<L of foo.bar.PairFunctor, A of foo.bar.PairFunctor.fmap> origin=IMPLICIT_CAST typeOperand=kotlin.Pair<L of foo.bar.PairFunctor, A of foo.bar.PairFunctor.fmap>
+            GET_VAR '<this>(index:1): @[K<A of foo.bar.PairFunctor.fmap>] kotlin.Pair<L of foo.bar.PairFunctor, *> declared in foo.bar.PairFunctor.fmap' type=@[K<A of foo.bar.PairFunctor.fmap>] kotlin.Pair<L of foo.bar.PairFunctor, *> origin=null
+        VAR name:l type:L of foo.bar.PairFunctor [val]
+          CALL 'public final fun component1 (): A of kotlin.Pair declared in kotlin.Pair' type=L of foo.bar.PairFunctor origin=COMPONENT_N(index=1)
+            ARG <this>: TYPE_OP type=kotlin.Pair<L of foo.bar.PairFunctor, A of foo.bar.PairFunctor.fmap> origin=IMPLICIT_CAST typeOperand=kotlin.Pair<L of foo.bar.PairFunctor, A of foo.bar.PairFunctor.fmap>
+              GET_VAR 'val tmp_0: kotlin.Pair<L of foo.bar.PairFunctor, *> declared in foo.bar.PairFunctor.fmap' type=kotlin.Pair<L of foo.bar.PairFunctor, *> origin=null
+        VAR name:a type:A of foo.bar.PairFunctor.fmap [val]
+          CALL 'public final fun component2 (): B of kotlin.Pair declared in kotlin.Pair' type=A of foo.bar.PairFunctor.fmap origin=COMPONENT_N(index=2)
+            ARG <this>: TYPE_OP type=kotlin.Pair<L of foo.bar.PairFunctor, A of foo.bar.PairFunctor.fmap> origin=IMPLICIT_CAST typeOperand=kotlin.Pair<L of foo.bar.PairFunctor, A of foo.bar.PairFunctor.fmap>
+              GET_VAR 'val tmp_0: kotlin.Pair<L of foo.bar.PairFunctor, *> declared in foo.bar.PairFunctor.fmap' type=kotlin.Pair<L of foo.bar.PairFunctor, *> origin=null
+        RETURN type=kotlin.Nothing from='public open fun fmap <A, B> (<this>: @[K<A of foo.bar.PairFunctor.fmap>] kotlin.Pair<L of foo.bar.PairFunctor, *>, f: kotlin.Function1<A of foo.bar.PairFunctor.fmap, B of foo.bar.PairFunctor.fmap>): @[K<B of foo.bar.PairFunctor.fmap>] kotlin.Pair<L of foo.bar.PairFunctor, *> declared in foo.bar.PairFunctor'
+          CALL 'public final fun to <A, B> (<this>: A of kotlin.to, that: B of kotlin.to): kotlin.Pair<A of kotlin.to, B of kotlin.to> declared in kotlin' type=kotlin.Pair<L of foo.bar.PairFunctor, B of foo.bar.PairFunctor.fmap> origin=null
+            TYPE_ARG A: L of foo.bar.PairFunctor
+            TYPE_ARG B: B of foo.bar.PairFunctor.fmap
+            ARG <this>: GET_VAR 'val l: L of foo.bar.PairFunctor declared in foo.bar.PairFunctor.fmap' type=L of foo.bar.PairFunctor origin=null
+            ARG that: CALL 'public abstract fun invoke (p1: P1 of kotlin.Function1): R of kotlin.Function1 declared in kotlin.Function1' type=B of foo.bar.PairFunctor.fmap origin=INVOKE
+              ARG <this>: GET_VAR 'f: kotlin.Function1<A of foo.bar.PairFunctor.fmap, B of foo.bar.PairFunctor.fmap> declared in foo.bar.PairFunctor.fmap' type=kotlin.Function1<A of foo.bar.PairFunctor.fmap, B of foo.bar.PairFunctor.fmap> origin=VARIABLE_AS_FUNCTION
+              ARG p1: GET_VAR 'val a: A of foo.bar.PairFunctor.fmap declared in foo.bar.PairFunctor.fmap' type=A of foo.bar.PairFunctor.fmap origin=null
   CLASS INTERFACE name:Functor modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Functor<F of foo.bar.Functor>
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -100,7 +154,7 @@ FILE fqName:foo.bar fileName:/simple.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun toString (): kotlin.String declared in foo.bar.Monad
-    FUN name:bind visibility:public modality:OPEN returnType:kotlin.collections.List<B of foo.bar.ListMonad.bind>
+    FUN name:bind visibility:public modality:OPEN returnType:@[K<B of foo.bar.ListMonad.bind>] kotlin.collections.List<*>
       TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
       TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.ListMonad
@@ -109,13 +163,23 @@ FILE fqName:foo.bar fileName:/simple.kt
       overridden:
         public abstract fun bind <A, B> (<this>: @[K<A of foo.bar.Monad.bind>] M of foo.bar.Monad, f: kotlin.Function1<A of foo.bar.Monad.bind, M of foo.bar.Monad>): @[K<B of foo.bar.Monad.bind>] M of foo.bar.Monad declared in foo.bar.Monad
       BLOCK_BODY
-        RETURN type=kotlin.Nothing from='public open fun bind <A, B> (<this>: @[K<A of foo.bar.ListMonad.bind>] kotlin.collections.List<*>, f: kotlin.Function1<A of foo.bar.ListMonad.bind, kotlin.collections.List<*>>): kotlin.collections.List<B of foo.bar.ListMonad.bind> declared in foo.bar.ListMonad'
+        TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
+          CALL 'public final fun fixAll (vararg casts: kotlin.Unit): org.jetbrains.kotlin.compiler.plugin.template.FixAll declared in org.jetbrains.kotlin.compiler.plugin.template' type=org.jetbrains.kotlin.compiler.plugin.template.FixAll origin=null
+            ARG casts: VARARG type=kotlin.Array<out kotlin.Unit> varargElementType=kotlin.Unit
+              CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in org.jetbrains.kotlin.compiler.plugin.template' type=kotlin.Unit origin=null
+                TYPE_ARG T: kotlin.Function1<A of foo.bar.ListMonad.bind, kotlin.collections.List<B of foo.bar.ListMonad.bind>>
+                ARG x: GET_VAR 'f: kotlin.Function1<A of foo.bar.ListMonad.bind, kotlin.collections.List<*>> declared in foo.bar.ListMonad.bind' type=kotlin.Function1<A of foo.bar.ListMonad.bind, kotlin.collections.List<*>> origin=null
+              CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in org.jetbrains.kotlin.compiler.plugin.template' type=kotlin.Unit origin=null
+                TYPE_ARG T: kotlin.collections.List<A of foo.bar.ListMonad.bind>
+                ARG x: GET_VAR '<this>(index:1): @[K<A of foo.bar.ListMonad.bind>] kotlin.collections.List<*> declared in foo.bar.ListMonad.bind' type=@[K<A of foo.bar.ListMonad.bind>] kotlin.collections.List<*> origin=null
+        RETURN type=kotlin.Nothing from='public open fun bind <A, B> (<this>: @[K<A of foo.bar.ListMonad.bind>] kotlin.collections.List<*>, f: kotlin.Function1<A of foo.bar.ListMonad.bind, kotlin.collections.List<*>>): @[K<B of foo.bar.ListMonad.bind>] kotlin.collections.List<*> declared in foo.bar.ListMonad'
           CALL 'public final fun flatMap <T, R> (<this>: kotlin.collections.Iterable<T of kotlin.collections.flatMap>, transform: kotlin.Function1<T of kotlin.collections.flatMap, kotlin.collections.Iterable<R of kotlin.collections.flatMap>>): kotlin.collections.List<R of kotlin.collections.flatMap> declared in kotlin.collections' type=kotlin.collections.List<B of foo.bar.ListMonad.bind> origin=null
             TYPE_ARG T: A of foo.bar.ListMonad.bind
             TYPE_ARG R: B of foo.bar.ListMonad.bind
             ARG <this>: TYPE_OP type=kotlin.collections.List<A of foo.bar.ListMonad.bind> origin=IMPLICIT_CAST typeOperand=kotlin.collections.List<A of foo.bar.ListMonad.bind>
-              GET_VAR '<this>(index:1): @[K<A of foo.bar.ListMonad.bind>] kotlin.collections.List<*> declared in foo.bar.ListMonad.bind' type=@[K<A of foo.bar.ListMonad.bind>] kotlin.collections.List<*> origin=null
-            ARG transform: GET_VAR 'f: kotlin.Function1<A of foo.bar.ListMonad.bind, kotlin.collections.List<*>> declared in foo.bar.ListMonad.bind' type=kotlin.Function1<A of foo.bar.ListMonad.bind, kotlin.collections.List<B of foo.bar.ListMonad.bind>> origin=null
+              GET_VAR '<this>(index:1): @[K<A of foo.bar.ListMonad.bind>] kotlin.collections.List<*> declared in foo.bar.ListMonad.bind' type=@[K<A of foo.bar.ListMonad.bind>] kotlin.collections.List<*> origin=IMPLICIT_ARGUMENT
+            ARG transform: TYPE_OP type=kotlin.Function1<A of foo.bar.ListMonad.bind, kotlin.collections.List<B of foo.bar.ListMonad.bind>> origin=IMPLICIT_CAST typeOperand=kotlin.Function1<A of foo.bar.ListMonad.bind, kotlin.collections.List<B of foo.bar.ListMonad.bind>>
+              GET_VAR 'f: kotlin.Function1<A of foo.bar.ListMonad.bind, kotlin.collections.List<*>> declared in foo.bar.ListMonad.bind' type=kotlin.Function1<A of foo.bar.ListMonad.bind, kotlin.collections.List<*>> origin=null
     FUN name:pure visibility:public modality:OPEN returnType:kotlin.collections.List<A of foo.bar.ListMonad.pure>
       TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.ListMonad
@@ -163,39 +227,24 @@ FILE fqName:foo.bar fileName:/simple.kt
             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Nothing
               VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:<unused var> index:0 type:foo.bar.Functor<kotlin.collections.List<*>>
               BLOCK_BODY
-                VAR name:result type:kotlin.String [val]
-                  CALL 'public final fun first <T> (<this>: kotlin.collections.List<T of kotlin.collections.first>): T of kotlin.collections.first declared in kotlin.collections' type=kotlin.String origin=null
-                    TYPE_ARG T: kotlin.String
-                    ARG <this>: CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: @[K<A of foo.bar.fmap>] F of foo.bar.fmap, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): F of foo.bar.fmap declared in foo.bar' type=kotlin.collections.List<kotlin.String> origin=null
-                      TYPE_ARG F: kotlin.collections.List<*>
-                      TYPE_ARG A: kotlin.String
-                      TYPE_ARG B: kotlin.String
-                      ARG functor: GET_VAR '<unused var>: foo.bar.Functor<kotlin.collections.List<*>> declared in foo.bar.box.<anonymous>' type=foo.bar.Functor<kotlin.collections.List<*>> origin=null
-                      ARG <this>: CALL 'public final fun listOf <T> (element: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<kotlin.String> origin=null
-                        TYPE_ARG T: kotlin.String
-                        ARG element: CONST String type=kotlin.String value="Hello"
-                      ARG f: FUN_EXPR type=kotlin.Function1<kotlin.String, kotlin.String> origin=LAMBDA
-                        FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String
-                          VALUE_PARAMETER kind:Regular name:it index:0 type:kotlin.String
-                          BLOCK_BODY
-                            RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: kotlin.String): kotlin.String declared in foo.bar.box.<anonymous>'
-                              STRING_CONCATENATION type=kotlin.String
-                                GET_VAR 'it: kotlin.String declared in foo.bar.box.<anonymous>.<anonymous>' type=kotlin.String origin=null
-                                CONST String type=kotlin.String value=" world"
+                VAR name:result type:kotlin.Boolean [val]
+                  WHEN type=kotlin.Boolean origin=ANDAND
+                    BRANCH
+                      if: CALL 'private final fun listExample (): kotlin.Boolean declared in foo.bar' type=kotlin.Boolean origin=null
+                      then: CALL 'private final fun pairExample (): kotlin.Boolean declared in foo.bar' type=kotlin.Boolean origin=null
+                    BRANCH
+                      if: CONST Boolean type=kotlin.Boolean value=true
+                      then: CONST Boolean type=kotlin.Boolean value=false
                 RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in foo.bar'
                   WHEN type=kotlin.String origin=IF
                     BRANCH
-                      if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-                        ARG arg0: GET_VAR 'val result: kotlin.String declared in foo.bar.box.<anonymous>' type=kotlin.String origin=null
-                        ARG arg1: CONST String type=kotlin.String value="Hello world"
+                      if: GET_VAR 'val result: kotlin.Boolean declared in foo.bar.box.<anonymous>' type=kotlin.Boolean origin=null
                       then: BLOCK type=kotlin.String origin=null
                         CONST String type=kotlin.String value="OK"
                     BRANCH
                       if: CONST Boolean type=kotlin.Boolean value=true
                       then: BLOCK type=kotlin.String origin=null
-                        STRING_CONCATENATION type=kotlin.String
-                          CONST String type=kotlin.String value="Fail: "
-                          GET_VAR 'val result: kotlin.String declared in foo.bar.box.<anonymous>' type=kotlin.String origin=null
+                        CONST String type=kotlin.String value="Fail"
   FUN name:fmap visibility:public modality:FINAL returnType:F of foo.bar.fmap
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
@@ -220,6 +269,85 @@ FILE fqName:foo.bar fileName:/simple.kt
                     ARG <this>(index:0): GET_VAR '$this$with: foo.bar.Functor<F of foo.bar.fmap> declared in foo.bar.fmap.<anonymous>' type=foo.bar.Functor<F of foo.bar.fmap> origin=IMPLICIT_ARGUMENT
                     ARG <this>(index:1): GET_VAR '<this>: @[K<A of foo.bar.fmap>] F of foo.bar.fmap declared in foo.bar.fmap' type=@[K<A of foo.bar.fmap>] F of foo.bar.fmap origin=IMPLICIT_ARGUMENT
                     ARG f: GET_VAR 'f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap> declared in foo.bar.fmap' type=kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap> origin=null
+  FUN name:listExample visibility:private modality:FINAL returnType:kotlin.Boolean
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='private final fun listExample (): kotlin.Boolean declared in foo.bar'
+        CALL 'public final fun context <T, R> (with: T of kotlin.context, block: @[ContextFunctionTypeParams(count = 1)] kotlin.Function1<T of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=kotlin.Boolean origin=null
+          TYPE_ARG T: foo.bar.Monad<kotlin.collections.List<*>>
+          TYPE_ARG R: kotlin.Boolean
+          ARG with: TYPE_OP type=foo.bar.Monad<kotlin.collections.List<*>> origin=CAST typeOperand=foo.bar.Monad<kotlin.collections.List<*>>
+            GET_OBJECT 'CLASS OBJECT name:ListMonad modality:FINAL visibility:public superTypes:[foo.bar.Monad<kotlin.collections.List<*>>]' type=foo.bar.ListMonad
+          ARG block: FUN_EXPR type=kotlin.Function1<foo.bar.Monad<kotlin.collections.List<*>>, kotlin.Boolean> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Boolean
+              VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:<unused var> index:0 type:foo.bar.Monad<kotlin.collections.List<*>>
+              BLOCK_BODY
+                VAR name:result type:kotlin.collections.List<kotlin.String> [val]
+                  CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: @[K<A of foo.bar.fmap>] F of foo.bar.fmap, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): F of foo.bar.fmap declared in foo.bar' type=kotlin.collections.List<kotlin.String> origin=null
+                    TYPE_ARG F: kotlin.collections.List<*>
+                    TYPE_ARG A: kotlin.String
+                    TYPE_ARG B: kotlin.String
+                    ARG functor: GET_VAR '<unused var>: foo.bar.Monad<kotlin.collections.List<*>> declared in foo.bar.listExample.<anonymous>' type=foo.bar.Monad<kotlin.collections.List<*>> origin=null
+                    ARG <this>: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<kotlin.String> origin=null
+                      TYPE_ARG T: kotlin.String
+                      ARG elements: VARARG type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String
+                        CONST String type=kotlin.String value="Hello"
+                        CONST String type=kotlin.String value="World"
+                    ARG f: FUN_EXPR type=kotlin.Function1<kotlin.String, kotlin.String> origin=LAMBDA
+                      FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String
+                        VALUE_PARAMETER kind:Regular name:str index:0 type:kotlin.String
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='local final fun <anonymous> (str: kotlin.String): kotlin.String declared in foo.bar.listExample.<anonymous>'
+                            STRING_CONCATENATION type=kotlin.String
+                              GET_VAR 'str: kotlin.String declared in foo.bar.listExample.<anonymous>.<anonymous>' type=kotlin.String origin=null
+                              CONST String type=kotlin.String value="!"
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> (<unused var>: foo.bar.Monad<kotlin.collections.List<*>>): kotlin.Boolean declared in foo.bar.listExample'
+                  CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                    ARG arg0: GET_VAR 'val result: kotlin.collections.List<kotlin.String> declared in foo.bar.listExample.<anonymous>' type=kotlin.collections.List<kotlin.String> origin=null
+                    ARG arg1: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<kotlin.String> origin=null
+                      TYPE_ARG T: kotlin.String
+                      ARG elements: VARARG type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String
+                        CONST String type=kotlin.String value="Hello!"
+                        CONST String type=kotlin.String value="World!"
+  FUN name:pairExample visibility:private modality:FINAL returnType:kotlin.Boolean
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='private final fun pairExample (): kotlin.Boolean declared in foo.bar'
+        CALL 'public final fun context <T, R> (with: T of kotlin.context, block: @[ContextFunctionTypeParams(count = 1)] kotlin.Function1<T of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=kotlin.Boolean origin=null
+          TYPE_ARG T: foo.bar.Functor<kotlin.Pair<kotlin.Int, *>>
+          TYPE_ARG R: kotlin.Boolean
+          ARG with: TYPE_OP type=foo.bar.Functor<kotlin.Pair<kotlin.Int, *>> origin=CAST typeOperand=foo.bar.Functor<kotlin.Pair<kotlin.Int, *>>
+            CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.PairFunctor' type=foo.bar.PairFunctor<kotlin.Int> origin=null
+              TYPE_ARG (of class) L: kotlin.Int
+          ARG block: FUN_EXPR type=kotlin.Function1<foo.bar.Functor<kotlin.Pair<kotlin.Int, *>>, kotlin.Boolean> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Boolean
+              VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:<unused var> index:0 type:foo.bar.Functor<kotlin.Pair<kotlin.Int, *>>
+              BLOCK_BODY
+                VAR name:result type:kotlin.Pair<kotlin.Int, kotlin.String> [val]
+                  CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: @[K<A of foo.bar.fmap>] F of foo.bar.fmap, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): F of foo.bar.fmap declared in foo.bar' type=kotlin.Pair<kotlin.Int, kotlin.String> origin=null
+                    TYPE_ARG F: kotlin.Pair<kotlin.Int, *>
+                    TYPE_ARG A: kotlin.String
+                    TYPE_ARG B: kotlin.String
+                    ARG functor: GET_VAR '<unused var>: foo.bar.Functor<kotlin.Pair<kotlin.Int, *>> declared in foo.bar.pairExample.<anonymous>' type=foo.bar.Functor<kotlin.Pair<kotlin.Int, *>> origin=null
+                    ARG <this>: CALL 'public final fun to <A, B> (<this>: A of kotlin.to, that: B of kotlin.to): kotlin.Pair<A of kotlin.to, B of kotlin.to> declared in kotlin' type=kotlin.Pair<kotlin.Int, kotlin.String> origin=null
+                      TYPE_ARG A: kotlin.Int
+                      TYPE_ARG B: kotlin.String
+                      ARG <this>: CONST Int type=kotlin.Int value=1
+                      ARG that: CONST String type=kotlin.String value="Hello"
+                    ARG f: FUN_EXPR type=kotlin.Function1<kotlin.String, kotlin.String> origin=LAMBDA
+                      FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String
+                        VALUE_PARAMETER kind:Regular name:str index:0 type:kotlin.String
+                        BLOCK_BODY
+                          RETURN type=kotlin.Nothing from='local final fun <anonymous> (str: kotlin.String): kotlin.String declared in foo.bar.pairExample.<anonymous>'
+                            STRING_CONCATENATION type=kotlin.String
+                              GET_VAR 'str: kotlin.String declared in foo.bar.pairExample.<anonymous>.<anonymous>' type=kotlin.String origin=null
+                              CONST String type=kotlin.String value="!"
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> (<unused var>: foo.bar.Functor<kotlin.Pair<kotlin.Int, *>>): kotlin.Boolean declared in foo.bar.pairExample'
+                  CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
+                    ARG arg0: GET_VAR 'val result: kotlin.Pair<kotlin.Int, kotlin.String> declared in foo.bar.pairExample.<anonymous>' type=kotlin.Pair<kotlin.Int, kotlin.String> origin=null
+                    ARG arg1: CALL 'public final fun to <A, B> (<this>: A of kotlin.to, that: B of kotlin.to): kotlin.Pair<A of kotlin.to, B of kotlin.to> declared in kotlin' type=kotlin.Pair<kotlin.Int, kotlin.String> origin=null
+                      TYPE_ARG A: kotlin.Int
+                      TYPE_ARG B: kotlin.String
+                      ARG <this>: CONST Int type=kotlin.Int value=1
+                      ARG that: CONST String type=kotlin.String value="Hello!"
   FUN name:pure visibility:public modality:FINAL returnType:M of foo.bar.pure
     TYPE_PARAMETER name:M index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false

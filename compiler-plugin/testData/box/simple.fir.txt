@@ -18,38 +18,6 @@ FILE: simple.kt
         }
 
     }
-    public final object ListMonad : R|foo/bar/Monad<kotlin/collections/List<*>>| {
-        private constructor(): R|foo/bar/ListMonad| {
-            super<R|kotlin/Any|>()
-        }
-
-        public open override fun <A> pure(a: R|A|): R|kotlin/collections/List<A>| {
-            ^pure R|kotlin/collections/listOf|<R|A|>(R|<local>/a|)
-        }
-
-        public open override fun <A, B> R|KindAttribute(coneType=A) kotlin/collections/List<*>|.bind(f: R|(A) -> KindAttribute(coneType=B) kotlin/collections/List<*>|): R|kotlin/collections/List<B>| {
-            ^bind this@R|foo/bar/ListMonad.bind|.R|kotlin/collections/flatMap|<R|A|, R|B|>(R|<local>/f|)
-        }
-
-    }
-    public final fun box(): R|kotlin/String| {
-        ^box R|kotlin/context|<R|foo/bar/Functor<kotlin/collections/List<*>>|, R|kotlin/Nothing|>((Q|foo/bar/ListMonad| as R|foo/bar/Functor<kotlin/collections/List<*>>|), <L> = context(<unused var>: R|foo/bar/Functor<kotlin/collections/List<*>>|) context@fun <anonymous>(): R|kotlin/Nothing| <inline=Inline, kind=EXACTLY_ONCE>  {
-            lval result: R|kotlin/String| = context(R|<local>/<unused var>|) R|kotlin/collections/listOf|<R|kotlin/String|>(String(Hello)).R|foo/bar/fmap|<R|kotlin/collections/List<*>|, R|kotlin/String|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/String|): R|kotlin/String| <inline=NoInline>  {
-                ^ <strcat>(R|<local>/it|, String( world))
-            }
-            ).R|kotlin/collections/first|<R|kotlin/String|>()
-            ^box when () {
-                ==(R|<local>/result|, String(Hello world)) ->  {
-                    String(OK)
-                }
-                else ->  {
-                    <strcat>(String(Fail: ), R|<local>/result|)
-                }
-            }
-
-        }
-        )
-    }
     context(functor: R|foo/bar/Functor<F>|)
     public final fun <F, A, B> R|KindAttribute(coneType=A) F|.fmap(f: R|(A) -> B|): R|KindAttribute(coneType=B) F| {
         ^fmap R|kotlin/with|<R|foo/bar/Functor<F>|, R|KindAttribute(coneType=B) F|>(R|<local>/functor|, <L> = with@fun R|foo/bar/Functor<F>|.<anonymous>(): R|KindAttribute(coneType=B) F| <inline=Inline, kind=EXACTLY_ONCE>  {
@@ -68,6 +36,70 @@ FILE: simple.kt
     public final fun <M, A, B> R|KindAttribute(coneType=A) M|.bind(f: R|(A) -> KindAttribute(coneType=B) M|): R|KindAttribute(coneType=B) M| {
         ^bind R|kotlin/with|<R|foo/bar/Monad<M>|, R|KindAttribute(coneType=B) M|>(R|<local>/monad|, <L> = with@fun R|foo/bar/Monad<M>|.<anonymous>(): R|KindAttribute(coneType=B) M| <inline=Inline, kind=EXACTLY_ONCE>  {
             ^ (this@R|special/anonymous|, this@R|foo/bar/bind|).R|SubstitutionOverride<foo/bar/Monad.bind: R|KindAttribute(coneType=B) M|>|<R|A|, R|B|>(R|<local>/f|)
+        }
+        )
+    }
+    public final object ListMonad : R|foo/bar/Monad<kotlin/collections/List<*>>| {
+        private constructor(): R|foo/bar/ListMonad| {
+            super<R|kotlin/Any|>()
+        }
+
+        public open override fun <A> pure(a: R|A|): R|kotlin/collections/List<A>| {
+            ^pure R|kotlin/collections/listOf|<R|A|>(R|<local>/a|)
+        }
+
+        public open override fun <A, B> R|KindAttribute(coneType=A) kotlin/collections/List<*>|.bind(f: R|(A) -> KindAttribute(coneType=B) kotlin/collections/List<*>|): R|KindAttribute(coneType=B) kotlin/collections/List<*>| {
+            R|org/jetbrains/kotlin/compiler/plugin/template/fixAll|(vararg(R|org/jetbrains/kotlin/compiler/plugin/template/assertIsType|<R|(A) -> kotlin/collections/List<B>|>(R|<local>/f|), R|org/jetbrains/kotlin/compiler/plugin/template/assertIsType|<R|kotlin/collections/List<A>|>(this@R|foo/bar/ListMonad.bind|)))
+            ^bind this@R|foo/bar/ListMonad.bind|.R|kotlin/collections/flatMap|<R|A|, R|B|>(R|<local>/f|)
+        }
+
+    }
+    private final fun listExample(): R|kotlin/Boolean| {
+        ^listExample R|kotlin/context|<R|foo/bar/Monad<kotlin/collections/List<*>>|, R|kotlin/Boolean|>((Q|foo/bar/ListMonad| as R|foo/bar/Monad<kotlin/collections/List<*>>|), <L> = context(<unused var>: R|foo/bar/Monad<kotlin/collections/List<*>>|) context@fun <anonymous>(): R|kotlin/Boolean| <inline=Inline, kind=EXACTLY_ONCE>  {
+            lval result: R|kotlin/collections/List<kotlin/String>| = context(R|<local>/<unused var>|) R|kotlin/collections/listOf|<R|kotlin/String|>(vararg(String(Hello), String(World))).R|foo/bar/fmap|<R|kotlin/collections/List<*>|, R|kotlin/String|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(str: R|kotlin/String|): R|kotlin/String| <inline=NoInline>  {
+                ^ <strcat>(R|<local>/str|, String(!))
+            }
+            )
+            ^ ==(R|<local>/result|, R|kotlin/collections/listOf|<R|kotlin/String|>(vararg(String(Hello!), String(World!))))
+        }
+        )
+    }
+    public final class PairFunctor<L> : R|foo/bar/Functor<kotlin/Pair<L, *>>| {
+        public constructor<L>(): R|foo/bar/PairFunctor<L>| {
+            super<R|kotlin/Any|>()
+        }
+
+        public open override fun <A, B> R|KindAttribute(coneType=A) kotlin/Pair<L, *>|.fmap(f: R|(A) -> B|): R|KindAttribute(coneType=B) kotlin/Pair<L, *>| {
+            R|org/jetbrains/kotlin/compiler/plugin/template/fixAll|(vararg(R|org/jetbrains/kotlin/compiler/plugin/template/assertIsType|<R|kotlin/Pair<L, A>|>(this@R|foo/bar/PairFunctor.fmap|)))
+            lval <destruct>: R|KindAttribute(coneType=A) kotlin/Pair<L, *>| = this@R|foo/bar/PairFunctor.fmap|
+            lval l: R|L| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component1: R|L|>|()
+            lval a: R|A| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component2: R|A|>|()
+            ^fmap R|<local>/l|.R|kotlin/to|<R|L|, R|B|>(R|<local>/f|.R|SubstitutionOverride<kotlin/Function1.invoke: R|B|>|(R|<local>/a|))
+        }
+
+    }
+    private final fun pairExample(): R|kotlin/Boolean| {
+        ^pairExample R|kotlin/context|<R|foo/bar/Functor<kotlin/Pair<kotlin/Int, *>>|, R|kotlin/Boolean|>((R|foo/bar/PairFunctor.PairFunctor|<R|kotlin/Int|>() as R|foo/bar/Functor<kotlin/Pair<kotlin/Int, *>>|), <L> = context(<unused var>: R|foo/bar/Functor<kotlin/Pair<kotlin/Int, *>>|) context@fun <anonymous>(): R|kotlin/Boolean| <inline=Inline, kind=EXACTLY_ONCE>  {
+            lval result: R|kotlin/Pair<kotlin/Int, kotlin/String>| = context(R|<local>/<unused var>|) Int(1).R|kotlin/to|<R|kotlin/Int|, R|kotlin/String|>(String(Hello)).R|foo/bar/fmap|<R|kotlin/Pair<kotlin/Int, *>|, R|kotlin/String|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(str: R|kotlin/String|): R|kotlin/String| <inline=NoInline>  {
+                ^ <strcat>(R|<local>/str|, String(!))
+            }
+            )
+            ^ ==(R|<local>/result|, Int(1).R|kotlin/to|<R|kotlin/Int|, R|kotlin/String|>(String(Hello!)))
+        }
+        )
+    }
+    public final fun box(): R|kotlin/String| {
+        ^box R|kotlin/context|<R|foo/bar/Functor<kotlin/collections/List<*>>|, R|kotlin/Nothing|>((Q|foo/bar/ListMonad| as R|foo/bar/Functor<kotlin/collections/List<*>>|), <L> = context(<unused var>: R|foo/bar/Functor<kotlin/collections/List<*>>|) context@fun <anonymous>(): R|kotlin/Nothing| <inline=Inline, kind=EXACTLY_ONCE>  {
+            lval result: R|kotlin/Boolean| = R|foo/bar/listExample|() && R|foo/bar/pairExample|()
+            ^box when () {
+                R|<local>/result| ->  {
+                    String(OK)
+                }
+                else ->  {
+                    String(Fail)
+                }
+            }
+
         }
         )
     }
