@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
         mavenCentral()
@@ -12,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "compiler-plugin-template"
+rootProject.name = "highKT"
 
 include("compiler-plugin")
 include("gradle-plugin")

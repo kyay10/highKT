@@ -74,7 +74,7 @@ tasks.test {
 kotlin {
     compilerOptions {
         optIn.add("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
-        optIn.add("org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI")
+        freeCompilerArgs.add("-Xcontext-parameters")
     }
 }
 
@@ -86,7 +86,7 @@ val generateTests by tasks.registering(JavaExec::class) {
         .withPropertyName("generatedTests")
 
     classpath = sourceSets.testFixtures.get().runtimeClasspath
-    mainClass.set("org.jetbrains.kotlin.compiler.plugin.template.GenerateTestsKt")
+    mainClass.set("io.github.kyay10.highkt.GenerateTestsKt")
     workingDir = rootDir
 }
 

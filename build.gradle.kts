@@ -6,6 +6,6 @@ plugins {
 }
 
 allprojects {
-    group = "org.jetbrains.kotlin.compiler.plugin.template"
+    group = "io.github.kyay10.highkt"
     version = "0.1.0-SNAPSHOT"
 }

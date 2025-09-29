@@ -1,1 +1,1 @@
-org.jetbrains.kotlin.compiler.plugin.template.SimpleCommandLineProcessor
+io.github.kyay10.highkt.HighKTCommandLineProcessor

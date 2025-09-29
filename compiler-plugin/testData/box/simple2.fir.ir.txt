@@ -1,0 +1,379 @@
+FILE fqName:foo.bar fileName:/simple2.kt
+  CLASS CLASS name:BiComposed modality:FINAL visibility:public [data] superTypes:[io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, Bi of foo.bar.BiComposed>, F of foo.bar.BiComposed>, G of foo.bar.BiComposed>, A of foo.bar.BiComposed>, B of foo.bar.BiComposed>]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed>
+    TYPE_PARAMETER name:Bi index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:F index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:G index:2 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:3 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:4 variance: superTypes:[kotlin.Any?] reified:false
+    PROPERTY name:value visibility:public modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:value type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> visibility:private [final]
+        EXPRESSION_BODY
+          GET_VAR 'value: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> declared in foo.bar.BiComposed.<init>' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-value> visibility:public modality:FINAL returnType:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>>
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed>
+        correspondingProperty: PROPERTY name:value visibility:public modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-value> (): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> declared in foo.bar.BiComposed'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> visibility:private [final]' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> origin=null
+              receiver: GET_VAR '<this>: foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> declared in foo.bar.BiComposed.<get-value>' type=foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> origin=null
+    CONSTRUCTOR visibility:public returnType:foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> [primary]
+      VALUE_PARAMETER kind:Regular name:value index:0 type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>>
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:BiComposed modality:FINAL visibility:public [data] superTypes:[io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, Bi of foo.bar.BiComposed>, F of foo.bar.BiComposed>, G of foo.bar.BiComposed>, A of foo.bar.BiComposed>, B of foo.bar.BiComposed>]' type=kotlin.Unit
+    FUN GENERATED_DATA_CLASS_MEMBER name:component1 visibility:public modality:FINAL returnType:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> [operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun component1 (): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> declared in foo.bar.BiComposed'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> visibility:private [final]' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> origin=null
+            receiver: GET_VAR '<this>: foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> declared in foo.bar.BiComposed.component1' type=foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> origin=null
+    FUN GENERATED_DATA_CLASS_MEMBER name:copy visibility:public modality:FINAL returnType:foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed>
+      VALUE_PARAMETER kind:Regular name:value index:1 type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>>
+        EXPRESSION_BODY
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> visibility:private [final]' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> origin=null
+            receiver: GET_VAR '<this>: foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> declared in foo.bar.BiComposed.copy' type=foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> origin=null
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun copy (value: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>>): foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> declared in foo.bar.BiComposed'
+          CONSTRUCTOR_CALL 'public constructor <init> (value: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>>) declared in foo.bar.BiComposed' type=foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> origin=null
+            TYPE_ARG (of class) Bi: Bi of foo.bar.BiComposed
+            TYPE_ARG (of class) F: F of foo.bar.BiComposed
+            TYPE_ARG (of class) G: G of foo.bar.BiComposed
+            TYPE_ARG (of class) A: A of foo.bar.BiComposed
+            TYPE_ARG (of class) B: B of foo.bar.BiComposed
+            ARG value: GET_VAR 'value: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> declared in foo.bar.BiComposed.copy' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> origin=null
+    FUN GENERATED_DATA_CLASS_MEMBER name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed>
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.K
+      BLOCK_BODY
+        WHEN type=kotlin.Unit origin=null
+          BRANCH
+            if: CALL 'public final fun EQEQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQEQ
+              ARG arg0: GET_VAR '<this>: foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> declared in foo.bar.BiComposed.equals' type=foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> origin=null
+              ARG arg1: GET_VAR 'other: kotlin.Any? declared in foo.bar.BiComposed.equals' type=kotlin.Any? origin=null
+            then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.BiComposed'
+              CONST Boolean type=kotlin.Boolean value=true
+        WHEN type=kotlin.Unit origin=null
+          BRANCH
+            if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed>
+              GET_VAR 'other: kotlin.Any? declared in foo.bar.BiComposed.equals' type=kotlin.Any? origin=null
+            then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.BiComposed'
+              CONST Boolean type=kotlin.Boolean value=false
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> [val]
+          TYPE_OP type=foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> origin=IMPLICIT_CAST typeOperand=foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed>
+            GET_VAR 'other: kotlin.Any? declared in foo.bar.BiComposed.equals' type=kotlin.Any? origin=null
+        WHEN type=kotlin.Unit origin=null
+          BRANCH
+            if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+              ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                ARG arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> visibility:private [final]' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> origin=null
+                  receiver: GET_VAR '<this>: foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> declared in foo.bar.BiComposed.equals' type=foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> origin=null
+                ARG arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> visibility:private [final]' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> origin=null
+                  receiver: GET_VAR 'val tmp_0: foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> declared in foo.bar.BiComposed.equals' type=foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> origin=null
+            then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.BiComposed'
+              CONST Boolean type=kotlin.Boolean value=false
+        RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.BiComposed'
+          CONST Boolean type=kotlin.Boolean value=true
+    FUN GENERATED_DATA_CLASS_MEMBER name:hashCode visibility:public modality:OPEN returnType:kotlin.Int
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed>
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun hashCode (): kotlin.Int declared in foo.bar.BiComposed'
+          CALL 'public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K' type=kotlin.Int origin=null
+            ARG <this>: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> visibility:private [final]' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> origin=null
+              receiver: GET_VAR '<this>: foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> declared in foo.bar.BiComposed.hashCode' type=foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> origin=null
+    FUN GENERATED_DATA_CLASS_MEMBER name:toString visibility:public modality:OPEN returnType:kotlin.String
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed>
+      overridden:
+        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.K
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in foo.bar.BiComposed'
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value="BiComposed("
+            CONST String type=kotlin.String value="value="
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> visibility:private [final]' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> origin=null
+              receiver: GET_VAR '<this>: foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> declared in foo.bar.BiComposed.toString' type=foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed> origin=null
+            CONST String type=kotlin.String value=")"
+  CLASS INTERFACE name:BiFunctor modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.BiFunctor<F of foo.bar.BiFunctor>
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    FUN name:bimap visibility:public modality:OPEN returnType:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.bimap>, D of foo.bar.BiFunctor.bimap>
+      TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:C index:2 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:D index:3 variance: superTypes:[kotlin.Any?] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<F of foo.bar.BiFunctor>
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.bimap>, B of foo.bar.BiFunctor.bimap>
+      VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap>
+      VALUE_PARAMETER kind:Regular name:g index:3 type:kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun bimap <A, B, C, D> (<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.bimap>, B of foo.bar.BiFunctor.bimap>, f: kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap>, g: kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.bimap>, D of foo.bar.BiFunctor.bimap> declared in foo.bar.BiFunctor'
+          CALL 'public open fun rightMap <A, B, D> (<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.rightMap>, B of foo.bar.BiFunctor.rightMap>, g: kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.rightMap>, D of foo.bar.BiFunctor.rightMap> declared in foo.bar.BiFunctor' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.bimap>, D of foo.bar.BiFunctor.bimap> origin=null
+            TYPE_ARG A: C of foo.bar.BiFunctor.bimap
+            TYPE_ARG B: B of foo.bar.BiFunctor.bimap
+            TYPE_ARG D: D of foo.bar.BiFunctor.bimap
+            ARG <this>(index:0): GET_VAR '<this>(index:0): foo.bar.BiFunctor<F of foo.bar.BiFunctor> declared in foo.bar.BiFunctor.bimap' type=foo.bar.BiFunctor<F of foo.bar.BiFunctor> origin=IMPLICIT_ARGUMENT
+            ARG <this>(index:1): CALL 'public open fun leftMap <A, B, C> (<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.leftMap>, B of foo.bar.BiFunctor.leftMap>, f: kotlin.Function1<A of foo.bar.BiFunctor.leftMap, C of foo.bar.BiFunctor.leftMap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.leftMap>, B of foo.bar.BiFunctor.leftMap> declared in foo.bar.BiFunctor' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.bimap>, B of foo.bar.BiFunctor.bimap> origin=null
+              TYPE_ARG A: A of foo.bar.BiFunctor.bimap
+              TYPE_ARG B: B of foo.bar.BiFunctor.bimap
+              TYPE_ARG C: C of foo.bar.BiFunctor.bimap
+              ARG <this>(index:0): GET_VAR '<this>(index:0): foo.bar.BiFunctor<F of foo.bar.BiFunctor> declared in foo.bar.BiFunctor.bimap' type=foo.bar.BiFunctor<F of foo.bar.BiFunctor> origin=IMPLICIT_ARGUMENT
+              ARG <this>(index:1): GET_VAR '<this>(index:1): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.bimap>, B of foo.bar.BiFunctor.bimap> declared in foo.bar.BiFunctor.bimap' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.bimap>, B of foo.bar.BiFunctor.bimap> origin=IMPLICIT_ARGUMENT
+              ARG f: GET_VAR 'f: kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap> declared in foo.bar.BiFunctor.bimap' type=kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap> origin=null
+            ARG g: GET_VAR 'g: kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap> declared in foo.bar.BiFunctor.bimap' type=kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap> origin=null
+    FUN name:leftMap visibility:public modality:OPEN returnType:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.leftMap>, B of foo.bar.BiFunctor.leftMap>
+      TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:C index:2 variance: superTypes:[kotlin.Any?] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<F of foo.bar.BiFunctor>
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.leftMap>, B of foo.bar.BiFunctor.leftMap>
+      VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.BiFunctor.leftMap, C of foo.bar.BiFunctor.leftMap>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun leftMap <A, B, C> (<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.leftMap>, B of foo.bar.BiFunctor.leftMap>, f: kotlin.Function1<A of foo.bar.BiFunctor.leftMap, C of foo.bar.BiFunctor.leftMap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.leftMap>, B of foo.bar.BiFunctor.leftMap> declared in foo.bar.BiFunctor'
+          CALL 'public open fun bimap <A, B, C, D> (<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.bimap>, B of foo.bar.BiFunctor.bimap>, f: kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap>, g: kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.bimap>, D of foo.bar.BiFunctor.bimap> declared in foo.bar.BiFunctor' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.leftMap>, B of foo.bar.BiFunctor.leftMap> origin=null
+            TYPE_ARG A: A of foo.bar.BiFunctor.leftMap
+            TYPE_ARG B: B of foo.bar.BiFunctor.leftMap
+            TYPE_ARG C: C of foo.bar.BiFunctor.leftMap
+            TYPE_ARG D: B of foo.bar.BiFunctor.leftMap
+            ARG <this>(index:0): GET_VAR '<this>(index:0): foo.bar.BiFunctor<F of foo.bar.BiFunctor> declared in foo.bar.BiFunctor.leftMap' type=foo.bar.BiFunctor<F of foo.bar.BiFunctor> origin=IMPLICIT_ARGUMENT
+            ARG <this>(index:1): GET_VAR '<this>(index:1): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.leftMap>, B of foo.bar.BiFunctor.leftMap> declared in foo.bar.BiFunctor.leftMap' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.leftMap>, B of foo.bar.BiFunctor.leftMap> origin=IMPLICIT_ARGUMENT
+            ARG f: GET_VAR 'f: kotlin.Function1<A of foo.bar.BiFunctor.leftMap, C of foo.bar.BiFunctor.leftMap> declared in foo.bar.BiFunctor.leftMap' type=kotlin.Function1<A of foo.bar.BiFunctor.leftMap, C of foo.bar.BiFunctor.leftMap> origin=null
+            ARG g: FUN_EXPR type=kotlin.Function1<B of foo.bar.BiFunctor.leftMap, B of foo.bar.BiFunctor.leftMap> origin=LAMBDA
+              FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:B of foo.bar.BiFunctor.leftMap
+                VALUE_PARAMETER kind:Regular name:it index:0 type:B of foo.bar.BiFunctor.leftMap
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: B of foo.bar.BiFunctor.leftMap): B of foo.bar.BiFunctor.leftMap declared in foo.bar.BiFunctor.leftMap'
+                    GET_VAR 'it: B of foo.bar.BiFunctor.leftMap declared in foo.bar.BiFunctor.leftMap.<anonymous>' type=B of foo.bar.BiFunctor.leftMap origin=null
+    FUN name:rightMap visibility:public modality:OPEN returnType:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.rightMap>, D of foo.bar.BiFunctor.rightMap>
+      TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:D index:2 variance: superTypes:[kotlin.Any?] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<F of foo.bar.BiFunctor>
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.rightMap>, B of foo.bar.BiFunctor.rightMap>
+      VALUE_PARAMETER kind:Regular name:g index:2 type:kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun rightMap <A, B, D> (<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.rightMap>, B of foo.bar.BiFunctor.rightMap>, g: kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.rightMap>, D of foo.bar.BiFunctor.rightMap> declared in foo.bar.BiFunctor'
+          CALL 'public open fun bimap <A, B, C, D> (<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.bimap>, B of foo.bar.BiFunctor.bimap>, f: kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap>, g: kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.bimap>, D of foo.bar.BiFunctor.bimap> declared in foo.bar.BiFunctor' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.rightMap>, D of foo.bar.BiFunctor.rightMap> origin=null
+            TYPE_ARG A: A of foo.bar.BiFunctor.rightMap
+            TYPE_ARG B: B of foo.bar.BiFunctor.rightMap
+            TYPE_ARG C: A of foo.bar.BiFunctor.rightMap
+            TYPE_ARG D: D of foo.bar.BiFunctor.rightMap
+            ARG <this>(index:0): GET_VAR '<this>(index:0): foo.bar.BiFunctor<F of foo.bar.BiFunctor> declared in foo.bar.BiFunctor.rightMap' type=foo.bar.BiFunctor<F of foo.bar.BiFunctor> origin=IMPLICIT_ARGUMENT
+            ARG <this>(index:1): GET_VAR '<this>(index:1): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.rightMap>, B of foo.bar.BiFunctor.rightMap> declared in foo.bar.BiFunctor.rightMap' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.rightMap>, B of foo.bar.BiFunctor.rightMap> origin=IMPLICIT_ARGUMENT
+            ARG f: FUN_EXPR type=kotlin.Function1<A of foo.bar.BiFunctor.rightMap, A of foo.bar.BiFunctor.rightMap> origin=LAMBDA
+              FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:A of foo.bar.BiFunctor.rightMap
+                VALUE_PARAMETER kind:Regular name:it index:0 type:A of foo.bar.BiFunctor.rightMap
+                BLOCK_BODY
+                  RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: A of foo.bar.BiFunctor.rightMap): A of foo.bar.BiFunctor.rightMap declared in foo.bar.BiFunctor.rightMap'
+                    GET_VAR 'it: A of foo.bar.BiFunctor.rightMap declared in foo.bar.BiFunctor.rightMap.<anonymous>' type=A of foo.bar.BiFunctor.rightMap origin=null
+            ARG g: GET_VAR 'g: kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap> declared in foo.bar.BiFunctor.rightMap' type=kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap> origin=null
+  CLASS INTERFACE name:Functor modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Functor<F of foo.bar.Functor>
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    FUN name:fmap visibility:public modality:ABSTRACT returnType:io.github.kyay10.highkt.K<F of foo.bar.Functor, B of foo.bar.Functor.fmap>
+      TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Functor<F of foo.bar.Functor>
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:io.github.kyay10.highkt.K<F of foo.bar.Functor, A of foo.bar.Functor.fmap>
+      VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.Functor.fmap, B of foo.bar.Functor.fmap>
+  FUN name:bimap visibility:public modality:FINAL returnType:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, C of foo.bar.bimap>, D of foo.bar.bimap>
+    TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:C index:2 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:D index:3 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:F index:4 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER kind:Context name:b index:0 type:foo.bar.BiFunctor<F of foo.bar.bimap>
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, A of foo.bar.bimap>, B of foo.bar.bimap>
+    VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.bimap, C of foo.bar.bimap>
+    VALUE_PARAMETER kind:Regular name:g index:3 type:kotlin.Function1<B of foo.bar.bimap, D of foo.bar.bimap>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun bimap <A, B, C, D, F> (b: foo.bar.BiFunctor<F of foo.bar.bimap>, <this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, A of foo.bar.bimap>, B of foo.bar.bimap>, f: kotlin.Function1<A of foo.bar.bimap, C of foo.bar.bimap>, g: kotlin.Function1<B of foo.bar.bimap, D of foo.bar.bimap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, C of foo.bar.bimap>, D of foo.bar.bimap> declared in foo.bar'
+        CALL 'public final fun with <T, R> (receiver: T of kotlin.with, block: @[ExtensionFunctionType] kotlin.Function1<T of kotlin.with, R of kotlin.with>): R of kotlin.with declared in kotlin' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, C of foo.bar.bimap>, D of foo.bar.bimap> origin=null
+          TYPE_ARG T: foo.bar.BiFunctor<F of foo.bar.bimap>
+          TYPE_ARG R: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, C of foo.bar.bimap>, D of foo.bar.bimap>
+          ARG receiver: GET_VAR 'b: foo.bar.BiFunctor<F of foo.bar.bimap> declared in foo.bar.bimap' type=foo.bar.BiFunctor<F of foo.bar.bimap> origin=null
+          ARG block: FUN_EXPR type=@[ExtensionFunctionType] kotlin.Function1<foo.bar.BiFunctor<F of foo.bar.bimap>, io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, C of foo.bar.bimap>, D of foo.bar.bimap>> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, C of foo.bar.bimap>, D of foo.bar.bimap>
+              VALUE_PARAMETER kind:ExtensionReceiver name:$this$with index:0 type:foo.bar.BiFunctor<F of foo.bar.bimap>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> ($this$with: foo.bar.BiFunctor<F of foo.bar.bimap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, C of foo.bar.bimap>, D of foo.bar.bimap> declared in foo.bar.bimap'
+                  CALL 'public open fun bimap <A, B, C, D> (<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.bimap>, B of foo.bar.BiFunctor.bimap>, f: kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap>, g: kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.bimap>, D of foo.bar.BiFunctor.bimap> declared in foo.bar.BiFunctor' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, C of foo.bar.bimap>, D of foo.bar.bimap> origin=null
+                    TYPE_ARG A: A of foo.bar.bimap
+                    TYPE_ARG B: B of foo.bar.bimap
+                    TYPE_ARG C: C of foo.bar.bimap
+                    TYPE_ARG D: D of foo.bar.bimap
+                    ARG <this>(index:0): GET_VAR '$this$with: foo.bar.BiFunctor<F of foo.bar.bimap> declared in foo.bar.bimap.<anonymous>' type=foo.bar.BiFunctor<F of foo.bar.bimap> origin=IMPLICIT_ARGUMENT
+                    ARG <this>(index:1): GET_VAR '<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, A of foo.bar.bimap>, B of foo.bar.bimap> declared in foo.bar.bimap' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, A of foo.bar.bimap>, B of foo.bar.bimap> origin=IMPLICIT_ARGUMENT
+                    ARG f: GET_VAR 'f: kotlin.Function1<A of foo.bar.bimap, C of foo.bar.bimap> declared in foo.bar.bimap' type=kotlin.Function1<A of foo.bar.bimap, C of foo.bar.bimap> origin=null
+                    ARG g: GET_VAR 'g: kotlin.Function1<B of foo.bar.bimap, D of foo.bar.bimap> declared in foo.bar.bimap' type=kotlin.Function1<B of foo.bar.bimap, D of foo.bar.bimap> origin=null
+  FUN name:box visibility:public modality:FINAL returnType:kotlin.String
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in foo.bar'
+        CONST String type=kotlin.String value="OK"
+  FUN name:composeBiFunctors visibility:public modality:FINAL returnType:foo.bar.BiFunctor<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>>
+    TYPE_PARAMETER name:BF index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:F index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:G index:2 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:<unused var> index:0 type:foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors>
+    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:<unused var> index:1 type:foo.bar.Functor<F of foo.bar.composeBiFunctors>
+    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:<unused var> index:2 type:foo.bar.Functor<G of foo.bar.composeBiFunctors>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun composeBiFunctors <BF, F, G> (<unused var>: foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors>, <unused var>: foo.bar.Functor<F of foo.bar.composeBiFunctors>, <unused var>: foo.bar.Functor<G of foo.bar.composeBiFunctors>): foo.bar.BiFunctor<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>> declared in foo.bar'
+        BLOCK type=foo.bar.composeBiFunctors.<no name provided><BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors> origin=OBJECT_LITERAL
+          CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.BiFunctor<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>>]
+            thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.composeBiFunctors.<no name provided><BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors>
+            CONSTRUCTOR visibility:public returnType:foo.bar.composeBiFunctors.<no name provided><BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors> [primary]
+              BLOCK_BODY
+                DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+                INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.BiFunctor<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>>]' type=kotlin.Unit
+            FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+              VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+              VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+              overridden:
+                public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.BiFunctor
+            FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+              VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+              overridden:
+                public open fun hashCode (): kotlin.Int declared in foo.bar.BiFunctor
+            FUN FAKE_OVERRIDE name:leftMap visibility:public modality:OPEN returnType:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>, C of foo.bar.composeBiFunctors.<no name provided>.leftMap>, B of foo.bar.composeBiFunctors.<no name provided>.leftMap> [fake_override]
+              TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+              TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+              TYPE_PARAMETER name:C index:2 variance: superTypes:[kotlin.Any?] reified:false
+              VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>>
+              VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>, A of foo.bar.composeBiFunctors.<no name provided>.leftMap>, B of foo.bar.composeBiFunctors.<no name provided>.leftMap>
+              VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.composeBiFunctors.<no name provided>.leftMap, C of foo.bar.composeBiFunctors.<no name provided>.leftMap>
+              overridden:
+                public open fun leftMap <A, B, C> (<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.leftMap>, B of foo.bar.BiFunctor.leftMap>, f: kotlin.Function1<A of foo.bar.BiFunctor.leftMap, C of foo.bar.BiFunctor.leftMap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.leftMap>, B of foo.bar.BiFunctor.leftMap> declared in foo.bar.BiFunctor
+            FUN FAKE_OVERRIDE name:rightMap visibility:public modality:OPEN returnType:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>, A of foo.bar.composeBiFunctors.<no name provided>.rightMap>, D of foo.bar.composeBiFunctors.<no name provided>.rightMap> [fake_override]
+              TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+              TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+              TYPE_PARAMETER name:D index:2 variance: superTypes:[kotlin.Any?] reified:false
+              VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>>
+              VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>, A of foo.bar.composeBiFunctors.<no name provided>.rightMap>, B of foo.bar.composeBiFunctors.<no name provided>.rightMap>
+              VALUE_PARAMETER kind:Regular name:g index:2 type:kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.rightMap, D of foo.bar.composeBiFunctors.<no name provided>.rightMap>
+              overridden:
+                public open fun rightMap <A, B, D> (<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.rightMap>, B of foo.bar.BiFunctor.rightMap>, g: kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.rightMap>, D of foo.bar.BiFunctor.rightMap> declared in foo.bar.BiFunctor
+            FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+              VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+              overridden:
+                public open fun toString (): kotlin.String declared in foo.bar.BiFunctor
+            FUN name:bimap visibility:public modality:OPEN returnType:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>, C of foo.bar.composeBiFunctors.<no name provided>.bimap>, D of foo.bar.composeBiFunctors.<no name provided>.bimap>
+              TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+              TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+              TYPE_PARAMETER name:C index:2 variance: superTypes:[kotlin.Any?] reified:false
+              TYPE_PARAMETER name:D index:3 variance: superTypes:[kotlin.Any?] reified:false
+              VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.composeBiFunctors.<no name provided><BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors>
+              VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>, A of foo.bar.composeBiFunctors.<no name provided>.bimap>, B of foo.bar.composeBiFunctors.<no name provided>.bimap>
+              VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.composeBiFunctors.<no name provided>.bimap, C of foo.bar.composeBiFunctors.<no name provided>.bimap>
+              VALUE_PARAMETER kind:Regular name:g index:3 type:kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap>
+              overridden:
+                public open fun bimap <A, B, C, D> (<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, A of foo.bar.BiFunctor.bimap>, B of foo.bar.BiFunctor.bimap>, f: kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap>, g: kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.BiFunctor, C of foo.bar.BiFunctor.bimap>, D of foo.bar.BiFunctor.bimap> declared in foo.bar.BiFunctor
+              BLOCK_BODY
+                CALL 'public final fun fix (vararg casts: kotlin.Unit): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
+                  ARG casts: VARARG type=kotlin.Array<out kotlin.Unit> varargElementType=kotlin.Unit
+                    CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
+                      TYPE_ARG T: foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap, B of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                      ARG x: GET_VAR '<this>(index:1): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>, A of foo.bar.composeBiFunctors.<no name provided>.bimap>, B of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>, A of foo.bar.composeBiFunctors.<no name provided>.bimap>, B of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
+                RETURN type=kotlin.Nothing from='public open fun bimap <A, B, C, D> (<this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>, A of foo.bar.composeBiFunctors.<no name provided>.bimap>, B of foo.bar.composeBiFunctors.<no name provided>.bimap>, f: kotlin.Function1<A of foo.bar.composeBiFunctors.<no name provided>.bimap, C of foo.bar.composeBiFunctors.<no name provided>.bimap>, g: kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>, C of foo.bar.composeBiFunctors.<no name provided>.bimap>, D of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>'
+                  CALL 'public final fun let <T, R> (<this>: T of kotlin.let, block: kotlin.Function1<T of kotlin.let, R of kotlin.let>): R of kotlin.let declared in kotlin' type=foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
+                    TYPE_ARG T: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<BF of foo.bar.composeBiFunctors, io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap>>, io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, D of foo.bar.composeBiFunctors.<no name provided>.bimap>>
+                    TYPE_ARG R: foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                    ARG <this>: CALL 'public final fun bimap <A, B, C, D, F> (b: foo.bar.BiFunctor<F of foo.bar.bimap>, <this>: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, A of foo.bar.bimap>, B of foo.bar.bimap>, f: kotlin.Function1<A of foo.bar.bimap, C of foo.bar.bimap>, g: kotlin.Function1<B of foo.bar.bimap, D of foo.bar.bimap>): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<F of foo.bar.bimap, C of foo.bar.bimap>, D of foo.bar.bimap> declared in foo.bar' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<BF of foo.bar.composeBiFunctors, io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap>>, io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, D of foo.bar.composeBiFunctors.<no name provided>.bimap>> origin=null
+                      TYPE_ARG A: io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                      TYPE_ARG B: io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, B of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                      TYPE_ARG C: io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                      TYPE_ARG D: io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, D of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                      TYPE_ARG F: BF of foo.bar.composeBiFunctors
+                      ARG b: GET_VAR '<unused var>(index:0): foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors> declared in foo.bar.composeBiFunctors' type=foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors> origin=null
+                      ARG <this>: CALL 'public final fun <get-value> (): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>> declared in foo.bar.BiComposed' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<BF of foo.bar.composeBiFunctors, io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap>>, io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, B of foo.bar.composeBiFunctors.<no name provided>.bimap>> origin=GET_PROPERTY
+                        ARG <this>: TYPE_OP type=foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap, B of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=IMPLICIT_CAST typeOperand=foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap, B of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                          GET_VAR '<this>(index:1): io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>, A of foo.bar.composeBiFunctors.<no name provided>.bimap>, B of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, BF of foo.bar.composeBiFunctors>, F of foo.bar.composeBiFunctors>, G of foo.bar.composeBiFunctors>, A of foo.bar.composeBiFunctors.<no name provided>.bimap>, B of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=IMPLICIT_ARGUMENT
+                      ARG f: FUN_EXPR type=kotlin.Function1<io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap>, io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap>> origin=LAMBDA
+                        FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                          VALUE_PARAMETER kind:Regular name:it index:0 type:io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap>): io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap'
+                              CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: io.github.kyay10.highkt.K<F of foo.bar.fmap, A of foo.bar.fmap>, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): io.github.kyay10.highkt.K<F of foo.bar.fmap, B of foo.bar.fmap> declared in foo.bar' type=io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
+                                TYPE_ARG F: F of foo.bar.composeBiFunctors
+                                TYPE_ARG A: A of foo.bar.composeBiFunctors.<no name provided>.bimap
+                                TYPE_ARG B: C of foo.bar.composeBiFunctors.<no name provided>.bimap
+                                ARG functor: GET_VAR '<unused var>(index:1): foo.bar.Functor<F of foo.bar.composeBiFunctors> declared in foo.bar.composeBiFunctors' type=foo.bar.Functor<F of foo.bar.composeBiFunctors> origin=null
+                                ARG <this>: GET_VAR 'it: io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap.<anonymous>' type=io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
+                                ARG f: GET_VAR 'f: kotlin.Function1<A of foo.bar.composeBiFunctors.<no name provided>.bimap, C of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Function1<A of foo.bar.composeBiFunctors.<no name provided>.bimap, C of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
+                      ARG g: FUN_EXPR type=kotlin.Function1<io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, B of foo.bar.composeBiFunctors.<no name provided>.bimap>, io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, D of foo.bar.composeBiFunctors.<no name provided>.bimap>> origin=LAMBDA
+                        FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, D of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                          VALUE_PARAMETER kind:Regular name:it index:0 type:io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, B of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, B of foo.bar.composeBiFunctors.<no name provided>.bimap>): io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, D of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap'
+                              CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: io.github.kyay10.highkt.K<F of foo.bar.fmap, A of foo.bar.fmap>, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): io.github.kyay10.highkt.K<F of foo.bar.fmap, B of foo.bar.fmap> declared in foo.bar' type=io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, D of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
+                                TYPE_ARG F: G of foo.bar.composeBiFunctors
+                                TYPE_ARG A: B of foo.bar.composeBiFunctors.<no name provided>.bimap
+                                TYPE_ARG B: D of foo.bar.composeBiFunctors.<no name provided>.bimap
+                                ARG functor: GET_VAR '<unused var>(index:2): foo.bar.Functor<G of foo.bar.composeBiFunctors> declared in foo.bar.composeBiFunctors' type=foo.bar.Functor<G of foo.bar.composeBiFunctors> origin=null
+                                ARG <this>: GET_VAR 'it: io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, B of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap.<anonymous>' type=io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, B of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
+                                ARG f: GET_VAR 'g: kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
+                    ARG block: FUNCTION_REFERENCE 'public constructor <init> (value: io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<Bi of foo.bar.BiComposed, io.github.kyay10.highkt.K<F of foo.bar.BiComposed, A of foo.bar.BiComposed>>, io.github.kyay10.highkt.K<G of foo.bar.BiComposed, B of foo.bar.BiComposed>>) declared in foo.bar.BiComposed' type=kotlin.reflect.KFunction1<@[ParameterName(name = "value")] io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<BF of foo.bar.composeBiFunctors, io.github.kyay10.highkt.K<F of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap>>, io.github.kyay10.highkt.K<G of foo.bar.composeBiFunctors, D of foo.bar.composeBiFunctors.<no name provided>.bimap>>, foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap>> origin=null reflectionTarget=<same>
+                      TYPE_ARG Bi: BF of foo.bar.composeBiFunctors
+                      TYPE_ARG F: F of foo.bar.composeBiFunctors
+                      TYPE_ARG G: G of foo.bar.composeBiFunctors
+                      TYPE_ARG A: C of foo.bar.composeBiFunctors.<no name provided>.bimap
+                      TYPE_ARG B: D of foo.bar.composeBiFunctors.<no name provided>.bimap
+          CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.composeBiFunctors.<no name provided>' type=foo.bar.composeBiFunctors.<no name provided><BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors> origin=OBJECT_LITERAL
+  FUN name:fmap visibility:public modality:FINAL returnType:io.github.kyay10.highkt.K<F of foo.bar.fmap, B of foo.bar.fmap>
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:2 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER kind:Context name:functor index:0 type:foo.bar.Functor<F of foo.bar.fmap>
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:io.github.kyay10.highkt.K<F of foo.bar.fmap, A of foo.bar.fmap>
+    VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: io.github.kyay10.highkt.K<F of foo.bar.fmap, A of foo.bar.fmap>, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): io.github.kyay10.highkt.K<F of foo.bar.fmap, B of foo.bar.fmap> declared in foo.bar'
+        CALL 'public final fun with <T, R> (receiver: T of kotlin.with, block: @[ExtensionFunctionType] kotlin.Function1<T of kotlin.with, R of kotlin.with>): R of kotlin.with declared in kotlin' type=io.github.kyay10.highkt.K<F of foo.bar.fmap, B of foo.bar.fmap> origin=null
+          TYPE_ARG T: foo.bar.Functor<F of foo.bar.fmap>
+          TYPE_ARG R: io.github.kyay10.highkt.K<F of foo.bar.fmap, B of foo.bar.fmap>
+          ARG receiver: GET_VAR 'functor: foo.bar.Functor<F of foo.bar.fmap> declared in foo.bar.fmap' type=foo.bar.Functor<F of foo.bar.fmap> origin=null
+          ARG block: FUN_EXPR type=@[ExtensionFunctionType] kotlin.Function1<foo.bar.Functor<F of foo.bar.fmap>, io.github.kyay10.highkt.K<F of foo.bar.fmap, B of foo.bar.fmap>> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:io.github.kyay10.highkt.K<F of foo.bar.fmap, B of foo.bar.fmap>
+              VALUE_PARAMETER kind:ExtensionReceiver name:$this$with index:0 type:foo.bar.Functor<F of foo.bar.fmap>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> ($this$with: foo.bar.Functor<F of foo.bar.fmap>): io.github.kyay10.highkt.K<F of foo.bar.fmap, B of foo.bar.fmap> declared in foo.bar.fmap'
+                  CALL 'public abstract fun fmap <A, B> (<this>: io.github.kyay10.highkt.K<F of foo.bar.Functor, A of foo.bar.Functor.fmap>, f: kotlin.Function1<A of foo.bar.Functor.fmap, B of foo.bar.Functor.fmap>): io.github.kyay10.highkt.K<F of foo.bar.Functor, B of foo.bar.Functor.fmap> declared in foo.bar.Functor' type=io.github.kyay10.highkt.K<F of foo.bar.fmap, B of foo.bar.fmap> origin=null
+                    TYPE_ARG A: A of foo.bar.fmap
+                    TYPE_ARG B: B of foo.bar.fmap
+                    ARG <this>(index:0): GET_VAR '$this$with: foo.bar.Functor<F of foo.bar.fmap> declared in foo.bar.fmap.<anonymous>' type=foo.bar.Functor<F of foo.bar.fmap> origin=IMPLICIT_ARGUMENT
+                    ARG <this>(index:1): GET_VAR '<this>: io.github.kyay10.highkt.K<F of foo.bar.fmap, A of foo.bar.fmap> declared in foo.bar.fmap' type=io.github.kyay10.highkt.K<F of foo.bar.fmap, A of foo.bar.fmap> origin=IMPLICIT_ARGUMENT
+                    ARG f: GET_VAR 'f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap> declared in foo.bar.fmap' type=kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap> origin=null
+  TYPEALIAS name:BiCompose visibility:public expandedType:io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<io.github.kyay10.highkt.K<foo.bar.BiComposed<*, *, *, *, *>, Bi of foo.bar.BiCompose>, F of foo.bar.BiCompose>, G of foo.bar.BiCompose>
+    TYPE_PARAMETER name:Bi index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:F index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:G index:2 variance: superTypes:[kotlin.Any?] reified:false
