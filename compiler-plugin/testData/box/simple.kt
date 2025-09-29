@@ -60,7 +60,7 @@ fun <F, G> composeFunctors() = object : Functor<Compose<F, G>> {
   override fun <A, B> K<Compose<F, G>, A>.fmap(f: (A) -> B): K<Compose<F, G>, B> {
     fix().all = 42
     // KT-81302
-    return value.fmap { it.fmap<_, _, B>(f) }.let(::Composed)
+    return value.fmap { it.fmap<G, _, B>(f) }.let(::Composed)
   }
 }
 
