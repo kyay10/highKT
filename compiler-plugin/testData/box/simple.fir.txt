@@ -392,7 +392,7 @@ FILE: simple.kt
         }
 
     }
-    public final data class BiComposed<Bi, F, G, A, B> : R|{io/github/kyay10/highkt/K5<foo/bar/BiComposed<*, *, *, *, *>, Bi, F, G, A, B>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K4<foo/bar/BiComposed<*, *, *, *, *>, Bi, F, G, A>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K3<foo/bar/BiComposed<*, *, *, *, *>, Bi, F, G>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<foo/bar/BiComposed<*, *, *, *, *>, Bi, F>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, Bi>, F>, G>, A>, B>| {
+    public final data class BiComposed<Bi, F, G, A, B> : R|{io/github/kyay10/highkt/K2<foo/bar/BiCompose<Bi, F, G>, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiCompose<Bi, F, G>, A>, B>| {
         public constructor<Bi, F, G, A, B>(value: R|{io/github/kyay10/highkt/K2<Bi, io/github/kyay10/highkt/K<F, A>, io/github/kyay10/highkt/K<G, B>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<Bi, io/github/kyay10/highkt/K<F, A>>, io/github/kyay10/highkt/K<G, B>>|): R|foo/bar/BiComposed<Bi, F, G, A, B>| {
             super<R|kotlin/Any|>()
         }

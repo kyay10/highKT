@@ -1,7 +1,7 @@
 package io.github.kyay10.highkt.fir
 
-import org.jetbrains.kotlin.KtSourceElement
 import io.github.kyay10.highkt.fir.KindReturnTypeRefinementExtension.Companion.ASSERT_IS_TYPE
+import org.jetbrains.kotlin.KtSourceElement
 import org.jetbrains.kotlin.fir.FirElement
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.SessionHolder
@@ -32,6 +32,11 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
+import org.jetbrains.kotlin.fir.types.ConeKotlinTypeConflictingProjection
+import org.jetbrains.kotlin.fir.types.ConeKotlinTypeProjectionIn
+import org.jetbrains.kotlin.fir.types.ConeKotlinTypeProjectionOut
+import org.jetbrains.kotlin.fir.types.ConeStarProjection
+import org.jetbrains.kotlin.fir.types.ConeTypeProjection
 import org.jetbrains.kotlin.fir.types.builder.buildTypeProjectionWithVariance
 import org.jetbrains.kotlin.fir.types.classId
 import org.jetbrains.kotlin.fir.types.coneType
@@ -62,12 +67,21 @@ internal var FirDeclaration.needsKRefinement: FirNamedFunctionSymbol? by FirDecl
 )
 
 @OptIn(FirExtensionApiInternals::class)
-class KindReturnTypeRefinementExtension(session: FirSession) : FirFunctionCallRefinementExtension(session), SessionHolder {
+class KindReturnTypeRefinementExtension(session: FirSession) : FirFunctionCallRefinementExtension(session),
+  SessionHolder {
   companion object {
     val PACKAGE_FQN = FqName("io.github.kyay10.highkt")
     val FIX = CallableId(PACKAGE_FQN, callableName = Name.identifier("fix"))
     val ASSERT_IS_TYPE = Name.identifier("assertIsType")
+    val OUT_CLASS_ID = ClassId(PACKAGE_FQN, Name.identifier("Out"))
+    val IN_CLASS_ID = ClassId(PACKAGE_FQN, Name.identifier("In"))
     val K_CLASS_ID = ClassId(PACKAGE_FQN, Name.identifier("K"))
+    val K_VARIANCES = mapOf(
+      IN_CLASS_ID to Variance.IN_VARIANCE,
+      OUT_CLASS_ID to Variance.OUT_VARIANCE,
+      K_CLASS_ID to Variance.INVARIANT
+    )
+    val K_IDS = K_VARIANCES.keys
   }
 
   @OptIn(UnresolvedExpressionTypeAccess::class, SymbolInternals::class)
@@ -93,7 +107,7 @@ class KindReturnTypeRefinementExtension(session: FirSession) : FirFunctionCallRe
     call: FirFunctionCall,
     originalSymbol: FirNamedFunctionSymbol
   ): FirFunctionCall {
-    call.accept(object: FirVisitorVoid() {
+    call.accept(object : FirVisitorVoid() {
       override fun visitElement(element: FirElement) {
         element.acceptChildren(this)
         if (element is FirFunctionCall) {
@@ -129,19 +143,19 @@ class KindReturnTypeRefinementExtension(session: FirSession) : FirFunctionCallRe
 }
 
 context(_: SessionHolder)
-private fun ConeKotlinType.needsKApplication(): Boolean = isK() || typeArguments.any { it.type?.needsKApplication() == true }
+private fun ConeKotlinType.needsKApplication(): Boolean =
+  isK() || typeArguments.any { it.type?.needsKApplication() == true }
 
 context(_: SessionHolder)
-private fun ConeKotlinType.isK(): Boolean = fullyExpandedType().classId == KindReturnTypeRefinementExtension.K_CLASS_ID
+private fun ConeKotlinType.isK(): Boolean = fullyExpandedType().classId in KindReturnTypeRefinementExtension.K_IDS
 
-context(_: SessionHolder)
+context(c: SessionHolder)
 private fun ConeKotlinType.applyKOnTheOutside(): ConeKotlinType? {
   var realType: ConeKotlinType = this
   val appliedTypes = buildList {
     while (realType.isK()) {
       realType = realType.fullyExpandedType()
-      val secondArg = realType.typeArguments[1]
-      add(0, secondArg)
+      add(0, realType.typeArguments[1].withVariance(KindReturnTypeRefinementExtension.K_VARIANCES[realType.classId]!!))
       realType = realType.typeArguments[0].type ?: return null // Caused by malformed K type
     }
     // Now !realType.isK()
@@ -151,6 +165,21 @@ private fun ConeKotlinType.applyKOnTheOutside(): ConeKotlinType? {
   if (realType.typeArguments.any { !it.isStarProjection }) return null
   return realType.withArguments(appliedTypes.toTypedArray())
 }
+
+private fun ConeKotlinType.withVariance(variance: Variance): ConeTypeProjection =
+  when (variance) {
+    Variance.INVARIANT -> this
+    Variance.IN_VARIANCE -> ConeKotlinTypeProjectionIn(this)
+    Variance.OUT_VARIANCE -> ConeKotlinTypeProjectionOut(this)
+  }
+
+private fun ConeTypeProjection.withVariance(variance: Variance): ConeTypeProjection =
+  when (this) {
+    is ConeKotlinTypeConflictingProjection, is ConeStarProjection -> this
+    is ConeKotlinType -> withVariance(variance)
+    is ConeKotlinTypeProjectionIn -> if (variance.allowsInPosition) this else ConeKotlinTypeConflictingProjection(type)
+    is ConeKotlinTypeProjectionOut -> if (variance.allowsOutPosition) this else ConeKotlinTypeConflictingProjection(type)
+  }
 
 context(_: SessionHolder)
 private fun ConeKotlinType.applyKEverywhere(): ConeKotlinType? {

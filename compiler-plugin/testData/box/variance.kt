@@ -25,7 +25,7 @@ fun <M, A> pure(a: A) = with(monad) { pure(a) }
 context(monad: Monad<M>)
 fun <M, A, B> Out<M, A>.bind(f: (A) -> Out<M, B>) = with(monad) { bind(f) }
 
-class ListK<out A>(list: List<A>) : K<ListK<*>, @UnsafeVariance A>, List<A> by list, AbstractList<A>()
+class ListK<out A>(list: List<A>) : Out<ListK<*>, A>, List<A> by list, AbstractList<A>()
 
 fun <A> listKOf(vararg elements: A): ListK<A> = listOf(*elements).toListK()
 
@@ -40,7 +40,7 @@ object ListMonad : Monad<ListK<*>> {
   }
 }
 
-data class PairK<out A, out B>(val first: A, val second: B) : K2<PairK<*, *>, @UnsafeVariance A, @UnsafeVariance B>
+data class PairK<out A, out B>(val first: A, val second: B) : Bi<PairK<*, *>, A, B>
 
 infix fun <A, B> A.toK(that: B): PairK<A, B> = PairK(this, that)
 
@@ -52,8 +52,7 @@ class PairFunctor<L> : Functor<Out<PairK<*, *>, L>> {
   }
 }
 
-data class Composed<out F, out G, out A>(val value: Out<F, Out<G, A>>) :
-  K<Compose<@UnsafeVariance F, @UnsafeVariance G>, @UnsafeVariance A>
+data class Composed<out F, out G, out A>(val value: Out<F, Out<G, A>>) : Out<Compose<F, G>, A>
 typealias Compose<F, G> = Bi<Composed<*, *, *>, F, G>
 
 context(_: Functor<F>, _: Functor<G>)
@@ -65,11 +64,11 @@ fun <F, G> composeFunctors() = object : Functor<Compose<F, G>> {
   }
 }
 
-data class Reader<in R, out A>(val run: (R) -> A) : K2<Reader<*, *>, @UnsafeVariance R, @UnsafeVariance A>
+data class Reader<in R, out A>(val run: (R) -> A) : Pro<Reader<*, *>, R, A>
 
-data class Const<out C, out A>(val value: C) : K2<Const<*, *>, @UnsafeVariance C, @UnsafeVariance A>
+data class Const<out C, out A>(val value: C) : Bi<Const<*, *>, C, A>
 
-data class Identity<out A>(val value: A) : K<Identity<*>, @UnsafeVariance A>
+data class Identity<out A>(val value: A) : Out<Identity<*>, A>
 
 infix fun <A, B, C> ((A) -> B).compose(g: (B) -> C): (A) -> C = { a: A -> g(this(a)) }
 
@@ -130,7 +129,7 @@ fun <F, A> rightFunctor() = object : Functor<Out<F, A>> {
 }
 
 data class Swapped<out F, out B, out A>(val value: Bi<F, A, B>) :
-  K2<Swap<@UnsafeVariance F>, @UnsafeVariance B, @UnsafeVariance A>
+  Bi<Swap<F>, B, A>
 typealias Swap<F> = Out<Swapped<*, *, *>, F>
 
 context(_: BiFunctor<F>)
@@ -141,7 +140,7 @@ fun <F, A> leftFunctor() = object : Functor<Out<Swap<F>, A>> {
   }
 }
 
-sealed class Either<out A, out B> : K2<Either<*, *>, @UnsafeVariance A, @UnsafeVariance B>
+sealed class Either<out A, out B> : Bi<Either<*, *>, A, B>
 data class Left<out A>(val value: A) : Either<A, Nothing>()
 data class Right<out B>(val value: B) : Either<Nothing, B>()
 
@@ -164,7 +163,7 @@ object PairBiFunctor : BiFunctor<PairK<*, *>> {
 }
 
 data class BiComposed<out BI, out F, out G, out A, out B>(val value: Bi<BI, Out<F, A>, Out<G, B>>) :
-  K2<BiCompose<@UnsafeVariance BI, @UnsafeVariance F, @UnsafeVariance G>, @UnsafeVariance A, @UnsafeVariance B>
+  Bi<BiCompose<BI, F, G>, A, B>
 typealias BiCompose<BI, F, G> = Bi<Out<BiComposed<*, *, *, *, *>, BI>, F, G>
 
 context(_: BiFunctor<BF>, _: Functor<F>, _: Functor<G>)
@@ -187,7 +186,7 @@ val maybeFunctor: Functor<MaybeK> = context(EitherBiFunctor, ConstFunctor<Unit>(
   }
 }
 
-interface NT<in F, out G> : K2<NT<*, *>, @UnsafeVariance F, @UnsafeVariance G> {
+interface NT<in F, out G> : Pro<NT<*, *>, F, G> {
   operator fun <A> invoke(fa: Out<F, A>): Out<G, A>
 }
 
