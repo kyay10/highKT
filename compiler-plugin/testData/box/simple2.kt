@@ -27,7 +27,7 @@ context(_: BiFunctor<BF>, _: Functor<F>, _: Functor<G>)
 fun <BF, F, G> composeBiFunctors() = object : BiFunctor<BiCompose<BF, F, G>> {
   override fun <A, B, C, D> K2<BiCompose<BF, F, G>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<BiCompose<BF, F, G>, C, D> {
     fix().all = 42
-    return BiComposed(value.bimap({ it.fmap(f) }) { it.fmap(g) }) // TODO Investigate: Fails with verification error
+    return BiComposed(value.bimap({ it.fmap(f) }) { it.fmap(g) })
   }
 }
 

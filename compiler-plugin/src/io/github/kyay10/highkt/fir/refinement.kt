@@ -4,6 +4,7 @@ import io.github.kyay10.highkt.fir.KindReturnTypeRefinementExtension.Companion.A
 import org.jetbrains.kotlin.KtSourceElement
 import org.jetbrains.kotlin.fir.FirElement
 import org.jetbrains.kotlin.fir.FirSession
+import org.jetbrains.kotlin.fir.SessionAndScopeSessionHolder
 import org.jetbrains.kotlin.fir.SessionHolder
 import org.jetbrains.kotlin.fir.declarations.FirDeclaration
 import org.jetbrains.kotlin.fir.declarations.FirDeclarationDataKey
@@ -19,15 +20,18 @@ import org.jetbrains.kotlin.fir.expressions.builder.buildFunctionCall
 import org.jetbrains.kotlin.fir.expressions.builder.buildPropertyAccessExpression
 import org.jetbrains.kotlin.fir.expressions.builder.buildThisReceiverExpression
 import org.jetbrains.kotlin.fir.extensions.FirAssignExpressionAltererExtension
+import org.jetbrains.kotlin.fir.extensions.FirExpressionResolutionExtension
 import org.jetbrains.kotlin.fir.extensions.FirExtensionApiInternals
 import org.jetbrains.kotlin.fir.extensions.FirFunctionCallRefinementExtension
 import org.jetbrains.kotlin.fir.references.FirResolvedNamedReference
 import org.jetbrains.kotlin.fir.references.builder.buildExplicitThisReference
 import org.jetbrains.kotlin.fir.references.builder.buildResolvedNamedReference
 import org.jetbrains.kotlin.fir.references.builder.buildSimpleNamedReference
+import org.jetbrains.kotlin.fir.resolve.calls.ImplicitExtensionReceiverValue
 import org.jetbrains.kotlin.fir.resolve.calls.candidate.CallInfo
 import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
+import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
@@ -102,31 +106,11 @@ class KindReturnTypeRefinementExtension(session: FirSession) : FirFunctionCallRe
     }
   }
 
-  @OptIn(SymbolInternals::class)
   override fun transform(
     call: FirFunctionCall,
     originalSymbol: FirNamedFunctionSymbol
   ): FirFunctionCall {
-    call.accept(object : FirVisitorVoid() {
-      override fun visitElement(element: FirElement) {
-        element.acceptChildren(this)
-        if (element is FirFunctionCall) {
-          val needsRefinement = (element.calleeReference as? FirResolvedNamedReference)?.resolvedSymbol
-            ?.fir?.needsKRefinement
-          if (needsRefinement != null) {
-            element.replaceCalleeReference(buildResolvedNamedReference {
-              name = needsRefinement.name
-              source = needsRefinement.source
-              resolvedSymbol = needsRefinement
-            })
-            val newType = element.resolvedType.applyKEverywhere()
-              ?: return
-            element.replaceConeTypeOrNull(newType)
-          }
-        }
-      }
-
-    })
+    call.accept(ApplyKToInterceptedCallsVisitor(session))
     return call
   }
 
@@ -140,6 +124,39 @@ class KindReturnTypeRefinementExtension(session: FirSession) : FirFunctionCallRe
     call: FirFunctionCall,
     name: Name
   ) = null
+}
+
+class ApplyKToInterceptedCallsVisitor(override val session: FirSession) : FirVisitorVoid(), SessionHolder {
+  @OptIn(SymbolInternals::class)
+  override fun visitElement(element: FirElement) {
+    element.acceptChildren(this)
+    if (element is FirFunctionCall) {
+      val needsRefinement = (element.calleeReference as? FirResolvedNamedReference)?.resolvedSymbol
+        ?.fir?.needsKRefinement
+      if (needsRefinement != null) {
+        element.replaceCalleeReference(buildResolvedNamedReference {
+          name = needsRefinement.name
+          source = needsRefinement.source
+          resolvedSymbol = needsRefinement
+        })
+        val newType = element.resolvedType.applyKEverywhere()
+          ?: return
+        element.replaceConeTypeOrNull(newType)
+      }
+    }
+  }
+
+}
+
+class KindReturnTypeRefinementWorkaround(session: FirSession): FirExpressionResolutionExtension(session), SessionHolder {
+  override fun addNewImplicitReceivers(
+    functionCall: FirFunctionCall,
+    sessionHolder: SessionAndScopeSessionHolder,
+    containingCallableSymbol: FirCallableSymbol<*>
+  ): List<ImplicitExtensionReceiverValue> {
+    functionCall.accept(ApplyKToInterceptedCallsVisitor(session))
+    return emptyList()
+  }
 }
 
 context(_: SessionHolder)
