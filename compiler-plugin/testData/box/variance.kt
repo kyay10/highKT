@@ -187,7 +187,7 @@ val maybeFunctor: Functor<MaybeK> = context(EitherBiFunctor, ConstFunctor<Unit>(
   }
 }
 
-interface NT<in F, out G> : K2<NT<*, *>, in F, @UnsafeVariance G> {
+interface NT<in F, out G> : K2<NT<*, *>, @UnsafeVariance F, @UnsafeVariance G> {
   operator fun <A> invoke(fa: Out<F, A>): Out<G, A>
 }
 
