@@ -68,6 +68,9 @@ class KindReturnTypeRefinementExtension(session: FirSession) : FirFunctionCallRe
     val FIX = CallableId(PACKAGE_FQN, callableName = Name.identifier("fix"))
     val ASSERT_IS_TYPE = Name.identifier("assertIsType")
     val K_CLASS_ID = ClassId(PACKAGE_FQN, Name.identifier("K"))
+    val K_OUT_CLASS_ID = ClassId(PACKAGE_FQN, Name.identifier("KOut"))
+    val K_IN_CLASS_ID = ClassId(PACKAGE_FQN, Name.identifier("KIn"))
+    val K_IDS = setOf(K_CLASS_ID, K_OUT_CLASS_ID, K_IN_CLASS_ID)
   }
 
   @OptIn(UnresolvedExpressionTypeAccess::class, SymbolInternals::class)
@@ -132,7 +135,7 @@ context(_: SessionHolder)
 private fun ConeKotlinType.needsKApplication(): Boolean = isK() || typeArguments.any { it.type?.needsKApplication() == true }
 
 context(_: SessionHolder)
-private fun ConeKotlinType.isK(): Boolean = fullyExpandedType().classId == KindReturnTypeRefinementExtension.K_CLASS_ID
+private fun ConeKotlinType.isK(): Boolean = fullyExpandedType().classId in KindReturnTypeRefinementExtension.K_IDS
 
 context(_: SessionHolder)
 private fun ConeKotlinType.applyKOnTheOutside(): ConeKotlinType? {
