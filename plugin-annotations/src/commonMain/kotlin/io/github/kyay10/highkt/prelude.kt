@@ -15,10 +15,6 @@ public typealias K2<F, A, B> = K<K<F, A>, B>
 public typealias Tri<F, A, B, C> = Out<Bi<F, A, B>, C>
 public typealias K3<F, A, B, C> = K<K2<F, A, B>, C>
 
-@Suppress("NOTHING_TO_INLINE")
-public inline fun fix(vararg casts: Unit) {}
-public val Unit.all: Unit get() = this
-
 public inline fun <reified T> assertIsType(x: Any?) {
   contract {
     returns() implies (x is T)
