@@ -31,17 +31,14 @@ typealias Opp<Arr> = K<Opposite<*, *, *>, Arr>
 
 context(c: Category<Cat>)
 fun <Cat> oppositeCategory(): Category<Opp<Cat>> = object : Category<Opp<Cat>> {
-  override fun <A, B, C> K2<Opp<Cat>, B, C>.compose(g: K2<Opp<Cat>, A, B>): K2<Opp<Cat>, A, C> = context(c) {
-    g.compose<Cat, _, _, _>(this)
-  }.expandTo()
+  override fun <A, B, C> K2<Opp<Cat>, B, C>.compose(g: K2<Opp<Cat>, A, B>): K2<Opp<Cat>, A, C> =
+    g.compose<Cat, _, _, _>(this).expandTo()
 
-  override fun <A> K2<Opp<Cat>, A, *>.source(): Obj<Opp<Cat>, A> = context(c) {
-    target<Cat, _>()
-  }.expandTo()
+  override fun <A> K2<Opp<Cat>, A, *>.source(): Obj<Opp<Cat>, A> =
+    target<Cat, _>().expandTo()
 
-  override fun <A> K2<Opp<Cat>, *, A>.target(): Obj<Opp<Cat>, A> = context(c) {
-    source<Cat, _>()
-  }.expandTo()
+  override fun <A> K2<Opp<Cat>, *, A>.target(): Obj<Opp<Cat>, A> =
+    source<Cat, _>().expandTo()
 }
 
 fun interface Arrow<A, B> : (A) -> B, K2<ArrowK, A, B>
@@ -249,8 +246,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
           override val secondFunctor: Functor<Cat, Cat, A> = a.firstFunctor
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<Identity, A>, A, X> =
             lift<_, _, A, _, _>(c).expandTo()
-        }
-      }.expandTo()
+        }.expandTo()
+      }
 
     override fun <A> leftUnitorInv(a: Obj<EndoK<Cat>, A>): K2<EndoK<Cat>, A, K<FunctorCompose<*>, TypePair<Identity, A>>> =
       context(a.firstFunctor, identityFunctor<Cat>()) {
@@ -259,8 +256,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
           override val secondFunctor: Functor<Cat, Cat, Compose<Identity, A>> = composeFunctors<_, _, _, Identity, A>()
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, A, Compose<Identity, A>, X> =
             lift<_, _, A, _, _>(c).expandTo()
-        }
-      }.expandTo()
+        }.expandTo()
+      }
 
     override fun <A> rightUnitor(a: Obj<EndoK<Cat>, A>): K2<EndoK<Cat>, K<FunctorCompose<*>, TypePair<A, Identity>>, A> =
       context(a.firstFunctor, identityFunctor<Cat>()) {
@@ -269,8 +266,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
           override val secondFunctor: Functor<Cat, Cat, A> = a.firstFunctor
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<A, Identity>, A, X> =
             lift<_, _, A, _, _>(c).expandTo()
-        }
-      }.expandTo()
+        }.expandTo()
+      }
 
     override fun <A> rightUnitorInv(a: Obj<EndoK<Cat>, A>): K2<EndoK<Cat>, A, K<FunctorCompose<*>, TypePair<A, Identity>>> =
       context(a.firstFunctor, identityFunctor<Cat>()) {
@@ -279,8 +276,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
           override val secondFunctor: Functor<Cat, Cat, Compose<A, Identity>> = composeFunctors<_, _, _, A, Identity>()
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, A, Compose<A, Identity>, X> =
             lift<_, _, A, _, _>(c).expandTo()
-        }
-      }.expandTo()
+        }.expandTo()
+      }
 
     override fun <A, B, C> associator(
       a: Obj<EndoK<Cat>, A>,
@@ -300,8 +297,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
 
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<Compose<A, B>, C>, Compose<A, Compose<B, C>>, X> =
             lift<_, _, A, _, _>(lift<_, _, B, _, _>(lift<_, _, C, _, _>(c))).expandTo()
-        }
-      }.expandTo()
+        }.expandTo()
+      }
 
     override fun <A, B, C> associatorInv(
       a: Obj<EndoK<Cat>, A>,
@@ -321,8 +318,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
 
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<A, Compose<B, C>>, Compose<Compose<A, B>, C>, X> =
             lift<_, _, A, _, _>(lift<_, _, B, _, _>(lift<_, _, C, _, _>(c))).expandTo()
-        }
-      }.expandTo()
+        }.expandTo()
+      }
   }
 
 interface MonoidObject<Cat, F, I, A> : TensorProduct<Cat, F, I> {
