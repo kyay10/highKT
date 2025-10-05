@@ -40,6 +40,12 @@ public class JvmBoxTestGenerated extends AbstractJvmBoxTest {
   }
 
   @Test
+  @TestMetadata("type_functions.kt")
+  public void testType_functions() {
+    runTest("compiler-plugin/testData/box/type_functions.kt");
+  }
+
+  @Test
   @TestMetadata("variance.kt")
   public void testVariance() {
     runTest("compiler-plugin/testData/box/variance.kt");

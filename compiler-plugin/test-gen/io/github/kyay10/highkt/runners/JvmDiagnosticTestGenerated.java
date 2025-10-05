@@ -22,6 +22,18 @@ public class JvmDiagnosticTestGenerated extends AbstractJvmDiagnosticTest {
   }
 
   @Test
+  @TestMetadata("expandTo_mismatch.kt")
+  public void testExpandTo_mismatch() {
+    runTest("compiler-plugin/testData/diagnostics/expandTo_mismatch.kt");
+  }
+
+  @Test
+  @TestMetadata("higher_order_type_function.kt")
+  public void testHigher_order_type_function() {
+    runTest("compiler-plugin/testData/diagnostics/higher_order_type_function.kt");
+  }
+
+  @Test
   @TestMetadata("rejects_invariance.kt")
   public void testRejects_invariance() {
     runTest("compiler-plugin/testData/diagnostics/rejects_invariance.kt");

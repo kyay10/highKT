@@ -1,0 +1,28 @@
+FILE: expandTo_mismatch.kt
+    @R|io/github/kyay10/highkt/TypeFunction|() public abstract interface Swapped<F, A, B> : R|{io/github/kyay10/highkt/K2<F, B, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, B>, A>| {
+    }
+    public final typealias Swap<F> = R|io/github/kyay10/highkt/K<Swapped<*, *, *>, F>|
+    public final data class PairK<A, B> : R|{io/github/kyay10/highkt/K2<PairK<*, *>, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<PairK<*, *>, A>, B>| {
+        public constructor<A, B>(first: R|A|, second: R|B|): R|PairK<A, B>| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val first: R|A| = R|<local>/first|
+            public get(): R|A|
+
+        public final val second: R|B| = R|<local>/second|
+            public get(): R|B|
+
+        public final operator fun component1(): R|A|
+
+        public final operator fun component2(): R|B|
+
+        public final fun copy(first: R|A| = this@R|/PairK|.R|/PairK.first|, second: R|B| = this@R|/PairK|.R|/PairK.second|): R|PairK<A, B>|
+
+    }
+    public final fun test(): R|kotlin/Unit| {
+        lval foo: R|PairK<kotlin/Int, kotlin/String>| = R|/PairK.PairK|<R|kotlin/Int|, R|kotlin/String|>(Int(1), String(Hello))
+        R|<local>/foo|.R|io/github/kyay10/highkt/expandTo|<R|{io/github/kyay10/highkt/K2<PairK<*, *>, kotlin/Int, kotlin/String>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<PairK<*, *>, kotlin/Int>, kotlin/String>|>()
+        R|<local>/foo|.R|io/github/kyay10/highkt/expandTo|<R|{io/github/kyay10/highkt/K2<{Swap<PairK<*, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, PairK<*, *>>, kotlin/String, kotlin/Int>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{Swap<PairK<*, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, PairK<*, *>>, kotlin/String>, kotlin/Int>|>()
+        R|<local>/foo|.R|io/github/kyay10/highkt/expandTo|<R|{io/github/kyay10/highkt/K2<{Swap<PairK<*, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, PairK<*, *>>, kotlin/Int, kotlin/String>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{Swap<PairK<*, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, PairK<*, *>>, kotlin/Int>, kotlin/String>|>()
+    }

@@ -118,7 +118,7 @@ FILE: simple.kt
 
     }
     public final typealias Compose<F, G> = R|{io/github/kyay10/highkt/K2<foo/bar/Composed<*, *, *>, F, G>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, F>, G>|
-    context(<unused var>: R|foo/bar/Functor<F>|, <unused var>: R|foo/bar/Functor<G>|)
+    context(ff: R|foo/bar/Functor<F>|, gg: R|foo/bar/Functor<G>|)
     public final fun <F, G> composeFunctors(): R|foo/bar/Functor<foo/bar/Compose<F, G>>| {
         ^composeFunctors object : R|foo/bar/Functor<foo/bar/Compose<F, G>>| {
             private constructor(): R|foo/bar/<anonymous><F, G>| {
@@ -127,10 +127,13 @@ FILE: simple.kt
 
             public open override fun <A, B> R|io/github/kyay10/highkt/K<{foo/bar/Compose<F, G>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, F>, G>, A>|.fmap(f: R|(A) -> B|): R|io/github/kyay10/highkt/K<{foo/bar/Compose<F, G>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, F>, G>, B>| {
                 R|io/github/kyay10/highkt/assertIsType|<R|foo/bar/Composed<F, G, A>|>(this@R|foo/bar/<anonymous>.fmap|)
-                ^fmap context(R|<local>/<unused var>|) this@R|foo/bar/<anonymous>.fmap|.R|SubstitutionOverride<foo/bar/Composed.value: R|io/github/kyay10/highkt/K<F, io/github/kyay10/highkt/K<G, A>>|>|.R|foo/bar/fmap|<R|F|, R|io/github/kyay10/highkt/K<G, A>|, R|io/github/kyay10/highkt/K<G, B>|>(<L> = fmap@fun <anonymous>(it: R|io/github/kyay10/highkt/K<G, A>|): R|io/github/kyay10/highkt/K<G, B>| <inline=NoInline>  {
-                    ^ context(this@R|foo/bar/<anonymous>|) R|<local>/it|.R|foo/bar/fmap|<R|G|, R|A|, R|B|>(R|<local>/f|)
+                ^fmap R|kotlin/context|<R|foo/bar/Functor<F>|, R|foo/bar/Functor<G>|, R|foo/bar/Composed<F, G, B>|>(R|<local>/ff|, R|<local>/gg|, <L> = context(<unused var>: R|foo/bar/Functor<F>|, <unused var>: R|foo/bar/Functor<G>|) context@fun <anonymous>(): R|foo/bar/Composed<F, G, B>| <inline=Inline, kind=EXACTLY_ONCE>  {
+                    ^ context(R|<local>/<unused var>|) this@R|foo/bar/<anonymous>.fmap|.R|SubstitutionOverride<foo/bar/Composed.value: R|io/github/kyay10/highkt/K<F, io/github/kyay10/highkt/K<G, A>>|>|.R|foo/bar/fmap|<R|F|, R|io/github/kyay10/highkt/K<G, A>|, R|io/github/kyay10/highkt/K<G, B>|>(<L> = fmap@fun <anonymous>(it: R|io/github/kyay10/highkt/K<G, A>|): R|io/github/kyay10/highkt/K<G, B>| <inline=NoInline>  {
+                        ^ context(R|<local>/<unused var>|) R|<local>/it|.R|foo/bar/fmap|<R|G|, R|A|, R|B|>(R|<local>/f|)
+                    }
+                    ).R|kotlin/let|<R|io/github/kyay10/highkt/K<F, io/github/kyay10/highkt/K<G, B>>|, R|foo/bar/Composed<F, G, B>|>(::R|foo/bar/Composed.Composed<F, G, B>|)
                 }
-                ).R|kotlin/let|<R|io/github/kyay10/highkt/K<F, io/github/kyay10/highkt/K<G, B>>|, R|foo/bar/Composed<F, G, B>|>(::R|foo/bar/Composed.Composed<F, G, B>|)
+                )
             }
 
         }
@@ -176,7 +179,7 @@ FILE: simple.kt
 
     }
     public final infix fun <A, B, C> R|(A) -> B|.compose(g: R|(B) -> C|): R|(A) -> C| {
-        ^compose fun <anonymous>(a: R|A|): R|C| <inline=Unknown>  {
+        ^compose fun <anonymous>(a: R|A|): R|C| <inline=NoInline>  {
             ^ R|<local>/g|.R|SubstitutionOverride<kotlin/Function1.invoke: R|C|>|(this@R|foo/bar/compose|.R|SubstitutionOverride<kotlin/Function1.invoke: R|B|>|(R|<local>/a|))
         }
 

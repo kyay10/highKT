@@ -1,6 +1,8 @@
 package foo.bar
 
 // LANGUAGE: +ContextParameters
+// LANGUAGE_VERSION: 2.3
+// ALLOW_DANGEROUS_LANGUAGE_VERSION_TESTING
 
 import io.github.kyay10.highkt.*
 

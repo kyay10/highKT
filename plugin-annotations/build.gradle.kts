@@ -8,6 +8,9 @@ plugins {
 }
 
 kotlin {
+    compilerOptions {
+        freeCompilerArgs.add("-Xallow-contracts-on-more-functions")
+    }
     explicitApi()
 
     androidNativeArm32()

@@ -50,21 +50,23 @@ class PairFunctor<L> : Functor<K<PairK<*, *>, L>> {
   }
 }
 
-data class Composed<F, G, A>(val value: K<F, K<G, A>>) : K3<Composed<*, *, *>, F, G, A>
-typealias Compose<F, G> = K2<Composed<*, *, *>, F, G>
+@TypeFunction
+interface Composition<F, G, A> : K<F, K<G, A>>
+typealias Compose<F, G> = K2<Composition<*, *, *>, F, G>
 
-context(ff: Functor<F>, gg: Functor<G>)
+context(_: Functor<F>, _: Functor<G>)
 fun <F, G> composeFunctors() = object : Functor<Compose<F, G>> {
-  override fun <A, B> K<Compose<F, G>, A>.fmap(f: (A) -> B): K<Compose<F, G>, B> = context(ff, gg) { // KT-81441
-    value.fmap { it.fmap(f) }.let(::Composed)
-  }
+  override fun <A, B> K<Compose<F, G>, A>.fmap(f: (A) -> B): K<Compose<F, G>, B> =
+    // KT-81302
+    fmap<F, K<G, A>, K<G, B>> { it.fmap<G, A, B>(f) }.expandTo<K<Compose<F, G>, B>>()
 }
 
 data class Reader<R, A>(val run: (R) -> A) : K2<Reader<*, *>, R, A>
 
-data class Const<C, A>(val value: C) : K2<Const<*, *>, C, A>
+@TypeFunction
+interface Constant<C, A> : Id<C>
 
-data class Identity<A>(val value: A) : K<Identity<*>, A>
+typealias Const<C> = K<Constant<*, *>, C>
 
 infix fun <A, B, C> ((A) -> B).compose(g: (B) -> C): (A) -> C = { a: A -> g(this(a)) }
 
@@ -72,22 +74,24 @@ class ReaderMonad<R> : Monad<K<Reader<*, *>, R>> {
   override fun <A, B> K2<Reader<*, *>, R, A>.fmap(f: (A) -> B): K2<Reader<*, *>, R, B> = Reader(run compose f)
 
   override fun <A> pure(a: A) = Reader { _: R -> a }
-  override fun <A, B> K2<Reader<*, *>, R, A>.bind(f: (A) -> K2<Reader<*, *>, R, B>): K2<Reader<*, *>, R, B> = Reader { r -> f(run(r)).run(r) }
+  override fun <A, B> K2<Reader<*, *>, R, A>.bind(f: (A) -> K2<Reader<*, *>, R, B>): K2<Reader<*, *>, R, B> =
+    Reader { r -> f(run(r)).run(r) }
 }
 
-class ConstFunctor<C> : Functor<K<Const<*, *>, C>> {
-  override fun <A, B> K2<Const<*, *>, C, A>.fmap(f: (A) -> B): K2<Const<*, *>, C, B> = Const(value)
+class ConstFunctor<C> : Functor<Const<C>> {
+  override fun <A, B> K<Const<C>, A>.fmap(f: (A) -> B): K<Const<C>, B> = expandTo<K<Const<C>, B>>()
 }
 
-object UnitMonad : Monad<K<Const<*, *>, Unit>> {
-  override fun <A> pure(a: A) = Const<_, A>(Unit)
+data object UnitK : K<Any?, Unit>
+object UnitMonad : Monad<Const<UnitK>> {
+  override fun <A> pure(a: A) = UnitK.expandTo<K<Const<UnitK>, A>>()
 
-  override fun <A, B> K2<Const<*, *>, Unit, A>.bind(f: (A) -> K2<Const<*, *>, Unit, B>): K2<Const<*, *>, Unit, B> =
-    Const(Unit)
+  override fun <A, B> K<Const<UnitK>, A>.bind(f: (A) -> K<Const<UnitK>, B>): K<Const<UnitK>, B> =
+    expandTo<K<Const<UnitK>, B>>()
 }
 
-object IdentityFunctor : Functor<Identity<*>> {
-  override fun <A, B> K<Identity<*>, A>.fmap(f: (A) -> B): K<Identity<*>, B> = Identity(f(value))
+object IdentityFunctor : Functor<Identity> {
+  override fun <A, B> K<Identity, A>.fmap(f: (A) -> B): K<Identity, B> = f(this).expandTo<K<Identity, B>>()
 }
 
 interface BiFunctor<F> {
@@ -110,23 +114,25 @@ fun <F, A> rightFunctor() = object : Functor<K<F, A>> {
   override fun <B, C> K2<F, A, B>.fmap(f: (B) -> C): K2<F, A, C> = rightMap(f)
 }
 
-data class Swapped<F, B, A>(val value: K2<F, A, B>) : K2<Swap<F>, B, A>
+@TypeFunction
+interface Swapped<F, A, B> : K2<F, B, A>
 typealias Swap<F> = K<Swapped<*, *, *>, F>
 
 context(_: BiFunctor<F>)
 fun <F, A> leftFunctor() = object : Functor<K<Swap<F>, A>> {
-  override fun <B, C> K2<Swap<F>, A, B>.fmap(f: (B) -> C): K2<Swap<F>, A, C> = value.leftMap(f).let(::Swapped)
+  override fun <B, C> K2<Swap<F>, A, B>.fmap(f: (B) -> C): K2<Swap<F>, A, C> = leftMap(f).expandTo<K2<Swap<F>, A, C>>()
 }
 
-sealed class Either<A, B>: K2<Either<*, *>, A, B>
+sealed class Either<A, B> : K2<Either<*, *>, A, B>
 data class Left<A, B>(val value: A) : Either<A, B>()
 data class Right<A, B>(val value: B) : Either<A, B>()
 
 object EitherBiFunctor : BiFunctor<Either<*, *>> {
-  override fun <A, B, C, D> K2<Either<*, *>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<Either<*, *>, C, D> = when (this) {
-    is Left -> Left(f(value))
-    is Right -> Right(g(value))
-  }
+  override fun <A, B, C, D> K2<Either<*, *>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<Either<*, *>, C, D> =
+    when (this) {
+      is Left -> Left(f(value))
+      is Right -> Right(g(value))
+    }
 }
 
 object PairBiFunctor : BiFunctor<PairK<*, *>> {
@@ -136,24 +142,53 @@ object PairBiFunctor : BiFunctor<PairK<*, *>> {
   }
 }
 
-data class BiComposed<Bi, F, G, A, B>(val value: K2<Bi, K<F, A>, K<G, B>>) : K2<BiCompose<Bi, F, G>, A, B>
+@TypeFunction
+interface BiComposed<Bi, F, G, A, B> : K2<Bi, K<F, A>, K<G, B>>
 typealias BiCompose<Bi, F, G> = K3<BiComposed<*, *, *, *, *>, Bi, F, G>
 
-context(_: BiFunctor<BF>, _: Functor<F>, _: Functor<G>)
+context(bf: BiFunctor<BF>, _: Functor<F>, _: Functor<G>)
 fun <BF, F, G> composeBiFunctors() = object : BiFunctor<BiCompose<BF, F, G>> {
-  override fun <A, B, C, D> K2<BiCompose<BF, F, G>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<BiCompose<BF, F, G>, C, D> =
-    value.bimap({ it.fmap(f) }) { it.fmap(g) }.let(::BiComposed)
+  override fun <A, B, C, D> K2<BiCompose<BF, F, G>, A, B>.bimap(
+    f: (A) -> C,
+    g: (B) -> D
+  ): K2<BiCompose<BF, F, G>, C, D> = context(bf) { // KT-81441
+    bimap<_, _, _, _, BF>({ it.fmap(f) }) { it.fmap(g) }
+  }.expandTo<K2<BiCompose<BF, F, G>, C, D>>()
 }
 
-typealias Maybe<A> = BiComposed<Either<*, *>, K<Const<*, *>, Unit>, Identity<*>, Unit, A>
-typealias MaybeK = K<BiCompose<Either<*, *>, K<Const<*, *>, Unit>, Identity<*>>, Unit>
-val maybeFunctor: Functor<MaybeK> = context(EitherBiFunctor, ConstFunctor<Unit>(), IdentityFunctor) {
-  context(composeBiFunctors<Either<*, *>, K<Const<*, *>, Unit>, Identity<*>>()) {
-    rightFunctor<_, Unit>()
+typealias Maybe<A> = K<MaybeK, A>
+typealias MaybeK = K<BiCompose<Either<*, *>, Const<UnitK>, Identity>, UnitK>
+
+val maybeFunctor: Functor<MaybeK> = context(EitherBiFunctor, ConstFunctor<UnitK>(), IdentityFunctor) {
+  context(composeBiFunctors<Either<*, *>, Const<UnitK>, Identity>()) {
+    rightFunctor<BiCompose<Either<*, *>, Const<UnitK>, Identity>, UnitK>()
   }
 }
 
-interface NT<F, G>: K2<NT<*, *>, F, G> {
+@TypeFunction
+interface BiComposed2<Bi, F, G, A> : Compose<K<Bi, K<F, A>>, G>
+typealias BiCompose2<Bi, F, G> = K3<BiComposed2<*, *, *, *>, Bi, F, G>
+
+context(bf: BiFunctor<BF>, _: Functor<F>, _: Functor<G>)
+fun <BF, F, G> composeBiFunctors2() = object : BiFunctor<BiCompose2<BF, F, G>> {
+  override fun <A, B, C, D> K2<BiCompose2<BF, F, G>, A, B>.bimap(
+    f: (A) -> C,
+    g: (B) -> D
+  ): K2<BiCompose2<BF, F, G>, C, D> = context(bf) { // KT-81441
+    bimap<_, _, _, _, BF>({ it.fmap(f) }) { it.fmap(g) }
+  }.expandTo<K2<BiCompose2<BF, F, G>, C, D>>()
+}
+
+typealias Maybe2<A> = K<Maybe2K, A>
+typealias Maybe2K = Compose<K<Either<*, *>, UnitK>, Identity>
+
+val maybeFunctor2: Functor<Maybe2K> = context(EitherBiFunctor, ConstFunctor<UnitK>(), IdentityFunctor) {
+  context(composeBiFunctors2<Either<*, *>, Const<UnitK>, Identity>()) {
+    rightFunctor<BiCompose2<Either<*, *>, Const<UnitK>, Identity>, UnitK>()
+  }
+}
+
+interface NT<F, G> : K2<NT<*, *>, F, G> {
   operator fun <A> invoke(fa: K<F, A>): K<G, A>
 }
 
@@ -163,13 +198,14 @@ infix fun <F, G, H> NT<F, G>.vertical(other: NT<G, H>) = object : NT<F, H> {
 
 context(_: Functor<I>)
 infix fun <F, G, I, J> NT<F, G>.horizontalLeft(other: NT<I, J>) = object : NT<Compose<I, F>, Compose<J, G>> {
-  override fun <A> invoke(fa: K<Compose<I, F>, A>): K<Compose<J, G>, A> = other(fa.value.fmap { this@horizontalLeft(it) }).let(::Composed)
+  override fun <A> invoke(fa: K<Compose<I, F>, A>): K<Compose<J, G>, A> =
+    other(fa.fmap<I, K<F, A>, K<G, A>> { this@horizontalLeft(it) }).expandTo<K<Compose<J, G>, A>>()
 }
 
 context(_: Functor<J>)
 infix fun <F, G, I, J> NT<F, G>.horizontalRight(other: NT<I, J>) = object : NT<Compose<I, F>, Compose<J, G>> {
   override fun <A> invoke(fa: K<Compose<I, F>, A>): K<Compose<J, G>, A> =
-    other(fa.value).fmap { this@horizontalRight(it) }.let(::Composed)
+    other(fa).fmap { this@horizontalRight(it) }.expandTo<K<Compose<J, G>, A>>()
 }
 
 // ----------------------------------------------------------------
@@ -184,10 +220,20 @@ private fun pairExample() = context(PairFunctor<Int>()) {
   if (result != (1 toK "Hello!")) error("$result")
 }
 
-private fun maybeExample() = with(maybeFunctor) {
-  val a: Maybe<Int> = Maybe(Right(Identity(10)))
-  val b: Maybe<String> = a.fmap { it.toString() }
-  val expected: Maybe<String> = Maybe(Right(Identity("10")))
+private data class IntK(val value: Int) : K<Any?, Int>
+private data class StringK(val value: String) : K<Any?, String>
+
+private fun maybeExample() = context(maybeFunctor) {
+  val a: Either<UnitK, IntK> = Right(IntK(10))
+  val b = a.expandTo<Maybe<IntK>>().fmap { StringK(it.value.toString()) }
+  val expected: Either<UnitK, StringK> = Right(StringK("10"))
+  if (b != expected) error("$b")
+}
+
+private fun maybeExample2() = context(maybeFunctor2) {
+  val a: Either<UnitK, IntK> = Right(IntK(10))
+  val b = a.expandTo<Maybe2<IntK>>().fmap { StringK(it.value.toString()) }
+  val expected: Either<UnitK, StringK> = Right(StringK("10"))
   if (b != expected) error("$b")
 }
 
@@ -195,5 +241,6 @@ fun box(): String {
   listExample()
   pairExample()
   maybeExample()
+  maybeExample2()
   return "OK"
 }

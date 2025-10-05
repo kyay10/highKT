@@ -1,6 +1,8 @@
 package foo.bar
 
 // LANGUAGE: +ContextParameters
+// LANGUAGE_VERSION: 2.3
+// ALLOW_DANGEROUS_LANGUAGE_VERSION_TESTING
 
 import io.github.kyay10.highkt.*
 
@@ -51,11 +53,11 @@ class PairFunctor<L> : Functor<Out<PairK<*, *>, L>> {
 data class Composed<out F, out G, out A>(val value: Out<F, Out<G, A>>) : Out<Compose<F, G>, A>
 typealias Compose<F, G> = Bi<Composed<*, *, *>, F, G>
 
-context(_: Functor<F>, _: Functor<G>)
+context(ff: Functor<F>, gg: Functor<G>)
 fun <F, G> composeFunctors() = object : Functor<Compose<F, G>> {
-  override fun <A, B> Out<Compose<F, G>, A>.fmap(f: (A) -> B): Out<Compose<F, G>, B> =
-    // KT-81302
-    value.fmap { it.fmap<G, A, B>(f) }.let(::Composed)
+  override fun <A, B> Out<Compose<F, G>, A>.fmap(f: (A) -> B): Out<Compose<F, G>, B> = context(ff, gg) { // KT-81441
+    value.fmap { it.fmap(f) }.let(::Composed)
+  }
 }
 
 data class Reader<in R, out A>(val run: (R) -> A) : Pro<Reader<*, *>, R, A>
