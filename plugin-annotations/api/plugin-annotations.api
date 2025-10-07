@@ -1,3 +1,14 @@
-public abstract interface annotation class org/jetbrains/kotlin/compiler/plugin/template/SomeAnnotation : java/lang/annotation/Annotation {
+public abstract interface class io/github/kyay10/highkt/Id {
+}
+
+public abstract interface class io/github/kyay10/highkt/K {
+}
+
+public final class io/github/kyay10/highkt/PreludeKt {
+	public static final fun assertIsType (Ljava/lang/Object;)V
+	public static final fun expandTo (Ljava/lang/Object;)Ljava/lang/Object;
+}
+
+public abstract interface annotation class io/github/kyay10/highkt/TypeFunction : java/lang/annotation/Annotation {
 }
 
