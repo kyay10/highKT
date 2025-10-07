@@ -27,63 +27,53 @@ fun <M, A> pure(a: A) = with(monad) { pure(a) }
 context(monad: Monad<M>)
 fun <M, A, B> K<M, A>.bind(f: (A) -> K<M, B>) = with(monad) { bind(f) }
 
-class ListK<A>(list: List<A>) : K<ListK<*>, A>, List<A> by list, AbstractList<A>()
+object ListMonad : Monad<List<*>> {
+  override fun <A> pure(a: A): K<List<*>, A> = listOf(a)
 
-fun <A> listKOf(vararg elements: A): ListK<A> = listOf(*elements).toListK()
-
-fun <A> List<A>.toListK(): ListK<A> = ListK(this)
-
-object ListMonad : Monad<ListK<*>> {
-  override fun <A> pure(a: A) = listKOf(a)
-
-  override fun <A, B> K<ListK<*>, A>.bind(f: (A) -> K<ListK<*>, B>): K<ListK<*>, B> = flatMap(f).toListK()
+  override fun <A, B> K<List<*>, A>.bind(f: (A) -> K<List<*>, B>): K<List<*>, B> = flatMap(f)
 }
 
-data class PairK<A, B>(val first: A, val second: B) : K2<PairK<*, *>, A, B>
-
-infix fun <A, B> A.toK(that: B): PairK<A, B> = PairK(this, that)
-
-class PairFunctor<L> : Functor<K<PairK<*, *>, L>> {
-  override fun <A, B> K2<PairK<*, *>, L, A>.fmap(f: (A) -> B): K2<PairK<*, *>, L, B> {
+class PairFunctor<L> : Functor<K<Pair<*, *>, L>> {
+  override fun <A, B> K2<Pair<*, *>, L, A>.fmap(f: (A) -> B): K2<Pair<*, *>, L, B> {
     val (l, a) = this
-    return l toK f(a)
+    return l to f(a)
   }
 }
 
-data class Composed<F, G, A>(val value: K<F, K<G, A>>) : K3<Composed<*, *, *>, F, G, A>
+data class Composed<F, G, A>(val value: K<F, K<G, A>>)
 typealias Compose<F, G> = K2<Composed<*, *, *>, F, G>
 
 context(ff: Functor<F>, gg: Functor<G>)
 fun <F, G> composeFunctors() = object : Functor<Compose<F, G>> {
   override fun <A, B> K<Compose<F, G>, A>.fmap(f: (A) -> B): K<Compose<F, G>, B> = context(ff, gg) { // KT-81441
-    value.fmap { it.fmap(f) }.let(::Composed)
+    Composed(value.fmap { it.fmap(f) })
   }
 }
 
-data class Reader<R, A>(val run: (R) -> A) : K2<Reader<*, *>, R, A>
+data class Reader<R, A>(val run: (R) -> A)
 
-data class Const<C, A>(val value: C) : K2<Const<*, *>, C, A>
+data class Const<C, A>(val value: C)
 
-data class Identity<A>(val value: A) : K<Identity<*>, A>
+data class Identity<A>(val value: A)
 
 infix fun <A, B, C> ((A) -> B).compose(g: (B) -> C): (A) -> C = { a: A -> g(this(a)) }
 
 class ReaderMonad<R> : Monad<K<Reader<*, *>, R>> {
   override fun <A, B> K2<Reader<*, *>, R, A>.fmap(f: (A) -> B): K2<Reader<*, *>, R, B> = Reader(run compose f)
 
-  override fun <A> pure(a: A) = Reader { _: R -> a }
-  override fun <A, B> K2<Reader<*, *>, R, A>.bind(f: (A) -> K2<Reader<*, *>, R, B>): K2<Reader<*, *>, R, B> = Reader { r -> f(run(r)).run(r) }
+  override fun <A> pure(a: A): K2<Reader<*, *>, R, A> = Reader { _: R -> a }
+  override fun <A, B> K2<Reader<*, *>, R, A>.bind(f: (A) -> K2<Reader<*, *>, R, B>): K2<Reader<*, *>, R, B> = Reader { r: R -> f(run(r)).run(r) }
 }
 
 class ConstFunctor<C> : Functor<K<Const<*, *>, C>> {
-  override fun <A, B> K2<Const<*, *>, C, A>.fmap(f: (A) -> B): K2<Const<*, *>, C, B> = Const(value)
+  override fun <A, B> K2<Const<*, *>, C, A>.fmap(f: (A) -> B): K2<Const<*, *>, C, B> = Const<_, B>(value)
 }
 
 object UnitMonad : Monad<K<Const<*, *>, Unit>> {
-  override fun <A> pure(a: A) = Const<_, A>(Unit)
+  override fun <A> pure(a: A): K2<Const<*, *>, Unit, A> = Const<_, A>(Unit)
 
   override fun <A, B> K2<Const<*, *>, Unit, A>.bind(f: (A) -> K2<Const<*, *>, Unit, B>): K2<Const<*, *>, Unit, B> =
-    Const(Unit)
+    Const<_, B>(Unit)
 }
 
 object IdentityFunctor : Functor<Identity<*>> {
@@ -118,25 +108,25 @@ fun <F, A> leftFunctor() = object : Functor<K<Swap<F>, A>> {
   override fun <B, C> K2<Swap<F>, A, B>.fmap(f: (B) -> C): K2<Swap<F>, A, C> = value.leftMap(f).let(::Swapped)
 }
 
-sealed class Either<A, B>: K2<Either<*, *>, A, B>
+sealed class Either<A, B>
 data class Left<A, B>(val value: A) : Either<A, B>()
 data class Right<A, B>(val value: B) : Either<A, B>()
 
 object EitherBiFunctor : BiFunctor<Either<*, *>> {
   override fun <A, B, C, D> K2<Either<*, *>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<Either<*, *>, C, D> = when (this) {
-    is Left -> Left(f(value))
-    is Right -> Right(g(value))
+    is Left<A, B> -> Left(f(value))
+    is Right<A, B> -> Right(g(value))
   }
 }
 
-object PairBiFunctor : BiFunctor<PairK<*, *>> {
-  override fun <A, B, C, D> K2<PairK<*, *>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<PairK<*, *>, C, D> {
+object PairBiFunctor : BiFunctor<Pair<*, *>> {
+  override fun <A, B, C, D> K2<Pair<*, *>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<Pair<*, *>, C, D> {
     val (a, b) = this
-    return f(a) toK g(b)
+    return f(a) to g(b)
   }
 }
 
-data class BiComposed<Bi, F, G, A, B>(val value: K2<Bi, K<F, A>, K<G, B>>) : K2<BiCompose<Bi, F, G>, A, B>
+data class BiComposed<Bi, F, G, A, B>(val value: K2<Bi, K<F, A>, K<G, B>>)
 typealias BiCompose<Bi, F, G> = K3<BiComposed<*, *, *, *, *>, Bi, F, G>
 
 context(_: BiFunctor<BF>, _: Functor<F>, _: Functor<G>)
@@ -153,7 +143,7 @@ val maybeFunctor: Functor<MaybeK> = context(EitherBiFunctor, ConstFunctor<Unit>(
   }
 }
 
-interface NT<F, G>: K2<NT<*, *>, F, G> {
+interface NT<F, G> {
   operator fun <A> invoke(fa: K<F, A>): K<G, A>
 }
 
@@ -175,18 +165,18 @@ infix fun <F, G, I, J> NT<F, G>.horizontalRight(other: NT<I, J>) = object : NT<C
 // ----------------------------------------------------------------
 
 private fun listExample() = context(ListMonad) {
-  val result: ListK<String> = listKOf("Hello", "World").fmap { "$it!" }
-  if (result != listKOf("Hello!", "World!")) error("$result")
+  val result: List<String> = listOf("Hello", "World").fmap { "$it!" }
+  if (result != listOf("Hello!", "World!")) error("$result")
 }
 
 private fun pairExample() = context(PairFunctor<Int>()) {
-  val result: PairK<Int, String> = (1 toK "Hello").fmap { "$it!" }
-  if (result != (1 toK "Hello!")) error("$result")
+  val result: Pair<Int, String> = (1 to "Hello").fmap { "$it!" }
+  if (result != (1 to "Hello!")) error("$result")
 }
 
-private fun maybeExample() = with(maybeFunctor) {
-  val a: Maybe<Int> = Maybe(Right(Identity(10)))
-  val b: Maybe<String> = a.fmap { it.toString() }
+private fun maybeExample() = context(maybeFunctor) {
+  val aMaybe = Maybe(Right(Identity(10)))
+  val b: Maybe<String> = aMaybe.fmap { it.toString() }
   val expected: Maybe<String> = Maybe(Right(Identity("10")))
   if (b != expected) error("$b")
 }

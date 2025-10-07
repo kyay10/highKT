@@ -9,9 +9,7 @@ import org.jetbrains.kotlin.fir.references.resolved
 import org.jetbrains.kotlin.fir.references.toResolvedCallableSymbol
 import org.jetbrains.kotlin.fir.resolve.calls.ImplicitExtensionReceiverValue
 import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
-import org.jetbrains.kotlin.fir.types.ConeTypeIntersector
 import org.jetbrains.kotlin.fir.types.resolvedType
-import org.jetbrains.kotlin.fir.types.typeContext
 
 class KindReturnTypeRefiner(session: FirSession) : FirExpressionResolutionExtension(session), SessionHolder {
   override fun addNewImplicitReceivers(
@@ -19,11 +17,8 @@ class KindReturnTypeRefiner(session: FirSession) : FirExpressionResolutionExtens
     sessionHolder: SessionAndScopeSessionHolder,
     containingCallableSymbol: FirCallableSymbol<*>
   ): List<ImplicitExtensionReceiverValue> {
-    if (functionCall.calleeReference.resolved?.toResolvedCallableSymbol()?.callableId != EXPAND_TO_ID) {
-      functionCall.replaceConeTypeOrNull(functionCall.resolvedType.applyKEverywhere()?.let {
-        ConeTypeIntersector.intersectTypes(session.typeContext, listOf(it, functionCall.resolvedType))
-      } ?: functionCall.resolvedType)
-    }
+    if (functionCall.calleeReference.resolved?.toResolvedCallableSymbol()?.callableId != EXPAND_TO_ID)
+      functionCall.replaceConeTypeOrNull(functionCall.resolvedType.applyKAndCanonicalize())
     return emptyList()
   }
 }

@@ -1,21 +1,25 @@
 FILE: rejects_invariance.kt
     public abstract interface Functor<F> : R|kotlin/Any| {
-        public abstract fun <A, B> R|io/github/kyay10/highkt/Out<F, A>|.fmap(f: R|(A) -> B|): R|io/github/kyay10/highkt/Out<F, B>|
+        public abstract fun <A, B> R|{io/github/kyay10/highkt/Out<F, A>=} io/github/kyay10/highkt/K<F, out A>|.fmap(f: R|(A) -> B|): R|{io/github/kyay10/highkt/Out<F, B>=} io/github/kyay10/highkt/K<F, out B>|
 
     }
-    public final class Invariant<A> : R|io/github/kyay10/highkt/Out<Invariant<*>, A>|, R|io/github/kyay10/highkt/In<Invariant<*>, A>| {
+    public final class Invariant<A> : R|kotlin/Any| {
         public constructor<A>(): R|Invariant<A>| {
             super<R|kotlin/Any|>()
         }
 
     }
     public final fun R|Functor<Invariant<*>>|.test(x: R|Invariant<kotlin/Int>|): R|kotlin/Unit| {
-        lval y: R|Invariant<kotlin/String>| = (this@R|/test|, R|<local>/x|).R|SubstitutionOverride</Functor.fmap: R|io/github/kyay10/highkt/Out<Invariant<*>, B>|>|<R|kotlin/Int|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/Int|): R|kotlin/String| <inline=NoInline>  {
+        R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<Invariant<*>, kotlin/Int>|>(R|<local>/x|)
+        R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<Functor<*>, Invariant<*>>|>(this@R|/test|)
+        lval y: R|Invariant<kotlin/String>| = (this@R|/test|, R|<local>/x|).R|SubstitutionOverride</Functor.fmap: R|{io/github/kyay10/highkt/Out<Invariant<*>, B>=} io/github/kyay10/highkt/K<Invariant<*>, out B>|>|<R|kotlin/Int|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/Int|): R|kotlin/String| <inline=NoInline>  {
             ^ R|<local>/it|.R|kotlin/Int.toString|()
         }
         )
-        lval z: R|Invariant<out kotlin/String>| = (this@R|/test|, R|<local>/x|).R|SubstitutionOverride</Functor.fmap: R|io/github/kyay10/highkt/Out<Invariant<*>, B>|>|<R|kotlin/Int|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/Int|): R|kotlin/String| <inline=NoInline>  {
+        R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<Invariant<*>, kotlin/String>|>(R|<local>/y|)
+        lval z: R|Invariant<out kotlin/String>| = (this@R|/test|, R|<local>/x|).R|SubstitutionOverride</Functor.fmap: R|{io/github/kyay10/highkt/Out<Invariant<*>, B>=} io/github/kyay10/highkt/K<Invariant<*>, out B>|>|<R|kotlin/Int|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/Int|): R|kotlin/String| <inline=NoInline>  {
             ^ R|<local>/it|.R|kotlin/Int.toString|()
         }
         )
+        R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<Invariant<*>, out kotlin/String>|>(R|<local>/z|)
     }

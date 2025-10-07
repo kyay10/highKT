@@ -2,32 +2,10 @@ FILE: higher_order_type_function.kt
     @R|io/github/kyay10/highkt/TypeFunction|() public abstract interface Swapped<F, A, B> : R|{io/github/kyay10/highkt/K2<F, B, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, B>, A>| {
     }
     public final typealias Swap<F> = R|io/github/kyay10/highkt/K<Swapped<*, *, *>, F>|
-    public final data class TripleK<A, B, C> : R|{io/github/kyay10/highkt/K3<TripleK<*, *, *>, A, B, C>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<TripleK<*, *, *>, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<TripleK<*, *, *>, A>, B>, C>| {
-        public constructor<A, B, C>(first: R|A|, second: R|B|, third: R|C|): R|TripleK<A, B, C>| {
-            super<R|kotlin/Any|>()
-        }
-
-        public final val first: R|A| = R|<local>/first|
-            public get(): R|A|
-
-        public final val second: R|B| = R|<local>/second|
-            public get(): R|B|
-
-        public final val third: R|C| = R|<local>/third|
-            public get(): R|C|
-
-        public final operator fun component1(): R|A|
-
-        public final operator fun component2(): R|B|
-
-        public final operator fun component3(): R|C|
-
-        public final fun copy(first: R|A| = this@R|/TripleK|.R|/TripleK.first|, second: R|B| = this@R|/TripleK|.R|/TripleK.second|, third: R|C| = this@R|/TripleK|.R|/TripleK.third|): R|TripleK<A, B, C>|
-
-    }
     public final fun test(): R|kotlin/Unit| {
-        lval foo: R|TripleK<kotlin/Int, kotlin/String, kotlin/Unit>| = R|/TripleK.TripleK|<R|kotlin/Int|, R|kotlin/String|, R|kotlin/Unit|>(Int(1), String(Hello), Q|kotlin/Unit|)
-        R|<local>/foo|.R|io/github/kyay10/highkt/expandTo|<R|{io/github/kyay10/highkt/K3<TripleK<*, *, *>, kotlin/Int, kotlin/String, kotlin/Unit>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<TripleK<*, *, *>, kotlin/Int, kotlin/String>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<TripleK<*, *, *>, kotlin/Int>, kotlin/String>, kotlin/Unit>|>()
-        R|<local>/foo|.R|io/github/kyay10/highkt/expandTo|<R|{io/github/kyay10/highkt/K3<{Swap<TripleK<*, *, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, TripleK<*, *, *>>, kotlin/String, kotlin/Int, kotlin/Unit>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<{Swap<TripleK<*, *, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, TripleK<*, *, *>>, kotlin/String, kotlin/Int>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{Swap<TripleK<*, *, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, TripleK<*, *, *>>, kotlin/String>, kotlin/Int>, kotlin/Unit>|>()
-        R|<local>/foo|.R|io/github/kyay10/highkt/expandTo|<R|{io/github/kyay10/highkt/K3<{Swap<TripleK<*, *, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, TripleK<*, *, *>>, kotlin/Int, kotlin/String, kotlin/Unit>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<{Swap<TripleK<*, *, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, TripleK<*, *, *>>, kotlin/Int, kotlin/String>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{Swap<TripleK<*, *, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, TripleK<*, *, *>>, kotlin/Int>, kotlin/String>, kotlin/Unit>|>()
+        lval foo: R|it(kotlin/Triple<kotlin/Int, kotlin/String, kotlin/Unit> & io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Triple<*, *, *>, kotlin/Int>, kotlin/String>, kotlin/Unit>)| = R|kotlin/Triple.Triple|<R|kotlin/Int|, R|kotlin/String|, R|kotlin/Unit|>(Int(1), String(Hello), Q|kotlin/Unit|)
+        R|io/github/kyay10/highkt/assertIsType<CS errors: io/github/kyay10/highkt/assertIsType>#|<R|it(kotlin/Triple<kotlin/Int, kotlin/String, kotlin/Unit> & io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Triple<*, *, *>, kotlin/Int>, kotlin/String>, kotlin/Unit>)|>(R|<local>/foo|)
+        R|<local>/foo|.R|io/github/kyay10/highkt/expandTo|<R|{io/github/kyay10/highkt/K3<kotlin/Triple<*, *, *>, kotlin/Int, kotlin/String, kotlin/Unit>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<kotlin/Triple<*, *, *>, kotlin/Int, kotlin/String>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Triple<*, *, *>, kotlin/Int>, kotlin/String>, kotlin/Unit>|>()
+        R|<local>/foo|.R|io/github/kyay10/highkt/expandTo|<R|{io/github/kyay10/highkt/K3<{Swap<kotlin/Triple<*, *, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, kotlin/Triple<*, *, *>>, kotlin/String, kotlin/Int, kotlin/Unit>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<{Swap<kotlin/Triple<*, *, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, kotlin/Triple<*, *, *>>, kotlin/String, kotlin/Int>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{Swap<kotlin/Triple<*, *, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, kotlin/Triple<*, *, *>>, kotlin/String>, kotlin/Int>, kotlin/Unit>|>()
+        R|<local>/foo|.R|io/github/kyay10/highkt/expandTo|<R|{io/github/kyay10/highkt/K3<{Swap<kotlin/Triple<*, *, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, kotlin/Triple<*, *, *>>, kotlin/Int, kotlin/String, kotlin/Unit>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<{Swap<kotlin/Triple<*, *, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, kotlin/Triple<*, *, *>>, kotlin/Int, kotlin/String>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{Swap<kotlin/Triple<*, *, *>>=} io/github/kyay10/highkt/K<Swapped<*, *, *>, kotlin/Triple<*, *, *>>, kotlin/Int>, kotlin/String>, kotlin/Unit>|>()
     }

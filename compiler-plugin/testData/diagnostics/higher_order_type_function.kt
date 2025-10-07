@@ -5,15 +5,14 @@
 import io.github.kyay10.highkt.*
 
 @TypeFunction
-interface Swapped<F, A, B>: K2<F, B, A>
+interface Swapped<F, A, B> : K2<F, B, A>
 typealias Swap<F> = K<Swapped<*, *, *>, F>
 
-data class TripleK<A, B, C>(val first: A, val second: B, val third: C): K3<TripleK<*, *, *>, A, B, C>
 fun test() {
-  val foo = TripleK(1, "Hello", Unit)
-  foo.expandTo<K3<TripleK<*, *, *>, Int, String, Unit>>() // OK
-  foo.expandTo<K3<Swap<TripleK<*, *, *>>, String, Int, Unit>>() // OK
-  <!EXPAND_TO_MISMATCH!>foo.expandTo<K3<Swap<TripleK<*, *, *>>, Int, String, Unit>>()<!> // Error
+  <!INFERRED_TYPE_VARIABLE_INTO_POSSIBLE_EMPTY_INTERSECTION!>val foo = Triple(1, "Hello", Unit)<!>
+  foo.expandTo<K3<Triple<*, *, *>, Int, String, Unit>>() // OK
+  foo.expandTo<K3<Swap<Triple<*, *, *>>, String, Int, Unit>>() // OK
+  <!EXPAND_TO_MISMATCH!>foo.expandTo<K3<Swap<Triple<*, *, *>>, Int, String, Unit>>()<!> // Error
 }
 
 /* GENERATED_FIR_TAGS: classDeclaration, data, functionDeclaration, integerLiteral, interfaceDeclaration,

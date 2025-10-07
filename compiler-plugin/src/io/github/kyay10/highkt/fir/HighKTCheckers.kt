@@ -37,16 +37,22 @@ private object ExpandToCallChecker : FirFunctionCallChecker(MppCheckerKind.Commo
   override fun check(expression: FirFunctionCall) {
     if (expression.calleeReference.resolved?.toResolvedCallableSymbol()?.callableId != EXPAND_TO_ID) return
     val receiver = expression.explicitReceiver ?: return
-    val newType = expression.resolvedType.applyKEverywhere()
-    if (newType == null || !receiver.resolvedType.isSubtypeOf(newType, context.session)) {
-      reporter.reportOn(expression.source, EXPAND_TO_MISMATCH, receiver.resolvedType, expression.resolvedType, newType ?: expression.resolvedType)
-    }
+    val newType = expression.resolvedType.applyKEverywhere() ?: expression.resolvedType
+    if (!receiver.resolvedType.isSubtypeOf(newType, context.session)) reporter.reportOn(
+      expression.source,
+      EXPAND_TO_MISMATCH,
+      receiver.resolvedType,
+      expression.resolvedType,
+      newType
+    )
   }
 }
 
 private object HighKTErrors : KtDiagnosticsContainer() {
   val EXPAND_TO_MISMATCH: KtDiagnosticFactory3<ConeKotlinType, ConeKotlinType, ConeKotlinType> = KtDiagnosticFactory3(
-    "EXPAND_TO_MISMATCH", ERROR, SourceElementPositioningStrategies.DEFAULT,
+    "EXPAND_TO_MISMATCH",
+    ERROR,
+    SourceElementPositioningStrategies.DEFAULT,
     KtCallExpression::class,
     getRendererFactory()
   )
@@ -56,6 +62,12 @@ private object HighKTErrors : KtDiagnosticsContainer() {
 
 private object HighKTErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
   override val MAP: KtDiagnosticFactoryToRendererMap by KtDiagnosticFactoryToRendererMap("FIR") { map ->
-    map.put(EXPAND_TO_MISMATCH, "Type {0} does not expand to {1}, since the latter contracts to {2}", RENDER_TYPE, RENDER_TYPE, RENDER_TYPE)
+    map.put(
+      EXPAND_TO_MISMATCH,
+      "Type {0} does not expand to {1}, since the latter contracts to {2}",
+      RENDER_TYPE,
+      RENDER_TYPE,
+      RENDER_TYPE
+    )
   }
 }

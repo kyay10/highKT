@@ -41,19 +41,17 @@ fun <Cat> oppositeCategory(): Category<Opp<Cat>> = object : Category<Opp<Cat>> {
     source<Cat, _>().expandTo()
 }
 
-fun interface Arrow<A, B> : (A) -> B, K2<ArrowK, A, B>
+typealias Arrow<A, B> = (A) -> B
 typealias ArrowK = Arrow<*, *>
 
-fun <A> idArrow(): Arrow<A, A> = Arrow { a: A -> a }
+fun <A> idArrow(): Arrow<A, A> = { a: A -> a }
 
 object ArrowCategory : Category<ArrowK> {
-  override fun <A, B, C> K2<ArrowK, B, C>.compose(g: K2<ArrowK, A, B>): K2<ArrowK, A, C> = Arrow { a: A -> this(g(a)) }
+  override fun <A, B, C> K2<ArrowK, B, C>.compose(g: K2<ArrowK, A, B>): K2<ArrowK, A, C> = { a: A -> this(g(a)) }.expandTo()
 
   override fun <A> K2<ArrowK, A, *>.source(): Obj<ArrowK, A> = idArrow<A>()
   override fun <A> K2<ArrowK, *, A>.target(): Obj<ArrowK, A> = idArrow<A>()
 }
-
-data class PairK<A, B>(val first: A, val second: B) : K2<PairK<*, *>, A, B>
 
 @TypeFunction
 interface TypePaired<A, B, F> : K2<F, A, B>
@@ -69,7 +67,7 @@ typealias TypePairSecond<P> = K<P, TypePairedSecond<*, *>>
 
 @TypeFunction
 interface MorphismProduct<C1, C2, PA, PB> :
-  K2<PairK<*, *>, K2<C1, TypePairFirst<PA>, TypePairFirst<PB>>, K2<C2, TypePairSecond<PA>, TypePairSecond<PB>>>
+  K2<Pair<*, *>, K2<C1, TypePairFirst<PA>, TypePairFirst<PB>>, K2<C2, TypePairSecond<PA>, TypePairSecond<PB>>>
 typealias Product<C1, C2> = K2<MorphismProduct<*, *, *, *>, C1, C2>
 
 context(_: Category<C1>, _: Category<C2>)
@@ -77,14 +75,14 @@ fun <C1, C2> productCategory(): Category<Product<C1, C2>> = object : Category<Pr
   override fun <PA, PB, PC> K2<Product<C1, C2>, PB, PC>.compose(g: K2<Product<C1, C2>, PA, PB>): K2<Product<C1, C2>, PA, PC> {
     val newFirst = first.compose(g.first)
     val newSecond = second.compose(g.second)
-    return PairK(newFirst, newSecond).expandTo()
+    return (newFirst to newSecond).expandTo()
   }
 
   override fun <P> K2<Product<C1, C2>, P, *>.source(): Obj<Product<C1, C2>, P> =
-    PairK(first.source(), second.source()).expandTo()
+    (first.source() to second.source()).expandTo()
 
   override fun <P> K2<Product<C1, C2>, *, P>.target(): Obj<Product<C1, C2>, P> =
-    PairK(first.target(), second.target()).expandTo()
+    (first.target() to second.target()).expandTo()
 }
 
 interface Functor<C, D, F> {
@@ -339,7 +337,7 @@ fun <M> NormalMonad<M>.toUsualMonad(): UsualMonad<M> = object : UsualMonad<M> {
   override fun <A> pure(a: A): K<M, A> = empty().get(idArrow<A>())(a)
   override fun <A, B> K<M, A>.bind(f: (A) -> K<M, B>): K<M, B> =
     context(plus().secondFunctor) {
-      val mapped = lift(Arrow(f))(this)
+      val mapped = lift(f)(this)
       plus().get(idArrow<B>())(mapped)
     }
 }
@@ -347,7 +345,7 @@ fun <M> NormalMonad<M>.toUsualMonad(): UsualMonad<M> = object : UsualMonad<M> {
 fun <M> UsualMonad<M>.toNormalFunctor(): Functor<ArrowK, ArrowK, M> = object : Functor<ArrowK, ArrowK, M> {
   override val firstCategory: Category<ArrowK> = ArrowCategory
   override val secondCategory: Category<ArrowK> = ArrowCategory
-  override fun <A, B> lift(f: K2<ArrowK, A, B>): K2<ArrowK, K<M, A>, K<M, B>> = Arrow { it.bind { pure(f(it)) } }
+  override fun <A, B> lift(f: K2<ArrowK, A, B>): K2<ArrowK, K<M, A>, K<M, B>> = { it: K<M, A> -> it.bind { pure(f(it)) } }.expandTo()
 }
 
 fun <M> UsualMonad<M>.toNormalMonad(): NormalMonad<M> = context(toNormalFunctor(), ArrowCategory) {
@@ -356,7 +354,7 @@ fun <M> UsualMonad<M>.toNormalMonad(): NormalMonad<M> = context(toNormalFunctor(
     override fun empty(): K2<EndoK<ArrowK>, Identity, M> = object : Nat<ArrowK, ArrowK, Identity, M> {
       override val firstFunctor: Functor<ArrowK, ArrowK, Identity> = identityFunctor<ArrowK>()
       override val secondFunctor: Functor<ArrowK, ArrowK, M> = contextOf<Functor<ArrowK, ArrowK, M>>()
-      override fun <A> get(c: Obj<ArrowK, A>): Component<ArrowK, Identity, M, A> = Arrow { a: A -> pure(a) }.expandTo()
+      override fun <A> get(c: Obj<ArrowK, A>): Component<ArrowK, Identity, M, A> = { a: A -> pure(a) }.expandTo()
     }
 
     override fun plus(): K2<EndoK<ArrowK>, K<FunctorCompose<*>, TypePair<M, M>>, M> =
@@ -364,7 +362,7 @@ fun <M> UsualMonad<M>.toNormalMonad(): NormalMonad<M> = context(toNormalFunctor(
         override val firstFunctor: Functor<ArrowK, ArrowK, Compose<M, M>> =
           composeFunctors<ArrowK, ArrowK, ArrowK, M, M>()
         override val secondFunctor: Functor<ArrowK, ArrowK, M> = contextOf<Functor<ArrowK, ArrowK, M>>()
-        override fun <A> get(c: Obj<ArrowK, A>): Component<ArrowK, Compose<M, M>, M, A> = Arrow { mma: K<M, K<M, A>> ->
+        override fun <A> get(c: Obj<ArrowK, A>): Component<ArrowK, Compose<M, M>, M, A> = { mma: K<M, K<M, A>> ->
           mma.bind { ma -> ma }
         }.expandTo()
       }.expandTo()

@@ -5,15 +5,14 @@
 import io.github.kyay10.highkt.*
 
 @TypeFunction
-interface Swapped<F, A, B>: K2<F, B, A>
+interface Swapped<F, A, B> : K2<F, B, A>
 typealias Swap<F> = K<Swapped<*, *, *>, F>
 
-data class PairK<A, B>(val first: A, val second: B): K2<PairK<*, *>, A, B>
 fun test() {
-    val foo = PairK(1, "Hello")
-    foo.expandTo<K2<PairK<*, *>, Int, String>>() // OK
-    foo.expandTo<K2<Swap<PairK<*, *>>, String, Int>>() // OK
-    <!EXPAND_TO_MISMATCH!>foo.expandTo<K2<Swap<PairK<*, *>>, Int, String>>()<!> // Error
+  <!INFERRED_TYPE_VARIABLE_INTO_POSSIBLE_EMPTY_INTERSECTION!>val foo = 1 to "Hello"<!>
+  foo.expandTo<K2<Pair<*, *>, Int, String>>() // OK
+  foo.expandTo<K2<Swap<Pair<*, *>>, String, Int>>() // OK
+  <!EXPAND_TO_MISMATCH!>foo.expandTo<K2<Swap<Pair<*, *>>, Int, String>>()<!> // Error
 }
 
 /* GENERATED_FIR_TAGS: classDeclaration, data, functionDeclaration, integerLiteral, interfaceDeclaration,

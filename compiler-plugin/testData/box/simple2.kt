@@ -22,7 +22,7 @@ interface BiFunctor<F> {
 context(b: BiFunctor<F>)
 fun <A, B, C, D, F> K2<F, A, B>.bimap(f: (A) -> C, g: (B) -> D) = with(b) { bimap(f, g) }
 
-data class BiComposed<Bi, F, G, A, B>(val value: K2<Bi, K<F, A>, K<G, B>>) : K2<BiCompose<Bi, F, G>, A, B>
+data class BiComposed<Bi, F, G, A, B>(val value: K2<Bi, K<F, A>, K<G, B>>)
 typealias BiCompose<Bi, F, G> = K3<BiComposed<*, *, *, *, *>, Bi, F, G>
 
 context(_: BiFunctor<BF>, _: Functor<F>, _: Functor<G>)

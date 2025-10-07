@@ -14,13 +14,16 @@ public annotation class TypeFunction
 public interface Id<@Suppress("unused") A>
 public typealias Identity = Id<*>
 
-public interface Out<out F, out A>
-public interface In<out F, in A>
-public interface K<out F, A>: Out<F, A>, In<F, A>
+@Suppress("unused")
+public interface K<out F, A>
+
+public typealias Out<F, A> = K<F, out A>
+public typealias In<F, A> = K<F, in A>
 
 public typealias Bi<F, A, B> = Out<Out<F, A>, B>
 public typealias Pro<F, A, B> = Out<In<F, A>, B>
 public typealias K2<F, A, B> = K<K<F, A>, B>
+
 public typealias Tri<F, A, B, C> = Out<Bi<F, A, B>, C>
 public typealias K3<F, A, B, C> = K<K2<F, A, B>, C>
 

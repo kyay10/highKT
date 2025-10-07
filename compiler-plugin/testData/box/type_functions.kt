@@ -27,26 +27,16 @@ fun <M, A> pure(a: A) = with(monad) { pure(a) }
 context(monad: Monad<M>)
 fun <M, A, B> K<M, A>.bind(f: (A) -> K<M, B>) = with(monad) { bind(f) }
 
-class ListK<A>(list: List<A>) : K<ListK<*>, A>, List<A> by list, AbstractList<A>()
+object ListMonad : Monad<List<*>> {
+  override fun <A> pure(a: A): K<List<*>, A> = listOf(a)
 
-fun <A> listKOf(vararg elements: A): ListK<A> = listOf(*elements).toListK()
-
-fun <A> List<A>.toListK(): ListK<A> = ListK(this)
-
-object ListMonad : Monad<ListK<*>> {
-  override fun <A> pure(a: A) = listKOf(a)
-
-  override fun <A, B> K<ListK<*>, A>.bind(f: (A) -> K<ListK<*>, B>): K<ListK<*>, B> = flatMap(f).toListK()
+  override fun <A, B> K<List<*>, A>.bind(f: (A) -> K<List<*>, B>): K<List<*>, B> = flatMap(f)
 }
 
-data class PairK<A, B>(val first: A, val second: B) : K2<PairK<*, *>, A, B>
-
-infix fun <A, B> A.toK(that: B): PairK<A, B> = PairK(this, that)
-
-class PairFunctor<L> : Functor<K<PairK<*, *>, L>> {
-  override fun <A, B> K2<PairK<*, *>, L, A>.fmap(f: (A) -> B): K2<PairK<*, *>, L, B> {
+class PairFunctor<L> : Functor<K<Pair<*, *>, L>> {
+  override fun <A, B> K2<Pair<*, *>, L, A>.fmap(f: (A) -> B): K2<Pair<*, *>, L, B> {
     val (l, a) = this
-    return l toK f(a)
+    return l to f(a)
   }
 }
 
@@ -61,7 +51,7 @@ fun <F, G> composeFunctors() = object : Functor<Compose<F, G>> {
     fmap<F, K<G, A>, K<G, B>> { it.fmap<G, A, B>(f) }.expandTo<K<Compose<F, G>, B>>()
 }
 
-data class Reader<R, A>(val run: (R) -> A) : K2<Reader<*, *>, R, A>
+data class Reader<R, A>(val run: (R) -> A)
 
 @TypeFunction
 interface Constant<C, A> : Id<C>
@@ -73,25 +63,23 @@ infix fun <A, B, C> ((A) -> B).compose(g: (B) -> C): (A) -> C = { a: A -> g(this
 class ReaderMonad<R> : Monad<K<Reader<*, *>, R>> {
   override fun <A, B> K2<Reader<*, *>, R, A>.fmap(f: (A) -> B): K2<Reader<*, *>, R, B> = Reader(run compose f)
 
-  override fun <A> pure(a: A) = Reader { _: R -> a }
+  override fun <A> pure(a: A): K2<Reader<*, *>, R, A> = Reader { _: R -> a }
   override fun <A, B> K2<Reader<*, *>, R, A>.bind(f: (A) -> K2<Reader<*, *>, R, B>): K2<Reader<*, *>, R, B> =
-    Reader { r -> f(run(r)).run(r) }
+    Reader { r: R -> f(run(r)).run(r) }
 }
 
 class ConstFunctor<C> : Functor<Const<C>> {
   override fun <A, B> K<Const<C>, A>.fmap(f: (A) -> B): K<Const<C>, B> = expandTo<K<Const<C>, B>>()
 }
 
-data object UnitK : K<Any?, Unit>
-object UnitMonad : Monad<Const<UnitK>> {
-  override fun <A> pure(a: A) = UnitK.expandTo<K<Const<UnitK>, A>>()
+object UnitMonad : Monad<Const<Unit>> {
+  override fun <A> pure(a: A): K<Const<Unit>, A> = Unit.expandTo()
 
-  override fun <A, B> K<Const<UnitK>, A>.bind(f: (A) -> K<Const<UnitK>, B>): K<Const<UnitK>, B> =
-    expandTo<K<Const<UnitK>, B>>()
+  override fun <A, B> K<Const<Unit>, A>.bind(f: (A) -> K<Const<Unit>, B>): K<Const<Unit>, B> = expandTo()
 }
 
 object IdentityFunctor : Functor<Identity> {
-  override fun <A, B> K<Identity, A>.fmap(f: (A) -> B): K<Identity, B> = f(this).expandTo<K<Identity, B>>()
+  override fun <A, B> K<Identity, A>.fmap(f: (A) -> B): K<Identity, B> = f(this).expandTo()
 }
 
 interface BiFunctor<F> {
@@ -123,22 +111,22 @@ fun <F, A> leftFunctor() = object : Functor<K<Swap<F>, A>> {
   override fun <B, C> K2<Swap<F>, A, B>.fmap(f: (B) -> C): K2<Swap<F>, A, C> = leftMap(f).expandTo<K2<Swap<F>, A, C>>()
 }
 
-sealed class Either<A, B> : K2<Either<*, *>, A, B>
+sealed class Either<A, B>
 data class Left<A, B>(val value: A) : Either<A, B>()
 data class Right<A, B>(val value: B) : Either<A, B>()
 
 object EitherBiFunctor : BiFunctor<Either<*, *>> {
   override fun <A, B, C, D> K2<Either<*, *>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<Either<*, *>, C, D> =
     when (this) {
-      is Left -> Left(f(value))
-      is Right -> Right(g(value))
+      is Left<A, B> -> Left(f(value))
+      is Right<A, B> -> Right(g(value))
     }
 }
 
-object PairBiFunctor : BiFunctor<PairK<*, *>> {
-  override fun <A, B, C, D> K2<PairK<*, *>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<PairK<*, *>, C, D> {
+object PairBiFunctor : BiFunctor<Pair<*, *>> {
+  override fun <A, B, C, D> K2<Pair<*, *>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<Pair<*, *>, C, D> {
     val (a, b) = this
-    return f(a) toK g(b)
+    return f(a) to g(b)
   }
 }
 
@@ -157,11 +145,11 @@ fun <BF, F, G> composeBiFunctors() = object : BiFunctor<BiCompose<BF, F, G>> {
 }
 
 typealias Maybe<A> = K<MaybeK, A>
-typealias MaybeK = K<BiCompose<Either<*, *>, Const<UnitK>, Identity>, UnitK>
+typealias MaybeK = K<BiCompose<Either<*, *>, Const<Unit>, Identity>, Unit>
 
-val maybeFunctor: Functor<MaybeK> = context(EitherBiFunctor, ConstFunctor<UnitK>(), IdentityFunctor) {
-  context(composeBiFunctors<Either<*, *>, Const<UnitK>, Identity>()) {
-    rightFunctor<BiCompose<Either<*, *>, Const<UnitK>, Identity>, UnitK>()
+val maybeFunctor: Functor<MaybeK> = context(EitherBiFunctor, ConstFunctor<Unit>(), IdentityFunctor) {
+  context(composeBiFunctors<Either<*, *>, Const<Unit>, Identity>()) {
+    rightFunctor<BiCompose<Either<*, *>, Const<Unit>, Identity>, Unit>()
   }
 }
 
@@ -180,15 +168,15 @@ fun <BF, F, G> composeBiFunctors2() = object : BiFunctor<BiCompose2<BF, F, G>> {
 }
 
 typealias Maybe2<A> = K<Maybe2K, A>
-typealias Maybe2K = Compose<K<Either<*, *>, UnitK>, Identity>
+typealias Maybe2K = Compose<K<Either<*, *>, Unit>, Identity>
 
-val maybeFunctor2: Functor<Maybe2K> = context(EitherBiFunctor, ConstFunctor<UnitK>(), IdentityFunctor) {
-  context(composeBiFunctors2<Either<*, *>, Const<UnitK>, Identity>()) {
-    rightFunctor<BiCompose2<Either<*, *>, Const<UnitK>, Identity>, UnitK>()
+val maybeFunctor2: Functor<Maybe2K> = context(EitherBiFunctor, ConstFunctor<Unit>(), IdentityFunctor) {
+  context(composeBiFunctors2<Either<*, *>, Const<Unit>, Identity>()) {
+    rightFunctor<BiCompose2<Either<*, *>, Const<Unit>, Identity>, Unit>()
   }
 }
 
-interface NT<F, G> : K2<NT<*, *>, F, G> {
+interface NT<F, G> {
   operator fun <A> invoke(fa: K<F, A>): K<G, A>
 }
 
@@ -211,29 +199,26 @@ infix fun <F, G, I, J> NT<F, G>.horizontalRight(other: NT<I, J>) = object : NT<C
 // ----------------------------------------------------------------
 
 private fun listExample() = context(ListMonad) {
-  val result: ListK<String> = listKOf("Hello", "World").fmap { "$it!" }
-  if (result != listKOf("Hello!", "World!")) error("$result")
+  val result: List<String> = listOf("Hello", "World").fmap { "$it!" }
+  if (result != listOf("Hello!", "World!")) error("$result")
 }
 
 private fun pairExample() = context(PairFunctor<Int>()) {
-  val result: PairK<Int, String> = (1 toK "Hello").fmap { "$it!" }
-  if (result != (1 toK "Hello!")) error("$result")
+  val result: Pair<Int, String> = (1 to "Hello").fmap { "$it!" }
+  if (result != (1 to "Hello!")) error("$result")
 }
 
-private data class IntK(val value: Int) : K<Any?, Int>
-private data class StringK(val value: String) : K<Any?, String>
-
 private fun maybeExample() = context(maybeFunctor) {
-  val a: Either<UnitK, IntK> = Right(IntK(10))
-  val b = a.expandTo<Maybe<IntK>>().fmap { StringK(it.value.toString()) }
-  val expected: Either<UnitK, StringK> = Right(StringK("10"))
+  val a: Either<Unit, Int> = Right(10)
+  val b = a.expandTo<Maybe<Int>>().fmap { it.toString() }
+  val expected: Either<Unit, String> = Right("10")
   if (b != expected) error("$b")
 }
 
 private fun maybeExample2() = context(maybeFunctor2) {
-  val a: Either<UnitK, IntK> = Right(IntK(10))
-  val b = a.expandTo<Maybe2<IntK>>().fmap { StringK(it.value.toString()) }
-  val expected: Either<UnitK, StringK> = Right(StringK("10"))
+  val a: Either<Unit, Int> = Right(10)
+  val b = a.expandTo<Maybe2<Int>>().fmap { it.toString() }
+  val expected: Either<Unit, String> = Right("10")
   if (b != expected) error("$b")
 }
 

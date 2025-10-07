@@ -8,7 +8,7 @@ interface Functor<F> {
   fun <A, B> Out<F, A>.fmap(f: (A) -> B): Out<F, B>
 }
 
-class Invariant<A>: Out<Invariant<*>, A>, In<Invariant<*>, A>
+class Invariant<A>
 
 fun Functor<Invariant<*>>.test(x: Invariant<Int>) {
   val y: Invariant<String> = <!INITIALIZER_TYPE_MISMATCH!>x.fmap { it.toString() }<!>
