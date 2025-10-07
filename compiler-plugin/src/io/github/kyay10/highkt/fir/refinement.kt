@@ -36,8 +36,9 @@ private fun ConeKotlinType.deconstructIfKType(): Pair<ConeKotlinType, List<ConeT
     }
     // Now realType is not a K
   }
-  if (realType.typeArguments.any { !it.isStarProjection }) return null // Could be relaxed
   if (appliedTypes.isEmpty()) return null // implies this was not a K at all
+  // Could be relaxed
+  require(realType.typeArguments.none { !it.isStarProjection }) { "K can only be applied to star projections; was called with $realType" }
   return realType to appliedTypes
 }
 
@@ -49,8 +50,7 @@ private fun ConeKotlinType.deconstructNormalType(): Pair<ConeKotlinType, List<Co
 
 context(c: SessionHolder)
 private tailrec fun FirRegularClassSymbol.applyTypeFunctions(
-  appliedTypes: List<ConeTypeProjection>,
-  default: ConeKotlinType? = null
+  appliedTypes: List<ConeTypeProjection>, default: ConeKotlinType? = null
 ): ConeKotlinType? {
   if (ownTypeParameterSymbols.size > appliedTypes.size) return default // partially-applied type
   require(classId != K_CLASS_ID) { "Should not be called on K; was called with arguments $appliedTypes" }
@@ -64,12 +64,11 @@ private tailrec fun FirRegularClassSymbol.applyTypeFunctions(
     val substitutor = createParametersSubstitutor(c.session, ownTypeParameterSymbols.zip(appliedTypes).toMap())
     substitutor.substituteOrNull(superType)
   } ?: return default
-  val appliedTypes = appliedTypes.subList(ownTypeParameterSymbols.size, appliedTypes.size).toMutableList()
+  val appliedTypes = appliedTypes.drop(ownTypeParameterSymbols.size)
   val newDefault = substituted.createKType(appliedTypes)
   val (realType, newApplied) = substituted.deconstructIfKType() ?: substituted.deconstructNormalType()
   val symbol = realType.toRegularClassSymbol(c.session) ?: return newDefault
-  appliedTypes.addAll(0, newApplied)
-  return symbol.applyTypeFunctions(appliedTypes, newDefault)
+  return symbol.applyTypeFunctions(newApplied + appliedTypes, newDefault)
 }
 
 // TODO: application order?
