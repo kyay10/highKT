@@ -44,11 +44,11 @@ class PairFunctor<L> : Functor<K<Pair<*, *>, L>> {
 interface Composition<F, G, A> : K<F, K<G, A>>
 typealias Compose<F, G> = K2<Composition<*, *, *>, F, G>
 
-context(_: Functor<F>, _: Functor<G>)
+context(ff: Functor<F>, gg: Functor<G>)
 fun <F, G> composeFunctors() = object : Functor<Compose<F, G>> {
-  override fun <A, B> K<Compose<F, G>, A>.fmap(f: (A) -> B): K<Compose<F, G>, B> =
-    // KT-81302
-    fmap<F, K<G, A>, K<G, B>> { it.fmap<G, A, B>(f) }.expandTo<K<Compose<F, G>, B>>()
+  override fun <A, B> K<Compose<F, G>, A>.fmap(f: (A) -> B): K<Compose<F, G>, B> = context(ff, gg) { // KT-81441
+    fmap<F, _, _> { it.fmap(f) }.expandTo()
+  }
 }
 
 data class Reader<R, A>(val run: (R) -> A)
