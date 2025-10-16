@@ -1,7 +1,5 @@
 // RUN_PIPELINE_TILL: BACKEND
 
-import io.github.kyay10.highkt.*
-
 fun test() {
   val (_, b) = listOf(42) to listOf("foo")
 }

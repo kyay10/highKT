@@ -3,5 +3,5 @@ FILE: handles_underscore_properties.kt
         lval <destruct>: R|kotlin/Pair<kotlin/collections/List<kotlin/Int>, kotlin/collections/List<kotlin/String>>| = R|kotlin/collections/listOf|<R|kotlin/Int|>(Int(42)).R|kotlin/to|<R|it(kotlin/collections/List<kotlin/Int> & io/github/kyay10/highkt/K<kotlin/collections/List<*>, kotlin/Int>)|, R|it(kotlin/collections/List<kotlin/String> & io/github/kyay10/highkt/K<kotlin/collections/List<*>, kotlin/String>)|>(R|kotlin/collections/listOf|<R|kotlin/String|>(String(foo)))
         lval <unused var>: R|kotlin/collections/List<kotlin/Int>| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component1: R|kotlin/collections/List<kotlin/Int>|>|()
         lval b: R|kotlin/collections/List<kotlin/String>| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component2: R|kotlin/collections/List<kotlin/String>|>|()
-        R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<kotlin/collections/List<*>, kotlin/String>|>(R|<local>/b|)
+        Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<kotlin/collections/List<*>, kotlin/String>|>(R|<local>/b|)
     }

@@ -1,6 +1,10 @@
 // RUN_PIPELINE_TILL: FRONTEND
 
-import io.github.kyay10.highkt.*
+import io.github.kyay10.highkt.TypeFunction
+import io.github.kyay10.highkt.expandTo
+import io.github.kyay10.highkt.K3
+import io.github.kyay10.highkt.K2
+import io.github.kyay10.highkt.K
 
 @TypeFunction
 interface Swapped<F, A, B> : K2<F, B, A>

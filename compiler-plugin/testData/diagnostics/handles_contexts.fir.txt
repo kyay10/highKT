@@ -27,6 +27,6 @@ FILE: handles_contexts.kt
     }
     context(<unused var>: R|Amb|, <unused var>: R|Exc|)
     public final suspend fun <A> R|Stream<A>?|.reflect(): R|A| {
-        R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<Stream<*>, A>?|>(this@R|/reflect|)
+        Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<Stream<*>, A>?|>(this@R|/reflect|)
         ^reflect context(R|<local>/<unused var>|, R|<local>/<unused var>|) this@R|/reflect| ?: context(R|<local>/<unused var>|) R|/raise|().R|/reflect|<R|A|>()
     }

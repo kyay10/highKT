@@ -12,5 +12,5 @@ FILE: handles_contracts.kt
             )
         }
 
-        R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<kotlin/collections/List<*>, kotlin/Any?>?|>(this@R|/hasContract|)
+        Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<kotlin/collections/List<*>, kotlin/Any?>?|>(this@R|/hasContract|)
     }

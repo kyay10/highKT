@@ -1,7 +1,5 @@
 // RUN_PIPELINE_TILL: BACKEND
 
-import io.github.kyay10.highkt.*
-
 sealed class Either<out A, out B> {
   data class Left<A>(val a: A) : Either<A, Nothing>()
   data class Right<B>(val b: B) : Either<Nothing, B>()

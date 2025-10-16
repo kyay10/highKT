@@ -54,7 +54,7 @@ FILE: handles_is_checks.kt
         }
 
         lval bar: R|Either<kotlin/Nothing, kotlin/Int>| = Int(42).R|/right|<R|kotlin/Int|>()
-        R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<Either<*, *>, kotlin/Nothing>, kotlin/Int>|>(R|<local>/bar|)
+        Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<Either<*, *>, kotlin/Nothing>, kotlin/Int>|>(R|<local>/bar|)
         when (lval <when-subject>: R|Either<kotlin/Nothing, kotlin/Int>| = R|<local>/bar|) {
             ($subj$ is R|Either.Left<kotlin/Nothing>|) ->  {
             }

@@ -1,6 +1,6 @@
 // RUN_PIPELINE_TILL: FRONTEND
 
-import io.github.kyay10.highkt.*
+import io.github.kyay10.highkt.Out
 
 interface Functor<F> {
   fun <A, B> Out<F, A>.fmap(f: (A) -> B): Out<F, B>

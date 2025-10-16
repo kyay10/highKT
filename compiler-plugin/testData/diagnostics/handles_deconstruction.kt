@@ -1,7 +1,5 @@
 // RUN_PIPELINE_TILL: BACKEND
 
-import io.github.kyay10.highkt.*
-
 interface Handler<E>
 class SubCont<in T, out R> {
   operator fun invoke(arg: T): R = TODO()

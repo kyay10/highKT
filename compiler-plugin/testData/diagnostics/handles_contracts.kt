@@ -1,6 +1,5 @@
 // RUN_PIPELINE_TILL: BACKEND
 
-import io.github.kyay10.highkt.*
 import kotlin.contracts.*
 
 @OptIn(ExperimentalContracts::class)

@@ -1,7 +1,5 @@
 // RUN_PIPELINE_TILL: BACKEND
 
-import io.github.kyay10.highkt.*
-
 @PublishedApi
 internal enum class OnInit {
   NONE,

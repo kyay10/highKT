@@ -1,8 +1,6 @@
 // RUN_PIPELINE_TILL: BACKEND
 // LANGUAGE: +ContextParameters
 
-import io.github.kyay10.highkt.*
-
 class Amb
 class Exc {
   fun raise(): Nothing = TODO()

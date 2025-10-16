@@ -189,15 +189,9 @@ class AddTypeToTypeAssertTransformer(session: FirSession) : FirAssignExpressionA
 }
 
 context(c: SessionHolder)
-private fun FirReceiverParameter.buildTypeAssertCall(
+private inline fun FirReceiverParameter.buildTypeAssertCall(
   block: FirFunctionCallBuilder.() -> Unit
-): FirFunctionCall = buildFunctionCall {
-  source = this@buildTypeAssertCall.source
-  coneTypeOrNull = c.session.builtinTypes.unitType.coneType
-  calleeReference = buildSimpleNamedReference {
-    source = this@buildTypeAssertCall.source
-    name = ASSERT_IS_TYPE
-  }
+): FirFunctionCall = buildTypeAssertCallBasic {
   argumentList = buildArgumentList {
     source = this@buildTypeAssertCall.source
     arguments.add(buildThisReceiverExpression {
@@ -214,15 +208,9 @@ private fun FirReceiverParameter.buildTypeAssertCall(
 }
 
 context(c: SessionHolder)
-private fun FirVariable.buildTypeAssertCall(
+private inline fun FirVariable.buildTypeAssertCall(
   block: FirFunctionCallBuilder.() -> Unit
-): FirFunctionCall = buildFunctionCall {
-  source = this@buildTypeAssertCall.source
-  coneTypeOrNull = c.session.builtinTypes.unitType.coneType
-  calleeReference = buildSimpleNamedReference {
-    source = this@buildTypeAssertCall.source
-    name = ASSERT_IS_TYPE
-  }
+): FirFunctionCall = buildTypeAssertCallBasic {
   argumentList = buildArgumentList {
     source = this@buildTypeAssertCall.source
     arguments.add(buildPropertyAccessExpression {
@@ -234,6 +222,29 @@ private fun FirVariable.buildTypeAssertCall(
         resolvedSymbol = symbol
       }
     })
+  }
+  block()
+}
+
+context(c: SessionHolder)
+private inline fun FirElement.buildTypeAssertCallBasic(
+  block: FirFunctionCallBuilder.() -> Unit
+): FirFunctionCall = buildFunctionCall {
+  source = this@buildTypeAssertCallBasic.source
+  coneTypeOrNull = c.session.builtinTypes.unitType.coneType
+  calleeReference = buildSimpleNamedReference {
+    source = this@buildTypeAssertCallBasic.source
+    name = ASSERT_IS_TYPE
+  }
+  explicitReceiver = PACKAGE_FQN.pathSegments().fold(null) { acc, name ->
+    buildPropertyAccessExpression {
+      source = this@buildTypeAssertCallBasic.source
+      calleeReference = buildSimpleNamedReference {
+        source = this@buildTypeAssertCallBasic.source
+        this.name = name
+      }
+      explicitReceiver = acc
+    }
   }
   block()
 }
