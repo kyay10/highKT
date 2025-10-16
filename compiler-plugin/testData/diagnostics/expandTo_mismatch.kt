@@ -1,6 +1,4 @@
 // RUN_PIPELINE_TILL: FRONTEND
-// LANGUAGE_VERSION: 2.3
-// ALLOW_DANGEROUS_LANGUAGE_VERSION_TESTING
 
 import io.github.kyay10.highkt.*
 
@@ -9,7 +7,7 @@ interface Swapped<F, A, B> : K2<F, B, A>
 typealias Swap<F> = K<Swapped<*, *, *>, F>
 
 fun test() {
-  <!INFERRED_TYPE_VARIABLE_INTO_POSSIBLE_EMPTY_INTERSECTION!>val foo = 1 to "Hello"<!>
+  val foo = 1 to "Hello"
   foo.expandTo<K2<Pair<*, *>, Int, String>>() // OK
   foo.expandTo<K2<Swap<Pair<*, *>>, String, Int>>() // OK
   <!EXPAND_TO_MISMATCH!>foo.expandTo<K2<Swap<Pair<*, *>>, Int, String>>()<!> // Error

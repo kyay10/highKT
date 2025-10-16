@@ -3,50 +3,60 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    kotlin("multiplatform")
-    id("org.jetbrains.kotlinx.binary-compatibility-validator")
+  kotlin("multiplatform")
+  id("module.publication")
+  id("org.jetbrains.kotlinx.binary-compatibility-validator")
 }
 
 kotlin {
-    compilerOptions {
-        freeCompilerArgs.add("-Xallow-contracts-on-more-functions")
+  explicitApi()
+
+  androidNativeArm32()
+  androidNativeArm64()
+  androidNativeX64()
+  androidNativeX86()
+
+  iosArm64()
+  iosSimulatorArm64()
+  iosX64()
+
+  js().nodejs()
+
+  jvmToolchain(8)
+  jvm()
+
+  linuxArm64()
+  linuxX64()
+
+  macosArm64()
+  macosX64()
+
+  mingwX64()
+
+  tvosArm64()
+  tvosSimulatorArm64()
+  tvosX64()
+
+  wasmJs().nodejs()
+  wasmWasi().nodejs()
+
+  watchosArm32()
+  watchosArm64()
+  watchosDeviceArm64()
+  watchosSimulatorArm64()
+  watchosX64()
+
+  applyDefaultHierarchyTemplate()
+}
+
+publishing {
+  publications {
+    withType<MavenPublication> {
+      // Stub javadoc.jar artifact
+      artifact(tasks.register("${name}JavadocJar", Jar::class) {
+        archiveClassifier.set("javadoc")
+        archiveAppendix.set(this@withType.name)
+      })
     }
-    explicitApi()
-
-    androidNativeArm32()
-    androidNativeArm64()
-    androidNativeX64()
-    androidNativeX86()
-
-    iosArm64()
-    iosSimulatorArm64()
-    iosX64()
-
-    js().nodejs()
-
-    jvmToolchain(8)
-    jvm()
-
-    linuxArm64()
-    linuxX64()
-
-    macosArm64()
-    macosX64()
-
-    mingwX64()
-
-    tvosArm64()
-    tvosSimulatorArm64()
-    tvosX64()
-
-    wasmJs().nodejs()
-    wasmWasi().nodejs()
-
-    watchosArm32()
-    watchosArm64()
-    watchosDeviceArm64()
-    watchosSimulatorArm64()
-    watchosX64()
-
-    applyDefaultHierarchyTemplate()
+  }
 }

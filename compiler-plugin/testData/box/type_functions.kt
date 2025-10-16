@@ -1,8 +1,6 @@
 package foo.bar
 
 // LANGUAGE: +ContextParameters
-// LANGUAGE_VERSION: 2.3
-// ALLOW_DANGEROUS_LANGUAGE_VERSION_TESTING
 
 import io.github.kyay10.highkt.*
 
@@ -47,8 +45,8 @@ typealias Compose<F, G> = K2<Composition<*, *, *>, F, G>
 context(ff: Functor<F>, gg: Functor<G>)
 fun <F, G> composeFunctors() = object : Functor<Compose<F, G>> {
   override fun <A, B> K<Compose<F, G>, A>.fmap(f: (A) -> B): K<Compose<F, G>, B> = context(ff, gg) { // KT-81441
-    fmap<F, _, _> { it.fmap(f) }.expandTo()
-  }
+    fmap<F, _, _> { it.fmap(f) }
+  }.expandTo()
 }
 
 data class Reader<R, A>(val run: (R) -> A)

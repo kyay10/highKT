@@ -12,6 +12,7 @@ import org.jetbrains.kotlin.fir.types.ConeKotlinType
 import org.jetbrains.kotlin.fir.types.ConeStarProjection
 import org.jetbrains.kotlin.fir.types.ConeTypeIntersector
 import org.jetbrains.kotlin.fir.types.ConeTypeProjection
+import org.jetbrains.kotlin.fir.types.canBeNull
 import org.jetbrains.kotlin.fir.types.classId
 import org.jetbrains.kotlin.fir.types.constructType
 import org.jetbrains.kotlin.fir.types.isStarProjection
@@ -19,11 +20,12 @@ import org.jetbrains.kotlin.fir.types.replaceType
 import org.jetbrains.kotlin.fir.types.type
 import org.jetbrains.kotlin.fir.types.typeContext
 import org.jetbrains.kotlin.fir.types.withArguments
+import org.jetbrains.kotlin.fir.types.withNullability
 
 context(c: SessionHolder)
 private fun ConeKotlinType.applyKOnTheOutside(): ConeKotlinType? {
   val (realType, appliedTypes) = deconstructIfKType() ?: return null
-  return realType.toRegularClassSymbol(c.session)?.applyTypeFunctions(appliedTypes)
+  return realType.toRegularClassSymbol()?.applyTypeFunctions(appliedTypes)
 }
 
 context(c: SessionHolder)
@@ -67,7 +69,7 @@ private tailrec fun FirRegularClassSymbol.applyTypeFunctions(
   val appliedTypes = appliedTypes.drop(ownTypeParameterSymbols.size)
   val newDefault = substituted.createKType(appliedTypes)
   val (realType, newApplied) = substituted.deconstructIfKType() ?: substituted.deconstructNormalType()
-  val symbol = realType.toRegularClassSymbol(c.session) ?: return newDefault
+  val symbol = realType.toRegularClassSymbol() ?: return newDefault
   return symbol.applyTypeFunctions(newApplied + appliedTypes, newDefault)
 }
 
@@ -94,7 +96,9 @@ fun ConeKotlinType.toCanonicalKType(): ConeKotlinType? {
   if (this is ConeIntersectionType) return mapTypesNotNull { it.toCanonicalKType() }
   if (typeArguments.isEmpty()) return null
   if (classId == K_CLASS_ID) return null
-  return withArguments { ConeStarProjection }.createKType(typeArguments.asList())
+  return withNullability(false, c.session.typeContext, preserveAttributes = true).withArguments { ConeStarProjection }
+    .createKType(typeArguments.asList())
+    .withNullability(canBeNull(c.session), c.session.typeContext, preserveAttributes = true)
 }
 
 context(c: SessionHolder)
@@ -102,17 +106,24 @@ fun ConeKotlinType.createKType(typeArguments: List<ConeTypeProjection>) =
   typeArguments.fold(this) { acc, arg -> K_CLASS_ID.createConeType(c.session, arrayOf(acc, arg)) }
 
 context(_: SessionHolder)
-fun ConeKotlinType.applyKAndCanonicalize(): ConeKotlinType = intersect(applyKAndCanonicalizeOrNull())
+fun ConeKotlinType.applyKAndCanonicalize(): ConeKotlinType = applyKEverywhere()?.let {
+  it.intersect(it.toCanonicalKType())
+} ?: intersect(toCanonicalKType())
 
 context(_: SessionHolder)
 fun ConeKotlinType.applyKAndCanonicalizeOrNull(): ConeKotlinType? = applyKEverywhere()?.let {
-  it.intersect(it.toCanonicalKType(), toCanonicalKType())
+  it.intersect(it.toCanonicalKType())
 } ?: toCanonicalKType()
 
 context(c: SessionHolder)
 private fun ConeKotlinType.intersect(vararg types: ConeKotlinType?) =
   ConeTypeIntersector.intersectTypes(c.session.typeContext, listOf(this) + types.filterNotNull())
+    .withUpperBound(this)
 
 context(c: SessionHolder)
 private inline fun ConeIntersectionType.mapTypesNotNull(func: (ConeKotlinType) -> ConeKotlinType?): ConeKotlinType? =
   ConeTypeIntersector.intersectTypes(c.session.typeContext, intersectedTypes.mapNotNull(func).ifEmpty { return null })
+    .withUpperBound(upperBoundForApproximation?.let(func) ?: upperBoundForApproximation)
+
+private fun ConeKotlinType.withUpperBound(upper: ConeKotlinType?): ConeKotlinType =
+  if (this is ConeIntersectionType) ConeIntersectionType(intersectedTypes, upper) else this

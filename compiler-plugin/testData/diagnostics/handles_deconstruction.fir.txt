@@ -1,0 +1,38 @@
+FILE: handles_deconstruction.kt
+    public abstract interface Handler<E> : R|kotlin/Any| {
+    }
+    public final class SubCont<in T, out R> : R|kotlin/Any| {
+        public constructor<in T, out R>(): R|SubCont<T, R>| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final operator fun invoke(arg: R|T|): R|R| {
+            ^invoke R|kotlin/TODO|()
+        }
+
+    }
+    public final fun <A, E> R|Handler<E>|.useWithFinal(body: R|(kotlin/Pair<SubCont<A, E>, SubCont<A, E>>) -> E|): R|A| {
+        R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, kotlin/Pair<SubCont<A, E>, SubCont<A, E>>>, E>|>(R|<local>/body|)
+        R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<Handler<*>, E>|>(this@R|/useWithFinal|)
+        R|kotlin/TODO|()
+    }
+    public final class Scheduler2 : R|Handler<kotlin/Unit>| {
+        public constructor(): R|Scheduler2| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final suspend fun yieldAndRepush(): R|kotlin/Unit| {
+            ^yieldAndRepush this@R|/Scheduler2|.R|/useWithFinal|<R|kotlin/Unit|, R|kotlin/Unit|>(<L> = useWithFinal@fun <anonymous>(<destruct>: R|kotlin/Pair<SubCont<kotlin/Unit, kotlin/Unit>, SubCont<kotlin/Unit, kotlin/Unit>>|): R|kotlin/Unit| <inline=NoInline>  {
+                lval a: R|SubCont<kotlin/Unit, kotlin/Unit>| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component1: R|SubCont<kotlin/Unit, kotlin/Unit>|>|()
+                R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<SubCont<*, *>, kotlin/Unit>, kotlin/Unit>|>(R|<local>/a|)
+                lval b: R|SubCont<kotlin/Unit, kotlin/Unit>| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component2: R|SubCont<kotlin/Unit, kotlin/Unit>|>|()
+                R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<SubCont<*, *>, kotlin/Unit>, kotlin/Unit>|>(R|<local>/b|)
+                 {
+                    R|<local>/b|.R|SubstitutionOverride</SubCont.invoke: R|kotlin/Unit|>|(Q|kotlin/Unit|)
+                }
+
+            }
+            )
+        }
+
+    }

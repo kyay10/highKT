@@ -7,6 +7,8 @@ import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrarAdapter
 
 class HighKTComponentRegistrar : CompilerPluginRegistrar() {
+  override val pluginId: String = BuildConfig.KOTLIN_PLUGIN_ID
+
   override val supportsK2: Boolean
     get() = true
 

@@ -1,105 +1,121 @@
 plugins {
-    kotlin("jvm")
-    `java-test-fixtures`
-    id("com.github.gmazzo.buildconfig")
-    idea
+  kotlin("jvm")
+  `java-test-fixtures`
+  id("com.github.gmazzo.buildconfig")
+  idea
+  id("module.publication")
 }
 
 sourceSets {
-    main {
-        java.setSrcDirs(listOf("src"))
-        resources.setSrcDirs(listOf("resources"))
-    }
-    testFixtures {
-        java.setSrcDirs(listOf("test-fixtures"))
-    }
-    test {
-        java.setSrcDirs(listOf("test", "test-gen"))
-        resources.setSrcDirs(listOf("testData"))
-    }
+  main {
+    java.setSrcDirs(listOf("src"))
+    resources.setSrcDirs(listOf("resources"))
+  }
+  testFixtures {
+    java.setSrcDirs(listOf("test-fixtures"))
+  }
+  test {
+    java.setSrcDirs(listOf("test", "test-gen"))
+    resources.setSrcDirs(listOf("testData"))
+  }
 }
 
 idea {
-    module.generatedSourceDirs.add(projectDir.resolve("test-gen"))
+  module.generatedSourceDirs.add(projectDir.resolve("test-gen"))
 }
 
 val annotationsRuntimeClasspath: Configuration by configurations.creating { isTransitive = false }
 
 dependencies {
-    compileOnly(kotlin("compiler"))
+  compileOnly(kotlin("compiler"))
+  api(libs.arrow.core)
 
-    testFixturesApi(kotlin("test-junit5"))
-    testFixturesApi(kotlin("compiler-internal-test-framework"))
-    testFixturesApi(kotlin("compiler"))
+  testFixturesApi(kotlin("test-junit5"))
+  testFixturesApi(kotlin("compiler-internal-test-framework"))
+  testFixturesApi(kotlin("compiler"))
 
-    annotationsRuntimeClasspath(project(":plugin-annotations"))
+  annotationsRuntimeClasspath(project(":plugin-annotations"))
 
-    // Dependencies required to run the internal test framework.
-    testRuntimeOnly("junit:junit:4.13.2")
-    testRuntimeOnly(kotlin("reflect"))
-    testRuntimeOnly(kotlin("test"))
-    testRuntimeOnly(kotlin("script-runtime"))
-    testRuntimeOnly(kotlin("annotations-jvm"))
+  // Dependencies required to run the internal test framework.
+  testRuntimeOnly("junit:junit:4.13.2")
+  testRuntimeOnly(kotlin("reflect"))
+  testRuntimeOnly(kotlin("test"))
+  testRuntimeOnly(kotlin("script-runtime"))
+  testRuntimeOnly(kotlin("annotations-jvm"))
 }
 
 buildConfig {
-    useKotlinOutput {
-        internalVisibility = true
-    }
+  useKotlinOutput {
+    internalVisibility = true
+  }
 
-    packageName(group.toString())
-    buildConfigField("String", "KOTLIN_PLUGIN_ID", "\"${rootProject.group}\"")
+  packageName(group.toString())
+  buildConfigField("String", "KOTLIN_PLUGIN_ID", "\"${rootProject.group}\"")
 }
 
 tasks.test {
-    dependsOn(annotationsRuntimeClasspath)
+  dependsOn(annotationsRuntimeClasspath)
 
-    useJUnitPlatform()
-    workingDir = rootDir
+  useJUnitPlatform()
+  workingDir = rootDir
 
-    systemProperty("annotationsRuntime.classpath", annotationsRuntimeClasspath.asPath)
+  systemProperty("annotationsRuntime.classpath", annotationsRuntimeClasspath.asPath)
 
-    // Properties required to run the internal test framework.
-    setLibraryProperty("org.jetbrains.kotlin.test.kotlin-stdlib", "kotlin-stdlib")
-    setLibraryProperty("org.jetbrains.kotlin.test.kotlin-stdlib-jdk8", "kotlin-stdlib-jdk8")
-    setLibraryProperty("org.jetbrains.kotlin.test.kotlin-reflect", "kotlin-reflect")
-    setLibraryProperty("org.jetbrains.kotlin.test.kotlin-test", "kotlin-test")
-    setLibraryProperty("org.jetbrains.kotlin.test.kotlin-script-runtime", "kotlin-script-runtime")
-    setLibraryProperty("org.jetbrains.kotlin.test.kotlin-annotations-jvm", "kotlin-annotations-jvm")
+  // Properties required to run the internal test framework.
+  setLibraryProperty("org.jetbrains.kotlin.test.kotlin-stdlib", "kotlin-stdlib")
+  setLibraryProperty("org.jetbrains.kotlin.test.kotlin-stdlib-jdk8", "kotlin-stdlib-jdk8")
+  setLibraryProperty("org.jetbrains.kotlin.test.kotlin-reflect", "kotlin-reflect")
+  setLibraryProperty("org.jetbrains.kotlin.test.kotlin-test", "kotlin-test")
+  setLibraryProperty("org.jetbrains.kotlin.test.kotlin-script-runtime", "kotlin-script-runtime")
+  setLibraryProperty("org.jetbrains.kotlin.test.kotlin-annotations-jvm", "kotlin-annotations-jvm")
 
-    systemProperty("idea.ignore.disabled.plugins", "true")
-    systemProperty("idea.home.path", rootDir)
+  systemProperty("idea.ignore.disabled.plugins", "true")
+  systemProperty("idea.home.path", rootDir)
 }
 
 kotlin {
-    compilerOptions {
-        optIn.add("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
-        freeCompilerArgs.add("-Xcontext-parameters")
-    }
+  compilerOptions {
+    optIn.add("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
+    freeCompilerArgs.add("-Xcontext-parameters")
+  }
 }
 
 val generateTests by tasks.registering(JavaExec::class) {
-    inputs.dir(layout.projectDirectory.dir("testData"))
-        .withPropertyName("testData")
-        .withPathSensitivity(PathSensitivity.RELATIVE)
-    outputs.dir(layout.projectDirectory.dir("test-gen"))
-        .withPropertyName("generatedTests")
+  inputs.dir(layout.projectDirectory.dir("testData"))
+    .withPropertyName("testData")
+    .withPathSensitivity(PathSensitivity.RELATIVE)
+  outputs.dir(layout.projectDirectory.dir("test-gen"))
+    .withPropertyName("generatedTests")
 
-    classpath = sourceSets.testFixtures.get().runtimeClasspath
-    mainClass.set("io.github.kyay10.highkt.GenerateTestsKt")
-    workingDir = rootDir
+  classpath = sourceSets.testFixtures.get().runtimeClasspath
+  mainClass.set("io.github.kyay10.highkt.GenerateTestsKt")
+  workingDir = rootDir
 }
 
 tasks.compileTestKotlin {
-    dependsOn(generateTests)
+  dependsOn(generateTests)
 }
 
 fun Test.setLibraryProperty(propName: String, jarName: String) {
-    val path = project.configurations
-        .testRuntimeClasspath.get()
-        .files
-        .find { """$jarName-\d.*jar""".toRegex().matches(it.name) }
-        ?.absolutePath
-        ?: return
-    systemProperty(propName, path)
+  val path = project.configurations
+    .testRuntimeClasspath.get()
+    .files
+    .find { """$jarName-\d.*jar""".toRegex().matches(it.name) }
+    ?.absolutePath
+    ?: return
+  systemProperty(propName, path)
+}
+
+java {
+  withSourcesJar()
+  withJavadocJar()
+}
+
+publishing {
+  publications {
+    create<MavenPublication>("maven") {
+      artifactId = "compiler-plugin"
+      from(components["java"])
+    }
+  }
 }

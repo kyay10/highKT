@@ -268,11 +268,11 @@ FILE fqName:foo.bar fileName:/simple2.kt
     TYPE_PARAMETER name:BF index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:F index:1 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:G index:2 variance: superTypes:[kotlin.Any?] reified:false
-    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:<unused var> index:0 type:foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors>
-    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:<unused var> index:1 type:foo.bar.Functor<F of foo.bar.composeBiFunctors>
-    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:<unused var> index:2 type:foo.bar.Functor<G of foo.bar.composeBiFunctors>
+    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-BiFunctor index:0 type:foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors>
+    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#1 index:1 type:foo.bar.Functor<F of foo.bar.composeBiFunctors>
+    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#2 index:2 type:foo.bar.Functor<G of foo.bar.composeBiFunctors>
     BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun composeBiFunctors <BF, F, G> (<unused var>: foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors>, <unused var>: foo.bar.Functor<F of foo.bar.composeBiFunctors>, <unused var>: foo.bar.Functor<G of foo.bar.composeBiFunctors>): foo.bar.BiFunctor<kotlin.Any?> declared in foo.bar'
+      RETURN type=kotlin.Nothing from='public final fun composeBiFunctors <BF, F, G> ($context-BiFunctor: foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors>, $context-Functor#1: foo.bar.Functor<F of foo.bar.composeBiFunctors>, $context-Functor#2: foo.bar.Functor<G of foo.bar.composeBiFunctors>): foo.bar.BiFunctor<kotlin.Any?> declared in foo.bar'
         BLOCK type=foo.bar.composeBiFunctors.<no name provided><BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors> origin=OBJECT_LITERAL
           CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.BiFunctor<kotlin.Any?>]
             thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.composeBiFunctors.<no name provided><BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors>
@@ -330,10 +330,10 @@ FILE fqName:foo.bar fileName:/simple2.kt
                   TYPE_ARG T: kotlin.Any?
                   ARG x: GET_VAR 'g: kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
                 CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.Any
+                  TYPE_ARG T: foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap, B of foo.bar.composeBiFunctors.<no name provided>.bimap>
                   ARG x: GET_VAR '<this>(index:1): kotlin.Any? declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Any? origin=null
                 RETURN type=kotlin.Nothing from='public open fun bimap <A, B, C, D> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.composeBiFunctors.<no name provided>.bimap, C of foo.bar.composeBiFunctors.<no name provided>.bimap>, g: kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap>): kotlin.Any? declared in foo.bar.composeBiFunctors.<no name provided>'
-                  CONSTRUCTOR_CALL 'public constructor <init> (value: kotlin.Any?) declared in foo.bar.BiComposed' type=kotlin.Any origin=null
+                  CONSTRUCTOR_CALL 'public constructor <init> (value: kotlin.Any?) declared in foo.bar.BiComposed' type=foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
                     TYPE_ARG (of class) Bi: BF of foo.bar.composeBiFunctors
                     TYPE_ARG (of class) F: F of foo.bar.composeBiFunctors
                     TYPE_ARG (of class) G: G of foo.bar.composeBiFunctors
@@ -345,7 +345,7 @@ FILE fqName:foo.bar fileName:/simple2.kt
                       TYPE_ARG C: kotlin.Any?
                       TYPE_ARG D: kotlin.Any?
                       TYPE_ARG F: BF of foo.bar.composeBiFunctors
-                      ARG b: GET_VAR '<unused var>(index:0): foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors> declared in foo.bar.composeBiFunctors' type=foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors> origin=null
+                      ARG b: GET_VAR '$context-BiFunctor: foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors> declared in foo.bar.composeBiFunctors' type=foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors> origin=null
                       ARG <this>: CALL 'public final fun <get-value> (): kotlin.Any? declared in foo.bar.BiComposed' type=kotlin.Any? origin=GET_PROPERTY
                         ARG <this>: TYPE_OP type=foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap, B of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=IMPLICIT_CAST typeOperand=foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap, B of foo.bar.composeBiFunctors.<no name provided>.bimap>
                           GET_VAR '<this>(index:1): kotlin.Any? declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Any? origin=IMPLICIT_ARGUMENT
@@ -358,7 +358,7 @@ FILE fqName:foo.bar fileName:/simple2.kt
                                 TYPE_ARG F: F of foo.bar.composeBiFunctors
                                 TYPE_ARG A: A of foo.bar.composeBiFunctors.<no name provided>.bimap
                                 TYPE_ARG B: C of foo.bar.composeBiFunctors.<no name provided>.bimap
-                                ARG functor: GET_VAR '<unused var>(index:1): foo.bar.Functor<F of foo.bar.composeBiFunctors> declared in foo.bar.composeBiFunctors' type=foo.bar.Functor<F of foo.bar.composeBiFunctors> origin=null
+                                ARG functor: GET_VAR '$context-Functor#1: foo.bar.Functor<F of foo.bar.composeBiFunctors> declared in foo.bar.composeBiFunctors' type=foo.bar.Functor<F of foo.bar.composeBiFunctors> origin=null
                                 ARG <this>: GET_VAR 'it: kotlin.Any? declared in foo.bar.composeBiFunctors.<no name provided>.bimap.<anonymous>' type=kotlin.Any? origin=null
                                 ARG f: GET_VAR 'f: kotlin.Function1<A of foo.bar.composeBiFunctors.<no name provided>.bimap, C of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Function1<A of foo.bar.composeBiFunctors.<no name provided>.bimap, C of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
                       ARG g: FUN_EXPR type=kotlin.Function1<kotlin.Any?, kotlin.Any?> origin=LAMBDA
@@ -370,7 +370,7 @@ FILE fqName:foo.bar fileName:/simple2.kt
                                 TYPE_ARG F: G of foo.bar.composeBiFunctors
                                 TYPE_ARG A: B of foo.bar.composeBiFunctors.<no name provided>.bimap
                                 TYPE_ARG B: D of foo.bar.composeBiFunctors.<no name provided>.bimap
-                                ARG functor: GET_VAR '<unused var>(index:2): foo.bar.Functor<G of foo.bar.composeBiFunctors> declared in foo.bar.composeBiFunctors' type=foo.bar.Functor<G of foo.bar.composeBiFunctors> origin=null
+                                ARG functor: GET_VAR '$context-Functor#2: foo.bar.Functor<G of foo.bar.composeBiFunctors> declared in foo.bar.composeBiFunctors' type=foo.bar.Functor<G of foo.bar.composeBiFunctors> origin=null
                                 ARG <this>: GET_VAR 'it: kotlin.Any? declared in foo.bar.composeBiFunctors.<no name provided>.bimap.<anonymous>' type=kotlin.Any? origin=null
                                 ARG f: GET_VAR 'g: kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
           CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.composeBiFunctors.<no name provided>' type=foo.bar.composeBiFunctors.<no name provided><BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors> origin=OBJECT_LITERAL

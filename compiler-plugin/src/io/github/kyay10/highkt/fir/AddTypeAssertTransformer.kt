@@ -3,7 +3,6 @@ package io.github.kyay10.highkt.fir
 import org.jetbrains.kotlin.fir.FirElement
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.SessionHolder
-import org.jetbrains.kotlin.fir.analysis.checkers.toRegularClassSymbol
 import org.jetbrains.kotlin.fir.declarations.FirAnonymousFunction
 import org.jetbrains.kotlin.fir.declarations.FirDeclaration
 import org.jetbrains.kotlin.fir.declarations.FirFunction
@@ -11,7 +10,9 @@ import org.jetbrains.kotlin.fir.declarations.FirProperty
 import org.jetbrains.kotlin.fir.declarations.FirReceiverParameter
 import org.jetbrains.kotlin.fir.declarations.FirVariable
 import org.jetbrains.kotlin.fir.declarations.utils.isDelegatedProperty
+import org.jetbrains.kotlin.fir.declarations.utils.isInline
 import org.jetbrains.kotlin.fir.expressions.FirFunctionCall
+import org.jetbrains.kotlin.fir.expressions.FirLazyBlock
 import org.jetbrains.kotlin.fir.expressions.FirPropertyAccessExpression
 import org.jetbrains.kotlin.fir.expressions.FirStatement
 import org.jetbrains.kotlin.fir.expressions.FirVariableAssignment
@@ -26,6 +27,8 @@ import org.jetbrains.kotlin.fir.expressions.builder.buildPropertyAccessExpressio
 import org.jetbrains.kotlin.fir.expressions.builder.buildResolvedQualifier
 import org.jetbrains.kotlin.fir.expressions.builder.buildThisReceiverExpression
 import org.jetbrains.kotlin.fir.expressions.builder.buildVariableAssignment
+import org.jetbrains.kotlin.fir.expressions.impl.FirContractCallBlock
+import org.jetbrains.kotlin.fir.expressions.impl.FirEmptyExpressionBlock
 import org.jetbrains.kotlin.fir.expressions.impl.FirSingleExpressionBlock
 import org.jetbrains.kotlin.fir.extensions.FirAssignExpressionAltererExtension
 import org.jetbrains.kotlin.fir.extensions.FirExtensionApiInternals
@@ -40,6 +43,8 @@ import org.jetbrains.kotlin.fir.types.FirImplicitTypeRef
 import org.jetbrains.kotlin.fir.types.builder.buildTypeProjectionWithVariance
 import org.jetbrains.kotlin.fir.types.coneType
 import org.jetbrains.kotlin.fir.types.coneTypeOrNull
+import org.jetbrains.kotlin.fir.types.isNonReflectFunctionType
+import org.jetbrains.kotlin.fir.types.toRegularClassSymbol
 import org.jetbrains.kotlin.fir.types.withReplacedConeType
 import org.jetbrains.kotlin.fir.visitors.FirVisitorVoid
 import org.jetbrains.kotlin.types.Variance
@@ -50,7 +55,7 @@ class AddTypeAssertTransformer(session: FirSession) : FirStatusTransformerExtens
   @OptIn(UnresolvedExpressionTypeAccess::class)
   override fun needTransformStatus(declaration: FirDeclaration): Boolean {
     val body = (declaration as? FirFunction)?.body
-    if (body != null) {
+    if (body != null && body !is FirEmptyExpressionBlock && body !is FirLazyBlock && body.statements.isNotEmpty()) {
       if (body is FirSingleExpressionBlock && declaration.returnTypeRef is FirImplicitTypeRef) {
         // TODO can this be done?
         /* declaration.replaceBody(FirSingleExpressionBlock(buildReturnExpression {
@@ -84,9 +89,10 @@ class AddTypeAssertTransformer(session: FirSession) : FirStatusTransformerExtens
         })) */
       } else {
         declaration.replaceBody(buildBlock {
-          // TODO handle contracts
+          coneTypeOrNull = body.coneTypeOrNull
           for (valueParam in declaration.contextParameters + declaration.valueParameters) {
             // TODO handle untyped lambda parameters
+            if (valueParam.returnTypeRef.coneTypeOrNull?.isNonReflectFunctionType(session) == true && declaration.isInline && !valueParam.isNoinline) continue
             val newType = valueParam.returnTypeRef.coneTypeOrNull?.applyKAndCanonicalizeOrNull() ?: continue
             statements.add(valueParam.buildTypeAssertCall {
               typeArguments += listOf(buildTypeProjectionWithVariance {
@@ -107,20 +113,24 @@ class AddTypeAssertTransformer(session: FirSession) : FirStatusTransformerExtens
               })
             })
           }
-          statements.addAll(body.statements)
+          if (body.statements.first() is FirContractCallBlock) {
+            statements.add(0, body.statements.first())
+            statements.addAll(body.statements.drop(1))
+          } else {
+            statements.addAll(body.statements)
+          }
           val iterator = statements.listIterator()
           for (statement in iterator) {
-            if (statement is FirProperty && statement.initializer != null && !statement.isDelegatedProperty) {
+            if (statement is FirProperty && statement.initializer != null && !statement.isDelegatedProperty && !statement.name.isSpecial) {
               val propertyType = statement.returnTypeRef.coneTypeOrNull
               val newType = propertyType?.applyKAndCanonicalizeOrNull()
-              if (newType != null)
-                iterator.add(statement.buildTypeAssertCall {
-                  typeArguments += listOf(buildTypeProjectionWithVariance {
-                    source = statement.source
-                    typeRef = statement.returnTypeRef.withReplacedConeType(newType)
-                    variance = Variance.INVARIANT
-                  })
+              if (newType != null) iterator.add(statement.buildTypeAssertCall {
+                typeArguments += listOf(buildTypeProjectionWithVariance {
+                  source = statement.source
+                  typeRef = statement.returnTypeRef.withReplacedConeType(newType)
+                  variance = Variance.INVARIANT
                 })
+              })
               else if (propertyType == null) iterator.add(buildVariableAssignment {
                 source = statement.source
                 lValue = buildPropertyAccessExpression {
@@ -137,19 +147,18 @@ class AddTypeAssertTransformer(session: FirSession) : FirStatusTransformerExtens
           }
         })
       }
+      declaration.acceptChildren(object : FirVisitorVoid() {
+        override fun visitElement(element: FirElement) {
+          element.acceptChildren(this)
+        }
 
+        override fun visitAnonymousFunction(anonymousFunction: FirAnonymousFunction) {
+          needTransformStatus(anonymousFunction)
+        }
+
+        override fun visitFunction(function: FirFunction) {} // Don't go into nested named functions
+      })
     }
-    declaration.acceptChildren(object : FirVisitorVoid() {
-      override fun visitElement(element: FirElement) {
-        element.acceptChildren(this)
-      }
-
-      override fun visitAnonymousFunction(anonymousFunction: FirAnonymousFunction) {
-        needTransformStatus(anonymousFunction)
-      }
-
-      override fun visitFunction(function: FirFunction) {} // Don't go into nested named functions
-    })
     return false
   }
 }

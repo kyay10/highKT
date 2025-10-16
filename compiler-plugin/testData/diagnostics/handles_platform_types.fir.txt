@@ -1,0 +1,15 @@
+FILE: handles_platform_types.kt
+    private final val baseContClass: R|java/lang/Class<*>!| = Q|java/lang/Class|.R|java/lang/Class.forName*s|(String(kotlin.coroutines.jvm.internal.BaseContinuationImpl))
+        private get(): R|java/lang/Class<*>!|
+    private final val contClass: R|java/lang/Class<*>!| = Q|java/lang/Class|.R|java/lang/Class.forName*s|(String(kotlin.coroutines.jvm.internal.ContinuationImpl))
+        private get(): R|java/lang/Class<*>!|
+    private final val completionField: R|java/lang/reflect/Field!| = R|/baseContClass|.R|SubstitutionOverride<java/lang/Class.getDeclaredField: R|java/lang/reflect/Field!|>|(String(completion)).R|kotlin/apply|<R|java/lang/reflect/Field!|>(<L> = apply@fun R|java/lang/reflect/Field!|.<anonymous>(): R|kotlin/Unit| <inline=Inline, kind=EXACTLY_ONCE>  {
+        this@R|special/anonymous|.R|java/lang/reflect/AccessibleObject.isAccessible| = Boolean(true)
+    }
+    )
+        private get(): R|java/lang/reflect/Field!|
+    private final val contextField: R|java/lang/reflect/Field!| = R|/contClass|.R|SubstitutionOverride<java/lang/Class.getDeclaredField: R|java/lang/reflect/Field!|>|(String(_context)).R|kotlin/apply|<R|java/lang/reflect/Field!|>(<L> = apply@fun R|java/lang/reflect/Field!|.<anonymous>(): R|kotlin/Unit| <inline=Inline, kind=EXACTLY_ONCE>  {
+        this@R|special/anonymous|.R|java/lang/reflect/AccessibleObject.isAccessible| = Boolean(true)
+    }
+    )
+        private get(): R|java/lang/reflect/Field!|

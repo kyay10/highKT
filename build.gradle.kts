@@ -1,11 +1,8 @@
 plugins {
-    kotlin("multiplatform") version "2.2.20" apply false
-    kotlin("jvm") version "2.2.20" apply false
-    id("com.github.gmazzo.buildconfig") version "5.6.5"
-    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.16.3" apply false
-}
-
-allprojects {
-    group = "io.github.kyay10.highkt"
-    version = "0.1.0-SNAPSHOT"
+  id("root.publication")
+  kotlin("multiplatform") version libs.versions.kotlin apply false
+  kotlin("jvm") version libs.versions.kotlin apply false
+  id("com.github.gmazzo.buildconfig") version libs.versions.buildconfig
+  id("com.gradle.plugin-publish") version libs.versions.gradle.plugin.publish apply false
+  id("org.jetbrains.kotlinx.binary-compatibility-validator") version libs.versions.binary.compatibility.validator apply false
 }

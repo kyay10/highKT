@@ -1,8 +1,6 @@
 package foo.bar
 
 // LANGUAGE: +ContextParameters
-// LANGUAGE_VERSION: 2.3
-// ALLOW_DANGEROUS_LANGUAGE_VERSION_TESTING
 
 import io.github.kyay10.highkt.*
 
@@ -62,7 +60,8 @@ class ReaderMonad<R> : Monad<K<Reader<*, *>, R>> {
   override fun <A, B> K2<Reader<*, *>, R, A>.fmap(f: (A) -> B): K2<Reader<*, *>, R, B> = Reader(run compose f)
 
   override fun <A> pure(a: A): K2<Reader<*, *>, R, A> = Reader { _: R -> a }
-  override fun <A, B> K2<Reader<*, *>, R, A>.bind(f: (A) -> K2<Reader<*, *>, R, B>): K2<Reader<*, *>, R, B> = Reader { r: R -> f(run(r)).run(r) }
+  override fun <A, B> K2<Reader<*, *>, R, A>.bind(f: (A) -> K2<Reader<*, *>, R, B>): K2<Reader<*, *>, R, B> =
+    Reader { r: R -> f(run(r)).run(r) }
 }
 
 class ConstFunctor<C> : Functor<K<Const<*, *>, C>> {
@@ -113,10 +112,11 @@ data class Left<A, B>(val value: A) : Either<A, B>()
 data class Right<A, B>(val value: B) : Either<A, B>()
 
 object EitherBiFunctor : BiFunctor<Either<*, *>> {
-  override fun <A, B, C, D> K2<Either<*, *>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<Either<*, *>, C, D> = when (this) {
-    is Left<A, B> -> Left(f(value))
-    is Right<A, B> -> Right(g(value))
-  }
+  override fun <A, B, C, D> K2<Either<*, *>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<Either<*, *>, C, D> =
+    when (this) {
+      is Left<A, B> -> Left(f(value))
+      is Right<A, B> -> Right(g(value))
+    }
 }
 
 object PairBiFunctor : BiFunctor<Pair<*, *>> {
@@ -131,12 +131,16 @@ typealias BiCompose<Bi, F, G> = K3<BiComposed<*, *, *, *, *>, Bi, F, G>
 
 context(_: BiFunctor<BF>, _: Functor<F>, _: Functor<G>)
 fun <BF, F, G> composeBiFunctors() = object : BiFunctor<BiCompose<BF, F, G>> {
-  override fun <A, B, C, D> K2<BiCompose<BF, F, G>, A, B>.bimap(f: (A) -> C, g: (B) -> D): K2<BiCompose<BF, F, G>, C, D> =
+  override fun <A, B, C, D> K2<BiCompose<BF, F, G>, A, B>.bimap(
+    f: (A) -> C,
+    g: (B) -> D
+  ): K2<BiCompose<BF, F, G>, C, D> =
     value.bimap({ it.fmap(f) }) { it.fmap(g) }.let(::BiComposed)
 }
 
 typealias Maybe<A> = BiComposed<Either<*, *>, K<Const<*, *>, Unit>, Identity<*>, Unit, A>
 typealias MaybeK = K<BiCompose<Either<*, *>, K<Const<*, *>, Unit>, Identity<*>>, Unit>
+
 val maybeFunctor: Functor<MaybeK> = context(EitherBiFunctor, ConstFunctor<Unit>(), IdentityFunctor) {
   context(composeBiFunctors<Either<*, *>, K<Const<*, *>, Unit>, Identity<*>>()) {
     rightFunctor<_, Unit>()
@@ -153,7 +157,8 @@ infix fun <F, G, H> NT<F, G>.vertical(other: NT<G, H>) = object : NT<F, H> {
 
 context(_: Functor<I>)
 infix fun <F, G, I, J> NT<F, G>.horizontalLeft(other: NT<I, J>) = object : NT<Compose<I, F>, Compose<J, G>> {
-  override fun <A> invoke(fa: K<Compose<I, F>, A>): K<Compose<J, G>, A> = other(fa.value.fmap { this@horizontalLeft(it) }).let(::Composed)
+  override fun <A> invoke(fa: K<Compose<I, F>, A>): K<Compose<J, G>, A> =
+    other(fa.value.fmap { this@horizontalLeft(it) }).let(::Composed)
 }
 
 context(_: Functor<J>)

@@ -4,7 +4,6 @@ package io.github.kyay10.highkt.runners;
 
 import com.intellij.testFramework.TestDataPath;
 import org.jetbrains.kotlin.test.util.KtTestUtil;
-import org.jetbrains.kotlin.test.TargetBackend;
 import org.jetbrains.kotlin.test.TestMetadata;
 import org.junit.jupiter.api.Test;
 
@@ -18,13 +17,55 @@ import java.util.regex.Pattern;
 public class JvmDiagnosticTestGenerated extends AbstractJvmDiagnosticTest {
   @Test
   public void testAllFilesPresentInDiagnostics() {
-    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler-plugin/testData/diagnostics"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM_IR, true);
+    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler-plugin/testData/diagnostics"), Pattern.compile("^(.+)\\.kt$"), null, true);
   }
 
   @Test
   @TestMetadata("expandTo_mismatch.kt")
   public void testExpandTo_mismatch() {
     runTest("compiler-plugin/testData/diagnostics/expandTo_mismatch.kt");
+  }
+
+  @Test
+  @TestMetadata("handles_contexts.kt")
+  public void testHandles_contexts() {
+    runTest("compiler-plugin/testData/diagnostics/handles_contexts.kt");
+  }
+
+  @Test
+  @TestMetadata("handles_contracts.kt")
+  public void testHandles_contracts() {
+    runTest("compiler-plugin/testData/diagnostics/handles_contracts.kt");
+  }
+
+  @Test
+  @TestMetadata("handles_deconstruction.kt")
+  public void testHandles_deconstruction() {
+    runTest("compiler-plugin/testData/diagnostics/handles_deconstruction.kt");
+  }
+
+  @Test
+  @TestMetadata("handles_empty_blocks.kt")
+  public void testHandles_empty_blocks() {
+    runTest("compiler-plugin/testData/diagnostics/handles_empty_blocks.kt");
+  }
+
+  @Test
+  @TestMetadata("handles_is_checks.kt")
+  public void testHandles_is_checks() {
+    runTest("compiler-plugin/testData/diagnostics/handles_is_checks.kt");
+  }
+
+  @Test
+  @TestMetadata("handles_platform_types.kt")
+  public void testHandles_platform_types() {
+    runTest("compiler-plugin/testData/diagnostics/handles_platform_types.kt");
+  }
+
+  @Test
+  @TestMetadata("handles_underscore_properties.kt")
+  public void testHandles_underscore_properties() {
+    runTest("compiler-plugin/testData/diagnostics/handles_underscore_properties.kt");
   }
 
   @Test

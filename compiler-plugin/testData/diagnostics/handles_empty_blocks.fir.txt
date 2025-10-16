@@ -1,0 +1,20 @@
+FILE: handles_empty_blocks.kt
+    @R|kotlin/PublishedApi|() internal final enum class OnInit : R|kotlin/Enum<OnInit>| {
+        private constructor(): R|OnInit| {
+            super<R|kotlin/Enum<OnInit>|>()
+        }
+
+        public final static enum entry NONE: R|OnInit|
+        public final static enum entry REUSABLE: R|OnInit|
+        public final static enum entry COPY: R|OnInit|
+        public final static enum entry REPUSH: R|OnInit|
+        public final static fun values(): R|kotlin/Array<OnInit>| {
+        }
+
+        public final static fun valueOf(value: R|kotlin/String|): R|OnInit| {
+        }
+
+        public final static val entries: R|kotlin/enums/EnumEntries<OnInit>|
+            public get(): R|kotlin/enums/EnumEntries<OnInit>|
+
+    }

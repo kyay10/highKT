@@ -1,8 +1,6 @@
 package foo.bar
 
 // LANGUAGE: +ContextParameters
-// LANGUAGE_VERSION: 2.3
-// ALLOW_DANGEROUS_LANGUAGE_VERSION_TESTING
 
 import io.github.kyay10.highkt.*
 
@@ -185,9 +183,9 @@ private fun pairExample() = context(PairFunctor<Int>()) {
 }
 
 private fun maybeExample() = with(maybeFunctor) {
-  val a = Maybe(Identity(10).right())
+  val a = Maybe<Int>(Identity(10).right().expandTo())
   val b: Maybe<String> = a.fmap { it.toString() }
-  val expected = Maybe(Identity("10").right())
+  val expected = Maybe<String>(Identity("10").right().expandTo())
   if (b != expected) error("$b")
 }
 

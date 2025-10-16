@@ -1,0 +1,32 @@
+FILE: handles_contexts.kt
+    public final class Amb : R|kotlin/Any| {
+        public constructor(): R|Amb| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    public final class Exc : R|kotlin/Any| {
+        public constructor(): R|Exc| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final fun raise(): R|kotlin/Nothing| {
+            ^raise R|kotlin/TODO|()
+        }
+
+    }
+    public final class Stream<A> : R|kotlin/Any| {
+        public constructor<A>(): R|Stream<A>| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    context(e: R|Exc|)
+    public final fun raise(): R|kotlin/Nothing| {
+        ^raise R|<local>/e|.R|/Exc.raise|()
+    }
+    context(<unused var>: R|Amb|, <unused var>: R|Exc|)
+    public final suspend fun <A> R|Stream<A>?|.reflect(): R|A| {
+        R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<Stream<*>, A>?|>(this@R|/reflect|)
+        ^reflect context(R|<local>/<unused var>|, R|<local>/<unused var>|) this@R|/reflect| ?: context(R|<local>/<unused var>|) R|/raise|().R|/reflect|<R|A|>()
+    }

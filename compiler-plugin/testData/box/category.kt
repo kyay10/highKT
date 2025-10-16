@@ -1,8 +1,6 @@
 package foo.bar
 
-// LANGUAGE: +ContextParameters +AllowCheckForErasedTypesInContracts
-// LANGUAGE_VERSION: 2.3
-// ALLOW_DANGEROUS_LANGUAGE_VERSION_TESTING
+// LANGUAGE: +ContextParameters
 
 import foo.bar.Product
 import io.github.kyay10.highkt.*
@@ -47,7 +45,8 @@ typealias ArrowK = Arrow<*, *>
 fun <A> idArrow(): Arrow<A, A> = { a: A -> a }
 
 object ArrowCategory : Category<ArrowK> {
-  override fun <A, B, C> K2<ArrowK, B, C>.compose(g: K2<ArrowK, A, B>): K2<ArrowK, A, C> = { a: A -> this(g(a)) }.expandTo()
+  override fun <A, B, C> K2<ArrowK, B, C>.compose(g: K2<ArrowK, A, B>): K2<ArrowK, A, C> =
+    { a: A -> this(g(a)) }.expandTo()
 
   override fun <A> K2<ArrowK, A, *>.source(): Obj<ArrowK, A> = idArrow<A>()
   override fun <A> K2<ArrowK, *, A>.target(): Obj<ArrowK, A> = idArrow<A>()
@@ -244,8 +243,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
           override val secondFunctor: Functor<Cat, Cat, A> = a.firstFunctor
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<Identity, A>, A, X> =
             lift<_, _, A, _, _>(c).expandTo()
-        }.expandTo()
-      }
+        }
+      }.expandTo()
 
     override fun <A> leftUnitorInv(a: Obj<EndoK<Cat>, A>): K2<EndoK<Cat>, A, K<FunctorCompose<*>, TypePair<Identity, A>>> =
       context(a.firstFunctor, identityFunctor<Cat>()) {
@@ -254,8 +253,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
           override val secondFunctor: Functor<Cat, Cat, Compose<Identity, A>> = composeFunctors<_, _, _, Identity, A>()
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, A, Compose<Identity, A>, X> =
             lift<_, _, A, _, _>(c).expandTo()
-        }.expandTo()
-      }
+        }
+      }.expandTo()
 
     override fun <A> rightUnitor(a: Obj<EndoK<Cat>, A>): K2<EndoK<Cat>, K<FunctorCompose<*>, TypePair<A, Identity>>, A> =
       context(a.firstFunctor, identityFunctor<Cat>()) {
@@ -264,8 +263,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
           override val secondFunctor: Functor<Cat, Cat, A> = a.firstFunctor
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<A, Identity>, A, X> =
             lift<_, _, A, _, _>(c).expandTo()
-        }.expandTo()
-      }
+        }
+      }.expandTo()
 
     override fun <A> rightUnitorInv(a: Obj<EndoK<Cat>, A>): K2<EndoK<Cat>, A, K<FunctorCompose<*>, TypePair<A, Identity>>> =
       context(a.firstFunctor, identityFunctor<Cat>()) {
@@ -274,8 +273,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
           override val secondFunctor: Functor<Cat, Cat, Compose<A, Identity>> = composeFunctors<_, _, _, A, Identity>()
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, A, Compose<A, Identity>, X> =
             lift<_, _, A, _, _>(c).expandTo()
-        }.expandTo()
-      }
+        }
+      }.expandTo()
 
     override fun <A, B, C> associator(
       a: Obj<EndoK<Cat>, A>,
@@ -295,8 +294,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
 
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<Compose<A, B>, C>, Compose<A, Compose<B, C>>, X> =
             lift<_, _, A, _, _>(lift<_, _, B, _, _>(lift<_, _, C, _, _>(c))).expandTo()
-        }.expandTo()
-      }
+        }
+      }.expandTo()
 
     override fun <A, B, C> associatorInv(
       a: Obj<EndoK<Cat>, A>,
@@ -316,8 +315,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
 
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<A, Compose<B, C>>, Compose<Compose<A, B>, C>, X> =
             lift<_, _, A, _, _>(lift<_, _, B, _, _>(lift<_, _, C, _, _>(c))).expandTo()
-        }.expandTo()
-      }
+        }
+      }.expandTo()
   }
 
 interface MonoidObject<Cat, F, I, A> : TensorProduct<Cat, F, I> {
@@ -345,7 +344,8 @@ fun <M> NormalMonad<M>.toUsualMonad(): UsualMonad<M> = object : UsualMonad<M> {
 fun <M> UsualMonad<M>.toNormalFunctor(): Functor<ArrowK, ArrowK, M> = object : Functor<ArrowK, ArrowK, M> {
   override val firstCategory: Category<ArrowK> = ArrowCategory
   override val secondCategory: Category<ArrowK> = ArrowCategory
-  override fun <A, B> lift(f: K2<ArrowK, A, B>): K2<ArrowK, K<M, A>, K<M, B>> = { it: K<M, A> -> it.bind { pure(f(it)) } }.expandTo()
+  override fun <A, B> lift(f: K2<ArrowK, A, B>): K2<ArrowK, K<M, A>, K<M, B>> =
+    { it: K<M, A> -> it.bind { pure(f(it)) } }.expandTo()
 }
 
 fun <M> UsualMonad<M>.toNormalMonad(): NormalMonad<M> = context(toNormalFunctor(), ArrowCategory) {
