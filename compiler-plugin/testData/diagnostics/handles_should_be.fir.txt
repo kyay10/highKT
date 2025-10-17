@@ -1,0 +1,28 @@
+FILE: handles_should_be.kt
+    public final data class Weighted<T> : R|kotlin/Any| {
+        public constructor<T>(value: R|T|, weight: R|kotlin/Double|): R|Weighted<T>| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val value: R|T| = R|<local>/value|
+            public get(): R|T|
+
+        public final val weight: R|kotlin/Double| = R|<local>/weight|
+            public get(): R|kotlin/Double|
+
+        public final operator fun component1(): R|T|
+
+        public final operator fun component2(): R|kotlin/Double|
+
+        public final fun copy(value: R|T| = this@R|/Weighted|.R|/Weighted.value|, weight: R|kotlin/Double| = this@R|/Weighted|.R|/Weighted.weight|): R|Weighted<T>|
+
+    }
+    public final fun foo(): R|kotlin/collections/List<Weighted<kotlin/Boolean>>| {
+        ^foo R|kotlin/collections/listOf|<R|Weighted<kotlin/Boolean>|>()
+    }
+    @R|kotlin/Suppress|(names = vararg(String(UNCHECKED_CAST))) public final infix fun <T, U : R|T|> R|T|.shouldBe(expected: R|U?|): R|T| {
+        ^shouldBe this@R|/shouldBe|
+    }
+    public final fun test(): R|kotlin/Unit| {
+        R|/foo|().R|/shouldBe|<R|it(kotlin/collections/List<Weighted<kotlin/Boolean>> & io/github/kyay10/highkt/K<kotlin/collections/List<*>, Weighted<kotlin/Boolean>>)|, R|it(kotlin/collections/List<Weighted<kotlin/Boolean>> & io/github/kyay10/highkt/K<kotlin/collections/List<*>, Weighted<kotlin/Boolean>>)|>(R|kotlin/collections/listOf|<R|Weighted<kotlin/Boolean>|>(vararg(R|/Weighted.Weighted|<R|kotlin/Boolean|>(Boolean(false), Double(0.099)), R|/Weighted.Weighted|<R|kotlin/Boolean|>(Boolean(true), Double(0.0099)))))
+    }

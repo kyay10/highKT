@@ -57,9 +57,27 @@ public class JvmDiagnosticTestGenerated extends AbstractJvmDiagnosticTest {
   }
 
   @Test
+  @TestMetadata("handles_is_checks_with_invoke.kt")
+  public void testHandles_is_checks_with_invoke() {
+    runTest("compiler-plugin/testData/diagnostics/handles_is_checks_with_invoke.kt");
+  }
+
+  @Test
   @TestMetadata("handles_platform_types.kt")
   public void testHandles_platform_types() {
     runTest("compiler-plugin/testData/diagnostics/handles_platform_types.kt");
+  }
+
+  @Test
+  @TestMetadata("handles_platform_types_with_scope_funs.kt")
+  public void testHandles_platform_types_with_scope_funs() {
+    runTest("compiler-plugin/testData/diagnostics/handles_platform_types_with_scope_funs.kt");
+  }
+
+  @Test
+  @TestMetadata("handles_should_be.kt")
+  public void testHandles_should_be() {
+    runTest("compiler-plugin/testData/diagnostics/handles_should_be.kt");
   }
 
   @Test

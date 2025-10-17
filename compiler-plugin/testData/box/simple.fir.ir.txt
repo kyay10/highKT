@@ -2179,12 +2179,14 @@ FILE fqName:foo.bar fileName:/simple.kt
                     TYPE_ARG (of class) G: foo.bar.Identity<*>
                     TYPE_ARG (of class) A: kotlin.Unit
                     TYPE_ARG (of class) B: kotlin.Int
-                    ARG value: CONSTRUCTOR_CALL 'public constructor <init> (value: B of foo.bar.Right) declared in foo.bar.Right' type=foo.bar.Right<kotlin.Any?, kotlin.Any?> origin=null
-                      TYPE_ARG (of class) A: kotlin.Any?
-                      TYPE_ARG (of class) B: kotlin.Any?
-                      ARG value: CONSTRUCTOR_CALL 'public constructor <init> (value: A of foo.bar.Identity) declared in foo.bar.Identity' type=foo.bar.Identity<kotlin.Int> origin=null
-                        TYPE_ARG (of class) A: kotlin.Int
-                        ARG value: CONST Int type=kotlin.Int value=10
+                    ARG value: CALL 'public final fun expandTo <T> (<this>: kotlin.Any?): T of io.github.kyay10.highkt.expandTo declared in io.github.kyay10.highkt' type=kotlin.Any? origin=null
+                      TYPE_ARG T: kotlin.Any?
+                      ARG <this>: CONSTRUCTOR_CALL 'public constructor <init> (value: B of foo.bar.Right) declared in foo.bar.Right' type=foo.bar.Right<foo.bar.Const<kotlin.Unit, kotlin.Unit>, foo.bar.Identity<kotlin.Int>> origin=null
+                        TYPE_ARG (of class) A: kotlin.Any?
+                        TYPE_ARG (of class) B: kotlin.Any
+                        ARG value: CONSTRUCTOR_CALL 'public constructor <init> (value: A of foo.bar.Identity) declared in foo.bar.Identity' type=foo.bar.Identity<kotlin.Int> origin=null
+                          TYPE_ARG (of class) A: kotlin.Int
+                          ARG value: CONST Int type=kotlin.Int value=10
                 CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
                   TYPE_ARG T: kotlin.Any?
                   ARG x: GET_VAR 'val aMaybe: foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.Int> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.Int> origin=null
@@ -2212,12 +2214,14 @@ FILE fqName:foo.bar fileName:/simple.kt
                     TYPE_ARG (of class) G: foo.bar.Identity<*>
                     TYPE_ARG (of class) A: kotlin.Unit
                     TYPE_ARG (of class) B: kotlin.String
-                    ARG value: CONSTRUCTOR_CALL 'public constructor <init> (value: B of foo.bar.Right) declared in foo.bar.Right' type=foo.bar.Right<kotlin.Any?, kotlin.Any?> origin=null
-                      TYPE_ARG (of class) A: kotlin.Any?
-                      TYPE_ARG (of class) B: kotlin.Any?
-                      ARG value: CONSTRUCTOR_CALL 'public constructor <init> (value: A of foo.bar.Identity) declared in foo.bar.Identity' type=foo.bar.Identity<kotlin.String> origin=null
-                        TYPE_ARG (of class) A: kotlin.String
-                        ARG value: CONST String type=kotlin.String value="10"
+                    ARG value: CALL 'public final fun expandTo <T> (<this>: kotlin.Any?): T of io.github.kyay10.highkt.expandTo declared in io.github.kyay10.highkt' type=kotlin.Any? origin=null
+                      TYPE_ARG T: kotlin.Any?
+                      ARG <this>: CONSTRUCTOR_CALL 'public constructor <init> (value: B of foo.bar.Right) declared in foo.bar.Right' type=foo.bar.Right<foo.bar.Const<kotlin.Unit, kotlin.Unit>, foo.bar.Identity<kotlin.String>> origin=null
+                        TYPE_ARG (of class) A: kotlin.Any?
+                        TYPE_ARG (of class) B: kotlin.Any
+                        ARG value: CONSTRUCTOR_CALL 'public constructor <init> (value: A of foo.bar.Identity) declared in foo.bar.Identity' type=foo.bar.Identity<kotlin.String> origin=null
+                          TYPE_ARG (of class) A: kotlin.String
+                          ARG value: CONST String type=kotlin.String value="10"
                 CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
                   TYPE_ARG T: kotlin.Any?
                   ARG x: GET_VAR 'val expected: foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.String> origin=null

@@ -1,0 +1,69 @@
+FILE: handles_is_checks_with_invoke.kt
+    public sealed class Either<out A, out B> : R|kotlin/Any| {
+        protected constructor<out A, out B>(): R|Either<A, B>| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final data class Left<A> : R|Either<A, kotlin/Nothing>| {
+            public constructor<A>(a: R|A|): R|Either.Left<A>| {
+                super<R|Either<A, kotlin/Nothing>|>()
+            }
+
+            public final val a: R|A| = R|<local>/a|
+                public get(): R|A|
+
+            public final operator fun component1(): R|A|
+
+            public final fun copy(a: R|A| = this@R|/Either.Left|.R|/Either.Left.a|): R|Either.Left<A>|
+
+        }
+
+        public final data class Right<B> : R|Either<kotlin/Nothing, B>| {
+            public constructor<B>(b: R|B|): R|Either.Right<B>| {
+                super<R|Either<kotlin/Nothing, B>|>()
+            }
+
+            public final val b: R|B| = R|<local>/b|
+                public get(): R|B|
+
+            public final operator fun component1(): R|B|
+
+            public final fun copy(b: R|B| = this@R|/Either.Right|.R|/Either.Right.b|): R|Either.Right<B>|
+
+        }
+
+    }
+    public final val <A> R|A|.right: R|() -> Either<kotlin/Nothing, A>|
+        public get(): R|() -> Either<kotlin/Nothing, A>| {
+            ^ fun <anonymous>(): R|Either<kotlin/Nothing, A>| <inline=NoInline>  {
+                ^ Q|Either|.R|/Either.Right.Right|<R|A|>(this@R|/right|)
+            }
+
+        }
+    public final val foo: R|Either<kotlin/Nothing, kotlin/Int>| = Int(42).R|/right|<R|kotlin/Int|>.R|SubstitutionOverride<kotlin/Function0.invoke: R|Either<kotlin/Nothing, kotlin/Int>|>|()
+        public get(): R|Either<kotlin/Nothing, kotlin/Int>|
+    public final fun test(): R|kotlin/Unit| {
+        when (lval <when-subject>: R|Either<kotlin/Nothing, kotlin/Int>| = Int(42).R|/right|<R|kotlin/Int|>.R|SubstitutionOverride<kotlin/Function0.invoke: R|Either<kotlin/Nothing, kotlin/Int>|>|()) {
+            ($subj$ is R|Either.Left<kotlin/Nothing>|) ->  {
+            }
+            ($subj$ is R|Either.Right<kotlin/Int>|) ->  {
+            }
+        }
+
+        when (lval <when-subject>: R|Either<kotlin/Nothing, kotlin/Int>| = R|/foo|) {
+            ($subj$ is R|Either.Left<kotlin/Nothing>|) ->  {
+            }
+            ($subj$ is R|Either.Right<kotlin/Int>|) ->  {
+            }
+        }
+
+        lval bar: R|Either<kotlin/Nothing, kotlin/Int>| = Int(42).R|/right|<R|kotlin/Int|>.R|SubstitutionOverride<kotlin/Function0.invoke: R|Either<kotlin/Nothing, kotlin/Int>|>|()
+        Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<Either<*, *>, kotlin/Nothing>, kotlin/Int>|>(R|<local>/bar|)
+        when (lval <when-subject>: R|Either<kotlin/Nothing, kotlin/Int>| = R|<local>/bar|) {
+            ($subj$ is R|Either.Left<kotlin/Nothing>|) ->  {
+            }
+            ($subj$ is R|Either.Right<kotlin/Int>|) ->  {
+            }
+        }
+
+    }

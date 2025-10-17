@@ -180,9 +180,9 @@ private fun pairExample() = context(PairFunctor<Int>()) {
 }
 
 private fun maybeExample() = context(maybeFunctor) {
-  val aMaybe = Maybe(Right(Identity(10)))
+  val aMaybe = Maybe<Int>(Right<K2<Const<*, *>, Unit, Unit>, _>(Identity(10)).expandTo())
   val b: Maybe<String> = aMaybe.fmap { it.toString() }
-  val expected: Maybe<String> = Maybe(Right(Identity("10")))
+  val expected: Maybe<String> = Maybe<String>(Right<K2<Const<*, *>, Unit, Unit>, _>(Identity("10")).expandTo())
   if (b != expected) error("$b")
 }
 

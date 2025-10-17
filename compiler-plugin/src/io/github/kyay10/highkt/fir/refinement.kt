@@ -7,16 +7,20 @@ import org.jetbrains.kotlin.fir.resolve.createParametersSubstitutor
 import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.resolve.toRegularClassSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
+import org.jetbrains.kotlin.fir.types.ConeFlexibleType
 import org.jetbrains.kotlin.fir.types.ConeIntersectionType
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
+import org.jetbrains.kotlin.fir.types.ConeRigidType
 import org.jetbrains.kotlin.fir.types.ConeStarProjection
 import org.jetbrains.kotlin.fir.types.ConeTypeIntersector
 import org.jetbrains.kotlin.fir.types.ConeTypeProjection
 import org.jetbrains.kotlin.fir.types.canBeNull
 import org.jetbrains.kotlin.fir.types.classId
 import org.jetbrains.kotlin.fir.types.constructType
+import org.jetbrains.kotlin.fir.types.isMarkedNullable
 import org.jetbrains.kotlin.fir.types.isStarProjection
 import org.jetbrains.kotlin.fir.types.replaceType
+import org.jetbrains.kotlin.fir.types.toTrivialFlexibleType
 import org.jetbrains.kotlin.fir.types.type
 import org.jetbrains.kotlin.fir.types.typeContext
 import org.jetbrains.kotlin.fir.types.withArguments
@@ -26,6 +30,7 @@ context(c: SessionHolder)
 private fun ConeKotlinType.applyKOnTheOutside(): ConeKotlinType? {
   val (realType, appliedTypes) = deconstructIfKType() ?: return null
   return realType.toRegularClassSymbol()?.applyTypeFunctions(appliedTypes)
+    ?.withNullability(isMarkedNullable, c.session.typeContext, preserveAttributes = true)
 }
 
 context(c: SessionHolder)
@@ -74,8 +79,16 @@ private tailrec fun FirRegularClassSymbol.applyTypeFunctions(
 }
 
 // TODO: application order?
-context(_: SessionHolder)
+context(c: SessionHolder)
 fun ConeKotlinType.applyKEverywhere(): ConeKotlinType? {
+  if (this is ConeFlexibleType && isTrivial)
+    return (lowerBound.applyKEverywhere() as? ConeRigidType)?.toTrivialFlexibleType(c.session.typeContext)
+  if (this is ConeFlexibleType) {
+    val newLowerBound = lowerBound.applyKEverywhere() as? ConeRigidType
+    val newUpperBound = upperBound.applyKEverywhere() as? ConeRigidType
+    if (newLowerBound != null || newUpperBound != null)
+      return ConeFlexibleType(newLowerBound ?: lowerBound, newUpperBound ?: upperBound, false)
+  }
   if (this is ConeIntersectionType) return mapTypesNotNull { it.applyKEverywhere() }
   if (typeArguments.isEmpty()) return null
   val appliedOutside = applyKOnTheOutside()
@@ -93,6 +106,14 @@ fun ConeKotlinType.applyKEverywhere(): ConeKotlinType? {
 
 context(c: SessionHolder)
 fun ConeKotlinType.toCanonicalKType(): ConeKotlinType? {
+  if (this is ConeFlexibleType && isTrivial)
+    return (lowerBound.toCanonicalKType() as ConeRigidType?)?.toTrivialFlexibleType(c.session.typeContext)
+  if (this is ConeFlexibleType) {
+    val newLowerBound = lowerBound.toCanonicalKType() as ConeRigidType?
+    val newUpperBound = upperBound.toCanonicalKType() as ConeRigidType?
+    if (newLowerBound != null || newUpperBound != null)
+      return ConeFlexibleType(newLowerBound ?: lowerBound, newUpperBound ?: upperBound, false)
+  }
   if (this is ConeIntersectionType) return mapTypesNotNull { it.toCanonicalKType() }
   if (typeArguments.isEmpty()) return null
   if (classId == K_CLASS_ID) return null
