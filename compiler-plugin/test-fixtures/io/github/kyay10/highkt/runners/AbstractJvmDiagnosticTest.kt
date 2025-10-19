@@ -5,6 +5,7 @@ import io.github.kyay10.highkt.services.PluginAnnotationsProvider
 import org.jetbrains.kotlin.test.FirParser
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
 import org.jetbrains.kotlin.test.directives.CodegenTestDirectives
+import org.jetbrains.kotlin.test.directives.DiagnosticsDirectives
 import org.jetbrains.kotlin.test.directives.FirDiagnosticsDirectives
 import org.jetbrains.kotlin.test.directives.JvmEnvironmentConfigurationDirectives
 import org.jetbrains.kotlin.test.runners.AbstractFirPhasedDiagnosticTest
@@ -32,6 +33,7 @@ open class AbstractJvmDiagnosticTest : AbstractFirPhasedDiagnosticTest(FirParser
       defaultDirectives {
         +FirDiagnosticsDirectives.FIR_DUMP
         +JvmEnvironmentConfigurationDirectives.FULL_JDK
+        DiagnosticsDirectives.DIAGNOSTICS with "-USELESS_IS_CHECK"
 
         +CodegenTestDirectives.IGNORE_DEXING // Avoids loading R8 from the classpath.
       }

@@ -45,8 +45,8 @@ typealias Compose<F, G> = K2<Composition<*, *, *>, F, G>
 context(ff: Functor<F>, gg: Functor<G>)
 fun <F, G> composeFunctors() = object : Functor<Compose<F, G>> {
   override fun <A, B> K<Compose<F, G>, A>.fmap(f: (A) -> B): K<Compose<F, G>, B> = context(ff, gg) { // KT-81441
-    fmap<F, _, _> { it.fmap(f) }
-  }.expandTo()
+    fmap<F, _, _> { it.fmap(f) }.expandTo() // TODO remove need for expandTo
+  }
 }
 
 data class Reader<R, A>(val run: (R) -> A)
@@ -77,7 +77,7 @@ object UnitMonad : Monad<Const<Unit>> {
 }
 
 object IdentityFunctor : Functor<Identity> {
-  override fun <A, B> K<Identity, A>.fmap(f: (A) -> B): K<Identity, B> = f(this).expandTo()
+  override fun <A, B> K<Identity, A>.fmap(f: (A) -> B): K<Identity, B> = f(this)
 }
 
 interface BiFunctor<F> {

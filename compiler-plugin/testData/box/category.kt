@@ -30,13 +30,11 @@ typealias Opp<Arr> = K<Opposite<*, *, *>, Arr>
 context(c: Category<Cat>)
 fun <Cat> oppositeCategory(): Category<Opp<Cat>> = object : Category<Opp<Cat>> {
   override fun <A, B, C> K2<Opp<Cat>, B, C>.compose(g: K2<Opp<Cat>, A, B>): K2<Opp<Cat>, A, C> =
-    g.compose<Cat, _, _, _>(this).expandTo()
+    g.compose<Cat, _, _, _>(this)
 
-  override fun <A> K2<Opp<Cat>, A, *>.source(): Obj<Opp<Cat>, A> =
-    target<Cat, _>().expandTo()
+  override fun <A> K2<Opp<Cat>, A, *>.source(): Obj<Opp<Cat>, A> = target<Cat, _>()
 
-  override fun <A> K2<Opp<Cat>, *, A>.target(): Obj<Opp<Cat>, A> =
-    source<Cat, _>().expandTo()
+  override fun <A> K2<Opp<Cat>, *, A>.target(): Obj<Opp<Cat>, A> = source<Cat, _>()
 }
 
 typealias Arrow<A, B> = (A) -> B
@@ -71,17 +69,12 @@ typealias Product<C1, C2> = K2<MorphismProduct<*, *, *, *>, C1, C2>
 
 context(_: Category<C1>, _: Category<C2>)
 fun <C1, C2> productCategory(): Category<Product<C1, C2>> = object : Category<Product<C1, C2>> {
-  override fun <PA, PB, PC> K2<Product<C1, C2>, PB, PC>.compose(g: K2<Product<C1, C2>, PA, PB>): K2<Product<C1, C2>, PA, PC> {
-    val newFirst = first.compose(g.first)
-    val newSecond = second.compose(g.second)
-    return (newFirst to newSecond).expandTo()
-  }
+  override fun <PA, PB, PC> K2<Product<C1, C2>, PB, PC>.compose(g: K2<Product<C1, C2>, PA, PB>): K2<Product<C1, C2>, PA, PC> =
+    first.compose(g.first) to second.compose(g.second)
 
-  override fun <P> K2<Product<C1, C2>, P, *>.source(): Obj<Product<C1, C2>, P> =
-    (first.source() to second.source()).expandTo()
+  override fun <P> K2<Product<C1, C2>, P, *>.source(): Obj<Product<C1, C2>, P> = first.source() to second.source()
 
-  override fun <P> K2<Product<C1, C2>, *, P>.target(): Obj<Product<C1, C2>, P> =
-    (first.target() to second.target()).expandTo()
+  override fun <P> K2<Product<C1, C2>, *, P>.target(): Obj<Product<C1, C2>, P> = first.target() to second.target()
 }
 
 interface Functor<C, D, F> {
@@ -105,8 +98,7 @@ context(f: Functor<D, E, F>, g: Functor<C, D, G>)
 fun <C, D, E, F, G> composeFunctors(): Functor<C, E, Compose<F, G>> = object : Functor<C, E, Compose<F, G>> {
   override val firstCategory: Category<C> = g.firstCategory
   override val secondCategory: Category<E> = f.secondCategory
-  override fun <A, B> lift(h: K2<C, A, B>): K2<E, K<Compose<F, G>, A>, K<Compose<F, G>, B>> =
-    lift(lift<_, _, G, _, _>(h)).expandTo()
+  override fun <A, B> lift(h: K2<C, A, B>): K2<E, K<Compose<F, G>, A>, K<Compose<F, G>, B>> = lift(lift<_, _, G, _, _>(h))
 }
 
 context(functor: Functor<C, D, F>)
@@ -171,8 +163,7 @@ infix fun <C, D, E, F, G, I, J> Nat<D, E, I, J>.horizontal(other: Nat<C, D, F, G
     override val secondFunctor: Functor<C, E, Compose<J, G>> =
       context(this@horizontal.secondFunctor, other.secondFunctor) { composeFunctors<C, D, E, J, G>() }
 
-    override fun <A> get(c: Obj<C, A>): Component<E, Compose<I, F>, Compose<J, G>, A> =
-      this@horizontal.at(other.at(c)).expandTo()
+    override fun <A> get(c: Obj<C, A>): Component<E, Compose<I, F>, Compose<J, G>, A> = this@horizontal.at(other.at(c))
   }
 
 context(_: Category<D>)
@@ -207,7 +198,7 @@ fun <C, D, E> functorComposeFunctor(): Functor<Product<NatK<D, E>, NatK<C, D>>, 
     override val secondCategory: Category<NatK<C, E>> = functorCategory<C, E>()
 
     override fun <A, B> lift(f: K2<Product<NatK<D, E>, NatK<C, D>>, A, B>): K2<NatK<C, E>, K<FunctorCompose<*>, A>, K<FunctorCompose<*>, B>> =
-      (f.first horizontal f.second).expandTo()
+      f.first horizontal f.second
   }
 
 interface TensorProduct<Cat, F, I> : Functor<Product<Cat, Cat>, Cat, F> {
@@ -242,39 +233,36 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
           override val firstFunctor: Functor<Cat, Cat, Compose<Identity, A>> = composeFunctors<_, _, _, Identity, A>()
           override val secondFunctor: Functor<Cat, Cat, A> = a.firstFunctor
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<Identity, A>, A, X> =
-            lift<_, _, A, _, _>(c).expandTo()
-        }
-      }.expandTo()
+            lift<_, _, A, _, _>(c)
+        }.expandTo()
+      }
 
     override fun <A> leftUnitorInv(a: Obj<EndoK<Cat>, A>): K2<EndoK<Cat>, A, K<FunctorCompose<*>, TypePair<Identity, A>>> =
       context(a.firstFunctor, identityFunctor<Cat>()) {
         object : Nat<Cat, Cat, A, Compose<Identity, A>> {
           override val firstFunctor: Functor<Cat, Cat, A> = a.firstFunctor
           override val secondFunctor: Functor<Cat, Cat, Compose<Identity, A>> = composeFunctors<_, _, _, Identity, A>()
-          override fun <X> get(c: Obj<Cat, X>): Component<Cat, A, Compose<Identity, A>, X> =
-            lift<_, _, A, _, _>(c).expandTo()
-        }
-      }.expandTo()
+          override fun <X> get(c: Obj<Cat, X>): Component<Cat, A, Compose<Identity, A>, X> = lift<_, _, A, _, _>(c)
+        }.expandTo()
+      }
 
     override fun <A> rightUnitor(a: Obj<EndoK<Cat>, A>): K2<EndoK<Cat>, K<FunctorCompose<*>, TypePair<A, Identity>>, A> =
       context(a.firstFunctor, identityFunctor<Cat>()) {
         object : Nat<Cat, Cat, Compose<A, Identity>, A> {
           override val firstFunctor: Functor<Cat, Cat, Compose<A, Identity>> = composeFunctors<_, _, _, A, Identity>()
           override val secondFunctor: Functor<Cat, Cat, A> = a.firstFunctor
-          override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<A, Identity>, A, X> =
-            lift<_, _, A, _, _>(c).expandTo()
-        }
-      }.expandTo()
+          override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<A, Identity>, A, X> = lift<_, _, A, _, _>(c)
+        }.expandTo()
+      }
 
     override fun <A> rightUnitorInv(a: Obj<EndoK<Cat>, A>): K2<EndoK<Cat>, A, K<FunctorCompose<*>, TypePair<A, Identity>>> =
       context(a.firstFunctor, identityFunctor<Cat>()) {
         object : Nat<Cat, Cat, A, Compose<A, Identity>> {
           override val firstFunctor: Functor<Cat, Cat, A> = a.firstFunctor
           override val secondFunctor: Functor<Cat, Cat, Compose<A, Identity>> = composeFunctors<_, _, _, A, Identity>()
-          override fun <X> get(c: Obj<Cat, X>): Component<Cat, A, Compose<A, Identity>, X> =
-            lift<_, _, A, _, _>(c).expandTo()
-        }
-      }.expandTo()
+          override fun <X> get(c: Obj<Cat, X>): Component<Cat, A, Compose<A, Identity>, X> = lift<_, _, A, _, _>(c)
+        }.expandTo()
+      }
 
     override fun <A, B, C> associator(
       a: Obj<EndoK<Cat>, A>,
@@ -293,9 +281,9 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
             }
 
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<Compose<A, B>, C>, Compose<A, Compose<B, C>>, X> =
-            lift<_, _, A, _, _>(lift<_, _, B, _, _>(lift<_, _, C, _, _>(c))).expandTo()
-        }
-      }.expandTo()
+            lift<_, _, A, _, _>(lift<_, _, B, _, _>(lift<_, _, C, _, _>(c)))
+        }.expandTo()
+      }
 
     override fun <A, B, C> associatorInv(
       a: Obj<EndoK<Cat>, A>,
@@ -314,9 +302,9 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*
             }
 
           override fun <X> get(c: Obj<Cat, X>): Component<Cat, Compose<A, Compose<B, C>>, Compose<Compose<A, B>, C>, X> =
-            lift<_, _, A, _, _>(lift<_, _, B, _, _>(lift<_, _, C, _, _>(c))).expandTo()
-        }
-      }.expandTo()
+            lift<_, _, A, _, _>(lift<_, _, B, _, _>(lift<_, _, C, _, _>(c)))
+        }.expandTo()
+      }
   }
 
 interface MonoidObject<Cat, F, I, A> : TensorProduct<Cat, F, I> {

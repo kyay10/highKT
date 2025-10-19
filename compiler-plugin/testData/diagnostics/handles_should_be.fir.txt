@@ -24,5 +24,5 @@ FILE: handles_should_be.kt
         ^shouldBe this@R|/shouldBe|
     }
     public final fun test(): R|kotlin/Unit| {
-        R|/foo|().R|/shouldBe|<R|it(kotlin/collections/List<Weighted<kotlin/Boolean>> & io/github/kyay10/highkt/K<kotlin/collections/List<*>, Weighted<kotlin/Boolean>>)|, R|it(kotlin/collections/List<Weighted<kotlin/Boolean>> & io/github/kyay10/highkt/K<kotlin/collections/List<*>, Weighted<kotlin/Boolean>>)|>(R|kotlin/collections/listOf|<R|Weighted<kotlin/Boolean>|>(vararg(R|/Weighted.Weighted|<R|kotlin/Boolean|>(Boolean(false), Double(0.099)), R|/Weighted.Weighted|<R|kotlin/Boolean|>(Boolean(true), Double(0.0099)))))
+        R|/foo|().R|/shouldBe|<R|kotlin/collections/List<Weighted<kotlin/Boolean>>|, R|kotlin/collections/List<Weighted<kotlin/Boolean>>|>(R|kotlin/collections/listOf|<R|Weighted<kotlin/Boolean>|>(vararg(R|/Weighted.Weighted|<R|kotlin/Boolean|>(Boolean(false), Double(0.099)), R|/Weighted.Weighted|<R|kotlin/Boolean|>(Boolean(true), Double(0.0099)))))
     }

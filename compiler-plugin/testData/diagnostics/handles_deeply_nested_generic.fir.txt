@@ -1,0 +1,67 @@
+FILE: handles_deeply_nested_generic.kt
+    public final data class Probable<T> : R|kotlin/Any| {
+        public constructor<T>(weight: R|kotlin/Double|, value: R|T|): R|Probable<T>| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val weight: R|kotlin/Double| = R|<local>/weight|
+            public get(): R|kotlin/Double|
+
+        public final val value: R|T| = R|<local>/value|
+            public get(): R|T|
+
+        public final operator fun component1(): R|kotlin/Double|
+
+        public final operator fun component2(): R|T|
+
+        public final fun copy(weight: R|kotlin/Double| = this@R|/Probable|.R|/Probable.weight|, value: R|T| = this@R|/Probable|.R|/Probable.value|): R|Probable<T>|
+
+    }
+    public sealed class Value<T> : R|kotlin/Any| {
+        protected constructor<T>(): R|Value<T>| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final data class Leaf<T> : R|Value<T>| {
+            public constructor<T>(value: R|T|): R|Value.Leaf<T>| {
+                super<R|Value<T>|>()
+            }
+
+            public final val value: R|T| = R|<local>/value|
+                public get(): R|T|
+
+            public final operator fun component1(): R|T|
+
+            public final fun copy(value: R|T| = this@R|/Value.Leaf|.R|/Value.Leaf.value|): R|Value.Leaf<T>|
+
+        }
+
+    }
+    public sealed class Option<out T> : R|kotlin/Any| {
+        protected constructor<out T>(): R|Option<T>| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    public final object None : R|Option<kotlin/Nothing>| {
+        private constructor(): R|None| {
+            super<R|Option<kotlin/Nothing>|>()
+        }
+
+    }
+    public final data class Some<out T> : R|Option<T>| {
+        public constructor<out T>(value: R|T|): R|Some<T>| {
+            super<R|Option<T>|>()
+        }
+
+        public final val value: R|T| = R|<local>/value|
+            public get(): R|T|
+
+        public final operator fun component1(): R|T|
+
+        public final fun copy(value: R|T| = this@R|/Some|.R|/Some.value|): R|Some<T>|
+
+    }
+    public final fun test(): R|kotlin/Unit| {
+        R|kotlin/collections/listOf|<R|Probable<out Value.Leaf<out Option<kotlin/Triple<kotlin/Boolean, kotlin/Int, kotlin/Int>>>>|>(vararg(R|/Probable.Probable|<R|Value.Leaf<Some<kotlin/Triple<kotlin/Boolean, kotlin/Int, kotlin/Int>>>|>(Double(0.125), Q|Value|.R|/Value.Leaf.Leaf|<R|Some<kotlin/Triple<kotlin/Boolean, kotlin/Int, kotlin/Int>>|>(R|/Some.Some|<R|kotlin/Triple<kotlin/Boolean, kotlin/Int, kotlin/Int>|>(R|kotlin/Triple.Triple|<R|kotlin/Boolean|, R|kotlin/Int|, R|kotlin/Int|>(Boolean(true), Int(21), Int(21))))), R|/Probable.Probable|<R|Value.Leaf<None>|>(Double(0.5), Q|Value|.R|/Value.Leaf.Leaf|<R|None|>(Q|None|))))
+    }

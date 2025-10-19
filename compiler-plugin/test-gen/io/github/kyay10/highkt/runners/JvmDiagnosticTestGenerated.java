@@ -45,6 +45,12 @@ public class JvmDiagnosticTestGenerated extends AbstractJvmDiagnosticTest {
   }
 
   @Test
+  @TestMetadata("handles_deeply_nested_generic.kt")
+  public void testHandles_deeply_nested_generic() {
+    runTest("compiler-plugin/testData/diagnostics/handles_deeply_nested_generic.kt");
+  }
+
+  @Test
   @TestMetadata("handles_empty_blocks.kt")
   public void testHandles_empty_blocks() {
     runTest("compiler-plugin/testData/diagnostics/handles_empty_blocks.kt");

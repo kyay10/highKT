@@ -5,6 +5,8 @@ package io.github.kyay10.highkt
 
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
+import kotlin.js.JsName
+import kotlin.jvm.JvmName
 
 @Target(AnnotationTarget.CLASS)
 public annotation class TypeFunction
@@ -30,6 +32,14 @@ public typealias K3<F, A, B, C> = K<K2<F, A, B>, C>
 public inline fun <T> assertIsType(x: Any?) {
   contract {
     returns() implies (x is T)
+  }
+}
+
+@JvmName("assertIsType2")
+@JsName("assertIsType2")
+public inline fun <T1, T2> assertIsType(x: Any?) {
+  contract {
+    returns() implies (x is T1 && x is T2)
   }
 }
 

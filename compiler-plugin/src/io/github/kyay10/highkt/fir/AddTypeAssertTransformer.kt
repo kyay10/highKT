@@ -24,7 +24,6 @@ import org.jetbrains.kotlin.fir.expressions.builder.buildBlock
 import org.jetbrains.kotlin.fir.expressions.builder.buildFunctionCall
 import org.jetbrains.kotlin.fir.expressions.builder.buildFunctionCallCopy
 import org.jetbrains.kotlin.fir.expressions.builder.buildPropertyAccessExpression
-import org.jetbrains.kotlin.fir.expressions.builder.buildResolvedQualifier
 import org.jetbrains.kotlin.fir.expressions.builder.buildThisReceiverExpression
 import org.jetbrains.kotlin.fir.expressions.builder.buildVariableAssignment
 import org.jetbrains.kotlin.fir.expressions.impl.FirContractCallBlock
@@ -33,7 +32,6 @@ import org.jetbrains.kotlin.fir.expressions.impl.FirSingleExpressionBlock
 import org.jetbrains.kotlin.fir.extensions.FirAssignExpressionAltererExtension
 import org.jetbrains.kotlin.fir.extensions.FirExtensionApiInternals
 import org.jetbrains.kotlin.fir.extensions.FirStatusTransformerExtension
-import org.jetbrains.kotlin.fir.packageFqName
 import org.jetbrains.kotlin.fir.references.builder.buildExplicitThisReference
 import org.jetbrains.kotlin.fir.references.builder.buildResolvedNamedReference
 import org.jetbrains.kotlin.fir.references.builder.buildSimpleNamedReference
@@ -44,7 +42,6 @@ import org.jetbrains.kotlin.fir.types.builder.buildTypeProjectionWithVariance
 import org.jetbrains.kotlin.fir.types.coneType
 import org.jetbrains.kotlin.fir.types.coneTypeOrNull
 import org.jetbrains.kotlin.fir.types.isNonReflectFunctionType
-import org.jetbrains.kotlin.fir.types.toRegularClassSymbol
 import org.jetbrains.kotlin.fir.types.withReplacedConeType
 import org.jetbrains.kotlin.fir.visitors.FirVisitorVoid
 import org.jetbrains.kotlin.types.Variance
@@ -93,24 +90,30 @@ class AddTypeAssertTransformer(session: FirSession) : FirStatusTransformerExtens
           for (valueParam in declaration.contextParameters + declaration.valueParameters) {
             // TODO handle untyped lambda parameters
             if (valueParam.returnTypeRef.coneTypeOrNull?.isNonReflectFunctionType(session) == true && declaration.isInline && !valueParam.isNoinline) continue
-            val newType = valueParam.returnTypeRef.coneTypeOrNull?.applyKAndCanonicalizeOrNull() ?: continue
+            val newTypes =
+              valueParam.returnTypeRef.coneTypeOrNull?.applyKAndCanonicalizeList().orEmpty().ifEmpty { continue }
             statements.add(valueParam.buildTypeAssertCall {
-              typeArguments += listOf(buildTypeProjectionWithVariance {
-                source = valueParam.source
-                typeRef = valueParam.returnTypeRef.withReplacedConeType(newType)
-                variance = Variance.INVARIANT
-              })
+              typeArguments += newTypes.map {
+                buildTypeProjectionWithVariance {
+                  source = valueParam.source
+                  typeRef = valueParam.returnTypeRef.withReplacedConeType(it)
+                  variance = Variance.INVARIANT
+                }
+              }
             })
           }
           declaration.receiverParameter?.let { receiverParam ->
             // TODO handle untyped lambda receivers
-            val newType = receiverParam.typeRef.coneTypeOrNull?.applyKAndCanonicalizeOrNull() ?: return@let
+            val newType =
+              receiverParam.typeRef.coneTypeOrNull?.applyKAndCanonicalizeList().orEmpty().ifEmpty { return@let }
             statements.add(receiverParam.buildTypeAssertCall {
-              typeArguments += listOf(buildTypeProjectionWithVariance {
-                source = receiverParam.source
-                typeRef = receiverParam.typeRef.withReplacedConeType(newType)
-                variance = Variance.INVARIANT
-              })
+              typeArguments += newType.map {
+                buildTypeProjectionWithVariance {
+                  source = receiverParam.source
+                  typeRef = receiverParam.typeRef.withReplacedConeType(it)
+                  variance = Variance.INVARIANT
+                }
+              }
             })
           }
           if (body.statements.first() is FirContractCallBlock) {
@@ -123,13 +126,15 @@ class AddTypeAssertTransformer(session: FirSession) : FirStatusTransformerExtens
           for (statement in iterator) {
             if (statement is FirProperty && statement.initializer != null && !statement.isDelegatedProperty && !statement.name.isSpecial) {
               val propertyType = statement.returnTypeRef.coneTypeOrNull
-              val newType = propertyType?.applyKAndCanonicalizeOrNull()
-              if (newType != null) iterator.add(statement.buildTypeAssertCall {
-                typeArguments += listOf(buildTypeProjectionWithVariance {
-                  source = statement.source
-                  typeRef = statement.returnTypeRef.withReplacedConeType(newType)
-                  variance = Variance.INVARIANT
-                })
+              val newTypes = propertyType?.applyKAndCanonicalizeList().orEmpty()
+              if (newTypes.isNotEmpty()) iterator.add(statement.buildTypeAssertCall {
+                typeArguments += newTypes.map {
+                  buildTypeProjectionWithVariance {
+                    source = statement.source
+                    typeRef = statement.returnTypeRef.withReplacedConeType(it)
+                    variance = Variance.INVARIANT
+                  }
+                }
               })
               else if (propertyType == null) iterator.add(buildVariableAssignment {
                 source = statement.source
@@ -171,19 +176,16 @@ class AddTypeToTypeAssertTransformer(session: FirSession) : FirAssignExpressionA
     if (typeAssertion !is FirFunctionCall || typeAssertion.calleeReference.name != ASSERT_IS_TYPE) return null
     val property =
       (typeAssertion.arguments.single() as FirPropertyAccessExpression).calleeReference.resolved!!.resolvedSymbol as FirPropertySymbol
-    val newType = property.resolvedReturnType.applyKAndCanonicalizeOrNull() ?: return buildResolvedQualifier {
-      symbol = session.builtinTypes.unitType.toRegularClassSymbol(session)
-      coneTypeOrNull = session.builtinTypes.unitType.coneType
-      packageFqName = symbol!!.packageFqName()
-      relativeClassFqName = symbol!!.classId.relativeClassName
-      resolvedToCompanionObject = false
-    }
+    val newTypes =
+      property.resolvedReturnType.applyKAndCanonicalizeList().ifEmpty { return FirEmptyExpressionBlock() }
     return buildFunctionCallCopy(typeAssertion) {
-      typeArguments += listOf(buildTypeProjectionWithVariance {
-        source = typeAssertion.source
-        typeRef = property.resolvedReturnTypeRef.withReplacedConeType(newType)
-        variance = Variance.INVARIANT
-      })
+      typeArguments += newTypes.map {
+        buildTypeProjectionWithVariance {
+          source = typeAssertion.source
+          typeRef = property.resolvedReturnTypeRef.withReplacedConeType(it)
+          variance = Variance.INVARIANT
+        }
+      }
     }
   }
 }

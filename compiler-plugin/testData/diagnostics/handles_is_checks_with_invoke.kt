@@ -20,8 +20,8 @@ fun test() {
   }
   val bar = 42.right()
   when (bar) {
-       <!USELESS_IS_CHECK!>is Either.Left<!> -> {}
-       <!USELESS_IS_CHECK!>is Either.Right<!> -> {}
+       is Either.Left -> {}
+       is Either.Right -> {}
   }
 }
 

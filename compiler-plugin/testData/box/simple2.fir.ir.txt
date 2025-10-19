@@ -329,11 +329,12 @@ FILE fqName:foo.bar fileName:/simple2.kt
                 CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
                   TYPE_ARG T: kotlin.Any?
                   ARG x: GET_VAR 'g: kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
-                CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-                  TYPE_ARG T: foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap, B of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                CALL 'public final fun assertIsType <T1, T2> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
+                  TYPE_ARG T1: foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap, B of foo.bar.composeBiFunctors.<no name provided>.bimap>
+                  TYPE_ARG T2: kotlin.Any?
                   ARG x: GET_VAR '<this>(index:1): kotlin.Any? declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Any? origin=null
                 RETURN type=kotlin.Nothing from='public open fun bimap <A, B, C, D> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.composeBiFunctors.<no name provided>.bimap, C of foo.bar.composeBiFunctors.<no name provided>.bimap>, g: kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap>): kotlin.Any? declared in foo.bar.composeBiFunctors.<no name provided>'
-                  CONSTRUCTOR_CALL 'public constructor <init> (value: kotlin.Any?) declared in foo.bar.BiComposed' type=foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
+                  CONSTRUCTOR_CALL 'public constructor <init> (value: kotlin.Any?) declared in foo.bar.BiComposed' type=kotlin.Any? origin=null
                     TYPE_ARG (of class) Bi: BF of foo.bar.composeBiFunctors
                     TYPE_ARG (of class) F: F of foo.bar.composeBiFunctors
                     TYPE_ARG (of class) G: G of foo.bar.composeBiFunctors
