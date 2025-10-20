@@ -31,22 +31,18 @@ import org.jetbrains.kotlin.types.model.CaptureStatus
 import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 import org.jetbrains.kotlin.types.model.RigidTypeMarker
 import org.jetbrains.kotlin.types.model.TypeConstructorMarker
-import java.lang.reflect.Field
-import java.lang.reflect.Modifier
+
+private val UNSAFE = Class.forName("sun.misc.Unsafe").getDeclaredField("theUnsafe").apply { isAccessible = true }
+  .get(null) as sun.misc.Unsafe
 
 private val typeContextField = TypeComponents::class.java.getDeclaredField("typeContext").apply {
   isAccessible = true
-  val modifiersField: Field = Field::class.java.getDeclaredField("modifiers")
-  modifiersField.setAccessible(true)
-  modifiersField.setInt(this, modifiers and Modifier.FINAL.inv())
 }
 
 private val typeApproximatorField = TypeComponents::class.java.getDeclaredField("typeApproximator").apply {
   isAccessible = true
-  val modifiersField: Field = Field::class.java.getDeclaredField("modifiers")
-  modifiersField.setAccessible(true)
-  modifiersField.setInt(this, modifiers and Modifier.FINAL.inv())
 }
+
 @OptIn(SessionConfiguration::class)
 class KindReturnTypeRefiner(session: FirSession) : FirExpressionResolutionExtension(session), SessionHolder {
   init {
@@ -73,7 +69,7 @@ class KindReturnTypeRefiner(session: FirSession) : FirExpressionResolutionExtens
   }
 }
 private fun TypeComponents(inferenceContext: ConeInferenceContext): TypeComponents = with(inferenceContext.session) {
-  TypeComponents(this).apply {
+  (UNSAFE.allocateInstance(TypeComponents::class.java) as TypeComponents).apply {
     typeContextField.set(this, inferenceContext)
     typeApproximatorField.set(this, ConeTypeApproximator(inferenceContext, languageVersionSettings))
   }
