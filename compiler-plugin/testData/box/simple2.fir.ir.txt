@@ -124,18 +124,6 @@ FILE fqName:foo.bar fileName:/simple2.kt
       VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap>
       VALUE_PARAMETER kind:Regular name:g index:3 type:kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap>
       BLOCK_BODY
-        CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-          TYPE_ARG T: kotlin.Any?
-          ARG x: GET_VAR 'f: kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap> declared in foo.bar.BiFunctor.bimap' type=kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap> origin=null
-        CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-          TYPE_ARG T: kotlin.Any?
-          ARG x: GET_VAR 'g: kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap> declared in foo.bar.BiFunctor.bimap' type=kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap> origin=null
-        CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-          TYPE_ARG T: kotlin.Any?
-          ARG x: GET_VAR 'f: kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap> declared in foo.bar.BiFunctor.bimap' type=kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap> origin=null
-        CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-          TYPE_ARG T: kotlin.Any?
-          ARG x: GET_VAR 'g: kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap> declared in foo.bar.BiFunctor.bimap' type=kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap> origin=null
         RETURN type=kotlin.Nothing from='public open fun bimap <A, B, C, D> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap>, g: kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap>): kotlin.Any? declared in foo.bar.BiFunctor'
           CALL 'public open fun rightMap <A, B, D> (<this>: kotlin.Any?, g: kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap>): kotlin.Any? declared in foo.bar.BiFunctor' type=kotlin.Any? origin=null
             TYPE_ARG A: C of foo.bar.BiFunctor.bimap
@@ -158,12 +146,6 @@ FILE fqName:foo.bar fileName:/simple2.kt
       VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
       VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.BiFunctor.leftMap, C of foo.bar.BiFunctor.leftMap>
       BLOCK_BODY
-        CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-          TYPE_ARG T: kotlin.Any?
-          ARG x: GET_VAR 'f: kotlin.Function1<A of foo.bar.BiFunctor.leftMap, C of foo.bar.BiFunctor.leftMap> declared in foo.bar.BiFunctor.leftMap' type=kotlin.Function1<A of foo.bar.BiFunctor.leftMap, C of foo.bar.BiFunctor.leftMap> origin=null
-        CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-          TYPE_ARG T: kotlin.Any?
-          ARG x: GET_VAR 'f: kotlin.Function1<A of foo.bar.BiFunctor.leftMap, C of foo.bar.BiFunctor.leftMap> declared in foo.bar.BiFunctor.leftMap' type=kotlin.Function1<A of foo.bar.BiFunctor.leftMap, C of foo.bar.BiFunctor.leftMap> origin=null
         RETURN type=kotlin.Nothing from='public open fun leftMap <A, B, C> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.BiFunctor.leftMap, C of foo.bar.BiFunctor.leftMap>): kotlin.Any? declared in foo.bar.BiFunctor'
           CALL 'public open fun bimap <A, B, C, D> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap>, g: kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap>): kotlin.Any? declared in foo.bar.BiFunctor' type=kotlin.Any? origin=null
             TYPE_ARG A: A of foo.bar.BiFunctor.leftMap
@@ -187,12 +169,6 @@ FILE fqName:foo.bar fileName:/simple2.kt
       VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
       VALUE_PARAMETER kind:Regular name:g index:2 type:kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap>
       BLOCK_BODY
-        CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-          TYPE_ARG T: kotlin.Any?
-          ARG x: GET_VAR 'g: kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap> declared in foo.bar.BiFunctor.rightMap' type=kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap> origin=null
-        CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-          TYPE_ARG T: kotlin.Any?
-          ARG x: GET_VAR 'g: kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap> declared in foo.bar.BiFunctor.rightMap' type=kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap> origin=null
         RETURN type=kotlin.Nothing from='public open fun rightMap <A, B, D> (<this>: kotlin.Any?, g: kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap>): kotlin.Any? declared in foo.bar.BiFunctor'
           CALL 'public open fun bimap <A, B, C, D> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap>, g: kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap>): kotlin.Any? declared in foo.bar.BiFunctor' type=kotlin.Any? origin=null
             TYPE_ARG A: A of foo.bar.BiFunctor.rightMap
@@ -257,7 +233,7 @@ FILE fqName:foo.bar fileName:/simple2.kt
                     TYPE_ARG C: C of foo.bar.bimap
                     TYPE_ARG D: D of foo.bar.bimap
                     ARG <this>(index:0): GET_VAR '$this$with: foo.bar.BiFunctor<F of foo.bar.bimap> declared in foo.bar.bimap.<anonymous>' type=foo.bar.BiFunctor<F of foo.bar.bimap> origin=IMPLICIT_ARGUMENT
-                    ARG <this>(index:1): GET_VAR '<this>: kotlin.Any? declared in foo.bar.bimap' type=kotlin.Any? origin=IMPLICIT_ARGUMENT
+                    ARG <this>(index:1): GET_VAR '<this>: kotlin.Any? declared in foo.bar.bimap' type=kotlin.Any? origin=null
                     ARG f: GET_VAR 'f: kotlin.Function1<A of foo.bar.bimap, C of foo.bar.bimap> declared in foo.bar.bimap' type=kotlin.Function1<A of foo.bar.bimap, C of foo.bar.bimap> origin=null
                     ARG g: GET_VAR 'g: kotlin.Function1<B of foo.bar.bimap, D of foo.bar.bimap> declared in foo.bar.bimap' type=kotlin.Function1<B of foo.bar.bimap, D of foo.bar.bimap> origin=null
   FUN name:box visibility:public modality:FINAL returnType:kotlin.String
@@ -323,18 +299,8 @@ FILE fqName:foo.bar fileName:/simple2.kt
               overridden:
                 public open fun bimap <A, B, C, D> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.BiFunctor.bimap, C of foo.bar.BiFunctor.bimap>, g: kotlin.Function1<B of foo.bar.BiFunctor.bimap, D of foo.bar.BiFunctor.bimap>): kotlin.Any? declared in foo.bar.BiFunctor
               BLOCK_BODY
-                CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.Any?
-                  ARG x: GET_VAR 'f: kotlin.Function1<A of foo.bar.composeBiFunctors.<no name provided>.bimap, C of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Function1<A of foo.bar.composeBiFunctors.<no name provided>.bimap, C of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
-                CALL 'public final fun assertIsType <T> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-                  TYPE_ARG T: kotlin.Any?
-                  ARG x: GET_VAR 'g: kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
-                CALL 'public final fun assertIsType <T1, T2> (x: kotlin.Any?): kotlin.Unit declared in io.github.kyay10.highkt' type=kotlin.Unit origin=null
-                  TYPE_ARG T1: foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap, B of foo.bar.composeBiFunctors.<no name provided>.bimap>
-                  TYPE_ARG T2: kotlin.Any?
-                  ARG x: GET_VAR '<this>(index:1): kotlin.Any? declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Any? origin=null
                 RETURN type=kotlin.Nothing from='public open fun bimap <A, B, C, D> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.composeBiFunctors.<no name provided>.bimap, C of foo.bar.composeBiFunctors.<no name provided>.bimap>, g: kotlin.Function1<B of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap>): kotlin.Any? declared in foo.bar.composeBiFunctors.<no name provided>'
-                  CONSTRUCTOR_CALL 'public constructor <init> (value: kotlin.Any?) declared in foo.bar.BiComposed' type=kotlin.Any? origin=null
+                  CONSTRUCTOR_CALL 'public constructor <init> (value: kotlin.Any?) declared in foo.bar.BiComposed' type=foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, C of foo.bar.composeBiFunctors.<no name provided>.bimap, D of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=null
                     TYPE_ARG (of class) Bi: BF of foo.bar.composeBiFunctors
                     TYPE_ARG (of class) F: F of foo.bar.composeBiFunctors
                     TYPE_ARG (of class) G: G of foo.bar.composeBiFunctors
@@ -348,8 +314,7 @@ FILE fqName:foo.bar fileName:/simple2.kt
                       TYPE_ARG F: BF of foo.bar.composeBiFunctors
                       ARG b: GET_VAR '$context-BiFunctor: foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors> declared in foo.bar.composeBiFunctors' type=foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors> origin=null
                       ARG <this>: CALL 'public final fun <get-value> (): kotlin.Any? declared in foo.bar.BiComposed' type=kotlin.Any? origin=GET_PROPERTY
-                        ARG <this>: TYPE_OP type=foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap, B of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=IMPLICIT_CAST typeOperand=foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap, B of foo.bar.composeBiFunctors.<no name provided>.bimap>
-                          GET_VAR '<this>(index:1): kotlin.Any? declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=kotlin.Any? origin=IMPLICIT_ARGUMENT
+                        ARG <this>: GET_VAR '<this>(index:1): kotlin.Any? declared in foo.bar.composeBiFunctors.<no name provided>.bimap' type=foo.bar.BiComposed<BF of foo.bar.composeBiFunctors, F of foo.bar.composeBiFunctors, G of foo.bar.composeBiFunctors, A of foo.bar.composeBiFunctors.<no name provided>.bimap, B of foo.bar.composeBiFunctors.<no name provided>.bimap> origin=IMPLICIT_ARGUMENT
                       ARG f: FUN_EXPR type=kotlin.Function1<kotlin.Any?, kotlin.Any?> origin=LAMBDA
                         FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
                           VALUE_PARAMETER kind:Regular name:it index:0 type:kotlin.Any?
@@ -397,7 +362,7 @@ FILE fqName:foo.bar fileName:/simple2.kt
                     TYPE_ARG A: A of foo.bar.fmap
                     TYPE_ARG B: B of foo.bar.fmap
                     ARG <this>(index:0): GET_VAR '$this$with: foo.bar.Functor<F of foo.bar.fmap> declared in foo.bar.fmap.<anonymous>' type=foo.bar.Functor<F of foo.bar.fmap> origin=IMPLICIT_ARGUMENT
-                    ARG <this>(index:1): GET_VAR '<this>: kotlin.Any? declared in foo.bar.fmap' type=kotlin.Any? origin=IMPLICIT_ARGUMENT
+                    ARG <this>(index:1): GET_VAR '<this>: kotlin.Any? declared in foo.bar.fmap' type=kotlin.Any? origin=null
                     ARG f: GET_VAR 'f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap> declared in foo.bar.fmap' type=kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap> origin=null
   TYPEALIAS name:BiCompose visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:Bi index:0 variance: superTypes:[kotlin.Any?] reified:false

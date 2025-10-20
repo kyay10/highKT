@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.fir.types.classId
 import org.jetbrains.kotlin.fir.types.constructType
 import org.jetbrains.kotlin.fir.types.isMarkedNullable
 import org.jetbrains.kotlin.fir.types.isStarProjection
-import org.jetbrains.kotlin.fir.types.isSubtypeOf
 import org.jetbrains.kotlin.fir.types.replaceType
 import org.jetbrains.kotlin.fir.types.toTrivialFlexibleType
 import org.jetbrains.kotlin.fir.types.type
@@ -38,7 +37,7 @@ context(c: SessionHolder)
 private fun ConeKotlinType.deconstructIfKType(): Pair<ConeKotlinType, List<ConeTypeProjection>>? {
   var realType: ConeKotlinType = fullyExpandedType()
   val appliedTypes = buildList {
-    while (realType.isK()) {
+    while (realType.isK && realType.typeArguments.size == 2) {
       add(0, realType.typeArguments[1])
       realType = realType.typeArguments[0].type?.fullyExpandedType() ?: return null // Caused by malformed K type
     }
@@ -46,13 +45,14 @@ private fun ConeKotlinType.deconstructIfKType(): Pair<ConeKotlinType, List<ConeT
   }
   if (appliedTypes.isEmpty()) return null // implies this was not a K at all
   // Could be relaxed
-  require(realType.typeArguments.none { !it.isStarProjection }) { "K can only be applied to star projections; was called with $realType" }
+  require(realType.typeArguments.none { !it.isStarProjection }) { "K can only be applied to star projections; was called with $realType and $appliedTypes" }
   return realType to appliedTypes
 }
 
 context(c: SessionHolder)
-private fun ConeKotlinType.deconstructNormalType(): Pair<ConeKotlinType, List<ConeTypeProjection>> {
+private fun ConeKotlinType.deconstructNormalType(): Pair<ConeKotlinType, List<ConeTypeProjection>>? {
   val realType = fullyExpandedType()
+  if (realType.isK) return null
   return realType to realType.typeArguments.toList()
 }
 
@@ -67,14 +67,14 @@ private tailrec fun FirRegularClassSymbol.applyTypeFunctions(
     return constructType(appliedTypes.toTypedArray())
   }
   // TODO what if K<Identity, in/out A>?
-  val substituted = if (classId == IDENTITY_CLASS_ID) appliedTypes.first().type else {
+  val substituted = (if (classId == IDENTITY_CLASS_ID) appliedTypes.first().type else {
     val superType = resolvedSuperTypeRefs.single().coneType
     val substitutor = createParametersSubstitutor(c.session, ownTypeParameterSymbols.zip(appliedTypes).toMap())
     substitutor.substituteOrNull(superType)
-  } ?: return default
+  }) ?: return default
   val appliedTypes = appliedTypes.drop(ownTypeParameterSymbols.size)
   val newDefault = substituted.createKType(appliedTypes)
-  val (realType, newApplied) = substituted.deconstructIfKType() ?: substituted.deconstructNormalType()
+  val (realType, newApplied) = substituted.deconstructIfKType() ?: substituted.deconstructNormalType() ?: return newDefault
   val symbol = realType.toRegularClassSymbol() ?: return newDefault
   return symbol.applyTypeFunctions(newApplied + appliedTypes, newDefault)
 }
@@ -82,6 +82,7 @@ private tailrec fun FirRegularClassSymbol.applyTypeFunctions(
 // TODO: application order?
 context(c: SessionHolder)
 private fun ConeKotlinType.applyKEverywhere(): ConeKotlinType? {
+  if (LeaveUnevaluatedAttribute in attributes) return this
   if (this is ConeFlexibleType && isTrivial)
     return (lowerBound.applyKEverywhere() as? ConeRigidType)?.toTrivialFlexibleType(c.session.typeContext)
   if (this is ConeFlexibleType) {
@@ -120,7 +121,7 @@ fun ConeKotlinType.toCanonicalKType(): ConeKotlinType? {
   }
   if (this is ConeIntersectionType) return mapTypesNotNull { it.toCanonicalKType() }
   if (typeArguments.isEmpty()) return null
-  if (isK()) return null
+  if (isK) return null
   return withNullability(false, c.session.typeContext, preserveAttributes = true).withArguments { ConeStarProjection }
     .createKType(typeArguments.asList())
     .withNullability(canBeNull(c.session), c.session.typeContext, preserveAttributes = true)
@@ -131,19 +132,7 @@ private fun ConeKotlinType.createKType(typeArguments: List<ConeTypeProjection>) 
   typeArguments.fold(this) { acc, arg -> K_CLASS_ID.createConeType(c.session, arrayOf(acc, arg)) }
 
 context(_: SessionHolder)
-fun ConeKotlinType.canonicalize(shouldCanonicalize: Boolean): ConeKotlinType =
-  if (shouldCanonicalize) toCanonicalKType() ?: this else this
-
-context(_: SessionHolder)
-fun ConeKotlinType.applyKAndCanonicalizeList(): List<ConeKotlinType> = applyKEverywhere()?.let {
-  listOfNotNull(it, it.toCanonicalKType())
-} ?: listOfNotNull(toCanonicalKType())
-
-context(_: SessionHolder)
-fun ConeKotlinType?.isK() = this != null && fullyExpandedType().classId == K_CLASS_ID
-
-context(c: SessionHolder)
-infix fun ConeKotlinType.expandsTo(other: ConeKotlinType) = isSubtypeOf(other.applyKOrSelf(), c.session)
+val ConeKotlinType?.isK get() = this != null && fullyExpandedType().classId == K_CLASS_ID
 
 context(c: SessionHolder)
 private inline fun ConeIntersectionType.mapTypesNotNull(func: (ConeKotlinType) -> ConeKotlinType?): ConeKotlinType? =

@@ -11,6 +11,9 @@ import kotlin.jvm.JvmName
 @Target(AnnotationTarget.CLASS)
 public annotation class TypeFunction
 
+@Target(AnnotationTarget.TYPE)
+public annotation class LeaveUnevaluated
+
 // Special type-lambda to represent identity type constructor
 @TypeFunction
 public interface Id<@Suppress("unused") A>
@@ -43,7 +46,4 @@ public inline fun <T1, T2> assertIsType(x: Any?) {
   }
 }
 
-public inline fun <T> Any?.expandTo(): T {
-  @Suppress("UNCHECKED_CAST")
-  return this as T
-}
+public inline fun <T> T.expandTo(): @LeaveUnevaluated T = this

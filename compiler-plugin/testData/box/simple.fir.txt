@@ -44,13 +44,11 @@ FILE: simple.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override fun <A> pure(a: R|A|): R|io/github/kyay10/highkt/K<kotlin/collections/List<*>, A>| {
+        public open override fun <A> pure(a: R|A|): R|kotlin/collections/List<A>| {
             ^pure R|kotlin/collections/listOf|<R|A|>(R|<local>/a|)
         }
 
-        public open override fun <A, B> R|io/github/kyay10/highkt/K<kotlin/collections/List<*>, A>|.bind(f: R|(A) -> io/github/kyay10/highkt/K<kotlin/collections/List<*>, B>|): R|io/github/kyay10/highkt/K<kotlin/collections/List<*>, B>| {
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|(A) -> kotlin/collections/List<B>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, kotlin/collections/List<B>>|>(R|<local>/f|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|kotlin/collections/List<A>|, R|io/github/kyay10/highkt/K<kotlin/collections/List<*>, A>|>(this@R|foo/bar/ListMonad.bind|)
+        public open override fun <A, B> R|kotlin/collections/List<A>|.bind(f: R|(A) -> kotlin/collections/List<B>|): R|kotlin/collections/List<B>| {
             ^bind this@R|foo/bar/ListMonad.bind|.R|kotlin/collections/flatMap|<R|A|, R|B|>(R|<local>/f|)
         }
 
@@ -60,18 +58,10 @@ FILE: simple.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override fun <A, B> R|{io/github/kyay10/highkt/K2<kotlin/Pair<*, *>, L, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Pair<*, *>, L>, A>|.fmap(f: R|(A) -> B|): R|{io/github/kyay10/highkt/K2<kotlin/Pair<*, *>, L, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Pair<*, *>, L>, B>| {
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, B>|>(R|<local>/f|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|kotlin/Pair<L, A>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Pair<*, *>, L>, A>|>(this@R|foo/bar/PairFunctor.fmap|)
-            lval <destruct>: R|{io/github/kyay10/highkt/K2<kotlin/Pair<*, *>, L, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Pair<*, *>, L>, A>| = this@R|foo/bar/PairFunctor.fmap|
+        public open override fun <A, B> R|kotlin/Pair<L, A>|.fmap(f: R|(A) -> B|): R|kotlin/Pair<L, B>| {
+            lval <destruct>: R|kotlin/Pair<L, A>| = this@R|foo/bar/PairFunctor.fmap|
             lval l: R|L| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component1: R|L|>|()
-             {
-            }
-
             lval a: R|A| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component2: R|A|>|()
-             {
-            }
-
             ^fmap R|<local>/l|.R|kotlin/to|<R|L|, R|B|>(R|<local>/f|.R|SubstitutionOverride<kotlin/Function1.invoke: R|B|>|(R|<local>/a|))
         }
 
@@ -97,10 +87,8 @@ FILE: simple.kt
                 super<R|kotlin/Any|>()
             }
 
-            public open override fun <A, B> R|io/github/kyay10/highkt/K<{foo/bar/Compose<F, G>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, F>, G>, A>|.fmap(f: R|(A) -> B|): R|io/github/kyay10/highkt/K<{foo/bar/Compose<F, G>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, F>, G>, B>| {
-                Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, B>|>(R|<local>/f|)
-                Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|foo/bar/Composed<F, G, A>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, F>, G>, A>|>(this@R|foo/bar/<anonymous>.fmap|)
-                ^fmap R|kotlin/context|<R|foo/bar/Functor<F>|, R|foo/bar/Functor<G>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, F>, G>, B>|>(R|<local>/ff|, R|<local>/gg|, <L> = context(<unused var>: R|foo/bar/Functor<F>|, <unused var>: R|foo/bar/Functor<G>|) context@fun <anonymous>(): R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, F>, G>, B>| <inline=Inline, kind=EXACTLY_ONCE>  {
+            public open override fun <A, B> R|foo/bar/Composed<F, G, A>|.fmap(f: R|(A) -> B|): R|foo/bar/Composed<F, G, B>| {
+                ^fmap R|kotlin/context|<R|foo/bar/Functor<F>|, R|foo/bar/Functor<G>|, R|foo/bar/Composed<F, G, B>|>(R|<local>/ff|, R|<local>/gg|, <L> = context(<unused var>: R|foo/bar/Functor<F>|, <unused var>: R|foo/bar/Functor<G>|) context@fun <anonymous>(): R|foo/bar/Composed<F, G, B>| <inline=Inline, kind=EXACTLY_ONCE>  {
                     ^ R|foo/bar/Composed.Composed|<R|F|, R|G|, R|B|>(context(R|<local>/<unused var>|) this@R|foo/bar/<anonymous>.fmap|.R|SubstitutionOverride<foo/bar/Composed.value: R|io/github/kyay10/highkt/K<F, io/github/kyay10/highkt/K<G, A>>|>|.R|foo/bar/fmap|<R|F|, R|io/github/kyay10/highkt/K<G, A>|, R|io/github/kyay10/highkt/K<G, B>|>(<L> = fmap@fun <anonymous>(it: R|io/github/kyay10/highkt/K<G, A>|): R|io/github/kyay10/highkt/K<G, B>| <inline=NoInline>  {
                         ^ context(R|<local>/<unused var>|) R|<local>/it|.R|foo/bar/fmap|<R|G|, R|A|, R|B|>(R|<local>/f|)
                     }
@@ -152,8 +140,6 @@ FILE: simple.kt
 
     }
     public final infix fun <A, B, C> R|(A) -> B|.compose(g: R|(B) -> C|): R|(A) -> C| {
-        Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, B>, C>|>(R|<local>/g|)
-        Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, B>|>(this@R|foo/bar/compose|)
         ^compose fun <anonymous>(a: R|A|): R|C| <inline=NoInline>  {
             ^ R|<local>/g|.R|SubstitutionOverride<kotlin/Function1.invoke: R|C|>|(this@R|foo/bar/compose|.R|SubstitutionOverride<kotlin/Function1.invoke: R|B|>|(R|<local>/a|))
         }
@@ -164,24 +150,20 @@ FILE: simple.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override fun <A, B> R|{io/github/kyay10/highkt/K2<foo/bar/Reader<*, *>, R, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Reader<*, *>, R>, A>|.fmap(f: R|(A) -> B|): R|{io/github/kyay10/highkt/K2<foo/bar/Reader<*, *>, R, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Reader<*, *>, R>, B>| {
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, B>|>(R|<local>/f|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|foo/bar/Reader<R, A>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Reader<*, *>, R>, A>|>(this@R|foo/bar/ReaderMonad.fmap|)
+        public open override fun <A, B> R|foo/bar/Reader<R, A>|.fmap(f: R|(A) -> B|): R|foo/bar/Reader<R, B>| {
             ^fmap R|foo/bar/Reader.Reader|<R|R|, R|B|>(this@R|foo/bar/ReaderMonad.fmap|.R|SubstitutionOverride<foo/bar/Reader.run: R|(R) -> A|>|.R|foo/bar/compose|<R|R|, R|A|, R|B|>(R|<local>/f|))
         }
 
-        public open override fun <A> pure(a: R|A|): R|{io/github/kyay10/highkt/K2<foo/bar/Reader<*, *>, R, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Reader<*, *>, R>, A>| {
+        public open override fun <A> pure(a: R|A|): R|foo/bar/Reader<R, A>| {
             ^pure R|foo/bar/Reader.Reader|<R|R|, R|A|>(<L> = Reader@fun <anonymous>(<unused var>: R|R|): R|A| <inline=NoInline>  {
                 ^ R|<local>/a|
             }
             )
         }
 
-        public open override fun <A, B> R|{io/github/kyay10/highkt/K2<foo/bar/Reader<*, *>, R, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Reader<*, *>, R>, A>|.bind(f: R|(A) -> {io/github/kyay10/highkt/K2<foo/bar/Reader<*, *>, R, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Reader<*, *>, R>, B>|): R|{io/github/kyay10/highkt/K2<foo/bar/Reader<*, *>, R, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Reader<*, *>, R>, B>| {
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|(A) -> foo/bar/Reader<R, B>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, foo/bar/Reader<R, B>>|>(R|<local>/f|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|foo/bar/Reader<R, A>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Reader<*, *>, R>, A>|>(this@R|foo/bar/ReaderMonad.bind|)
+        public open override fun <A, B> R|foo/bar/Reader<R, A>|.bind(f: R|(A) -> foo/bar/Reader<R, B>|): R|foo/bar/Reader<R, B>| {
             ^bind R|foo/bar/Reader.Reader|<R|R|, R|B|>(<L> = Reader@fun <anonymous>(r: R|R|): R|B| <inline=NoInline>  {
-                ^ R|<local>/f|.R|kotlin/Function1.invoke|(this@R|foo/bar/ReaderMonad.bind|.R|SubstitutionOverride<foo/bar/Reader.run: R|(R) -> A|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|A|>|(R|<local>/r|)).R|SubstitutionOverride<foo/bar/Reader.run: R|(R) -> B|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|B|>|(R|<local>/r|)
+                ^ R|<local>/f|.R|SubstitutionOverride<kotlin/Function1.invoke: R|foo/bar/Reader<R, B>|>|(this@R|foo/bar/ReaderMonad.bind|.R|SubstitutionOverride<foo/bar/Reader.run: R|(R) -> A|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|A|>|(R|<local>/r|)).R|SubstitutionOverride<foo/bar/Reader.run: R|(R) -> B|>|.R|SubstitutionOverride<kotlin/Function1.invoke: R|B|>|(R|<local>/r|)
             }
             )
         }
@@ -192,9 +174,7 @@ FILE: simple.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override fun <A, B> R|{io/github/kyay10/highkt/K2<foo/bar/Const<*, *>, C, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, C>, A>|.fmap(f: R|(A) -> B|): R|{io/github/kyay10/highkt/K2<foo/bar/Const<*, *>, C, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, C>, B>| {
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, B>|>(R|<local>/f|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|foo/bar/Const<C, A>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, C>, A>|>(this@R|foo/bar/ConstFunctor.fmap|)
+        public open override fun <A, B> R|foo/bar/Const<C, A>|.fmap(f: R|(A) -> B|): R|foo/bar/Const<C, B>| {
             ^fmap R|foo/bar/Const.Const|<R|C|, R|B|>(this@R|foo/bar/ConstFunctor.fmap|.R|SubstitutionOverride<foo/bar/Const.value: R|C|>|)
         }
 
@@ -204,13 +184,11 @@ FILE: simple.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override fun <A> pure(a: R|A|): R|{io/github/kyay10/highkt/K2<foo/bar/Const<*, *>, kotlin/Unit, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, A>| {
+        public open override fun <A> pure(a: R|A|): R|foo/bar/Const<kotlin/Unit, A>| {
             ^pure R|foo/bar/Const.Const|<R|kotlin/Unit|, R|A|>(Q|kotlin/Unit|)
         }
 
-        public open override fun <A, B> R|{io/github/kyay10/highkt/K2<foo/bar/Const<*, *>, kotlin/Unit, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, A>|.bind(f: R|(A) -> {io/github/kyay10/highkt/K2<foo/bar/Const<*, *>, kotlin/Unit, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, B>|): R|{io/github/kyay10/highkt/K2<foo/bar/Const<*, *>, kotlin/Unit, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, B>| {
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|(A) -> foo/bar/Const<kotlin/Unit, B>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, foo/bar/Const<kotlin/Unit, B>>|>(R|<local>/f|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|foo/bar/Const<kotlin/Unit, A>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, A>|>(this@R|foo/bar/UnitMonad.bind|)
+        public open override fun <A, B> R|foo/bar/Const<kotlin/Unit, A>|.bind(f: R|(A) -> foo/bar/Const<kotlin/Unit, B>|): R|foo/bar/Const<kotlin/Unit, B>| {
             ^bind R|foo/bar/Const.Const|<R|kotlin/Unit|, R|B|>(Q|kotlin/Unit|)
         }
 
@@ -220,25 +198,17 @@ FILE: simple.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override fun <A, B> R|io/github/kyay10/highkt/K<foo/bar/Identity<*>, A>|.fmap(f: R|(A) -> B|): R|io/github/kyay10/highkt/K<foo/bar/Identity<*>, B>| {
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, B>|>(R|<local>/f|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|foo/bar/Identity<A>|, R|io/github/kyay10/highkt/K<foo/bar/Identity<*>, A>|>(this@R|foo/bar/IdentityFunctor.fmap|)
+        public open override fun <A, B> R|foo/bar/Identity<A>|.fmap(f: R|(A) -> B|): R|foo/bar/Identity<B>| {
             ^fmap R|foo/bar/Identity.Identity|<R|B|>(R|<local>/f|.R|SubstitutionOverride<kotlin/Function1.invoke: R|B|>|(this@R|foo/bar/IdentityFunctor.fmap|.R|SubstitutionOverride<foo/bar/Identity.value: R|A|>|))
         }
 
     }
     public abstract interface BiFunctor<F> : R|kotlin/Any| {
         public open fun <A, B, C, D> R|{io/github/kyay10/highkt/K2<F, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, A>, B>|.bimap(f: R|(A) -> C|, g: R|(B) -> D|): R|{io/github/kyay10/highkt/K2<F, C, D>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, C>, D>| {
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, C>|>(R|<local>/f|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, B>, D>|>(R|<local>/g|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, C>|>(R|<local>/f|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, B>, D>|>(R|<local>/g|)
             ^bimap (this@R|foo/bar/BiFunctor|, (this@R|foo/bar/BiFunctor|, this@R|foo/bar/BiFunctor.bimap|).R|foo/bar/BiFunctor.leftMap|<R|A|, R|B|, R|C|>(R|<local>/f|)).R|foo/bar/BiFunctor.rightMap|<R|C|, R|B|, R|D|>(R|<local>/g|)
         }
 
         public open fun <A, B, C> R|{io/github/kyay10/highkt/K2<F, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, A>, B>|.leftMap(f: R|(A) -> C|): R|{io/github/kyay10/highkt/K2<F, C, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, C>, B>| {
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, C>|>(R|<local>/f|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, C>|>(R|<local>/f|)
             ^leftMap (this@R|foo/bar/BiFunctor|, this@R|foo/bar/BiFunctor.leftMap|).R|foo/bar/BiFunctor.bimap|<R|A|, R|B|, R|C|, R|B|>(R|<local>/f|, <L> = bimap@fun <anonymous>(it: R|B|): R|B| <inline=NoInline>  {
                 ^ R|<local>/it|
             }
@@ -246,8 +216,6 @@ FILE: simple.kt
         }
 
         public open fun <A, B, D> R|{io/github/kyay10/highkt/K2<F, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, A>, B>|.rightMap(g: R|(B) -> D|): R|{io/github/kyay10/highkt/K2<F, A, D>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, A>, D>| {
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, B>, D>|>(R|<local>/g|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, B>, D>|>(R|<local>/g|)
             ^rightMap (this@R|foo/bar/BiFunctor|, this@R|foo/bar/BiFunctor.rightMap|).R|foo/bar/BiFunctor.bimap|<R|A|, R|B|, R|A|, R|D|>(bimap@fun <anonymous>(it: R|A|): R|A| <inline=NoInline>  {
                 ^ R|<local>/it|
             }
@@ -284,7 +252,6 @@ FILE: simple.kt
             }
 
             public open override fun <B, C> R|{io/github/kyay10/highkt/K2<F, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, A>, B>|.fmap(f: R|(B) -> C|): R|{io/github/kyay10/highkt/K2<F, A, C>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, A>, C>| {
-                Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, B>, C>|>(R|<local>/f|)
                 ^fmap context(R|<local>/<unused var>|) this@R|foo/bar/<anonymous>.fmap|.R|foo/bar/rightMap|<R|A|, R|B|, R|C|, R|F|>(R|<local>/f|)
             }
 
@@ -312,9 +279,7 @@ FILE: simple.kt
                 super<R|kotlin/Any|>()
             }
 
-            public open override fun <B, C> R|{io/github/kyay10/highkt/K2<{foo/bar/Swap<F>=} io/github/kyay10/highkt/K<foo/bar/Swapped<*, *, *>, F>, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{foo/bar/Swap<F>=} io/github/kyay10/highkt/K<foo/bar/Swapped<*, *, *>, F>, A>, B>|.fmap(f: R|(B) -> C|): R|{io/github/kyay10/highkt/K2<{foo/bar/Swap<F>=} io/github/kyay10/highkt/K<foo/bar/Swapped<*, *, *>, F>, A, C>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{foo/bar/Swap<F>=} io/github/kyay10/highkt/K<foo/bar/Swapped<*, *, *>, F>, A>, C>| {
-                Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, B>, C>|>(R|<local>/f|)
-                Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|foo/bar/Swapped<F, A, B>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Swapped<*, *, *>, F>, A>, B>|>(this@R|foo/bar/<anonymous>.fmap|)
+            public open override fun <B, C> R|foo/bar/Swapped<F, A, B>|.fmap(f: R|(B) -> C|): R|foo/bar/Swapped<F, A, C>| {
                 ^fmap context(R|<local>/<unused var>|) this@R|foo/bar/<anonymous>.fmap|.R|SubstitutionOverride<foo/bar/Swapped.value: R|{io/github/kyay10/highkt/K2<F, B, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, B>, A>|>|.R|foo/bar/leftMap|<R|B|, R|A|, R|C|, R|F|>(R|<local>/f|).R|kotlin/let|<R|{io/github/kyay10/highkt/K2<F, C, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, C>, A>|, R|foo/bar/Swapped<F, A, C>|>(::R|foo/bar/Swapped.Swapped<F, A, C>|)
             }
 
@@ -358,11 +323,8 @@ FILE: simple.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override fun <A, B, C, D> R|{io/github/kyay10/highkt/K2<foo/bar/Either<*, *>, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Either<*, *>, A>, B>|.bimap(f: R|(A) -> C|, g: R|(B) -> D|): R|{io/github/kyay10/highkt/K2<foo/bar/Either<*, *>, C, D>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Either<*, *>, C>, D>| {
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, C>|>(R|<local>/f|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, B>, D>|>(R|<local>/g|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|foo/bar/Either<A, B>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Either<*, *>, A>, B>|>(this@R|foo/bar/EitherBiFunctor.bimap|)
-            ^bimap when (lval <when-subject>: R|{io/github/kyay10/highkt/K2<foo/bar/Either<*, *>, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Either<*, *>, A>, B>| = this@R|foo/bar/EitherBiFunctor.bimap|) {
+        public open override fun <A, B, C, D> R|foo/bar/Either<A, B>|.bimap(f: R|(A) -> C|, g: R|(B) -> D|): R|foo/bar/Either<C, D>| {
+            ^bimap when (lval <when-subject>: R|foo/bar/Either<A, B>| = this@R|foo/bar/EitherBiFunctor.bimap|) {
                 ($subj$ is R|foo/bar/Left<A, B>|) ->  {
                     R|foo/bar/Left.Left|<R|C|, R|D|>(R|<local>/f|.R|SubstitutionOverride<kotlin/Function1.invoke: R|C|>|(this@R|foo/bar/EitherBiFunctor.bimap|.R|SubstitutionOverride<foo/bar/Left.value: R|A|>|))
                 }
@@ -379,19 +341,10 @@ FILE: simple.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override fun <A, B, C, D> R|{io/github/kyay10/highkt/K2<kotlin/Pair<*, *>, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Pair<*, *>, A>, B>|.bimap(f: R|(A) -> C|, g: R|(B) -> D|): R|{io/github/kyay10/highkt/K2<kotlin/Pair<*, *>, C, D>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Pair<*, *>, C>, D>| {
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, C>|>(R|<local>/f|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, B>, D>|>(R|<local>/g|)
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|kotlin/Pair<A, B>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Pair<*, *>, A>, B>|>(this@R|foo/bar/PairBiFunctor.bimap|)
-            lval <destruct>: R|{io/github/kyay10/highkt/K2<kotlin/Pair<*, *>, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Pair<*, *>, A>, B>| = this@R|foo/bar/PairBiFunctor.bimap|
+        public open override fun <A, B, C, D> R|kotlin/Pair<A, B>|.bimap(f: R|(A) -> C|, g: R|(B) -> D|): R|kotlin/Pair<C, D>| {
+            lval <destruct>: R|kotlin/Pair<A, B>| = this@R|foo/bar/PairBiFunctor.bimap|
             lval a: R|A| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component1: R|A|>|()
-             {
-            }
-
             lval b: R|B| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component2: R|B|>|()
-             {
-            }
-
             ^bimap R|<local>/f|.R|SubstitutionOverride<kotlin/Function1.invoke: R|C|>|(R|<local>/a|).R|kotlin/to|<R|C|, R|D|>(R|<local>/g|.R|SubstitutionOverride<kotlin/Function1.invoke: R|D|>|(R|<local>/b|))
         }
 
@@ -417,10 +370,7 @@ FILE: simple.kt
                 super<R|kotlin/Any|>()
             }
 
-            public open override fun <A, B, C, D> R|{io/github/kyay10/highkt/K2<{foo/bar/BiCompose<BF, F, G>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<foo/bar/BiComposed<*, *, *, *, *>, BF, F>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, BF>, F>, G>, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{foo/bar/BiCompose<BF, F, G>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<foo/bar/BiComposed<*, *, *, *, *>, BF, F>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, BF>, F>, G>, A>, B>|.bimap(f: R|(A) -> C|, g: R|(B) -> D|): R|{io/github/kyay10/highkt/K2<{foo/bar/BiCompose<BF, F, G>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<foo/bar/BiComposed<*, *, *, *, *>, BF, F>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, BF>, F>, G>, C, D>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{foo/bar/BiCompose<BF, F, G>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<foo/bar/BiComposed<*, *, *, *, *>, BF, F>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, BF>, F>, G>, C>, D>| {
-                Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, A>, C>|>(R|<local>/f|)
-                Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Function1<*, *>, B>, D>|>(R|<local>/g|)
-                Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|foo/bar/BiComposed<BF, F, G, A, B>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, BF>, F>, G>, A>, B>|>(this@R|foo/bar/<anonymous>.bimap|)
+            public open override fun <A, B, C, D> R|foo/bar/BiComposed<BF, F, G, A, B>|.bimap(f: R|(A) -> C|, g: R|(B) -> D|): R|foo/bar/BiComposed<BF, F, G, C, D>| {
                 ^bimap context(R|<local>/<unused var>|) this@R|foo/bar/<anonymous>.bimap|.R|SubstitutionOverride<foo/bar/BiComposed.value: R|{io/github/kyay10/highkt/K2<BF, io/github/kyay10/highkt/K<F, A>, io/github/kyay10/highkt/K<G, B>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<BF, io/github/kyay10/highkt/K<F, A>>, io/github/kyay10/highkt/K<G, B>>|>|.R|foo/bar/bimap|<R|io/github/kyay10/highkt/K<F, A>|, R|io/github/kyay10/highkt/K<G, B>|, R|io/github/kyay10/highkt/K<F, C>|, R|io/github/kyay10/highkt/K<G, D>|, R|BF|>(bimap@fun <anonymous>(it: R|io/github/kyay10/highkt/K<F, A>|): R|io/github/kyay10/highkt/K<F, C>| <inline=NoInline>  {
                     ^ context(R|<local>/<unused var>|) R|<local>/it|.R|foo/bar/fmap|<R|F|, R|A|, R|C|>(R|<local>/f|)
                 }
@@ -467,8 +417,7 @@ FILE: simple.kt
                 super<R|kotlin/Any|>()
             }
 
-            public open override operator fun <A> invoke(fa: R|io/github/kyay10/highkt/K<{foo/bar/Compose<I, F>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, I>, F>, A>|): R|io/github/kyay10/highkt/K<{foo/bar/Compose<J, G>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, J>, G>, A>| {
-                Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|foo/bar/Composed<I, F, A>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, I>, F>, A>|>(R|<local>/fa|)
+            public open override operator fun <A> invoke(fa: R|foo/bar/Composed<I, F, A>|): R|foo/bar/Composed<J, G, A>| {
                 ^invoke R|<local>/other|.R|SubstitutionOverride<foo/bar/NT.invoke: R|io/github/kyay10/highkt/K<J, A>|>|<R|io/github/kyay10/highkt/K<G, A>|>(context(R|<local>/<unused var>|) R|<local>/fa|.R|SubstitutionOverride<foo/bar/Composed.value: R|io/github/kyay10/highkt/K<I, io/github/kyay10/highkt/K<F, A>>|>|.R|foo/bar/fmap|<R|I|, R|io/github/kyay10/highkt/K<F, A>|, R|io/github/kyay10/highkt/K<G, A>|>(<L> = fmap@fun <anonymous>(it: R|io/github/kyay10/highkt/K<F, A>|): R|io/github/kyay10/highkt/K<G, A>| <inline=NoInline>  {
                     ^ this@R|foo/bar/horizontalLeft|.R|SubstitutionOverride<foo/bar/NT.invoke: R|io/github/kyay10/highkt/K<G, A>|>|<R|A|>(R|<local>/it|)
                 }
@@ -485,8 +434,7 @@ FILE: simple.kt
                 super<R|kotlin/Any|>()
             }
 
-            public open override operator fun <A> invoke(fa: R|io/github/kyay10/highkt/K<{foo/bar/Compose<I, F>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, I>, F>, A>|): R|io/github/kyay10/highkt/K<{foo/bar/Compose<J, G>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, J>, G>, A>| {
-                Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|foo/bar/Composed<I, F, A>|, R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, I>, F>, A>|>(R|<local>/fa|)
+            public open override operator fun <A> invoke(fa: R|foo/bar/Composed<I, F, A>|): R|foo/bar/Composed<J, G, A>| {
                 ^invoke context(R|<local>/<unused var>|) R|<local>/other|.R|SubstitutionOverride<foo/bar/NT.invoke: R|io/github/kyay10/highkt/K<J, A>|>|<R|io/github/kyay10/highkt/K<F, A>|>(R|<local>/fa|.R|SubstitutionOverride<foo/bar/Composed.value: R|io/github/kyay10/highkt/K<I, io/github/kyay10/highkt/K<F, A>>|>|).R|foo/bar/fmap|<R|J|, R|io/github/kyay10/highkt/K<F, A>|, R|io/github/kyay10/highkt/K<G, A>|>(<L> = fmap@fun <anonymous>(it: R|io/github/kyay10/highkt/K<F, A>|): R|io/github/kyay10/highkt/K<G, A>| <inline=NoInline>  {
                     ^ this@R|foo/bar/horizontalRight|.R|SubstitutionOverride<foo/bar/NT.invoke: R|io/github/kyay10/highkt/K<G, A>|>|<R|A|>(R|<local>/it|)
                 }
@@ -502,7 +450,6 @@ FILE: simple.kt
                 ^ <strcat>(R|<local>/it|, String(!))
             }
             )
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<kotlin/collections/List<*>, kotlin/String>|>(R|<local>/result|)
             when () {
                 !=(R|<local>/result|, R|kotlin/collections/listOf|<R|kotlin/String|>(vararg(String(Hello!), String(World!)))) ->  {
                     R|kotlin/error|(<strcat>(R|<local>/result|))
@@ -518,7 +465,6 @@ FILE: simple.kt
                 ^ <strcat>(R|<local>/it|, String(!))
             }
             )
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<kotlin/Pair<*, *>, kotlin/Int>, kotlin/String>|>(R|<local>/result|)
             when () {
                 !=(R|<local>/result|, Int(1).R|kotlin/to|<R|kotlin/Int|, R|kotlin/String|>(String(Hello!))) ->  {
                     R|kotlin/error|(<strcat>(R|<local>/result|))
@@ -530,15 +476,12 @@ FILE: simple.kt
     }
     private final fun maybeExample(): R|kotlin/Unit| {
         ^maybeExample R|kotlin/context|<R|foo/bar/Functor<{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>, kotlin/Unit>>|, R|kotlin/Unit|>(R|foo/bar/maybeFunctor|, <L> = context(<unused var>: R|foo/bar/Functor<{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>, kotlin/Unit>>|) context@fun <anonymous>(): R|kotlin/Unit| <inline=Inline, kind=EXACTLY_ONCE>  {
-            lval aMaybe: R|{foo/bar/Maybe<kotlin/Int>=} foo/bar/BiComposed<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>, kotlin/Unit, kotlin/Int>| = R|foo/bar/BiComposed.BiComposed|<R|kotlin/Int|>(R|foo/bar/Right.Right|<R|{io/github/kyay10/highkt/K2<foo/bar/Const<*, *>, kotlin/Unit, kotlin/Unit>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, kotlin/Unit>|, R|foo/bar/Identity<kotlin/Int>|>(R|foo/bar/Identity.Identity|<R|kotlin/Int|>(Int(10))).R|io/github/kyay10/highkt/expandTo|<R|{io/github/kyay10/highkt/K2<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, kotlin/Unit>, io/github/kyay10/highkt/K<foo/bar/Identity<*>, kotlin/Int>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, kotlin/Unit>>, io/github/kyay10/highkt/K<foo/bar/Identity<*>, kotlin/Int>>|>())
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{foo/bar/Maybe<kotlin/Int>=} foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>, foo/bar/Identity<*>>, kotlin/Unit>, kotlin/Int>|>(R|<local>/aMaybe|)
+            lval aMaybe: R|{foo/bar/Maybe<kotlin/Int>=} foo/bar/BiComposed<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>, kotlin/Unit, kotlin/Int>| = R|foo/bar/BiComposed.BiComposed|<R|kotlin/Int|>(R|foo/bar/Right.Right|<R|foo/bar/Const<kotlin/Unit, kotlin/Unit>|, R|foo/bar/Identity<kotlin/Int>|>(R|foo/bar/Identity.Identity|<R|kotlin/Int|>(Int(10))))
             lval b: R|{foo/bar/Maybe<kotlin/String>=} foo/bar/BiComposed<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>, kotlin/Unit, kotlin/String>| = context(R|<local>/<unused var>|) R|<local>/aMaybe|.R|foo/bar/fmap|<R|{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>, kotlin/Unit>|, R|kotlin/Int|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/Int|): R|kotlin/String| <inline=NoInline>  {
                 ^ R|<local>/it|.R|kotlin/Int.toString|()
             }
             )
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{foo/bar/Maybe<kotlin/String>=} foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>, foo/bar/Identity<*>>, kotlin/Unit>, kotlin/String>|>(R|<local>/b|)
-            lval expected: R|{foo/bar/Maybe<kotlin/String>=} foo/bar/BiComposed<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>, kotlin/Unit, kotlin/String>| = R|foo/bar/BiComposed.BiComposed|<R|kotlin/String|>(R|foo/bar/Right.Right|<R|{io/github/kyay10/highkt/K2<foo/bar/Const<*, *>, kotlin/Unit, kotlin/Unit>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, kotlin/Unit>|, R|foo/bar/Identity<kotlin/String>|>(R|foo/bar/Identity.Identity|<R|kotlin/String|>(String(10))).R|io/github/kyay10/highkt/expandTo|<R|{io/github/kyay10/highkt/K2<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, kotlin/Unit>, io/github/kyay10/highkt/K<foo/bar/Identity<*>, kotlin/String>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, kotlin/Unit>>, io/github/kyay10/highkt/K<foo/bar/Identity<*>, kotlin/String>>|>())
-            Q|io/github/kyay10/highkt|.R|io/github/kyay10/highkt/assertIsType|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<{foo/bar/Maybe<kotlin/String>=} foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>, foo/bar/Identity<*>>, kotlin/Unit>, kotlin/String>|>(R|<local>/expected|)
+            lval expected: R|{foo/bar/Maybe<kotlin/String>=} foo/bar/BiComposed<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>, kotlin/Unit, kotlin/String>| = R|foo/bar/BiComposed.BiComposed|<R|kotlin/String|>(R|foo/bar/Right.Right|<R|foo/bar/Const<kotlin/Unit, kotlin/Unit>|, R|foo/bar/Identity<kotlin/String>|>(R|foo/bar/Identity.Identity|<R|kotlin/String|>(String(10))))
             when () {
                 !=(R|<local>/b|, R|<local>/expected|) ->  {
                     R|kotlin/error|(<strcat>(R|<local>/b|))
