@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.fir.plugin.createConeType
 import org.jetbrains.kotlin.fir.resolve.createParametersSubstitutor
 import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.resolve.toRegularClassSymbol
+import org.jetbrains.kotlin.fir.resolve.toSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
 import org.jetbrains.kotlin.fir.types.ConeFlexibleType
 import org.jetbrains.kotlin.fir.types.ConeIntersectionType
@@ -24,6 +25,7 @@ import org.jetbrains.kotlin.fir.types.toTrivialFlexibleType
 import org.jetbrains.kotlin.fir.types.type
 import org.jetbrains.kotlin.fir.types.typeContext
 import org.jetbrains.kotlin.fir.types.withArguments
+import org.jetbrains.kotlin.fir.types.withAttributes
 import org.jetbrains.kotlin.fir.types.withNullability
 
 context(c: SessionHolder)
@@ -74,7 +76,8 @@ private tailrec fun FirRegularClassSymbol.applyTypeFunctions(
   }) ?: return default
   val appliedTypes = appliedTypes.drop(ownTypeParameterSymbols.size)
   val newDefault = substituted.createKType(appliedTypes)
-  val (realType, newApplied) = substituted.deconstructIfKType() ?: substituted.deconstructNormalType() ?: return newDefault
+  val (realType, newApplied) = substituted.deconstructIfKType() ?: substituted.deconstructNormalType()
+  ?: return newDefault
   val symbol = realType.toRegularClassSymbol() ?: return newDefault
   return symbol.applyTypeFunctions(newApplied + appliedTypes, newDefault)
 }
@@ -82,7 +85,6 @@ private tailrec fun FirRegularClassSymbol.applyTypeFunctions(
 // TODO: application order?
 context(c: SessionHolder)
 private fun ConeKotlinType.applyKEverywhere(): ConeKotlinType? {
-  if (LeaveUnevaluatedAttribute in attributes) return this
   if (this is ConeFlexibleType && isTrivial)
     return (lowerBound.applyKEverywhere() as? ConeRigidType)?.toTrivialFlexibleType(c.session.typeContext)
   if (this is ConeFlexibleType) {
@@ -107,7 +109,8 @@ private fun ConeKotlinType.applyKEverywhere(): ConeKotlinType? {
 }
 
 context(c: SessionHolder)
-fun ConeKotlinType.applyKOrSelf(): ConeKotlinType = applyKEverywhere() ?: this
+fun ConeKotlinType.applyKOrSelf(): ConeKotlinType =
+  applyKEverywhere()?.withAttributes(attributes.add(ExpandedTypeAttribute(this))) ?: this
 
 context(c: SessionHolder)
 fun ConeKotlinType.toCanonicalKType(): ConeKotlinType? {
@@ -122,7 +125,8 @@ fun ConeKotlinType.toCanonicalKType(): ConeKotlinType? {
   if (this is ConeIntersectionType) return mapTypesNotNull { it.toCanonicalKType() }
   if (typeArguments.isEmpty()) return null
   if (isK) return null
-  return withNullability(false, c.session.typeContext, preserveAttributes = true).withArguments { ConeStarProjection }
+  val symbol = toSymbol() ?: return null
+  return symbol.constructType(Array(typeArguments.size) { ConeStarProjection })
     .createKType(typeArguments.asList())
     .withNullability(canBeNull(c.session), c.session.typeContext, preserveAttributes = true)
 }

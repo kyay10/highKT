@@ -68,6 +68,7 @@ class KindReturnTypeRefiner(session: FirSession) : FirExpressionResolutionExtens
     return emptyList()
   }
 }
+
 private fun TypeComponents(inferenceContext: ConeInferenceContext): TypeComponents = with(inferenceContext.session) {
   (UNSAFE.allocateInstance(TypeComponents::class.java) as TypeComponents).apply {
     typeContextField.set(this, inferenceContext)
@@ -94,7 +95,10 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
     require(this is ConeKotlinType)
     if ((constructor as? ConeClassLikeLookupTag)?.classId != K_CLASS_ID || this.classId == K_CLASS_ID)
       return session.correspondingSupertypesCache.getCorrespondingSupertypes(this, constructor)
-    return listOfNotNull(toCanonicalKType() as? ConeClassLikeType).map {
+    return listOfNotNull(
+      attributes.expandedType?.coneType as? ConeClassLikeType,
+      toCanonicalKType() as? ConeClassLikeType
+    ).map {
       captureFromArguments(it, CaptureStatus.FOR_SUBTYPING) as? ConeClassLikeType ?: it
     }
   }

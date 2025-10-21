@@ -4,15 +4,9 @@
 package io.github.kyay10.highkt
 
 import kotlin.contracts.ExperimentalContracts
-import kotlin.contracts.contract
-import kotlin.js.JsName
-import kotlin.jvm.JvmName
 
 @Target(AnnotationTarget.CLASS)
 public annotation class TypeFunction
-
-@Target(AnnotationTarget.TYPE)
-public annotation class LeaveUnevaluated
 
 // Special type-lambda to represent identity type constructor
 @TypeFunction
@@ -32,18 +26,4 @@ public typealias K2<F, A, B> = K<K<F, A>, B>
 public typealias Tri<F, A, B, C> = Out<Bi<F, A, B>, C>
 public typealias K3<F, A, B, C> = K<K2<F, A, B>, C>
 
-public inline fun <T> assertIsType(x: Any?) {
-  contract {
-    returns() implies (x is T)
-  }
-}
-
-@JvmName("assertIsType2")
-@JsName("assertIsType2")
-public inline fun <T1, T2> assertIsType(x: Any?) {
-  contract {
-    returns() implies (x is T1 && x is T2)
-  }
-}
-
-public inline fun <T> T.expandTo(): @LeaveUnevaluated T = this
+public inline fun <T> T.expandTo(): T = this

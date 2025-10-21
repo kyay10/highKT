@@ -199,15 +199,15 @@ private fun pairExample() = context(PairFunctor<Int>()) {
 }
 
 private fun maybeExample() = context(maybeFunctor) {
-  val a: Either<Unit, Int> = Right(10)
-  val b = a.expandTo<Maybe<Int>>().fmap { it.toString() }
-  val expected: Either<Unit, String> = Right("10")
+  val a: Maybe<Int> = Right(10)
+  val b = a.fmap { it.toString() }.fmap { "$it!" } // look ma! no expandTo needed
+  val expected: Either<Unit, String> = Right("10!")
   if (b != expected) error("$b")
 }
 
 private fun maybeExample2() = context(maybeFunctor2) {
   val a: Either<Unit, Int> = Right(10)
-  val b = a.expandTo<Maybe2<Int>>().fmap { it.toString() }
+  val b = a.expandTo<Maybe2<Int>>().fmap { it.toString() } // intentionally showcasing expandTo
   val expected: Either<Unit, String> = Right("10")
   if (b != expected) error("$b")
 }
