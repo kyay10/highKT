@@ -33,9 +33,6 @@ class HighKTGradlePlugin : KotlinCompilerPluginSupportPlugin {
     if (kotlinCompilation.implementationConfigurationName == "metadataCompilationImplementation") {
       project.dependencies.add("commonMainImplementation", ANNOTATIONS_LIBRARY_COORDINATES)
     }
-    kotlinCompilation.compileTaskProvider.configure {
-      it.compilerOptions.freeCompilerArgs.add("-Xwarning-level=USELESS_IS_CHECK:disabled")
-    }
 
     return project.provider {
       emptyList()

@@ -1,0 +1,61 @@
+FILE: prompt.kt
+    package foo.bar
+
+    public final class Prompt<R> : R|kotlin/Any| {
+        public constructor<R>(): R|foo/bar/Prompt<R>| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    public abstract interface Monad<F> : R|kotlin/Any| {
+        public abstract fun <A> pure(a: R|A|): R|io/github/kyay10/highkt/K<F, A>|
+
+        public abstract fun <A, B> R|io/github/kyay10/highkt/K<F, A>|.flatMap(f: R|suspend (A) -> io/github/kyay10/highkt/K<F, B>|): R|io/github/kyay10/highkt/K<F, B>|
+
+    }
+    context(m: R|foo/bar/Monad<F>|)
+    public final fun <F, A> pure(a: R|A|): R|io/github/kyay10/highkt/K<F, A>| {
+        ^pure R|<local>/m|.R|SubstitutionOverride<foo/bar/Monad.pure: R|io/github/kyay10/highkt/K<F, A>|>|<R|A|>(R|<local>/a|)
+    }
+    context(m: R|foo/bar/Monad<F>|)
+    public final fun <F, A, B> R|io/github/kyay10/highkt/K<F, A>|.flatMap(f: R|suspend (A) -> io/github/kyay10/highkt/K<F, B>|): R|io/github/kyay10/highkt/K<F, B>| {
+        ^flatMap R|kotlin/with|<R|foo/bar/Monad<F>|, R|io/github/kyay10/highkt/K<F, B>|>(R|<local>/m|, <L> = with@fun R|foo/bar/Monad<F>|.<anonymous>(): R|io/github/kyay10/highkt/K<F, B>| <inline=Inline, kind=EXACTLY_ONCE>  {
+            ^ (this@R|special/anonymous|, this@R|foo/bar/flatMap|).R|SubstitutionOverride<foo/bar/Monad.flatMap: R|io/github/kyay10/highkt/K<F, B>|>|<R|A|, R|B|>(R|<local>/f|)
+        }
+        )
+    }
+    context(<unused var>: R|foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>|, <unused var>: R|foo/bar/Monad<F>|)
+    public final suspend fun <F, A, B> R|io/github/kyay10/highkt/K<F, B>|.bind(): R|B| {
+        ^bind R|kotlin/TODO|()
+    }
+    public final suspend fun <F, A, B> b(m: R|foo/bar/Monad<F>|, prompt: R|foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>|, a: R|io/github/kyay10/highkt/K<F, B>|): R|B| {
+        ^b R|kotlin/context|<R|foo/bar/Monad<F>|, R|foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>|, R|B|>(R|<local>/m|, R|<local>/prompt|, <L> = context(<unused var>: R|foo/bar/Monad<F>|, <unused var>: R|foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>|) context@fun <anonymous>(): R|B| <inline=Inline, kind=EXACTLY_ONCE>  {
+            ^ context(R|<local>/<unused var>|, R|<local>/<unused var>|) R|<local>/a|.R|foo/bar/bind|<R|F|, R|A|, R|B|>()
+        }
+        )
+    }
+    public final data class State<S, out A> : R|kotlin/Any| {
+        public constructor<S, out A>(run: R|suspend (S) -> kotlin/Pair<A, S>|): R|foo/bar/State<S, A>| {
+            super<R|kotlin/Any|>()
+        }
+
+        public final val run: R|suspend (S) -> kotlin/Pair<A, S>| = R|<local>/run|
+            public get(): R|suspend (S) -> kotlin/Pair<A, S>|
+
+        public final operator fun component1(): R|suspend (S) -> kotlin/Pair<A, S>|
+
+        public final fun copy(run: R|suspend (S) -> kotlin/Pair<A, S>| = this@R|foo/bar/State|.R|foo/bar/State.run|): R|foo/bar/State<S, A>|
+
+    }
+    public final typealias StateOf<S> = R|io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>|
+    context(m: R|foo/bar/Monad<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>>|)
+    public final suspend fun <S, A, B> R|foo/bar/Prompt<io/github/kyay10/highkt/K<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>, A>>|.b2(a: R|io/github/kyay10/highkt/K<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>, B>|): R|B| {
+        ^b2 R|foo/bar/b|<R|{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>|, R|A|, R|B|>(R|<local>/m|, this@R|foo/bar/b2|, R|<local>/a|)
+    }
+    context(m: R|foo/bar/Monad<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>>|)
+    public final suspend fun <S, A, B> R|foo/bar/Prompt<foo/bar/State<S, A>>|.b3(a: R|io/github/kyay10/highkt/K<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>, B>|): R|B| {
+        ^b3 R|foo/bar/b|<R|{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>|, R|A|, R|B|>(R|<local>/m|, this@R|foo/bar/b3|, R|<local>/a|)
+    }
+    public final fun box(): R|kotlin/String| {
+        ^box String(OK)
+    }
