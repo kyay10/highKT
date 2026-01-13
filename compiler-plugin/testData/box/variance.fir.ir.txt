@@ -2,11 +2,11 @@ FILE fqName:foo.bar fileName:/variance.kt
   PROPERTY name:maybeFunctor visibility:public modality:FINAL [val]
     FIELD PROPERTY_BACKING_FIELD name:maybeFunctor type:foo.bar.Functor<kotlin.Any?> visibility:private [final,static]
       EXPRESSION_BODY
-        CALL 'public final fun context <A, B, C, Result> (a: A of kotlin.context, b: B of kotlin.context, c: C of kotlin.context, block: @[ContextFunctionTypeParams(count = 3)] kotlin.Function3<A of kotlin.context, B of kotlin.context, C of kotlin.context, Result of kotlin.context>): Result of kotlin.context declared in kotlin' type=foo.bar.Functor<kotlin.Any?> origin=null
+        CALL 'public final fun context <A, B, C, R> (a: A of kotlin.context, b: B of kotlin.context, c: C of kotlin.context, block: @[ContextFunctionTypeParams(count = 3)] kotlin.Function3<A of kotlin.context, B of kotlin.context, C of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=foo.bar.Functor<kotlin.Any?> origin=null
           TYPE_ARG A: foo.bar.EitherBiFunctor
           TYPE_ARG B: foo.bar.ConstFunctor<kotlin.Unit>
           TYPE_ARG C: foo.bar.IdentityFunctor
-          TYPE_ARG Result: foo.bar.Functor<kotlin.Any?>
+          TYPE_ARG R: foo.bar.Functor<kotlin.Any?>
           ARG a: GET_OBJECT 'CLASS OBJECT name:EitherBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<foo.bar.Either<*, *>>]' type=foo.bar.EitherBiFunctor
           ARG b: CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.ConstFunctor' type=foo.bar.ConstFunctor<kotlin.Unit> origin=null
             TYPE_ARG (of class) C: kotlin.Unit
@@ -1703,10 +1703,10 @@ FILE fqName:foo.bar fileName:/variance.kt
                 public abstract fun fmap <A, B> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.Functor.fmap, B of foo.bar.Functor.fmap>): kotlin.Any? declared in foo.bar.Functor
               BLOCK_BODY
                 RETURN type=kotlin.Nothing from='public open fun fmap <A, B> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.composeFunctors.<no name provided>.fmap, B of foo.bar.composeFunctors.<no name provided>.fmap>): kotlin.Any? declared in foo.bar.composeFunctors.<no name provided>'
-                  CALL 'public final fun context <A, B, Result> (a: A of kotlin.context, b: B of kotlin.context, block: @[ContextFunctionTypeParams(count = 2)] kotlin.Function2<A of kotlin.context, B of kotlin.context, Result of kotlin.context>): Result of kotlin.context declared in kotlin' type=foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, B of foo.bar.composeFunctors.<no name provided>.fmap> origin=null
+                  CALL 'public final fun context <A, B, R> (a: A of kotlin.context, b: B of kotlin.context, block: @[ContextFunctionTypeParams(count = 2)] kotlin.Function2<A of kotlin.context, B of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, B of foo.bar.composeFunctors.<no name provided>.fmap> origin=null
                     TYPE_ARG A: foo.bar.Functor<F of foo.bar.composeFunctors>
                     TYPE_ARG B: foo.bar.Functor<G of foo.bar.composeFunctors>
-                    TYPE_ARG Result: foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, B of foo.bar.composeFunctors.<no name provided>.fmap>
+                    TYPE_ARG R: foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, B of foo.bar.composeFunctors.<no name provided>.fmap>
                     ARG a: GET_VAR 'ff: foo.bar.Functor<F of foo.bar.composeFunctors> declared in foo.bar.composeFunctors' type=foo.bar.Functor<F of foo.bar.composeFunctors> origin=null
                     ARG b: GET_VAR 'gg: foo.bar.Functor<G of foo.bar.composeFunctors> declared in foo.bar.composeFunctors' type=foo.bar.Functor<G of foo.bar.composeFunctors> origin=null
                     ARG block: FUN_EXPR type=kotlin.Function2<foo.bar.Functor<F of foo.bar.composeFunctors>, foo.bar.Functor<G of foo.bar.composeFunctors>, foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, B of foo.bar.composeFunctors.<no name provided>.fmap>> origin=LAMBDA

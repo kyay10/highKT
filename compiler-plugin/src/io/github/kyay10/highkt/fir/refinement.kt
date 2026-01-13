@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.fir.resolve.createParametersSubstitutor
 import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.resolve.toRegularClassSymbol
 import org.jetbrains.kotlin.fir.resolve.toSymbol
+import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
 import org.jetbrains.kotlin.fir.types.ConeFlexibleType
 import org.jetbrains.kotlin.fir.types.ConeIntersectionType
@@ -25,14 +26,13 @@ import org.jetbrains.kotlin.fir.types.toTrivialFlexibleType
 import org.jetbrains.kotlin.fir.types.type
 import org.jetbrains.kotlin.fir.types.typeContext
 import org.jetbrains.kotlin.fir.types.withArguments
-import org.jetbrains.kotlin.fir.types.withAttributes
 import org.jetbrains.kotlin.fir.types.withNullability
 
 context(c: SessionHolder)
 private fun ConeKotlinType.applyKOnTheOutside(): ConeKotlinType? {
   val (realType, appliedTypes) = deconstructIfKType() ?: return null
   return realType.toRegularClassSymbol()?.applyTypeFunctions(appliedTypes)
-    ?.withNullability(isMarkedNullable, c.session.typeContext, preserveAttributes = true)
+    ?.withNullability(isMarkedNullable, c.session.typeContext, attributes = attributes.add(ExpandedTypeAttribute(this)), preserveAttributes = true)
 }
 
 context(c: SessionHolder)
@@ -47,7 +47,7 @@ private fun ConeKotlinType.deconstructIfKType(): Pair<ConeKotlinType, List<ConeT
   }
   if (appliedTypes.isEmpty()) return null // implies this was not a K at all
   // Could be relaxed
-  require(realType.typeArguments.none { !it.isStarProjection }) { "K can only be applied to star projections; was called with $realType and $appliedTypes" }
+  if (realType.typeArguments.any { !it.isStarProjection }) return null
   return realType to appliedTypes
 }
 
@@ -63,8 +63,8 @@ private tailrec fun FirRegularClassSymbol.applyTypeFunctions(
   appliedTypes: List<ConeTypeProjection>, default: ConeKotlinType? = null
 ): ConeKotlinType? {
   if (ownTypeParameterSymbols.size > appliedTypes.size) return default // partially-applied type
-  require(classId != K_CLASS_ID) { "Should not be called on K; was called with arguments $appliedTypes" }
-  if (!hasAnnotation(TYPE_FUNCTION_CLASS_ID, c.session)) {
+  if (classId == K_CLASS_ID) return default // should not be called on K
+  if (!isTypeFunction()) {
     if (ownTypeParameterSymbols.size != appliedTypes.size) return default
     return constructType(appliedTypes.toTypedArray())
   }
@@ -81,6 +81,9 @@ private tailrec fun FirRegularClassSymbol.applyTypeFunctions(
   val symbol = realType.toRegularClassSymbol() ?: return newDefault
   return symbol.applyTypeFunctions(newApplied + appliedTypes, newDefault)
 }
+
+context(c: SessionHolder)
+fun FirBasedSymbol<*>.isTypeFunction(): Boolean = hasAnnotation(TYPE_FUNCTION_CLASS_ID, c.session)
 
 // TODO: application order?
 context(c: SessionHolder)
@@ -109,8 +112,7 @@ private fun ConeKotlinType.applyKEverywhere(): ConeKotlinType? {
 }
 
 context(c: SessionHolder)
-fun ConeKotlinType.applyKOrSelf(): ConeKotlinType =
-  applyKEverywhere()?.withAttributes(attributes.add(ExpandedTypeAttribute(this))) ?: this
+fun ConeKotlinType.applyKOrSelf(): ConeKotlinType = applyKEverywhere() ?: this
 
 context(c: SessionHolder)
 fun ConeKotlinType.toCanonicalKType(): ConeKotlinType? {

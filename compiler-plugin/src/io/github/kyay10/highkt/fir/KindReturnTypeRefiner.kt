@@ -9,11 +9,11 @@ import org.jetbrains.kotlin.fir.extensions.FirExpressionResolutionExtension
 import org.jetbrains.kotlin.fir.languageVersionSettings
 import org.jetbrains.kotlin.fir.resolve.calls.ImplicitExtensionReceiverValue
 import org.jetbrains.kotlin.fir.resolve.inference.InferenceComponents
+import org.jetbrains.kotlin.fir.resolve.toSymbol
 import org.jetbrains.kotlin.fir.scopes.FirOverrideChecker
 import org.jetbrains.kotlin.fir.scopes.impl.FirStandardOverrideChecker
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
-import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.fir.types.ConeClassLikeLookupTag
 import org.jetbrains.kotlin.fir.types.ConeClassLikeType
 import org.jetbrains.kotlin.fir.types.ConeInferenceContext
@@ -21,13 +21,11 @@ import org.jetbrains.kotlin.fir.types.ConeKotlinType
 import org.jetbrains.kotlin.fir.types.ConeTypeApproximator
 import org.jetbrains.kotlin.fir.types.ConeTypePreparator
 import org.jetbrains.kotlin.fir.types.TypeComponents
-import org.jetbrains.kotlin.fir.types.classId
 import org.jetbrains.kotlin.fir.types.correspondingSupertypesCache
 import org.jetbrains.kotlin.fir.types.resolvedType
 import org.jetbrains.kotlin.types.AbstractTypeRefiner
 import org.jetbrains.kotlin.types.TypeCheckerState
 import org.jetbrains.kotlin.types.TypeRefinement
-import org.jetbrains.kotlin.types.model.CaptureStatus
 import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 import org.jetbrains.kotlin.types.model.RigidTypeMarker
 import org.jetbrains.kotlin.types.model.TypeConstructorMarker
@@ -51,14 +49,8 @@ class KindReturnTypeRefiner(session: FirSession) : FirExpressionResolutionExtens
     session.register(FirOverrideChecker::class, FirStandardOverrideChecker(session))
   }
 
-  override fun addNewImplicitReceivers(
-    functionCall: FirFunctionCall,
-    sessionHolder: SessionAndScopeSessionHolder,
-    containingCallableSymbol: FirCallableSymbol<*>
-  ) = addNewImplicitReceivers(functionCall, sessionHolder, containingCallableSymbol as FirBasedSymbol<*>)
-
   @OptIn(SymbolInternals::class)
-  fun addNewImplicitReceivers(
+  override fun addNewImplicitReceivers(
     functionCall: FirFunctionCall,
     sessionHolder: SessionAndScopeSessionHolder,
     containingCallableSymbol: FirBasedSymbol<*>
@@ -91,16 +83,18 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
     kotlinTypeRefiner = KindTypeRefiner(session)
   )
 
+  private fun ConeKotlinType.cachedCorrespondingSupertypes(constructor: TypeConstructorMarker) =
+    session.correspondingSupertypesCache.getCorrespondingSupertypes(this, constructor)
+
+  private fun ConeKotlinType.options(): List<ConeKotlinType> =
+    listOfNotNull(this, attributes.expandedType?.coneType, toCanonicalKType())
+
   override fun RigidTypeMarker.fastCorrespondingSupertypes(constructor: TypeConstructorMarker): List<ConeClassLikeType>? {
     require(this is ConeKotlinType)
-    if ((constructor as? ConeClassLikeLookupTag)?.classId != K_CLASS_ID || this.classId == K_CLASS_ID)
-      return session.correspondingSupertypesCache.getCorrespondingSupertypes(this, constructor)
-    return listOfNotNull(
-      attributes.expandedType?.coneType as? ConeClassLikeType,
-      toCanonicalKType() as? ConeClassLikeType
-    ).map {
-      captureFromArguments(it, CaptureStatus.FOR_SUBTYPING) as? ConeClassLikeType ?: it
-    }
+    if ((constructor as? ConeClassLikeLookupTag)?.classId != K_CLASS_ID)
+      return cachedCorrespondingSupertypes(constructor)
+    if (toSymbol()?.isTypeFunction() == true) return emptyList()
+    return options().flatMap { it.cachedCorrespondingSupertypes(constructor) ?: return null }
   }
 }
 
