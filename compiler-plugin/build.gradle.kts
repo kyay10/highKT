@@ -4,6 +4,7 @@ plugins {
   id("com.github.gmazzo.buildconfig")
   idea
   id("module.publication")
+  id("com.gradleup.shadow") version "9.3.0"
 }
 
 sourceSets {

@@ -28,12 +28,6 @@ class HighKTGradlePlugin : KotlinCompilerPluginSupportPlugin {
     kotlinCompilation: KotlinCompilation<*>
   ): Provider<List<SubpluginOption>> {
     val project = kotlinCompilation.target.project
-    // KT-53477 workaround
-    project.configurations.matching {
-      it.name.startsWith("kotlin") && it.name.contains("CompilerPluginClasspath")
-    }.all {
-      it.isTransitive = true
-    }
 
     kotlinCompilation.dependencies { implementation(ANNOTATIONS_LIBRARY_COORDINATES) }
     if (kotlinCompilation.implementationConfigurationName == "metadataCompilationImplementation") {
