@@ -1,14 +1,12 @@
 package io.github.kyay10.highkt.fir
 
 import org.jetbrains.kotlin.fir.SessionHolder
-import org.jetbrains.kotlin.fir.declarations.hasAnnotation
 import org.jetbrains.kotlin.fir.plugin.createConeType
-import org.jetbrains.kotlin.fir.resolve.createParametersSubstitutor
+import org.jetbrains.kotlin.fir.resolve.directExpansionType
 import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
-import org.jetbrains.kotlin.fir.resolve.toRegularClassSymbol
+import org.jetbrains.kotlin.fir.resolve.toClassLikeSymbol
 import org.jetbrains.kotlin.fir.resolve.toSymbol
-import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
-import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
+import org.jetbrains.kotlin.fir.symbols.impl.FirClassLikeSymbol
 import org.jetbrains.kotlin.fir.types.ConeClassLikeType
 import org.jetbrains.kotlin.fir.types.ConeFlexibleType
 import org.jetbrains.kotlin.fir.types.ConeIntersectionType
@@ -17,6 +15,7 @@ import org.jetbrains.kotlin.fir.types.ConeRigidType
 import org.jetbrains.kotlin.fir.types.ConeStarProjection
 import org.jetbrains.kotlin.fir.types.ConeTypeIntersector
 import org.jetbrains.kotlin.fir.types.ConeTypeProjection
+import org.jetbrains.kotlin.fir.types.abbreviatedTypeOrSelf
 import org.jetbrains.kotlin.fir.types.canBeNull
 import org.jetbrains.kotlin.fir.types.classId
 import org.jetbrains.kotlin.fir.types.constructType
@@ -33,7 +32,7 @@ import org.jetbrains.kotlin.fir.types.withNullability
 context(c: SessionHolder)
 private fun ConeKotlinType.applyKOnTheOutside(): ConeKotlinType? {
   val (realType, appliedTypes) = deconstructIfKType() ?: return null
-  return realType.toRegularClassSymbol()?.applyTypeFunctions(appliedTypes)
+  return realType.toClassLikeSymbol()?.applyTypeFunctions(appliedTypes)
     ?.withNullability(isMarkedNullable, c.session.typeContext, attributes = attributes.add(ExpandedTypeAttribute(this)), preserveAttributes = true)
 }
 
@@ -48,10 +47,10 @@ private fun ConeKotlinType.deconstructIfKType(): Pair<ConeKotlinType, List<ConeT
     // Now realType is not a K
   }
   if (appliedTypes.isEmpty()) return null // implies this was not a K at all
-  if (realType.lowerBoundIfFlexible() is ConeClassLikeType) { // so type parameters are allowed
+  if (realType.lowerBoundIfFlexible() is ConeClassLikeType && realType.classId != IDENTITY_CLASS_ID) { // so type parameters are allowed
     if (realType.classId != CONSTRUCTOR_CLASS_ID)
       return null // Must be Constructor
-    realType = realType.typeArguments.firstOrNull()?.type?.fullyExpandedType() ?: return null
+    realType = realType.typeArguments.firstOrNull()?.type?.abbreviatedTypeOrSelf ?: return null
   }
   // Could be relaxed
   if (realType.typeArguments.any { !it.isStarProjection }) return null
@@ -66,31 +65,31 @@ private fun ConeKotlinType.deconstructNormalType(): Pair<ConeKotlinType, List<Co
 }
 
 context(c: SessionHolder)
-private tailrec fun FirRegularClassSymbol.applyTypeFunctions(
+private tailrec fun FirClassLikeSymbol<*>.applyTypeFunctions(
   appliedTypes: List<ConeTypeProjection>, default: ConeKotlinType? = null
 ): ConeKotlinType? {
-  if (ownTypeParameterSymbols.size > appliedTypes.size) return default // partially-applied type
+  val isIdentity = classId == IDENTITY_CLASS_ID
+  val typeParameterSize = if (isIdentity) 1 else ownTypeParameterSymbols.size
+  if (typeParameterSize > appliedTypes.size) return default // partially-applied type
   if (classId == K_CLASS_ID) return default // should not be called on K
-  if (!isTypeFunction()) {
-    if (ownTypeParameterSymbols.size != appliedTypes.size) return default
-    return constructType(appliedTypes.toTypedArray())
-  }
+  var tookAStep = isIdentity
   // TODO what if K<Identity, in/out A>?
-  val substituted = (if (classId == IDENTITY_CLASS_ID) appliedTypes.first().type else {
-    val superType = resolvedSuperTypeRefs.single().coneType
-    val substitutor = createParametersSubstitutor(c.session, ownTypeParameterSymbols.zip(appliedTypes).toMap())
-    substitutor.substituteOrNull(superType)
-  }) ?: return default
-  val appliedTypes = appliedTypes.drop(ownTypeParameterSymbols.size)
+  val substituted = if (isIdentity) appliedTypes.first().type ?: return default else {
+    val constructed = constructType(appliedTypes.take(typeParameterSize).toTypedArray())
+    val expanded = constructed.directExpansionType(c.session)
+    if (expanded == null) constructed else {
+      tookAStep = true
+      expanded
+    }
+  }
+  val appliedTypes = appliedTypes.drop(typeParameterSize)
   val newDefault = substituted.createKType(appliedTypes)
+  if (!tookAStep) return newDefault
   val (realType, newApplied) = substituted.deconstructIfKType() ?: substituted.deconstructNormalType()
   ?: return newDefault
-  val symbol = realType.toRegularClassSymbol() ?: return newDefault
+  val symbol = realType.toClassLikeSymbol() ?: return newDefault
   return symbol.applyTypeFunctions(newApplied + appliedTypes, newDefault)
 }
-
-context(c: SessionHolder)
-fun FirBasedSymbol<*>.isTypeFunction(): Boolean = hasAnnotation(TYPE_FUNCTION_CLASS_ID, c.session)
 
 // TODO: application order?
 context(c: SessionHolder)

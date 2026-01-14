@@ -9,7 +9,6 @@ import org.jetbrains.kotlin.fir.extensions.FirExpressionResolutionExtension
 import org.jetbrains.kotlin.fir.languageVersionSettings
 import org.jetbrains.kotlin.fir.resolve.calls.ImplicitExtensionReceiverValue
 import org.jetbrains.kotlin.fir.resolve.inference.InferenceComponents
-import org.jetbrains.kotlin.fir.resolve.toSymbol
 import org.jetbrains.kotlin.fir.scopes.FirOverrideChecker
 import org.jetbrains.kotlin.fir.scopes.impl.FirStandardOverrideChecker
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
@@ -165,7 +164,6 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
         }.takeIf { replacedAny } ?: it
       }
     }
-    if (toSymbol()?.isTypeFunction() == true) return emptyList()
     return options().flatMap { it.cachedCorrespondingSupertypes(constructor) ?: return null }
   }
 }

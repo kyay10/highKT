@@ -38,8 +38,7 @@ class PairFunctor<L> : Functor<K<Constructor<Pair<*, *>>, L>> {
   }
 }
 
-@TypeFunction
-interface Composition<F, G, A> : K<F, K<G, A>>
+typealias Composition<F, G, A> = K<F, K<G, A>>
 typealias Compose<F, G> = K2<Constructor<Composition<*, *, *>>, F, G>
 
 context(ff: Functor<F>, gg: Functor<G>)
@@ -49,8 +48,7 @@ fun <F, G> composeFunctors() = object : Functor<Compose<F, G>> {
 
 data class Reader<R, A>(val run: (R) -> A)
 
-@TypeFunction
-interface Constant<C, A> : Id<C>
+typealias Constant<C, A> = Id<C>
 
 typealias Const<C> = K<Constructor<Constant<*, *>>, C>
 
@@ -97,8 +95,7 @@ fun <F, A> rightFunctor() = object : Functor<K<F, A>> {
   override fun <B, C> K2<F, A, B>.fmap(f: (B) -> C) = rightMap(f)
 }
 
-@TypeFunction
-interface Swapped<F, A, B> : K2<F, B, A>
+typealias Swapped<F, A, B> = K2<F, B, A>
 typealias Swap<F> = K<Constructor<Swapped<*, *, *>>, F>
 
 context(_: BiFunctor<F>)
@@ -125,8 +122,7 @@ object PairBiFunctor : BiFunctor<Constructor<Pair<*, *>>> {
   }
 }
 
-@TypeFunction
-interface BiComposed<Bi, F, G, A, B> : K2<Bi, K<F, A>, K<G, B>>
+typealias BiComposed<Bi, F, G, A, B> = K2<Bi, K<F, A>, K<G, B>>
 typealias BiCompose<Bi, F, G> = K3<Constructor<BiComposed<*, *, *, *, *>>, Bi, F, G>
 
 context(bf: BiFunctor<BF>, _: Functor<F>, _: Functor<G>)
@@ -146,8 +142,7 @@ val maybeFunctor: Functor<MaybeK> = context(EitherBiFunctor, ConstFunctor<Unit>(
   }
 }
 
-@TypeFunction
-interface BiComposed2<Bi, F, G, A> : Compose<K<Bi, K<F, A>>, G>
+typealias BiComposed2<Bi, F, G, A> = Compose<K<Bi, K<F, A>>, G>
 typealias BiCompose2<Bi, F, G> = K3<Constructor<BiComposed2<*, *, *, *>>, Bi, F, G>
 
 context(bf: BiFunctor<BF>, _: Functor<F>, _: Functor<G>)

@@ -1,6 +1,5 @@
 FILE: expandTo_mismatch.kt
-    @R|io/github/kyay10/highkt/TypeFunction|() public abstract interface Swapped<F, A, B> : R|{io/github/kyay10/highkt/K2<F, B, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, B>, A>| {
-    }
+    public final typealias Swapped<F, A, B> = R|{io/github/kyay10/highkt/K2<F, B, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, B>, A>|
     public final typealias Swap<F> = R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<Swapped<*, *, *>>, F>|
     public final typealias PairK = R|io/github/kyay10/highkt/Constructor<kotlin/Pair<*, *>>|
     public final fun test(): R|kotlin/Unit| {

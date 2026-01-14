@@ -10,7 +10,7 @@ FILE fqName:foo.bar fileName:/type_functions.kt
           ARG a: GET_OBJECT 'CLASS OBJECT name:EitherBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>>]' type=foo.bar.EitherBiFunctor
           ARG b: CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.ConstFunctor' type=foo.bar.ConstFunctor<kotlin.Unit> origin=null
             TYPE_ARG (of class) C: kotlin.Unit
-          ARG c: GET_OBJECT 'CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>]' type=foo.bar.IdentityFunctor
+          ARG c: GET_OBJECT 'CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<io.github.kyay10.highkt.Identity>]' type=foo.bar.IdentityFunctor
           ARG block: FUN_EXPR type=kotlin.Function3<foo.bar.EitherBiFunctor, foo.bar.ConstFunctor<kotlin.Unit>, foo.bar.IdentityFunctor, foo.bar.Functor<kotlin.Any?>> origin=LAMBDA
             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:foo.bar.Functor<kotlin.Any?>
               VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-EitherBiFunctor index:0 type:foo.bar.EitherBiFunctor
@@ -24,7 +24,7 @@ FILE fqName:foo.bar fileName:/type_functions.kt
                     ARG with: CALL 'public final fun composeBiFunctors <BF, F, G> (bf: foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors>, $context-Functor#1: foo.bar.Functor<F of foo.bar.composeBiFunctors>, $context-Functor#2: foo.bar.Functor<G of foo.bar.composeBiFunctors>): foo.bar.BiFunctor<kotlin.Any?> declared in foo.bar' type=foo.bar.BiFunctor<kotlin.Any?> origin=null
                       TYPE_ARG BF: io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>
                       TYPE_ARG F: kotlin.Any?
-                      TYPE_ARG G: io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>
+                      TYPE_ARG G: io.github.kyay10.highkt.Identity
                       ARG bf: GET_VAR '$context-EitherBiFunctor: foo.bar.EitherBiFunctor declared in foo.bar.maybeFunctor.<anonymous>' type=foo.bar.EitherBiFunctor origin=null
                       ARG $context-Functor#1: GET_VAR '$context-ConstFunctor: foo.bar.ConstFunctor<kotlin.Unit> declared in foo.bar.maybeFunctor.<anonymous>' type=foo.bar.ConstFunctor<kotlin.Unit> origin=null
                       ARG $context-Functor#2: GET_VAR '$context-IdentityFunctor: foo.bar.IdentityFunctor declared in foo.bar.maybeFunctor.<anonymous>' type=foo.bar.IdentityFunctor origin=null
@@ -53,7 +53,7 @@ FILE fqName:foo.bar fileName:/type_functions.kt
           ARG a: GET_OBJECT 'CLASS OBJECT name:EitherBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>>]' type=foo.bar.EitherBiFunctor
           ARG b: CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.ConstFunctor' type=foo.bar.ConstFunctor<kotlin.Unit> origin=null
             TYPE_ARG (of class) C: kotlin.Unit
-          ARG c: GET_OBJECT 'CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>]' type=foo.bar.IdentityFunctor
+          ARG c: GET_OBJECT 'CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<io.github.kyay10.highkt.Identity>]' type=foo.bar.IdentityFunctor
           ARG block: FUN_EXPR type=kotlin.Function3<foo.bar.EitherBiFunctor, foo.bar.ConstFunctor<kotlin.Unit>, foo.bar.IdentityFunctor, foo.bar.Functor<kotlin.Any?>> origin=LAMBDA
             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:foo.bar.Functor<kotlin.Any?>
               VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-EitherBiFunctor index:0 type:foo.bar.EitherBiFunctor
@@ -67,7 +67,7 @@ FILE fqName:foo.bar fileName:/type_functions.kt
                     ARG with: CALL 'public final fun composeBiFunctors2 <BF, F, G> (bf: foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors2>, $context-Functor#1: foo.bar.Functor<F of foo.bar.composeBiFunctors2>, $context-Functor#2: foo.bar.Functor<G of foo.bar.composeBiFunctors2>): foo.bar.BiFunctor<kotlin.Any?> declared in foo.bar' type=foo.bar.BiFunctor<kotlin.Any?> origin=null
                       TYPE_ARG BF: io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>
                       TYPE_ARG F: kotlin.Any?
-                      TYPE_ARG G: io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>
+                      TYPE_ARG G: io.github.kyay10.highkt.Identity
                       ARG bf: GET_VAR '$context-EitherBiFunctor: foo.bar.EitherBiFunctor declared in foo.bar.maybeFunctor2.<anonymous>' type=foo.bar.EitherBiFunctor origin=null
                       ARG $context-Functor#1: GET_VAR '$context-ConstFunctor: foo.bar.ConstFunctor<kotlin.Unit> declared in foo.bar.maybeFunctor2.<anonymous>' type=foo.bar.ConstFunctor<kotlin.Unit> origin=null
                       ARG $context-Functor#2: GET_VAR '$context-IdentityFunctor: foo.bar.IdentityFunctor declared in foo.bar.maybeFunctor2.<anonymous>' type=foo.bar.IdentityFunctor origin=null
@@ -570,49 +570,6 @@ FILE fqName:foo.bar fileName:/type_functions.kt
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:B of foo.bar.Right visibility:private [final]' type=B of foo.bar.Right origin=null
               receiver: GET_VAR '<this>: foo.bar.Right<A of foo.bar.Right, B of foo.bar.Right> declared in foo.bar.Right.toString' type=foo.bar.Right<A of foo.bar.Right, B of foo.bar.Right> origin=null
             CONST String type=kotlin.String value=")"
-  CLASS INTERFACE name:BiComposed modality:ABSTRACT visibility:public superTypes:[kotlin.Any?]
-    annotations:
-      TypeFunction
-    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.BiComposed<Bi of foo.bar.BiComposed, F of foo.bar.BiComposed, G of foo.bar.BiComposed, A of foo.bar.BiComposed, B of foo.bar.BiComposed>
-    TYPE_PARAMETER name:Bi index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:F index:1 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:G index:2 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:A index:3 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:B index:4 variance: superTypes:[kotlin.Any?] reified:false
-    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-      overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.K
-  CLASS INTERFACE name:BiComposed2 modality:ABSTRACT visibility:public superTypes:[kotlin.Any?]
-    annotations:
-      TypeFunction
-    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.BiComposed2<Bi of foo.bar.BiComposed2, F of foo.bar.BiComposed2, G of foo.bar.BiComposed2, A of foo.bar.BiComposed2>
-    TYPE_PARAMETER name:Bi index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:F index:1 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:G index:2 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:A index:3 variance: superTypes:[kotlin.Any?] reified:false
-    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-      overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.K
   CLASS INTERFACE name:BiFunctor modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.BiFunctor<F of foo.bar.BiFunctor>
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -699,45 +656,6 @@ FILE fqName:foo.bar fileName:/type_functions.kt
                   RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: A of foo.bar.BiFunctor.rightMap): A of foo.bar.BiFunctor.rightMap declared in foo.bar.BiFunctor.rightMap'
                     GET_VAR 'it: A of foo.bar.BiFunctor.rightMap declared in foo.bar.BiFunctor.rightMap.<anonymous>' type=A of foo.bar.BiFunctor.rightMap origin=null
             ARG g: GET_VAR 'g: kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap> declared in foo.bar.BiFunctor.rightMap' type=kotlin.Function1<B of foo.bar.BiFunctor.rightMap, D of foo.bar.BiFunctor.rightMap> origin=null
-  CLASS INTERFACE name:Composition modality:ABSTRACT visibility:public superTypes:[kotlin.Any?]
-    annotations:
-      TypeFunction
-    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Composition<F of foo.bar.Composition, G of foo.bar.Composition, A of foo.bar.Composition>
-    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:G index:1 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:A index:2 variance: superTypes:[kotlin.Any?] reified:false
-    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-      overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.K
-  CLASS INTERFACE name:Constant modality:ABSTRACT visibility:public superTypes:[io.github.kyay10.highkt.Id<C of foo.bar.Constant>]
-    annotations:
-      TypeFunction
-    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Constant<C of foo.bar.Constant, A of foo.bar.Constant>
-    TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
-    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-      overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.Id
-    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.Id
-    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.Id
   CLASS INTERFACE name:Functor modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Functor<F of foo.bar.Functor>
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -833,26 +751,6 @@ FILE fqName:foo.bar fileName:/type_functions.kt
       TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.NT<F of foo.bar.NT, G of foo.bar.NT>
       VALUE_PARAMETER kind:Regular name:fa index:1 type:kotlin.Any?
-  CLASS INTERFACE name:Swapped modality:ABSTRACT visibility:public superTypes:[kotlin.Any?]
-    annotations:
-      TypeFunction
-    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Swapped<F of foo.bar.Swapped, A of foo.bar.Swapped, B of foo.bar.Swapped>
-    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:B index:2 variance: superTypes:[kotlin.Any?] reified:false
-    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-      overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.K
   CLASS OBJECT name:EitherBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>>]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.EitherBiFunctor
     CONSTRUCTOR visibility:private returnType:foo.bar.EitherBiFunctor [primary]
@@ -932,12 +830,12 @@ FILE fqName:foo.bar fileName:/type_functions.kt
               BRANCH
                 if: CONST Boolean type=kotlin.Boolean value=true
                 then: CALL 'public final fun noWhenBranchMatchedException (): kotlin.Nothing declared in kotlin.internal.ir' type=kotlin.Nothing origin=null
-  CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>]
+  CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<io.github.kyay10.highkt.Identity>]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.IdentityFunctor
     CONSTRUCTOR visibility:private returnType:foo.bar.IdentityFunctor [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<io.github.kyay10.highkt.Identity>]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
@@ -1991,11 +1889,29 @@ FILE fqName:foo.bar fileName:/type_functions.kt
     TYPE_PARAMETER name:Bi index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:F index:1 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:G index:2 variance: superTypes:[kotlin.Any?] reified:false
+  TYPEALIAS name:BiComposed visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:Bi index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:F index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:G index:2 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:3 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:4 variance: superTypes:[kotlin.Any?] reified:false
+  TYPEALIAS name:BiComposed2 visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:Bi index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:F index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:G index:2 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:3 variance: superTypes:[kotlin.Any?] reified:false
   TYPEALIAS name:Compose visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:G index:1 variance: superTypes:[kotlin.Any?] reified:false
+  TYPEALIAS name:Composition visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:G index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:2 variance: superTypes:[kotlin.Any?] reified:false
   TYPEALIAS name:Const visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
+  TYPEALIAS name:Constant visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
   TYPEALIAS name:EitherK visibility:public expandedType:io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>
   TYPEALIAS name:Maybe visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -2005,3 +1921,7 @@ FILE fqName:foo.bar fileName:/type_functions.kt
   TYPEALIAS name:MaybeK visibility:public expandedType:kotlin.Any?
   TYPEALIAS name:Swap visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+  TYPEALIAS name:Swapped visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:2 variance: superTypes:[kotlin.Any?] reified:false

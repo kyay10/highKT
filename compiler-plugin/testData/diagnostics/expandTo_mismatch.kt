@@ -3,12 +3,9 @@
 import io.github.kyay10.highkt.Constructor
 import io.github.kyay10.highkt.K2
 import io.github.kyay10.highkt.K
-import io.github.kyay10.highkt.TypeFunction
-import io.github.kyay10.highkt.TypeFunctionMarker
 import io.github.kyay10.highkt.expandTo
 
-@TypeFunction
-interface Swapped<F, A, B> : K2<F, B, A>
+typealias Swapped<F, A, B> = K2<F, B, A>
 typealias Swap<F> = K<Constructor<Swapped<*, *, *>>, F>
 
 typealias PairK = Constructor<Pair<*, *>>

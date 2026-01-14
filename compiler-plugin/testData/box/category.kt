@@ -23,8 +23,7 @@ fun <Cat, A> K2<Cat, A, *>.source() = with(category) { this@source.source<A>() }
 context(category: Category<Cat>)
 fun <Cat, A> K2<Cat, *, A>.target() = with(category) { this@target.target<A>() }
 
-@TypeFunction
-interface Opposite<Cat, A, B> : K2<Cat, B, A>
+typealias Opposite<Cat, A, B> = K2<Cat, B, A>
 typealias Opp<Arr> = K<Constructor<Opposite<*, *, *>>, Arr>
 
 context(c: Category<Cat>)
@@ -46,32 +45,26 @@ object ArrowCategory : Category<ArrowK> {
   override fun <A> Arrow<*, A>.target() = idArrow<A>()
 }
 
-@TypeFunction
-interface TypePaired<A, B, F> : K2<F, A, B>
+typealias TypePaired<A, B, F> = K2<F, A, B>
 typealias TypePair<A, B> = K2<Constructor<TypePaired<*, *, *>>, A, B>
 
-@TypeFunction
-interface TypePairedFirst<A, B> : Id<A>
+typealias TypePairedFirst<A, B> = Id<A>
 typealias TypePairFirst<P> = K<P, Constructor<TypePairedFirst<*, *>>>
 
-@TypeFunction
-interface TypePairedSecond<A, B> : Id<B>
+typealias TypePairedSecond<A, B> = Id<B>
 typealias TypePairSecond<P> = K<P, Constructor<TypePairedSecond<*, *>>>
 
-@TypeFunction
-interface MorphismProduct<C1, C2, PA, PB> :
-  K2<Constructor<Pair<*, *>>, K2<C1, TypePairFirst<PA>, TypePairFirst<PB>>, K2<C2, TypePairSecond<PA>, TypePairSecond<PB>>>
-typealias MorphismProducted<C1, C2, PA, PB> = Pair<K2<C1, TypePairFirst<PA>, TypePairFirst<PB>>, K2<C2, TypePairSecond<PA>, TypePairSecond<PB>>>
+typealias MorphismProduct<C1, C2, PA, PB> = Pair<K2<C1, TypePairFirst<PA>, TypePairFirst<PB>>, K2<C2, TypePairSecond<PA>, TypePairSecond<PB>>>
 typealias Product<C1, C2> = K2<Constructor<MorphismProduct<*, *, *, *>>, C1, C2>
 
 context(_: Category<C1>, _: Category<C2>)
 fun <C1, C2> productCategory(): Category<Product<C1, C2>> = object : Category<Product<C1, C2>> {
-  override fun <PA, PB, PC> MorphismProducted<C1, C2, PB, PC>.compose(g: MorphismProducted<C1, C2, PA, PB>) =
+  override fun <PA, PB, PC> MorphismProduct<C1, C2, PB, PC>.compose(g: MorphismProduct<C1, C2, PA, PB>) =
     first.compose(g.first) to second.compose(g.second)
 
-  override fun <P> MorphismProducted<C1, C2, P, *>.source() = first.source() to second.source()
+  override fun <P> MorphismProduct<C1, C2, P, *>.source() = first.source() to second.source()
 
-  override fun <P> MorphismProducted<C1, C2, *, P>.target() = first.target() to second.target()
+  override fun <P> MorphismProduct<C1, C2, *, P>.target() = first.target() to second.target()
 }
 
 interface Functor<C, D, F> {
@@ -87,8 +80,7 @@ fun <C> identityFunctor(): Functor<C, C, Identity> = object : Functor<C, C, Iden
   override fun <A, B> lift(f: K2<C, A, B>) = f
 }
 
-@TypeFunction
-interface Composition<F, G, A> : K<F, K<G, A>>
+typealias Composition<F, G, A> = K<F, K<G, A>>
 typealias Compose<F, G> = K2<Constructor<Composition<*, *, *>>, F, G>
 
 context(f: Functor<D, E, F>, g: Functor<C, D, G>)
@@ -179,8 +171,7 @@ fun <C, D> functorCategory(): Category<NatK<C, D>> = object : Category<NatK<C, D
   override fun <F> Nat<C, D, *, F>.target() = context(secondFunctor) { identityNat() }
 }
 
-@TypeFunction
-interface FunctorCompose<P> : Compose<TypePairFirst<P>, TypePairSecond<P>>
+typealias FunctorCompose<P> = Compose<TypePairFirst<P>, TypePairSecond<P>>
 typealias FunctorComposeK = Constructor<FunctorCompose<*>>
 
 context(_: Category<C>, _: Category<D>, _: Category<E>)
@@ -191,7 +182,7 @@ fun <C, D, E> functorComposeFunctor(): Functor<Product<NatK<D, E>, NatK<C, D>>, 
     }
     override val secondCategory = functorCategory<C, E>()
 
-    override fun <A, B> lift(f: MorphismProducted<NatK<D, E>, NatK<C, D>, A, B>) = f.first horizontal f.second
+    override fun <A, B> lift(f: MorphismProduct<NatK<D, E>, NatK<C, D>, A, B>) = f.first horizontal f.second
   }
 
 interface TensorProduct<Cat, F, I> : Functor<Product<Cat, Cat>, Cat, F> {

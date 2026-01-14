@@ -2,18 +2,13 @@
 
 package io.github.kyay10.highkt
 
-public sealed interface TypeFunctionMarker
-
 public sealed interface Constructor<C>
 
-@Target(AnnotationTarget.CLASS)
-public annotation class TypeFunction
+// Represents the identity type function
+public typealias Id<A> = Out<Identity, A>
+public object Identity
 
-// Special type-lambda to represent identity type constructor
-@TypeFunction
-public interface Id<A>
-public typealias Identity = Constructor<Id<*>>
-
+// Represents function application
 public interface K<out F, A>
 
 public typealias Out<F, A> = K<F, out A>

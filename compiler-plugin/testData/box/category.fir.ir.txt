@@ -30,26 +30,6 @@ FILE fqName:foo.bar fileName:/category.kt
       TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Category<Cat of foo.bar.Category>
       VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
-  CLASS INTERFACE name:Composition modality:ABSTRACT visibility:public superTypes:[kotlin.Any?]
-    annotations:
-      TypeFunction
-    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Composition<F of foo.bar.Composition, G of foo.bar.Composition, A of foo.bar.Composition>
-    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:G index:1 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:A index:2 variance: superTypes:[kotlin.Any?] reified:false
-    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-      overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.K
   CLASS INTERFACE name:Functor modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Functor<C of foo.bar.Functor, D of foo.bar.Functor, F of foo.bar.Functor>
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -81,24 +61,6 @@ FILE fqName:foo.bar fileName:/category.kt
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-secondCategory> visibility:public modality:ABSTRACT returnType:foo.bar.Category<D of foo.bar.Functor>
         VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Functor<C of foo.bar.Functor, D of foo.bar.Functor, F of foo.bar.Functor>
         correspondingProperty: PROPERTY name:secondCategory visibility:public modality:ABSTRACT [val]
-  CLASS INTERFACE name:FunctorCompose modality:ABSTRACT visibility:public superTypes:[kotlin.Any?]
-    annotations:
-      TypeFunction
-    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.FunctorCompose<P of foo.bar.FunctorCompose>
-    TYPE_PARAMETER name:P index:0 variance: superTypes:[kotlin.Any?] reified:false
-    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-      overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.K
   CLASS INTERFACE name:Iso modality:ABSTRACT visibility:public superTypes:[foo.bar.Nat<C of foo.bar.Iso, D of foo.bar.Iso, F of foo.bar.Iso, G of foo.bar.Iso>]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Iso<C of foo.bar.Iso, D of foo.bar.Iso, F of foo.bar.Iso, G of foo.bar.Iso>
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -242,27 +204,6 @@ FILE fqName:foo.bar fileName:/category.kt
         correspondingProperty: PROPERTY FAKE_OVERRIDE name:unitObject visibility:public modality:ABSTRACT [fake_override,val]
         overridden:
           public abstract fun <get-unitObject> (): kotlin.Any? declared in foo.bar.TensorProduct
-  CLASS INTERFACE name:MorphismProduct modality:ABSTRACT visibility:public superTypes:[kotlin.Any?]
-    annotations:
-      TypeFunction
-    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.MorphismProduct<C1 of foo.bar.MorphismProduct, C2 of foo.bar.MorphismProduct, PA of foo.bar.MorphismProduct, PB of foo.bar.MorphismProduct>
-    TYPE_PARAMETER name:C1 index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:C2 index:1 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:PA index:2 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:PB index:3 variance: superTypes:[kotlin.Any?] reified:false
-    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-      overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.K
   CLASS INTERFACE name:Nat modality:ABSTRACT visibility:public superTypes:[kotlin.Any?]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Nat<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat, G of foo.bar.Nat>
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -294,26 +235,6 @@ FILE fqName:foo.bar fileName:/category.kt
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-secondFunctor> visibility:public modality:ABSTRACT returnType:foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, G of foo.bar.Nat>
         VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Nat<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat, G of foo.bar.Nat>
         correspondingProperty: PROPERTY name:secondFunctor visibility:public modality:ABSTRACT [val]
-  CLASS INTERFACE name:Opposite modality:ABSTRACT visibility:public superTypes:[kotlin.Any?]
-    annotations:
-      TypeFunction
-    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Opposite<Cat of foo.bar.Opposite, A of foo.bar.Opposite, B of foo.bar.Opposite>
-    TYPE_PARAMETER name:Cat index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:B index:2 variance: superTypes:[kotlin.Any?] reified:false
-    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-      overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.K
   CLASS INTERFACE name:TensorProduct modality:ABSTRACT visibility:public superTypes:[foo.bar.Functor<kotlin.Any?, Cat of foo.bar.TensorProduct, F of foo.bar.TensorProduct>]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.TensorProduct<Cat of foo.bar.TensorProduct, F of foo.bar.TensorProduct, I of foo.bar.TensorProduct>
     TYPE_PARAMETER name:Cat index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -391,64 +312,6 @@ FILE fqName:foo.bar fileName:/category.kt
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-unitObject> visibility:public modality:ABSTRACT returnType:kotlin.Any?
         VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.TensorProduct<Cat of foo.bar.TensorProduct, F of foo.bar.TensorProduct, I of foo.bar.TensorProduct>
         correspondingProperty: PROPERTY name:unitObject visibility:public modality:ABSTRACT [val]
-  CLASS INTERFACE name:TypePaired modality:ABSTRACT visibility:public superTypes:[kotlin.Any?]
-    annotations:
-      TypeFunction
-    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.TypePaired<A of foo.bar.TypePaired, B of foo.bar.TypePaired, F of foo.bar.TypePaired>
-    TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:F index:2 variance: superTypes:[kotlin.Any?] reified:false
-    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-      overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K
-    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.K
-  CLASS INTERFACE name:TypePairedFirst modality:ABSTRACT visibility:public superTypes:[io.github.kyay10.highkt.Id<A of foo.bar.TypePairedFirst>]
-    annotations:
-      TypeFunction
-    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.TypePairedFirst<A of foo.bar.TypePairedFirst, B of foo.bar.TypePairedFirst>
-    TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
-    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-      overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.Id
-    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.Id
-    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.Id
-  CLASS INTERFACE name:TypePairedSecond modality:ABSTRACT visibility:public superTypes:[io.github.kyay10.highkt.Id<B of foo.bar.TypePairedSecond>]
-    annotations:
-      TypeFunction
-    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.TypePairedSecond<A of foo.bar.TypePairedSecond, B of foo.bar.TypePairedSecond>
-    TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
-    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-      overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.Id
-    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.Id
-    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-      overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.Id
   CLASS INTERFACE name:UsualMonad modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.UsualMonad<M of foo.bar.UsualMonad>
     TYPE_PARAMETER name:M index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -898,17 +761,17 @@ FILE fqName:foo.bar fileName:/category.kt
                       ARG <this>: GET_VAR 'g: foo.bar.Functor<C of foo.bar.composeFunctors, D of foo.bar.composeFunctors, G of foo.bar.composeFunctors> declared in foo.bar.composeFunctors' type=foo.bar.Functor<C of foo.bar.composeFunctors, D of foo.bar.composeFunctors, G of foo.bar.composeFunctors> origin=null
                       ARG f: GET_VAR 'h: kotlin.Any? declared in foo.bar.composeFunctors.<no name provided>.lift' type=kotlin.Any? origin=null
           CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.composeFunctors.<no name provided>' type=foo.bar.composeFunctors.<no name provided><C of foo.bar.composeFunctors, D of foo.bar.composeFunctors, E of foo.bar.composeFunctors, F of foo.bar.composeFunctors, G of foo.bar.composeFunctors> origin=OBJECT_LITERAL
-  FUN name:endoFunctorComposeTensor visibility:public modality:FINAL returnType:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+  FUN name:endoFunctorComposeTensor visibility:public modality:FINAL returnType:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity>
     TYPE_PARAMETER name:Cat index:0 variance: superTypes:[kotlin.Any?] reified:false
     VALUE_PARAMETER kind:Context name:k index:0 type:foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor>
     BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun endoFunctorComposeTensor <Cat> (k: foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor>): foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar'
+      RETURN type=kotlin.Nothing from='public final fun endoFunctorComposeTensor <Cat> (k: foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor>): foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> declared in foo.bar'
         BLOCK type=foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor> origin=OBJECT_LITERAL
-          CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>; foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>>]
+          CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity>; foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>>]
             thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor>
-            FIELD DELEGATE name:$$delegate_0 type:foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>> visibility:private [final]
+            FIELD DELEGATE name:$$delegate_0 type:foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>> visibility:private [final]
               EXPRESSION_BODY
-                CALL 'public final fun functorComposeFunctor <C, D, E> ($context-Category#1: foo.bar.Category<C of foo.bar.functorComposeFunctor>, $context-Category#2: foo.bar.Category<D of foo.bar.functorComposeFunctor>, $context-Category#3: foo.bar.Category<E of foo.bar.functorComposeFunctor>): foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>> declared in foo.bar' type=foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>> origin=null
+                CALL 'public final fun functorComposeFunctor <C, D, E> ($context-Category#1: foo.bar.Category<C of foo.bar.functorComposeFunctor>, $context-Category#2: foo.bar.Category<D of foo.bar.functorComposeFunctor>, $context-Category#3: foo.bar.Category<E of foo.bar.functorComposeFunctor>): foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>> declared in foo.bar' type=foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>> origin=null
                   TYPE_ARG C: Cat of foo.bar.endoFunctorComposeTensor
                   TYPE_ARG D: Cat of foo.bar.endoFunctorComposeTensor
                   TYPE_ARG E: Cat of foo.bar.endoFunctorComposeTensor
@@ -918,37 +781,37 @@ FILE fqName:foo.bar fileName:/category.kt
             PROPERTY name:unitObject visibility:public modality:OPEN [val]
               overridden:
                 public abstract unitObject: kotlin.Any? declared in foo.bar.TensorProduct
-              FIELD PROPERTY_BACKING_FIELD name:unitObject type:foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final]
+              FIELD PROPERTY_BACKING_FIELD name:unitObject type:foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity, io.github.kyay10.highkt.Identity> visibility:private [final]
                 EXPRESSION_BODY
-                  CALL 'public final fun context <T, R> (with: T of kotlin.context, block: @[ContextFunctionTypeParams(count = 1)] kotlin.Function1<T of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
-                    TYPE_ARG T: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
-                    TYPE_ARG R: foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
-                    ARG with: CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                  CALL 'public final fun context <T, R> (with: T of kotlin.context, block: @[ContextFunctionTypeParams(count = 1)] kotlin.Function1<T of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity, io.github.kyay10.highkt.Identity> origin=null
+                    TYPE_ARG T: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>
+                    TYPE_ARG R: foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity, io.github.kyay10.highkt.Identity>
+                    ARG with: CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Identity> declared in foo.bar' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> origin=null
                       TYPE_ARG C: Cat of foo.bar.endoFunctorComposeTensor
                       ARG c: GET_VAR 'k: foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor' type=foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor> origin=null
-                    ARG block: FUN_EXPR type=kotlin.Function1<foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>, foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>> origin=LAMBDA
-                      FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
-                        VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor index:0 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+                    ARG block: FUN_EXPR type=kotlin.Function1<foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>, foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity, io.github.kyay10.highkt.Identity>> origin=LAMBDA
+                      FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity, io.github.kyay10.highkt.Identity>
+                        VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor index:0 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>
                         BLOCK_BODY
-                          RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Functor: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>): foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.unitObject'
-                            CALL 'public final fun identityNat <C, D, F> (functor: foo.bar.Functor<C of foo.bar.identityNat, D of foo.bar.identityNat, F of foo.bar.identityNat>): foo.bar.Iso<C of foo.bar.identityNat, D of foo.bar.identityNat, F of foo.bar.identityNat, F of foo.bar.identityNat> declared in foo.bar' type=foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                          RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Functor: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>): foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity, io.github.kyay10.highkt.Identity> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.unitObject'
+                            CALL 'public final fun identityNat <C, D, F> (functor: foo.bar.Functor<C of foo.bar.identityNat, D of foo.bar.identityNat, F of foo.bar.identityNat>): foo.bar.Iso<C of foo.bar.identityNat, D of foo.bar.identityNat, F of foo.bar.identityNat, F of foo.bar.identityNat> declared in foo.bar' type=foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity, io.github.kyay10.highkt.Identity> origin=null
                               TYPE_ARG C: Cat of foo.bar.endoFunctorComposeTensor
                               TYPE_ARG D: Cat of foo.bar.endoFunctorComposeTensor
-                              TYPE_ARG F: io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>
-                              ARG functor: GET_VAR '$context-Functor: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.unitObject.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
-              FUN DEFAULT_PROPERTY_ACCESSOR name:<get-unitObject> visibility:public modality:OPEN returnType:foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+                              TYPE_ARG F: io.github.kyay10.highkt.Identity
+                              ARG functor: GET_VAR '$context-Functor: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.unitObject.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> origin=null
+              FUN DEFAULT_PROPERTY_ACCESSOR name:<get-unitObject> visibility:public modality:OPEN returnType:foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity, io.github.kyay10.highkt.Identity>
                 VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor>
                 correspondingProperty: PROPERTY name:unitObject visibility:public modality:OPEN [val]
                 overridden:
                   public abstract fun <get-unitObject> (): kotlin.Any? declared in foo.bar.TensorProduct
                 BLOCK_BODY
-                  RETURN type=kotlin.Nothing from='public open fun <get-unitObject> (): foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar.endoFunctorComposeTensor.<no name provided>'
-                    GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:unitObject type:foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final]' type=foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                  RETURN type=kotlin.Nothing from='public open fun <get-unitObject> (): foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity, io.github.kyay10.highkt.Identity> declared in foo.bar.endoFunctorComposeTensor.<no name provided>'
+                    GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:unitObject type:foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity, io.github.kyay10.highkt.Identity> visibility:private [final]' type=foo.bar.Iso<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity, io.github.kyay10.highkt.Identity> origin=null
                       receiver: GET_VAR '<this>: foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.<get-unitObject>' type=foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor> origin=null
             CONSTRUCTOR visibility:public returnType:foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor> [primary]
               BLOCK_BODY
                 DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-                INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>; foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>>]' type=kotlin.Unit
+                INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity>; foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>>]' type=kotlin.Unit
             FUN DELEGATED_MEMBER name:lift visibility:public modality:OPEN returnType:kotlin.Any?
               TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
               TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
@@ -962,7 +825,7 @@ FILE fqName:foo.bar fileName:/category.kt
                   CALL 'public abstract fun lift <A, B> (f: kotlin.Any?): kotlin.Any? declared in foo.bar.Functor' type=kotlin.Any? origin=null
                     TYPE_ARG A: A of foo.bar.endoFunctorComposeTensor.<no name provided>.lift
                     TYPE_ARG B: B of foo.bar.endoFunctorComposeTensor.<no name provided>.lift
-                    ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>> visibility:private [final] declared in foo.bar.endoFunctorComposeTensor.<no name provided>' type=foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>> origin=null
+                    ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>> visibility:private [final] declared in foo.bar.endoFunctorComposeTensor.<no name provided>' type=foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>> origin=null
                       receiver: GET_VAR '<this>: foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.lift' type=foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor> origin=null
                     ARG f: GET_VAR 'f: kotlin.Any? declared in foo.bar.endoFunctorComposeTensor.<no name provided>.lift' type=kotlin.Any? origin=null
             FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
@@ -1305,19 +1168,19 @@ FILE fqName:foo.bar fileName:/category.kt
                 RETURN type=kotlin.Nothing from='public open fun leftUnitor <A> (a: kotlin.Any?): kotlin.Any? declared in foo.bar.endoFunctorComposeTensor.<no name provided>'
                   CALL 'public final fun context <A, B, R> (a: A of kotlin.context, b: B of kotlin.context, block: @[ContextFunctionTypeParams(count = 2)] kotlin.Function2<A of kotlin.context, B of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor, Cat of foo.bar.endoFunctorComposeTensor> origin=null
                     TYPE_ARG A: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor>
-                    TYPE_ARG B: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+                    TYPE_ARG B: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>
                     TYPE_ARG R: foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor, Cat of foo.bar.endoFunctorComposeTensor>
                     ARG a: CALL 'public abstract fun <get-firstFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor> origin=GET_PROPERTY
                       ARG <this>: GET_VAR 'a: kotlin.Any? declared in foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor' type=foo.bar.Nat<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor> origin=null
-                    ARG b: CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                    ARG b: CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Identity> declared in foo.bar' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> origin=null
                       TYPE_ARG C: Cat of foo.bar.endoFunctorComposeTensor
                       ARG c: GET_VAR 'k: foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor' type=foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor> origin=null
-                    ARG block: FUN_EXPR type=kotlin.Function2<foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor>, foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>, foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor, Cat of foo.bar.endoFunctorComposeTensor>> origin=LAMBDA
+                    ARG block: FUN_EXPR type=kotlin.Function2<foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor>, foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>, foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor, Cat of foo.bar.endoFunctorComposeTensor>> origin=LAMBDA
                       FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor, Cat of foo.bar.endoFunctorComposeTensor>
                         VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#1 index:0 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor>
-                        VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#2 index:1 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+                        VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#2 index:1 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>
                         BLOCK_BODY
-                          RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Functor#1: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor>, $context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>): foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor, Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor'
+                          RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Functor#1: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor>, $context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>): foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor, Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor'
                             BLOCK type=foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor, Cat of foo.bar.endoFunctorComposeTensor> origin=OBJECT_LITERAL
                               CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, kotlin.Any?, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor>]
                                 thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor, Cat of foo.bar.endoFunctorComposeTensor>
@@ -1330,9 +1193,9 @@ FILE fqName:foo.bar fileName:/category.kt
                                         TYPE_ARG C: Cat of foo.bar.endoFunctorComposeTensor
                                         TYPE_ARG D: Cat of foo.bar.endoFunctorComposeTensor
                                         TYPE_ARG E: Cat of foo.bar.endoFunctorComposeTensor
-                                        TYPE_ARG F: io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>
+                                        TYPE_ARG F: io.github.kyay10.highkt.Identity
                                         TYPE_ARG G: A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor
-                                        ARG f: GET_VAR '$context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                                        ARG f: GET_VAR '$context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> origin=null
                                         ARG g: GET_VAR '$context-Functor#1: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor> origin=null
                                   FUN DEFAULT_PROPERTY_ACCESSOR name:<get-firstFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, kotlin.Any?>
                                     VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitor, Cat of foo.bar.endoFunctorComposeTensor>
@@ -1403,19 +1266,19 @@ FILE fqName:foo.bar fileName:/category.kt
                 RETURN type=kotlin.Nothing from='public open fun leftUnitorInv <A> (a: kotlin.Any?): kotlin.Any? declared in foo.bar.endoFunctorComposeTensor.<no name provided>'
                   CALL 'public final fun context <A, B, R> (a: A of kotlin.context, b: B of kotlin.context, block: @[ContextFunctionTypeParams(count = 2)] kotlin.Function2<A of kotlin.context, B of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv, Cat of foo.bar.endoFunctorComposeTensor> origin=null
                     TYPE_ARG A: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv>
-                    TYPE_ARG B: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+                    TYPE_ARG B: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>
                     TYPE_ARG R: foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv, Cat of foo.bar.endoFunctorComposeTensor>
                     ARG a: CALL 'public abstract fun <get-firstFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv> origin=GET_PROPERTY
                       ARG <this>: GET_VAR 'a: kotlin.Any? declared in foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv' type=foo.bar.Nat<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv> origin=null
-                    ARG b: CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                    ARG b: CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Identity> declared in foo.bar' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> origin=null
                       TYPE_ARG C: Cat of foo.bar.endoFunctorComposeTensor
                       ARG c: GET_VAR 'k: foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor' type=foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor> origin=null
-                    ARG block: FUN_EXPR type=kotlin.Function2<foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv>, foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>, foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv, Cat of foo.bar.endoFunctorComposeTensor>> origin=LAMBDA
+                    ARG block: FUN_EXPR type=kotlin.Function2<foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv>, foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>, foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv, Cat of foo.bar.endoFunctorComposeTensor>> origin=LAMBDA
                       FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv, Cat of foo.bar.endoFunctorComposeTensor>
                         VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#1 index:0 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv>
-                        VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#2 index:1 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+                        VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#2 index:1 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>
                         BLOCK_BODY
-                          RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Functor#1: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv>, $context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>): foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv, Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv'
+                          RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Functor#1: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv>, $context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>): foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv, Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv'
                             BLOCK type=foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv, Cat of foo.bar.endoFunctorComposeTensor> origin=OBJECT_LITERAL
                               CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv, kotlin.Any?>]
                                 thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv, Cat of foo.bar.endoFunctorComposeTensor>
@@ -1444,9 +1307,9 @@ FILE fqName:foo.bar fileName:/category.kt
                                         TYPE_ARG C: Cat of foo.bar.endoFunctorComposeTensor
                                         TYPE_ARG D: Cat of foo.bar.endoFunctorComposeTensor
                                         TYPE_ARG E: Cat of foo.bar.endoFunctorComposeTensor
-                                        TYPE_ARG F: io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>
+                                        TYPE_ARG F: io.github.kyay10.highkt.Identity
                                         TYPE_ARG G: A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv
-                                        ARG f: GET_VAR '$context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                                        ARG f: GET_VAR '$context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> origin=null
                                         ARG g: GET_VAR '$context-Functor#1: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv> origin=null
                                   FUN DEFAULT_PROPERTY_ACCESSOR name:<get-secondFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, kotlin.Any?>
                                     VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.leftUnitorInv, Cat of foo.bar.endoFunctorComposeTensor>
@@ -1501,19 +1364,19 @@ FILE fqName:foo.bar fileName:/category.kt
                 RETURN type=kotlin.Nothing from='public open fun rightUnitor <A> (a: kotlin.Any?): kotlin.Any? declared in foo.bar.endoFunctorComposeTensor.<no name provided>'
                   CALL 'public final fun context <A, B, R> (a: A of kotlin.context, b: B of kotlin.context, block: @[ContextFunctionTypeParams(count = 2)] kotlin.Function2<A of kotlin.context, B of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor, Cat of foo.bar.endoFunctorComposeTensor> origin=null
                     TYPE_ARG A: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor>
-                    TYPE_ARG B: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+                    TYPE_ARG B: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>
                     TYPE_ARG R: foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor, Cat of foo.bar.endoFunctorComposeTensor>
                     ARG a: CALL 'public abstract fun <get-firstFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor> origin=GET_PROPERTY
                       ARG <this>: GET_VAR 'a: kotlin.Any? declared in foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor' type=foo.bar.Nat<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor> origin=null
-                    ARG b: CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                    ARG b: CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Identity> declared in foo.bar' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> origin=null
                       TYPE_ARG C: Cat of foo.bar.endoFunctorComposeTensor
                       ARG c: GET_VAR 'k: foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor' type=foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor> origin=null
-                    ARG block: FUN_EXPR type=kotlin.Function2<foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor>, foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>, foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor, Cat of foo.bar.endoFunctorComposeTensor>> origin=LAMBDA
+                    ARG block: FUN_EXPR type=kotlin.Function2<foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor>, foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>, foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor, Cat of foo.bar.endoFunctorComposeTensor>> origin=LAMBDA
                       FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor, Cat of foo.bar.endoFunctorComposeTensor>
                         VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#1 index:0 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor>
-                        VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#2 index:1 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+                        VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#2 index:1 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>
                         BLOCK_BODY
-                          RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Functor#1: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor>, $context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>): foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor, Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor'
+                          RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Functor#1: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor>, $context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>): foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor, Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor'
                             BLOCK type=foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor, Cat of foo.bar.endoFunctorComposeTensor> origin=OBJECT_LITERAL
                               CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, kotlin.Any?, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor>]
                                 thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor, Cat of foo.bar.endoFunctorComposeTensor>
@@ -1527,9 +1390,9 @@ FILE fqName:foo.bar fileName:/category.kt
                                         TYPE_ARG D: Cat of foo.bar.endoFunctorComposeTensor
                                         TYPE_ARG E: Cat of foo.bar.endoFunctorComposeTensor
                                         TYPE_ARG F: A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor
-                                        TYPE_ARG G: io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>
+                                        TYPE_ARG G: io.github.kyay10.highkt.Identity
                                         ARG f: GET_VAR '$context-Functor#1: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor> origin=null
-                                        ARG g: GET_VAR '$context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                                        ARG g: GET_VAR '$context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> origin=null
                                   FUN DEFAULT_PROPERTY_ACCESSOR name:<get-firstFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, kotlin.Any?>
                                     VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitor, Cat of foo.bar.endoFunctorComposeTensor>
                                     correspondingProperty: PROPERTY name:firstFunctor visibility:public modality:OPEN [val]
@@ -1599,19 +1462,19 @@ FILE fqName:foo.bar fileName:/category.kt
                 RETURN type=kotlin.Nothing from='public open fun rightUnitorInv <A> (a: kotlin.Any?): kotlin.Any? declared in foo.bar.endoFunctorComposeTensor.<no name provided>'
                   CALL 'public final fun context <A, B, R> (a: A of kotlin.context, b: B of kotlin.context, block: @[ContextFunctionTypeParams(count = 2)] kotlin.Function2<A of kotlin.context, B of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv, Cat of foo.bar.endoFunctorComposeTensor> origin=null
                     TYPE_ARG A: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv>
-                    TYPE_ARG B: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+                    TYPE_ARG B: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>
                     TYPE_ARG R: foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv, Cat of foo.bar.endoFunctorComposeTensor>
                     ARG a: CALL 'public abstract fun <get-firstFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv> origin=GET_PROPERTY
                       ARG <this>: GET_VAR 'a: kotlin.Any? declared in foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv' type=foo.bar.Nat<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv> origin=null
-                    ARG b: CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                    ARG b: CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Identity> declared in foo.bar' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> origin=null
                       TYPE_ARG C: Cat of foo.bar.endoFunctorComposeTensor
                       ARG c: GET_VAR 'k: foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor' type=foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor> origin=null
-                    ARG block: FUN_EXPR type=kotlin.Function2<foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv>, foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>, foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv, Cat of foo.bar.endoFunctorComposeTensor>> origin=LAMBDA
+                    ARG block: FUN_EXPR type=kotlin.Function2<foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv>, foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>, foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv, Cat of foo.bar.endoFunctorComposeTensor>> origin=LAMBDA
                       FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv, Cat of foo.bar.endoFunctorComposeTensor>
                         VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#1 index:0 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv>
-                        VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#2 index:1 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+                        VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#2 index:1 type:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>
                         BLOCK_BODY
-                          RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Functor#1: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv>, $context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>): foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv, Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv'
+                          RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Functor#1: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv>, $context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity>): foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv, Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv'
                             BLOCK type=foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv, Cat of foo.bar.endoFunctorComposeTensor> origin=OBJECT_LITERAL
                               CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv, kotlin.Any?>]
                                 thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv, Cat of foo.bar.endoFunctorComposeTensor>
@@ -1641,9 +1504,9 @@ FILE fqName:foo.bar fileName:/category.kt
                                         TYPE_ARG D: Cat of foo.bar.endoFunctorComposeTensor
                                         TYPE_ARG E: Cat of foo.bar.endoFunctorComposeTensor
                                         TYPE_ARG F: A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv
-                                        TYPE_ARG G: io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>
+                                        TYPE_ARG G: io.github.kyay10.highkt.Identity
                                         ARG f: GET_VAR '$context-Functor#1: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv> origin=null
-                                        ARG g: GET_VAR '$context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                                        ARG g: GET_VAR '$context-Functor#2: foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>' type=foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, io.github.kyay10.highkt.Identity> origin=null
                                   FUN DEFAULT_PROPERTY_ACCESSOR name:<get-secondFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<Cat of foo.bar.endoFunctorComposeTensor, Cat of foo.bar.endoFunctorComposeTensor, kotlin.Any?>
                                     VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv.<anonymous>.<no name provided><A of foo.bar.endoFunctorComposeTensor.<no name provided>.rightUnitorInv, Cat of foo.bar.endoFunctorComposeTensor>
                                     correspondingProperty: PROPERTY name:secondFunctor visibility:public modality:OPEN [val]
@@ -1700,7 +1563,7 @@ FILE fqName:foo.bar fileName:/category.kt
                 BLOCK_BODY
                   RETURN type=kotlin.Nothing from='public open fun <get-firstCategory> (): foo.bar.Category<kotlin.Any?> declared in foo.bar.endoFunctorComposeTensor.<no name provided>'
                     CALL 'public abstract fun <get-firstCategory> (): foo.bar.Category<C of foo.bar.Functor> declared in foo.bar.Functor' type=foo.bar.Category<kotlin.Any?> origin=null
-                      ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>> visibility:private [final] declared in foo.bar.endoFunctorComposeTensor.<no name provided>' type=foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>> origin=null
+                      ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>> visibility:private [final] declared in foo.bar.endoFunctorComposeTensor.<no name provided>' type=foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>> origin=null
                         receiver: GET_VAR '<this>: foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.<get-firstCategory>' type=foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor> origin=null
             PROPERTY DELEGATED_MEMBER name:secondCategory visibility:public modality:OPEN [val]
               overridden:
@@ -1715,7 +1578,7 @@ FILE fqName:foo.bar fileName:/category.kt
                 BLOCK_BODY
                   RETURN type=kotlin.Nothing from='public open fun <get-secondCategory> (): foo.bar.Category<kotlin.Any?> declared in foo.bar.endoFunctorComposeTensor.<no name provided>'
                     CALL 'public abstract fun <get-secondCategory> (): foo.bar.Category<D of foo.bar.Functor> declared in foo.bar.Functor' type=foo.bar.Category<kotlin.Any?> origin=null
-                      ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>> visibility:private [final] declared in foo.bar.endoFunctorComposeTensor.<no name provided>' type=foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>> origin=null
+                      ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>> visibility:private [final] declared in foo.bar.endoFunctorComposeTensor.<no name provided>' type=foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>> origin=null
                         receiver: GET_VAR '<this>: foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor> declared in foo.bar.endoFunctorComposeTensor.<no name provided>.<get-secondCategory>' type=foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor> origin=null
           CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.endoFunctorComposeTensor.<no name provided>' type=foo.bar.endoFunctorComposeTensor.<no name provided><Cat of foo.bar.endoFunctorComposeTensor> origin=OBJECT_LITERAL
   FUN name:functorCategory visibility:public modality:FINAL returnType:foo.bar.Category<kotlin.Any?>
@@ -1811,7 +1674,7 @@ FILE fqName:foo.bar fileName:/category.kt
                               TYPE_ARG F: F of foo.bar.functorCategory.<no name provided>.target
                               ARG functor: GET_VAR '$context-Functor: foo.bar.Functor<C of foo.bar.functorCategory, D of foo.bar.functorCategory, F of foo.bar.functorCategory.<no name provided>.target> declared in foo.bar.functorCategory.<no name provided>.target.<anonymous>' type=foo.bar.Functor<C of foo.bar.functorCategory, D of foo.bar.functorCategory, F of foo.bar.functorCategory.<no name provided>.target> origin=null
           CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.functorCategory.<no name provided>' type=foo.bar.functorCategory.<no name provided><C of foo.bar.functorCategory, D of foo.bar.functorCategory> origin=OBJECT_LITERAL
-  FUN name:functorComposeFunctor visibility:public modality:FINAL returnType:foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>>
+  FUN name:functorComposeFunctor visibility:public modality:FINAL returnType:foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>>
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:D index:1 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:E index:2 variance: superTypes:[kotlin.Any?] reified:false
@@ -1819,9 +1682,9 @@ FILE fqName:foo.bar fileName:/category.kt
     VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Category#2 index:1 type:foo.bar.Category<D of foo.bar.functorComposeFunctor>
     VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Category#3 index:2 type:foo.bar.Category<E of foo.bar.functorComposeFunctor>
     BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun functorComposeFunctor <C, D, E> ($context-Category#1: foo.bar.Category<C of foo.bar.functorComposeFunctor>, $context-Category#2: foo.bar.Category<D of foo.bar.functorComposeFunctor>, $context-Category#3: foo.bar.Category<E of foo.bar.functorComposeFunctor>): foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>> declared in foo.bar'
+      RETURN type=kotlin.Nothing from='public final fun functorComposeFunctor <C, D, E> ($context-Category#1: foo.bar.Category<C of foo.bar.functorComposeFunctor>, $context-Category#2: foo.bar.Category<D of foo.bar.functorComposeFunctor>, $context-Category#3: foo.bar.Category<E of foo.bar.functorComposeFunctor>): foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>> declared in foo.bar'
         BLOCK type=foo.bar.functorComposeFunctor.<no name provided><C of foo.bar.functorComposeFunctor, D of foo.bar.functorComposeFunctor, E of foo.bar.functorComposeFunctor> origin=OBJECT_LITERAL
-          CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>>]
+          CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>>]
             thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.functorComposeFunctor.<no name provided><C of foo.bar.functorComposeFunctor, D of foo.bar.functorComposeFunctor, E of foo.bar.functorComposeFunctor>
             PROPERTY name:firstCategory visibility:public modality:OPEN [val]
               overridden:
@@ -1881,7 +1744,7 @@ FILE fqName:foo.bar fileName:/category.kt
             CONSTRUCTOR visibility:public returnType:foo.bar.functorComposeFunctor.<no name provided><C of foo.bar.functorComposeFunctor, D of foo.bar.functorComposeFunctor, E of foo.bar.functorComposeFunctor> [primary]
               BLOCK_BODY
                 DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-                INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>>]' type=kotlin.Unit
+                INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Functor<kotlin.Any?, kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>>]' type=kotlin.Unit
             FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
               VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
               VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
@@ -2057,13 +1920,13 @@ FILE fqName:foo.bar fileName:/category.kt
             BLOCK_BODY
               RETURN type=kotlin.Nothing from='local final fun <anonymous> (a: A of foo.bar.idArrow): A of foo.bar.idArrow declared in foo.bar.idArrow'
                 GET_VAR 'a: A of foo.bar.idArrow declared in foo.bar.idArrow.<anonymous>' type=A of foo.bar.idArrow origin=null
-  FUN name:identityFunctor visibility:public modality:FINAL returnType:foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+  FUN name:identityFunctor visibility:public modality:FINAL returnType:foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Identity>
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
     VALUE_PARAMETER kind:Context name:c index:0 type:foo.bar.Category<C of foo.bar.identityFunctor>
     BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar'
+      RETURN type=kotlin.Nothing from='public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Identity> declared in foo.bar'
         BLOCK type=foo.bar.identityFunctor.<no name provided><C of foo.bar.identityFunctor> origin=OBJECT_LITERAL
-          CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>]
+          CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Identity>]
             thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.identityFunctor.<no name provided><C of foo.bar.identityFunctor>
             PROPERTY name:firstCategory visibility:public modality:OPEN [val]
               overridden:
@@ -2098,7 +1961,7 @@ FILE fqName:foo.bar fileName:/category.kt
             CONSTRUCTOR visibility:public returnType:foo.bar.identityFunctor.<no name provided><C of foo.bar.identityFunctor> [primary]
               BLOCK_BODY
                 DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-                INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>]' type=kotlin.Unit
+                INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Identity>]' type=kotlin.Unit
             FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
               VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
               VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
@@ -2534,11 +2397,11 @@ FILE fqName:foo.bar fileName:/category.kt
                                         ARG <this>: GET_VAR 'f: kotlin.Any? declared in foo.bar.toNormalFunctor.<no name provided>.lift' type=kotlin.Function1<A of foo.bar.toNormalFunctor.<no name provided>.lift, B of foo.bar.toNormalFunctor.<no name provided>.lift> origin=VARIABLE_AS_FUNCTION
                                         ARG p1: GET_VAR 'it: A of foo.bar.toNormalFunctor.<no name provided>.lift declared in foo.bar.toNormalFunctor.<no name provided>.lift.<anonymous>.<anonymous>' type=A of foo.bar.toNormalFunctor.<no name provided>.lift origin=null
           CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.toNormalFunctor.<no name provided>' type=foo.bar.toNormalFunctor.<no name provided><M of foo.bar.toNormalFunctor> origin=OBJECT_LITERAL
-  FUN name:toNormalMonad visibility:public modality:FINAL returnType:foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toNormalMonad>
+  FUN name:toNormalMonad visibility:public modality:FINAL returnType:foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toNormalMonad>
     TYPE_PARAMETER name:M index:0 variance: superTypes:[kotlin.Any?] reified:false
     VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:foo.bar.UsualMonad<M of foo.bar.toNormalMonad>
     BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun toNormalMonad <M> (<this>: foo.bar.UsualMonad<M of foo.bar.toNormalMonad>): foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toNormalMonad> declared in foo.bar'
+      RETURN type=kotlin.Nothing from='public final fun toNormalMonad <M> (<this>: foo.bar.UsualMonad<M of foo.bar.toNormalMonad>): foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toNormalMonad> declared in foo.bar'
         CALL 'public final fun context <A, B, R> (a: A of kotlin.context, b: B of kotlin.context, block: @[ContextFunctionTypeParams(count = 2)] kotlin.Function2<A of kotlin.context, B of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
           TYPE_ARG A: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad>
           TYPE_ARG B: foo.bar.ArrowCategory
@@ -2554,17 +2417,17 @@ FILE fqName:foo.bar fileName:/category.kt
               BLOCK_BODY
                 RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Functor: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad>, $context-ArrowCategory: foo.bar.ArrowCategory): foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad'
                   BLOCK type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=OBJECT_LITERAL
-                    CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toNormalMonad>; foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>]
+                    CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toNormalMonad>; foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity>]
                       thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad>
-                      FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final]
+                      FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> visibility:private [final]
                         EXPRESSION_BODY
-                          CALL 'public final fun endoFunctorComposeTensor <Cat> (k: foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor>): foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                          CALL 'public final fun endoFunctorComposeTensor <Cat> (k: foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor>): foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> declared in foo.bar' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> origin=null
                             TYPE_ARG Cat: io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
                             ARG k: GET_VAR '$context-ArrowCategory: foo.bar.ArrowCategory declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.ArrowCategory origin=null
                       CONSTRUCTOR visibility:public returnType:foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> [primary]
                         BLOCK_BODY
                           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-                          INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toNormalMonad>; foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>]' type=kotlin.Unit
+                          INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toNormalMonad>; foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity>]' type=kotlin.Unit
                       FUN DELEGATED_MEMBER name:associator visibility:public modality:OPEN returnType:kotlin.Any?
                         TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
                         TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
@@ -2582,7 +2445,7 @@ FILE fqName:foo.bar fileName:/category.kt
                               TYPE_ARG A: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.associator
                               TYPE_ARG B: B of foo.bar.toNormalMonad.<anonymous>.<no name provided>.associator
                               TYPE_ARG C: C of foo.bar.toNormalMonad.<anonymous>.<no name provided>.associator
-                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> origin=null
                                 receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.associator' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
                               ARG a: GET_VAR 'a: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.associator' type=kotlin.Any? origin=null
                               ARG b: GET_VAR 'b: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.associator' type=kotlin.Any? origin=null
@@ -2604,7 +2467,7 @@ FILE fqName:foo.bar fileName:/category.kt
                               TYPE_ARG A: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.associatorInv
                               TYPE_ARG B: B of foo.bar.toNormalMonad.<anonymous>.<no name provided>.associatorInv
                               TYPE_ARG C: C of foo.bar.toNormalMonad.<anonymous>.<no name provided>.associatorInv
-                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> origin=null
                                 receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.associatorInv' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
                               ARG a: GET_VAR 'a: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.associatorInv' type=kotlin.Any? origin=null
                               ARG b: GET_VAR 'b: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.associatorInv' type=kotlin.Any? origin=null
@@ -2620,7 +2483,7 @@ FILE fqName:foo.bar fileName:/category.kt
                           RETURN type=kotlin.Nothing from='public open fun leftUnitor <A> (a: kotlin.Any?): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>'
                             CALL 'public abstract fun leftUnitor <A> (a: kotlin.Any?): kotlin.Any? declared in foo.bar.TensorProduct' type=kotlin.Any? origin=null
                               TYPE_ARG A: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.leftUnitor
-                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> origin=null
                                 receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.leftUnitor' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
                               ARG a: GET_VAR 'a: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.leftUnitor' type=kotlin.Any? origin=null
                       FUN DELEGATED_MEMBER name:leftUnitorInv visibility:public modality:OPEN returnType:kotlin.Any?
@@ -2634,7 +2497,7 @@ FILE fqName:foo.bar fileName:/category.kt
                           RETURN type=kotlin.Nothing from='public open fun leftUnitorInv <A> (a: kotlin.Any?): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>'
                             CALL 'public abstract fun leftUnitorInv <A> (a: kotlin.Any?): kotlin.Any? declared in foo.bar.TensorProduct' type=kotlin.Any? origin=null
                               TYPE_ARG A: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.leftUnitorInv
-                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> origin=null
                                 receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.leftUnitorInv' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
                               ARG a: GET_VAR 'a: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.leftUnitorInv' type=kotlin.Any? origin=null
                       FUN DELEGATED_MEMBER name:lift visibility:public modality:OPEN returnType:kotlin.Any?
@@ -2650,7 +2513,7 @@ FILE fqName:foo.bar fileName:/category.kt
                             CALL 'public abstract fun lift <A, B> (f: kotlin.Any?): kotlin.Any? declared in foo.bar.TensorProduct' type=kotlin.Any? origin=null
                               TYPE_ARG A: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.lift
                               TYPE_ARG B: B of foo.bar.toNormalMonad.<anonymous>.<no name provided>.lift
-                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> origin=null
                                 receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.lift' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
                               ARG f: GET_VAR 'f: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.lift' type=kotlin.Any? origin=null
                       FUN DELEGATED_MEMBER name:rightUnitor visibility:public modality:OPEN returnType:kotlin.Any?
@@ -2664,7 +2527,7 @@ FILE fqName:foo.bar fileName:/category.kt
                           RETURN type=kotlin.Nothing from='public open fun rightUnitor <A> (a: kotlin.Any?): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>'
                             CALL 'public abstract fun rightUnitor <A> (a: kotlin.Any?): kotlin.Any? declared in foo.bar.TensorProduct' type=kotlin.Any? origin=null
                               TYPE_ARG A: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.rightUnitor
-                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> origin=null
                                 receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.rightUnitor' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
                               ARG a: GET_VAR 'a: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.rightUnitor' type=kotlin.Any? origin=null
                       FUN DELEGATED_MEMBER name:rightUnitorInv visibility:public modality:OPEN returnType:kotlin.Any?
@@ -2678,7 +2541,7 @@ FILE fqName:foo.bar fileName:/category.kt
                           RETURN type=kotlin.Nothing from='public open fun rightUnitorInv <A> (a: kotlin.Any?): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>'
                             CALL 'public abstract fun rightUnitorInv <A> (a: kotlin.Any?): kotlin.Any? declared in foo.bar.TensorProduct' type=kotlin.Any? origin=null
                               TYPE_ARG A: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.rightUnitorInv
-                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                              ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> origin=null
                                 receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.rightUnitorInv' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
                               ARG a: GET_VAR 'a: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.rightUnitorInv' type=kotlin.Any? origin=null
                       FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
@@ -2704,24 +2567,24 @@ FILE fqName:foo.bar fileName:/category.kt
                         BLOCK_BODY
                           RETURN type=kotlin.Nothing from='public open fun empty (): foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>'
                             BLOCK type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> origin=OBJECT_LITERAL
-                              CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toNormalMonad>]
+                              CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity, M of foo.bar.toNormalMonad>]
                                 thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad>
                                 PROPERTY name:firstFunctor visibility:public modality:OPEN [val]
                                   overridden:
                                     public abstract firstFunctor: foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat
-                                  FIELD PROPERTY_BACKING_FIELD name:firstFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final]
+                                  FIELD PROPERTY_BACKING_FIELD name:firstFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> visibility:private [final]
                                     EXPRESSION_BODY
-                                      CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                                      CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Identity> declared in foo.bar' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> origin=null
                                         TYPE_ARG C: io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
                                         ARG c: GET_VAR '$context-ArrowCategory: foo.bar.ArrowCategory declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.ArrowCategory origin=null
-                                  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-firstFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>>
+                                  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-firstFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity>
                                     VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad>
                                     correspondingProperty: PROPERTY name:firstFunctor visibility:public modality:OPEN [val]
                                     overridden:
                                       public abstract fun <get-firstFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat
                                     BLOCK_BODY
-                                      RETURN type=kotlin.Nothing from='public open fun <get-firstFunctor> (): foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>'
-                                        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:firstFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final]' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                                      RETURN type=kotlin.Nothing from='public open fun <get-firstFunctor> (): foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>'
+                                        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:firstFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> visibility:private [final]' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> origin=null
                                           receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.<get-firstFunctor>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> origin=null
                                 PROPERTY name:secondFunctor visibility:public modality:OPEN [val]
                                   overridden:
@@ -2743,7 +2606,7 @@ FILE fqName:foo.bar fileName:/category.kt
                                 CONSTRUCTOR visibility:public returnType:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> [primary]
                                   BLOCK_BODY
                                     DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-                                    INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toNormalMonad>]' type=kotlin.Unit
+                                    INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity, M of foo.bar.toNormalMonad>]' type=kotlin.Unit
                                 FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
                                   VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
                                   VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
@@ -2878,7 +2741,7 @@ FILE fqName:foo.bar fileName:/category.kt
                           BLOCK_BODY
                             RETURN type=kotlin.Nothing from='public open fun <get-firstCategory> (): foo.bar.Category<kotlin.Any?> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>'
                               CALL 'public abstract fun <get-firstCategory> (): foo.bar.Category<kotlin.Any?> declared in foo.bar.TensorProduct' type=foo.bar.Category<kotlin.Any?> origin=null
-                                ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                                ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> origin=null
                                   receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.<get-firstCategory>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
                       PROPERTY DELEGATED_MEMBER name:secondCategory visibility:public modality:OPEN [val]
                         overridden:
@@ -2893,7 +2756,7 @@ FILE fqName:foo.bar fileName:/category.kt
                           BLOCK_BODY
                             RETURN type=kotlin.Nothing from='public open fun <get-secondCategory> (): foo.bar.Category<kotlin.Any?> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>'
                               CALL 'public abstract fun <get-secondCategory> (): foo.bar.Category<Cat of foo.bar.TensorProduct> declared in foo.bar.TensorProduct' type=foo.bar.Category<kotlin.Any?> origin=null
-                                ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                                ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> origin=null
                                   receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.<get-secondCategory>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
                       PROPERTY DELEGATED_MEMBER name:unitObject visibility:public modality:OPEN [val]
                         overridden:
@@ -2908,14 +2771,14 @@ FILE fqName:foo.bar fileName:/category.kt
                           BLOCK_BODY
                             RETURN type=kotlin.Nothing from='public open fun <get-unitObject> (): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>'
                               CALL 'public abstract fun <get-unitObject> (): kotlin.Any? declared in foo.bar.TensorProduct' type=kotlin.Any? origin=null
-                                ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>> origin=null
+                                ARG <this>: GET_FIELD 'FIELD DELEGATE name:$$delegate_0 type:foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> visibility:private [final] declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> origin=null
                                   receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.<get-unitObject>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
                     CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=OBJECT_LITERAL
   FUN name:toUsualMonad visibility:public modality:FINAL returnType:foo.bar.UsualMonad<M of foo.bar.toUsualMonad>
     TYPE_PARAMETER name:M index:0 variance: superTypes:[kotlin.Any?] reified:false
-    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toUsualMonad>
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad>
     BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun toUsualMonad <M> (<this>: foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toUsualMonad>): foo.bar.UsualMonad<M of foo.bar.toUsualMonad> declared in foo.bar'
+      RETURN type=kotlin.Nothing from='public final fun toUsualMonad <M> (<this>: foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad>): foo.bar.UsualMonad<M of foo.bar.toUsualMonad> declared in foo.bar'
         BLOCK type=foo.bar.toUsualMonad.<no name provided><M of foo.bar.toUsualMonad> origin=OBJECT_LITERAL
           CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.UsualMonad<M of foo.bar.toUsualMonad>]
             thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.toUsualMonad.<no name provided><M of foo.bar.toUsualMonad>
@@ -2951,7 +2814,7 @@ FILE fqName:foo.bar fileName:/category.kt
                     TYPE_ARG R: kotlin.Any?
                     ARG with: CALL 'public abstract fun <get-secondFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, G of foo.bar.Nat> declared in foo.bar.Nat' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toUsualMonad> origin=GET_PROPERTY
                       ARG <this>: CALL 'public abstract fun plus (): kotlin.Any? declared in foo.bar.MonoidObject' type=foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?, M of foo.bar.toUsualMonad> origin=null
-                        ARG <this>: GET_VAR '<this>: foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toUsualMonad> declared in foo.bar.toUsualMonad' type=foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toUsualMonad> origin=IMPLICIT_ARGUMENT
+                        ARG <this>: GET_VAR '<this>: foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> declared in foo.bar.toUsualMonad' type=foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> origin=IMPLICIT_ARGUMENT
                     ARG block: FUN_EXPR type=kotlin.Function1<foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toUsualMonad>, kotlin.Any?> origin=LAMBDA
                       FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
                         VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor index:0 type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toUsualMonad>
@@ -2972,7 +2835,7 @@ FILE fqName:foo.bar fileName:/category.kt
                               ARG <this>: CALL 'public abstract fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.Nat' type=kotlin.Function1<kotlin.Any?, kotlin.Any?> origin=GET_ARRAY_ELEMENT
                                 TYPE_ARG A: B of foo.bar.toUsualMonad.<no name provided>.bind
                                 ARG <this>: CALL 'public abstract fun plus (): kotlin.Any? declared in foo.bar.MonoidObject' type=foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?, M of foo.bar.toUsualMonad> origin=null
-                                  ARG <this>: GET_VAR '<this>: foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toUsualMonad> declared in foo.bar.toUsualMonad' type=foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toUsualMonad> origin=IMPLICIT_ARGUMENT
+                                  ARG <this>: GET_VAR '<this>: foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> declared in foo.bar.toUsualMonad' type=foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> origin=IMPLICIT_ARGUMENT
                                 ARG c: CALL 'public final fun idArrow <A> (): kotlin.Function1<A of foo.bar.idArrow, A of foo.bar.idArrow> declared in foo.bar' type=kotlin.Function1<B of foo.bar.toUsualMonad.<no name provided>.bind, B of foo.bar.toUsualMonad.<no name provided>.bind> origin=null
                                   TYPE_ARG A: B of foo.bar.toUsualMonad.<no name provided>.bind
                               ARG p1: GET_VAR 'val mapped: kotlin.Any? declared in foo.bar.toUsualMonad.<no name provided>.bind.<anonymous>' type=kotlin.Any? origin=null
@@ -2987,8 +2850,8 @@ FILE fqName:foo.bar fileName:/category.kt
                   CALL 'public abstract fun invoke (p1: P1 of kotlin.Function1): R of kotlin.Function1 declared in kotlin.Function1' type=kotlin.Any? origin=INVOKE
                     ARG <this>: CALL 'public abstract fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.Nat' type=kotlin.Function1<A of foo.bar.toUsualMonad.<no name provided>.pure, kotlin.Any?> origin=GET_ARRAY_ELEMENT
                       TYPE_ARG A: A of foo.bar.toUsualMonad.<no name provided>.pure
-                      ARG <this>: CALL 'public abstract fun empty (): kotlin.Any? declared in foo.bar.MonoidObject' type=foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toUsualMonad> origin=null
-                        ARG <this>: GET_VAR '<this>: foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toUsualMonad> declared in foo.bar.toUsualMonad' type=foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, M of foo.bar.toUsualMonad> origin=IMPLICIT_ARGUMENT
+                      ARG <this>: CALL 'public abstract fun empty (): kotlin.Any? declared in foo.bar.MonoidObject' type=foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> origin=null
+                        ARG <this>: GET_VAR '<this>: foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> declared in foo.bar.toUsualMonad' type=foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> origin=IMPLICIT_ARGUMENT
                       ARG c: CALL 'public final fun idArrow <A> (): kotlin.Function1<A of foo.bar.idArrow, A of foo.bar.idArrow> declared in foo.bar' type=kotlin.Function1<A of foo.bar.toUsualMonad.<no name provided>.pure, A of foo.bar.toUsualMonad.<no name provided>.pure> origin=null
                         TYPE_ARG A: A of foo.bar.toUsualMonad.<no name provided>.pure
                     ARG p1: GET_VAR 'a: A of foo.bar.toUsualMonad.<no name provided>.pure declared in foo.bar.toUsualMonad.<no name provided>.pure' type=A of foo.bar.toUsualMonad.<no name provided>.pure origin=null
@@ -3096,6 +2959,10 @@ FILE fqName:foo.bar fileName:/category.kt
   TYPEALIAS name:Compose visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:G index:1 variance: superTypes:[kotlin.Any?] reified:false
+  TYPEALIAS name:Composition visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:G index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:2 variance: superTypes:[kotlin.Any?] reified:false
   TYPEALIAS name:Endo visibility:public expandedType:foo.bar.Nat<C of foo.bar.Endo, C of foo.bar.Endo, F of foo.bar.Endo, G of foo.bar.Endo>
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:F index:1 variance: superTypes:[kotlin.Any?] reified:false
@@ -3105,14 +2972,16 @@ FILE fqName:foo.bar fileName:/category.kt
     TYPE_PARAMETER name:F index:1 variance: superTypes:[kotlin.Any?] reified:false
   TYPEALIAS name:EndoK visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
-  TYPEALIAS name:FunctorComposeK visibility:public expandedType:io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>
+  TYPEALIAS name:FunctorCompose visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:P index:0 variance: superTypes:[kotlin.Any?] reified:false
+  TYPEALIAS name:FunctorComposeK visibility:public expandedType:io.github.kyay10.highkt.Constructor<kotlin.Any?>
   TYPEALIAS name:IsoK visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:D index:1 variance: superTypes:[kotlin.Any?] reified:false
-  TYPEALIAS name:Monad visibility:public expandedType:foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, F of foo.bar.Monad>
+  TYPEALIAS name:Monad visibility:public expandedType:foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, F of foo.bar.Monad>
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:F index:1 variance: superTypes:[kotlin.Any?] reified:false
-  TYPEALIAS name:MorphismProducted visibility:public expandedType:kotlin.Pair<kotlin.Any?, kotlin.Any?>
+  TYPEALIAS name:MorphismProduct visibility:public expandedType:kotlin.Pair<kotlin.Any?, kotlin.Any?>
     TYPE_PARAMETER name:C1 index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:C2 index:1 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:PA index:2 variance: superTypes:[kotlin.Any?] reified:false
@@ -3120,7 +2989,7 @@ FILE fqName:foo.bar fileName:/category.kt
   TYPEALIAS name:NatK visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:D index:1 variance: superTypes:[kotlin.Any?] reified:false
-  TYPEALIAS name:NormalMonad visibility:public expandedType:foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.FunctorCompose<*>>, io.github.kyay10.highkt.Constructor<io.github.kyay10.highkt.Id<*>>, F of foo.bar.NormalMonad>
+  TYPEALIAS name:NormalMonad visibility:public expandedType:foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, F of foo.bar.NormalMonad>
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
   TYPEALIAS name:NormalNat visibility:public expandedType:foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, F of foo.bar.NormalNat, G of foo.bar.NormalNat>
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -3131,6 +3000,10 @@ FILE fqName:foo.bar fileName:/category.kt
     TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
   TYPEALIAS name:Opp visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:Arr index:0 variance: superTypes:[kotlin.Any?] reified:false
+  TYPEALIAS name:Opposite visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:Cat index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:2 variance: superTypes:[kotlin.Any?] reified:false
   TYPEALIAS name:Product visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:C1 index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:C2 index:1 variance: superTypes:[kotlin.Any?] reified:false
@@ -3141,3 +3014,13 @@ FILE fqName:foo.bar fileName:/category.kt
     TYPE_PARAMETER name:P index:0 variance: superTypes:[kotlin.Any?] reified:false
   TYPEALIAS name:TypePairSecond visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:P index:0 variance: superTypes:[kotlin.Any?] reified:false
+  TYPEALIAS name:TypePaired visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:F index:2 variance: superTypes:[kotlin.Any?] reified:false
+  TYPEALIAS name:TypePairedFirst visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+  TYPEALIAS name:TypePairedSecond visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
