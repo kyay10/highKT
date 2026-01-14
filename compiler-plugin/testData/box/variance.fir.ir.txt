@@ -7,10 +7,10 @@ FILE fqName:foo.bar fileName:/variance.kt
           TYPE_ARG B: foo.bar.ConstFunctor<kotlin.Unit>
           TYPE_ARG C: foo.bar.IdentityFunctor
           TYPE_ARG R: foo.bar.Functor<kotlin.Any?>
-          ARG a: GET_OBJECT 'CLASS OBJECT name:EitherBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<foo.bar.Either<*, *>>]' type=foo.bar.EitherBiFunctor
+          ARG a: GET_OBJECT 'CLASS OBJECT name:EitherBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>>]' type=foo.bar.EitherBiFunctor
           ARG b: CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.ConstFunctor' type=foo.bar.ConstFunctor<kotlin.Unit> origin=null
             TYPE_ARG (of class) C: kotlin.Unit
-          ARG c: GET_OBJECT 'CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<foo.bar.Identity<*>>]' type=foo.bar.IdentityFunctor
+          ARG c: GET_OBJECT 'CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>>]' type=foo.bar.IdentityFunctor
           ARG block: FUN_EXPR type=kotlin.Function3<foo.bar.EitherBiFunctor, foo.bar.ConstFunctor<kotlin.Unit>, foo.bar.IdentityFunctor, foo.bar.Functor<kotlin.Any?>> origin=LAMBDA
             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:foo.bar.Functor<kotlin.Any?>
               VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-EitherBiFunctor index:0 type:foo.bar.EitherBiFunctor
@@ -22,9 +22,9 @@ FILE fqName:foo.bar fileName:/variance.kt
                     TYPE_ARG T: foo.bar.BiFunctor<kotlin.Any?>
                     TYPE_ARG R: foo.bar.Functor<kotlin.Any?>
                     ARG with: CALL 'public final fun composeBiFunctors <BF, F, G> ($context-BiFunctor: foo.bar.BiFunctor<BF of foo.bar.composeBiFunctors>, $context-Functor#1: foo.bar.Functor<F of foo.bar.composeBiFunctors>, $context-Functor#2: foo.bar.Functor<G of foo.bar.composeBiFunctors>): foo.bar.BiFunctor<kotlin.Any?> declared in foo.bar' type=foo.bar.BiFunctor<kotlin.Any?> origin=null
-                      TYPE_ARG BF: foo.bar.Either<*, *>
+                      TYPE_ARG BF: io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>
                       TYPE_ARG F: kotlin.Any?
-                      TYPE_ARG G: foo.bar.Identity<*>
+                      TYPE_ARG G: io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>
                       ARG $context-BiFunctor: GET_VAR '$context-EitherBiFunctor: foo.bar.EitherBiFunctor declared in foo.bar.maybeFunctor.<anonymous>' type=foo.bar.EitherBiFunctor origin=null
                       ARG $context-Functor#1: GET_VAR '$context-ConstFunctor: foo.bar.ConstFunctor<kotlin.Unit> declared in foo.bar.maybeFunctor.<anonymous>' type=foo.bar.ConstFunctor<kotlin.Unit> origin=null
                       ARG $context-Functor#2: GET_VAR '$context-IdentityFunctor: foo.bar.IdentityFunctor declared in foo.bar.maybeFunctor.<anonymous>' type=foo.bar.IdentityFunctor origin=null
@@ -1199,12 +1199,12 @@ FILE fqName:foo.bar fileName:/variance.kt
       TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.NT<F of foo.bar.NT, G of foo.bar.NT>
       VALUE_PARAMETER kind:Regular name:fa index:1 type:kotlin.Any?
-  CLASS OBJECT name:EitherBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<foo.bar.Either<*, *>>]
+  CLASS OBJECT name:EitherBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>>]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.EitherBiFunctor
     CONSTRUCTOR visibility:private returnType:foo.bar.EitherBiFunctor [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:EitherBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<foo.bar.Either<*, *>>]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:EitherBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>>]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
@@ -1218,7 +1218,7 @@ FILE fqName:foo.bar fileName:/variance.kt
       TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
       TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
       TYPE_PARAMETER name:C index:2 variance: superTypes:[kotlin.Any?] reified:false
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<foo.bar.Either<*, *>>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>>
       VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
       VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.EitherBiFunctor.leftMap, C of foo.bar.EitherBiFunctor.leftMap>
       overridden:
@@ -1227,7 +1227,7 @@ FILE fqName:foo.bar fileName:/variance.kt
       TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
       TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
       TYPE_PARAMETER name:D index:2 variance: superTypes:[kotlin.Any?] reified:false
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<foo.bar.Either<*, *>>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>>
       VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
       VALUE_PARAMETER kind:Regular name:g index:2 type:kotlin.Function1<B of foo.bar.EitherBiFunctor.rightMap, D of foo.bar.EitherBiFunctor.rightMap>
       overridden:
@@ -1276,12 +1276,12 @@ FILE fqName:foo.bar fileName:/variance.kt
               BRANCH
                 if: CONST Boolean type=kotlin.Boolean value=true
                 then: CALL 'public final fun noWhenBranchMatchedException (): kotlin.Nothing declared in kotlin.internal.ir' type=kotlin.Nothing origin=null
-  CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<foo.bar.Identity<*>>]
+  CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>>]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.IdentityFunctor
     CONSTRUCTOR visibility:private returnType:foo.bar.IdentityFunctor [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<foo.bar.Identity<*>>]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:IdentityFunctor modality:FINAL visibility:public superTypes:[foo.bar.Functor<io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>>]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
@@ -1311,12 +1311,12 @@ FILE fqName:foo.bar fileName:/variance.kt
               ARG <this>: GET_VAR 'f: kotlin.Function1<A of foo.bar.IdentityFunctor.fmap, B of foo.bar.IdentityFunctor.fmap> declared in foo.bar.IdentityFunctor.fmap' type=kotlin.Function1<A of foo.bar.IdentityFunctor.fmap, B of foo.bar.IdentityFunctor.fmap> origin=VARIABLE_AS_FUNCTION
               ARG p1: CALL 'public final fun <get-value> (): A of foo.bar.Identity declared in foo.bar.Identity' type=A of foo.bar.IdentityFunctor.fmap origin=GET_PROPERTY
                 ARG <this>: GET_VAR '<this>(index:1): kotlin.Any? declared in foo.bar.IdentityFunctor.fmap' type=foo.bar.Identity<A of foo.bar.IdentityFunctor.fmap> origin=IMPLICIT_ARGUMENT
-  CLASS OBJECT name:ListMonad modality:FINAL visibility:public superTypes:[foo.bar.Monad<kotlin.collections.List<*>>]
+  CLASS OBJECT name:ListMonad modality:FINAL visibility:public superTypes:[foo.bar.Monad<io.github.kyay10.highkt.Constructor<kotlin.collections.List<*>>>]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.ListMonad
     CONSTRUCTOR visibility:private returnType:foo.bar.ListMonad [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:ListMonad modality:FINAL visibility:public superTypes:[foo.bar.Monad<kotlin.collections.List<*>>]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:ListMonad modality:FINAL visibility:public superTypes:[foo.bar.Monad<io.github.kyay10.highkt.Constructor<kotlin.collections.List<*>>>]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
@@ -1325,7 +1325,7 @@ FILE fqName:foo.bar fileName:/variance.kt
     FUN FAKE_OVERRIDE name:fmap visibility:public modality:OPEN returnType:kotlin.Any? [fake_override]
       TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
       TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Monad<kotlin.collections.List<*>>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Monad<io.github.kyay10.highkt.Constructor<kotlin.collections.List<*>>>
       VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
       VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.ListMonad.fmap, B of foo.bar.ListMonad.fmap>
       overridden:
@@ -1364,12 +1364,12 @@ FILE fqName:foo.bar fileName:/variance.kt
           CALL 'public final fun listOf <T> (element: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<A of foo.bar.ListMonad.pure> origin=null
             TYPE_ARG T: A of foo.bar.ListMonad.pure
             ARG element: GET_VAR 'a: A of foo.bar.ListMonad.pure declared in foo.bar.ListMonad.pure' type=A of foo.bar.ListMonad.pure origin=null
-  CLASS OBJECT name:PairBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<kotlin.Pair<*, *>>]
+  CLASS OBJECT name:PairBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<io.github.kyay10.highkt.Constructor<kotlin.Pair<*, *>>>]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.PairBiFunctor
     CONSTRUCTOR visibility:private returnType:foo.bar.PairBiFunctor [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:PairBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<kotlin.Pair<*, *>>]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS OBJECT name:PairBiFunctor modality:FINAL visibility:public superTypes:[foo.bar.BiFunctor<io.github.kyay10.highkt.Constructor<kotlin.Pair<*, *>>>]' type=kotlin.Unit
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
@@ -1383,7 +1383,7 @@ FILE fqName:foo.bar fileName:/variance.kt
       TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
       TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
       TYPE_PARAMETER name:C index:2 variance: superTypes:[kotlin.Any?] reified:false
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<kotlin.Pair<*, *>>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<io.github.kyay10.highkt.Constructor<kotlin.Pair<*, *>>>
       VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
       VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.Function1<A of foo.bar.PairBiFunctor.leftMap, C of foo.bar.PairBiFunctor.leftMap>
       overridden:
@@ -1392,7 +1392,7 @@ FILE fqName:foo.bar fileName:/variance.kt
       TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
       TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
       TYPE_PARAMETER name:D index:2 variance: superTypes:[kotlin.Any?] reified:false
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<kotlin.Pair<*, *>>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.BiFunctor<io.github.kyay10.highkt.Constructor<kotlin.Pair<*, *>>>
       VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
       VALUE_PARAMETER kind:Regular name:g index:2 type:kotlin.Function1<B of foo.bar.PairBiFunctor.rightMap, D of foo.bar.PairBiFunctor.rightMap>
       overridden:
@@ -1703,41 +1703,29 @@ FILE fqName:foo.bar fileName:/variance.kt
                 public abstract fun fmap <A, B> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.Functor.fmap, B of foo.bar.Functor.fmap>): kotlin.Any? declared in foo.bar.Functor
               BLOCK_BODY
                 RETURN type=kotlin.Nothing from='public open fun fmap <A, B> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.composeFunctors.<no name provided>.fmap, B of foo.bar.composeFunctors.<no name provided>.fmap>): kotlin.Any? declared in foo.bar.composeFunctors.<no name provided>'
-                  CALL 'public final fun context <A, B, R> (a: A of kotlin.context, b: B of kotlin.context, block: @[ContextFunctionTypeParams(count = 2)] kotlin.Function2<A of kotlin.context, B of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, B of foo.bar.composeFunctors.<no name provided>.fmap> origin=null
-                    TYPE_ARG A: foo.bar.Functor<F of foo.bar.composeFunctors>
-                    TYPE_ARG B: foo.bar.Functor<G of foo.bar.composeFunctors>
-                    TYPE_ARG R: foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, B of foo.bar.composeFunctors.<no name provided>.fmap>
-                    ARG a: GET_VAR 'ff: foo.bar.Functor<F of foo.bar.composeFunctors> declared in foo.bar.composeFunctors' type=foo.bar.Functor<F of foo.bar.composeFunctors> origin=null
-                    ARG b: GET_VAR 'gg: foo.bar.Functor<G of foo.bar.composeFunctors> declared in foo.bar.composeFunctors' type=foo.bar.Functor<G of foo.bar.composeFunctors> origin=null
-                    ARG block: FUN_EXPR type=kotlin.Function2<foo.bar.Functor<F of foo.bar.composeFunctors>, foo.bar.Functor<G of foo.bar.composeFunctors>, foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, B of foo.bar.composeFunctors.<no name provided>.fmap>> origin=LAMBDA
-                      FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, B of foo.bar.composeFunctors.<no name provided>.fmap>
-                        VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#1 index:0 type:foo.bar.Functor<F of foo.bar.composeFunctors>
-                        VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Functor#2 index:1 type:foo.bar.Functor<G of foo.bar.composeFunctors>
-                        BLOCK_BODY
-                          RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Functor#1: foo.bar.Functor<F of foo.bar.composeFunctors>, $context-Functor#2: foo.bar.Functor<G of foo.bar.composeFunctors>): foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, B of foo.bar.composeFunctors.<no name provided>.fmap> declared in foo.bar.composeFunctors.<no name provided>.fmap'
-                            CONSTRUCTOR_CALL 'public constructor <init> (value: kotlin.Any?) declared in foo.bar.Composed' type=foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, B of foo.bar.composeFunctors.<no name provided>.fmap> origin=null
-                              TYPE_ARG (of class) F: F of foo.bar.composeFunctors
-                              TYPE_ARG (of class) G: G of foo.bar.composeFunctors
-                              TYPE_ARG (of class) A: B of foo.bar.composeFunctors.<no name provided>.fmap
-                              ARG value: CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=kotlin.Any? origin=null
-                                TYPE_ARG F: F of foo.bar.composeFunctors
-                                TYPE_ARG A: kotlin.Any?
-                                TYPE_ARG B: kotlin.Any?
-                                ARG functor: GET_VAR '$context-Functor#1: foo.bar.Functor<F of foo.bar.composeFunctors> declared in foo.bar.composeFunctors.<no name provided>.fmap.<anonymous>' type=foo.bar.Functor<F of foo.bar.composeFunctors> origin=null
-                                ARG <this>: CALL 'public final fun <get-value> (): kotlin.Any? declared in foo.bar.Composed' type=kotlin.Any? origin=GET_PROPERTY
-                                  ARG <this>: GET_VAR '<this>(index:1): kotlin.Any? declared in foo.bar.composeFunctors.<no name provided>.fmap' type=foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, A of foo.bar.composeFunctors.<no name provided>.fmap> origin=IMPLICIT_ARGUMENT
-                                ARG f: FUN_EXPR type=kotlin.Function1<kotlin.Any?, kotlin.Any?> origin=LAMBDA
-                                  FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
-                                    VALUE_PARAMETER kind:Regular name:it index:0 type:kotlin.Any?
-                                    BLOCK_BODY
-                                      RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: kotlin.Any?): kotlin.Any? declared in foo.bar.composeFunctors.<no name provided>.fmap.<anonymous>'
-                                        CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=kotlin.Any? origin=null
-                                          TYPE_ARG F: G of foo.bar.composeFunctors
-                                          TYPE_ARG A: A of foo.bar.composeFunctors.<no name provided>.fmap
-                                          TYPE_ARG B: B of foo.bar.composeFunctors.<no name provided>.fmap
-                                          ARG functor: GET_VAR '$context-Functor#2: foo.bar.Functor<G of foo.bar.composeFunctors> declared in foo.bar.composeFunctors.<no name provided>.fmap.<anonymous>' type=foo.bar.Functor<G of foo.bar.composeFunctors> origin=null
-                                          ARG <this>: GET_VAR 'it: kotlin.Any? declared in foo.bar.composeFunctors.<no name provided>.fmap.<anonymous>.<anonymous>' type=kotlin.Any? origin=null
-                                          ARG f: GET_VAR 'f: kotlin.Function1<A of foo.bar.composeFunctors.<no name provided>.fmap, B of foo.bar.composeFunctors.<no name provided>.fmap> declared in foo.bar.composeFunctors.<no name provided>.fmap' type=kotlin.Function1<A of foo.bar.composeFunctors.<no name provided>.fmap, B of foo.bar.composeFunctors.<no name provided>.fmap> origin=null
+                  CONSTRUCTOR_CALL 'public constructor <init> (value: kotlin.Any?) declared in foo.bar.Composed' type=foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, B of foo.bar.composeFunctors.<no name provided>.fmap> origin=null
+                    TYPE_ARG (of class) F: F of foo.bar.composeFunctors
+                    TYPE_ARG (of class) G: G of foo.bar.composeFunctors
+                    TYPE_ARG (of class) A: B of foo.bar.composeFunctors.<no name provided>.fmap
+                    ARG value: CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=kotlin.Any? origin=null
+                      TYPE_ARG F: F of foo.bar.composeFunctors
+                      TYPE_ARG A: kotlin.Any?
+                      TYPE_ARG B: kotlin.Any?
+                      ARG functor: GET_VAR 'ff: foo.bar.Functor<F of foo.bar.composeFunctors> declared in foo.bar.composeFunctors' type=foo.bar.Functor<F of foo.bar.composeFunctors> origin=null
+                      ARG <this>: CALL 'public final fun <get-value> (): kotlin.Any? declared in foo.bar.Composed' type=kotlin.Any? origin=GET_PROPERTY
+                        ARG <this>: GET_VAR '<this>(index:1): kotlin.Any? declared in foo.bar.composeFunctors.<no name provided>.fmap' type=foo.bar.Composed<F of foo.bar.composeFunctors, G of foo.bar.composeFunctors, A of foo.bar.composeFunctors.<no name provided>.fmap> origin=IMPLICIT_ARGUMENT
+                      ARG f: FUN_EXPR type=kotlin.Function1<kotlin.Any?, kotlin.Any?> origin=LAMBDA
+                        FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
+                          VALUE_PARAMETER kind:Regular name:it index:0 type:kotlin.Any?
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: kotlin.Any?): kotlin.Any? declared in foo.bar.composeFunctors.<no name provided>.fmap'
+                              CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=kotlin.Any? origin=null
+                                TYPE_ARG F: G of foo.bar.composeFunctors
+                                TYPE_ARG A: A of foo.bar.composeFunctors.<no name provided>.fmap
+                                TYPE_ARG B: B of foo.bar.composeFunctors.<no name provided>.fmap
+                                ARG functor: GET_VAR 'gg: foo.bar.Functor<G of foo.bar.composeFunctors> declared in foo.bar.composeFunctors' type=foo.bar.Functor<G of foo.bar.composeFunctors> origin=null
+                                ARG <this>: GET_VAR 'it: kotlin.Any? declared in foo.bar.composeFunctors.<no name provided>.fmap.<anonymous>' type=kotlin.Any? origin=null
+                                ARG f: GET_VAR 'f: kotlin.Function1<A of foo.bar.composeFunctors.<no name provided>.fmap, B of foo.bar.composeFunctors.<no name provided>.fmap> declared in foo.bar.composeFunctors.<no name provided>.fmap' type=kotlin.Function1<A of foo.bar.composeFunctors.<no name provided>.fmap, B of foo.bar.composeFunctors.<no name provided>.fmap> origin=null
           CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.composeFunctors.<no name provided>' type=foo.bar.composeFunctors.<no name provided><F of foo.bar.composeFunctors, G of foo.bar.composeFunctors> origin=OBJECT_LITERAL
   FUN name:fmap visibility:public modality:FINAL returnType:kotlin.Any?
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -1986,14 +1974,14 @@ FILE fqName:foo.bar fileName:/variance.kt
         CALL 'public final fun context <T, R> (with: T of kotlin.context, block: @[ContextFunctionTypeParams(count = 1)] kotlin.Function1<T of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=kotlin.Unit origin=null
           TYPE_ARG T: foo.bar.ListMonad
           TYPE_ARG R: kotlin.Unit
-          ARG with: GET_OBJECT 'CLASS OBJECT name:ListMonad modality:FINAL visibility:public superTypes:[foo.bar.Monad<kotlin.collections.List<*>>]' type=foo.bar.ListMonad
+          ARG with: GET_OBJECT 'CLASS OBJECT name:ListMonad modality:FINAL visibility:public superTypes:[foo.bar.Monad<io.github.kyay10.highkt.Constructor<kotlin.collections.List<*>>>]' type=foo.bar.ListMonad
           ARG block: FUN_EXPR type=kotlin.Function1<foo.bar.ListMonad, kotlin.Unit> origin=LAMBDA
             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Unit
               VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-ListMonad index:0 type:foo.bar.ListMonad
               BLOCK_BODY
                 VAR name:result type:kotlin.collections.List<kotlin.String> [val]
                   CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=kotlin.collections.List<out kotlin.String> origin=null
-                    TYPE_ARG F: kotlin.collections.List<*>
+                    TYPE_ARG F: io.github.kyay10.highkt.Constructor<kotlin.collections.List<*>>
                     TYPE_ARG A: kotlin.String
                     TYPE_ARG B: kotlin.String
                     ARG functor: GET_VAR '$context-ListMonad: foo.bar.ListMonad declared in foo.bar.listExample.<anonymous>' type=foo.bar.ListMonad origin=null
@@ -2034,11 +2022,11 @@ FILE fqName:foo.bar fileName:/variance.kt
             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Unit
               VALUE_PARAMETER kind:ExtensionReceiver name:$this$with index:0 type:foo.bar.Functor<kotlin.Any?>
               BLOCK_BODY
-                VAR name:a type:foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.Int> [val]
-                  CONSTRUCTOR_CALL 'public constructor <init> (value: kotlin.Any?) declared in foo.bar.BiComposed' type=foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.Int> origin=null
-                    TYPE_ARG (of class) BI: foo.bar.Either<*, *>
+                VAR name:a type:foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.Int> [val]
+                  CONSTRUCTOR_CALL 'public constructor <init> (value: kotlin.Any?) declared in foo.bar.BiComposed' type=foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.Int> origin=null
+                    TYPE_ARG (of class) BI: io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>
                     TYPE_ARG (of class) F: kotlin.Any?
-                    TYPE_ARG (of class) G: foo.bar.Identity<*>
+                    TYPE_ARG (of class) G: io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>
                     TYPE_ARG (of class) A: kotlin.Unit
                     TYPE_ARG (of class) B: kotlin.Int
                     ARG value: CALL 'public final fun right <A> (<this>: A of foo.bar.right): foo.bar.Either<kotlin.Nothing, A of foo.bar.right> declared in foo.bar' type=foo.bar.Either<kotlin.Nothing, foo.bar.Identity<kotlin.Int>> origin=null
@@ -2046,12 +2034,12 @@ FILE fqName:foo.bar fileName:/variance.kt
                       ARG <this>: CONSTRUCTOR_CALL 'public constructor <init> (value: A of foo.bar.Identity) declared in foo.bar.Identity' type=foo.bar.Identity<kotlin.Int> origin=null
                         TYPE_ARG (of class) A: kotlin.Int
                         ARG value: CONST Int type=kotlin.Int value=10
-                VAR name:b type:foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.String> [val]
-                  CALL 'public abstract fun fmap <A, B> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.Functor.fmap, B of foo.bar.Functor.fmap>): kotlin.Any? declared in foo.bar.Functor' type=foo.bar.BiComposed<out foo.bar.Either<*, *>, out io.github.kyay10.highkt.K<foo.bar.Const<*, *>, out kotlin.Unit>, out foo.bar.Identity<*>, out kotlin.Unit, out kotlin.String> origin=null
+                VAR name:b type:foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.String> [val]
+                  CALL 'public abstract fun fmap <A, B> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.Functor.fmap, B of foo.bar.Functor.fmap>): kotlin.Any? declared in foo.bar.Functor' type=foo.bar.BiComposed<out io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, out io.github.kyay10.highkt.K<io.github.kyay10.highkt.Constructor<foo.bar.Const<*, *>>, out kotlin.Unit>, out io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, out kotlin.Unit, out kotlin.String> origin=null
                     TYPE_ARG A: kotlin.Int
                     TYPE_ARG B: kotlin.String
                     ARG <this>(index:0): GET_VAR '$this$with: foo.bar.Functor<kotlin.Any?> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.Functor<kotlin.Any?> origin=IMPLICIT_ARGUMENT
-                    ARG <this>(index:1): GET_VAR 'val a: foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.Int> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.Int> origin=null
+                    ARG <this>(index:1): GET_VAR 'val a: foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.Int> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.Int> origin=null
                     ARG f: FUN_EXPR type=kotlin.Function1<kotlin.Int, kotlin.String> origin=LAMBDA
                       FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.String
                         VALUE_PARAMETER kind:Regular name:it index:0 type:kotlin.Int
@@ -2059,11 +2047,11 @@ FILE fqName:foo.bar fileName:/variance.kt
                           RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: kotlin.Int): kotlin.String declared in foo.bar.maybeExample.<anonymous>'
                             CALL 'public open fun toString (): kotlin.String declared in kotlin.Int' type=kotlin.String origin=null
                               ARG <this>: GET_VAR 'it: kotlin.Int declared in foo.bar.maybeExample.<anonymous>.<anonymous>' type=kotlin.Int origin=null
-                VAR name:expected type:foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.String> [val]
-                  CONSTRUCTOR_CALL 'public constructor <init> (value: kotlin.Any?) declared in foo.bar.BiComposed' type=foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.String> origin=null
-                    TYPE_ARG (of class) BI: foo.bar.Either<*, *>
+                VAR name:expected type:foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.String> [val]
+                  CONSTRUCTOR_CALL 'public constructor <init> (value: kotlin.Any?) declared in foo.bar.BiComposed' type=foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.String> origin=null
+                    TYPE_ARG (of class) BI: io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>
                     TYPE_ARG (of class) F: kotlin.Any?
-                    TYPE_ARG (of class) G: foo.bar.Identity<*>
+                    TYPE_ARG (of class) G: io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>
                     TYPE_ARG (of class) A: kotlin.Unit
                     TYPE_ARG (of class) B: kotlin.String
                     ARG value: CALL 'public final fun right <A> (<this>: A of foo.bar.right): foo.bar.Either<kotlin.Nothing, A of foo.bar.right> declared in foo.bar' type=foo.bar.Either<kotlin.Nothing, foo.bar.Identity<kotlin.String>> origin=null
@@ -2075,11 +2063,11 @@ FILE fqName:foo.bar fileName:/variance.kt
                   BRANCH
                     if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
                       ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-                        ARG arg0: GET_VAR 'val b: foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.String> origin=null
-                        ARG arg1: GET_VAR 'val expected: foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.String> origin=null
+                        ARG arg0: GET_VAR 'val b: foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.String> origin=null
+                        ARG arg1: GET_VAR 'val expected: foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.String> origin=null
                     then: CALL 'public final fun error (message: kotlin.Any): kotlin.Nothing declared in kotlin' type=kotlin.Nothing origin=null
                       ARG message: STRING_CONCATENATION type=kotlin.String
-                        GET_VAR 'val b: foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, kotlin.String> origin=null
+                        GET_VAR 'val b: foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.String> origin=null
   FUN name:pairExample visibility:private modality:FINAL returnType:kotlin.Unit
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='private final fun pairExample (): kotlin.Unit declared in foo.bar'
@@ -2274,7 +2262,10 @@ FILE fqName:foo.bar fileName:/variance.kt
   TYPEALIAS name:Compose visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:G index:1 variance: superTypes:[kotlin.Any?] reified:false
-  TYPEALIAS name:Maybe visibility:public expandedType:foo.bar.BiComposed<foo.bar.Either<*, *>, kotlin.Any?, foo.bar.Identity<*>, kotlin.Unit, A of foo.bar.Maybe>
+  TYPEALIAS name:ConstK visibility:public expandedType:io.github.kyay10.highkt.Constructor<foo.bar.Const<*, *>>
+  TYPEALIAS name:EitherK visibility:public expandedType:io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>
+  TYPEALIAS name:IdentityK visibility:public expandedType:io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>
+  TYPEALIAS name:Maybe visibility:public expandedType:foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, A of foo.bar.Maybe>
     TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
   TYPEALIAS name:MaybeK visibility:public expandedType:kotlin.Any?
   TYPEALIAS name:Swap visibility:public expandedType:kotlin.Any?

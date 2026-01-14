@@ -1,19 +1,19 @@
-@file:OptIn(ExperimentalContracts::class)
-@file:Suppress("NOTHING_TO_INLINE")
+@file:Suppress("NOTHING_TO_INLINE", "unused")
 
 package io.github.kyay10.highkt
 
-import kotlin.contracts.ExperimentalContracts
+public sealed interface TypeFunctionMarker
+
+public sealed interface Constructor<C>
 
 @Target(AnnotationTarget.CLASS)
 public annotation class TypeFunction
 
 // Special type-lambda to represent identity type constructor
 @TypeFunction
-public interface Id<@Suppress("unused") A>
-public typealias Identity = Id<*>
+public interface Id<A>
+public typealias Identity = Constructor<Id<*>>
 
-@Suppress("unused")
 public interface K<out F, A>
 
 public typealias Out<F, A> = K<F, out A>

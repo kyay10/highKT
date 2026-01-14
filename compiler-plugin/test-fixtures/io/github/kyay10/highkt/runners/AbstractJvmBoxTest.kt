@@ -6,9 +6,9 @@ import io.github.kyay10.highkt.services.PluginRuntimeAnnotationsProvider
 import org.jetbrains.kotlin.test.FirParser
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
 import org.jetbrains.kotlin.test.directives.CodegenTestDirectives
-import org.jetbrains.kotlin.test.directives.DiagnosticsDirectives
 import org.jetbrains.kotlin.test.directives.FirDiagnosticsDirectives
 import org.jetbrains.kotlin.test.directives.JvmEnvironmentConfigurationDirectives
+import org.jetbrains.kotlin.test.directives.LanguageSettingsDirectives
 import org.jetbrains.kotlin.test.runners.codegen.AbstractFirBlackBoxCodegenTestBase
 import org.jetbrains.kotlin.test.services.EnvironmentBasedStandardLibrariesPathProvider
 import org.jetbrains.kotlin.test.services.KotlinStandardLibrariesPathProvider
@@ -36,7 +36,7 @@ open class AbstractJvmBoxTest : AbstractFirBlackBoxCodegenTestBase(FirParser.Lig
       +CodegenTestDirectives.DUMP_IR
       +FirDiagnosticsDirectives.FIR_DUMP
       +JvmEnvironmentConfigurationDirectives.FULL_JDK
-      DiagnosticsDirectives.DIAGNOSTICS with "-USELESS_IS_CHECK"
+      +LanguageSettingsDirectives.PROGRESSIVE_MODE
 
       +CodegenTestDirectives.IGNORE_DEXING // Avoids loading R8 from the classpath.
     }

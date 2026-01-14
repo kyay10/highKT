@@ -25,13 +25,13 @@ fun <M, A> pure(a: A) = with(monad) { pure(a) }
 context(monad: Monad<M>)
 fun <M, A, B> Out<M, A>.bind(f: (A) -> Out<M, B>) = with(monad) { this@bind.bind(f) }
 
-object ListMonad : Monad<List<*>> {
+object ListMonad : Monad<Constructor<List<*>>> {
   override fun <A> pure(a: A) = listOf(a)
 
   override fun <A, B> List<A>.bind(f: (A) -> List<B>) = flatMap(f)
 }
 
-class PairFunctor<L> : Functor<Out<Pair<*, *>, L>> {
+class PairFunctor<L> : Functor<Out<Constructor<Pair<*, *>>, L>> {
   override fun <A, B> Pair<L, A>.fmap(f: (A) -> B): Pair<L, B> {
     val (l, a) = this
     return l to f(a)
@@ -39,41 +39,41 @@ class PairFunctor<L> : Functor<Out<Pair<*, *>, L>> {
 }
 
 data class Composed<out F, out G, out A>(val value: Out<F, Out<G, A>>)
-typealias Compose<F, G> = Bi<Composed<*, *, *>, F, G>
+typealias Compose<F, G> = Bi<Constructor<Composed<*, *, *>>, F, G>
 
 context(ff: Functor<F>, gg: Functor<G>)
 fun <F, G> composeFunctors() = object : Functor<Compose<F, G>> {
-  override fun <A, B> Composed<F, G, A>.fmap(f: (A) -> B) = context(ff, gg) { // KT-81441
-    Composed(value.fmap { it.fmap(f) })
-  }
+  override fun <A, B> Composed<F, G, A>.fmap(f: (A) -> B) = Composed(value.fmap { it.fmap(f) })
 }
 
 data class Reader<in R, out A>(val run: (R) -> A)
 
+typealias ConstK = Constructor<Const<*, *>>
 data class Const<out C, out A>(val value: C)
 
+typealias IdentityK = Constructor<Identity<*>>
 data class Identity<out A>(val value: A)
 
 infix fun <A, B, C> ((A) -> B).compose(g: (B) -> C) = { a: A -> g(this(a)) }
 
-class ReaderMonad<R> : Monad<In<Reader<*, *>, R>> {
+class ReaderMonad<R> : Monad<In<Constructor<Reader<*, *>>, R>> {
   override fun <A, B> Reader<R, A>.fmap(f: (A) -> B) = Reader(run compose f)
 
   override fun <A> pure(a: A) = Reader { _: R -> a }
   override fun <A, B> Reader<R, A>.bind(f: (A) -> Reader<R, B>) = Reader { r: R -> f(run(r)).run(r) }
 }
 
-class ConstFunctor<C> : Functor<Out<Const<*, *>, C>> {
+class ConstFunctor<C> : Functor<Out<ConstK, C>> {
   override fun <A, B> Const<C, A>.fmap(f: (A) -> B) = Const<_, B>(value)
 }
 
-object UnitMonad : Monad<Out<Const<*, *>, Unit>> {
+object UnitMonad : Monad<Out<ConstK, Unit>> {
   override fun <A> pure(a: A) = Const<_, A>(Unit)
 
   override fun <A, B> Const<Unit, A>.bind(f: (A) -> Const<Unit, B>) = Const<_, B>(Unit)
 }
 
-object IdentityFunctor : Functor<Identity<*>> {
+object IdentityFunctor : Functor<IdentityK> {
   override fun <A, B> Identity<A>.fmap(f: (A) -> B) = Identity(f(value))
 }
 
@@ -98,13 +98,14 @@ fun <F, A> rightFunctor() = object : Functor<Out<F, A>> {
 }
 
 data class Swapped<out F, out B, out A>(val value: Bi<F, A, B>)
-typealias Swap<F> = Out<Swapped<*, *, *>, F>
+typealias Swap<F> = Out<Constructor<Swapped<*, *, *>>, F>
 
 context(_: BiFunctor<F>)
 fun <F, A> leftFunctor() = object : Functor<Out<Swap<F>, A>> {
   override fun <B, C> Swapped<F, A, B>.fmap(f: (B) -> C) = value.leftMap(f).let(::Swapped)
 }
 
+typealias EitherK = Constructor<Either<*, *>>
 sealed class Either<out A, out B>
 data class Left<out A>(val value: A) : Either<A, Nothing>()
 data class Right<out B>(val value: B) : Either<Nothing, B>()
@@ -112,14 +113,14 @@ data class Right<out B>(val value: B) : Either<Nothing, B>()
 fun <A> A.right(): Either<Nothing, A> = Right(this)
 fun <A> A.left(): Either<A, Nothing> = Left(this)
 
-object EitherBiFunctor : BiFunctor<Either<*, *>> {
+object EitherBiFunctor : BiFunctor<EitherK> {
   override fun <A, B, C, D> Either<A, B>.bimap(f: (A) -> C, g: (B) -> D) = when (this) {
     is Left<A> -> f(value).left()
     is Right<B> -> g(value).right()
   }
 }
 
-object PairBiFunctor : BiFunctor<Pair<*, *>> {
+object PairBiFunctor : BiFunctor<Constructor<Pair<*, *>>> {
   override fun <A, B, C, D> Pair<A, B>.bimap(f: (A) -> C, g: (B) -> D): Pair<C, D> {
     val (a, b) = this
     return f(a) to g(b)
@@ -127,7 +128,7 @@ object PairBiFunctor : BiFunctor<Pair<*, *>> {
 }
 
 data class BiComposed<out BI, out F, out G, out A, out B>(val value: Bi<BI, Out<F, A>, Out<G, B>>)
-typealias BiCompose<BI, F, G> = Bi<Out<BiComposed<*, *, *, *, *>, BI>, F, G>
+typealias BiCompose<BI, F, G> = Bi<Out<Constructor<BiComposed<*, *, *, *, *>>, BI>, F, G>
 
 context(_: BiFunctor<BF>, _: Functor<F>, _: Functor<G>)
 fun <BF, F, G> composeBiFunctors() = object : BiFunctor<BiCompose<BF, F, G>> {
@@ -137,11 +138,11 @@ fun <BF, F, G> composeBiFunctors() = object : BiFunctor<BiCompose<BF, F, G>> {
   ) = value.bimap({ it.fmap(f) }) { it.fmap(g) }.let(::BiComposed)
 }
 
-typealias Maybe<A> = BiComposed<Either<*, *>, Out<Const<*, *>, Unit>, Identity<*>, Unit, A>
-typealias MaybeK = Out<BiCompose<Either<*, *>, Out<Const<*, *>, Unit>, Identity<*>>, Unit>
+typealias Maybe<A> = BiComposed<EitherK, Out<ConstK, Unit>, IdentityK, Unit, A>
+typealias MaybeK = Out<BiCompose<EitherK, Out<ConstK, Unit>, IdentityK>, Unit>
 
 val maybeFunctor: Functor<MaybeK> = context(EitherBiFunctor, ConstFunctor<Unit>(), IdentityFunctor) {
-  context(composeBiFunctors<Either<*, *>, Out<Const<*, *>, Unit>, Identity<*>>()) {
+  context(composeBiFunctors<EitherK, Out<ConstK, Unit>, IdentityK>()) {
     rightFunctor<_, Unit>()
   }
 }

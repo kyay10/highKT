@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.fir.resolve.toRegularClassSymbol
 import org.jetbrains.kotlin.fir.resolve.toSymbol
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
+import org.jetbrains.kotlin.fir.types.ConeClassLikeType
 import org.jetbrains.kotlin.fir.types.ConeFlexibleType
 import org.jetbrains.kotlin.fir.types.ConeIntersectionType
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
@@ -21,6 +22,7 @@ import org.jetbrains.kotlin.fir.types.classId
 import org.jetbrains.kotlin.fir.types.constructType
 import org.jetbrains.kotlin.fir.types.isMarkedNullable
 import org.jetbrains.kotlin.fir.types.isStarProjection
+import org.jetbrains.kotlin.fir.types.lowerBoundIfFlexible
 import org.jetbrains.kotlin.fir.types.replaceType
 import org.jetbrains.kotlin.fir.types.toTrivialFlexibleType
 import org.jetbrains.kotlin.fir.types.type
@@ -46,6 +48,11 @@ private fun ConeKotlinType.deconstructIfKType(): Pair<ConeKotlinType, List<ConeT
     // Now realType is not a K
   }
   if (appliedTypes.isEmpty()) return null // implies this was not a K at all
+  if (realType.lowerBoundIfFlexible() is ConeClassLikeType) { // so type parameters are allowed
+    if (realType.classId != CONSTRUCTOR_CLASS_ID)
+      return null // Must be Constructor
+    realType = realType.typeArguments.firstOrNull()?.type?.fullyExpandedType() ?: return null
+  }
   // Could be relaxed
   if (realType.typeArguments.any { !it.isStarProjection }) return null
   return realType to appliedTypes
@@ -128,7 +135,8 @@ fun ConeKotlinType.toCanonicalKType(): ConeKotlinType? {
   if (typeArguments.isEmpty()) return null
   if (isK) return null
   val symbol = toSymbol() ?: return null
-  return symbol.constructType(Array(typeArguments.size) { ConeStarProjection })
+  val constructor = symbol.constructType(Array(typeArguments.size) { ConeStarProjection })
+  return CONSTRUCTOR_CLASS_ID.createConeType(c.session, arrayOf(constructor))
     .createKType(typeArguments.asList())
     .withNullability(canBeNull(c.session), c.session.typeContext, preserveAttributes = true)
 }

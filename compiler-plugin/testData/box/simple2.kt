@@ -21,7 +21,7 @@ context(b: BiFunctor<F>)
 fun <A, B, C, D, F> K2<F, A, B>.bimap(f: (A) -> C, g: (B) -> D) = with(b) { this@bimap.bimap(f, g) }
 
 data class BiComposed<Bi, F, G, A, B>(val value: K2<Bi, K<F, A>, K<G, B>>)
-typealias BiCompose<Bi, F, G> = K3<BiComposed<*, *, *, *, *>, Bi, F, G>
+typealias BiCompose<Bi, F, G> = K3<Constructor<BiComposed<*, *, *, *, *>>, Bi, F, G>
 
 context(_: BiFunctor<BF>, _: Functor<F>, _: Functor<G>)
 fun <BF, F, G> composeBiFunctors() = object : BiFunctor<BiCompose<BF, F, G>> {

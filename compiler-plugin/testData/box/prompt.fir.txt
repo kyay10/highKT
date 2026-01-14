@@ -47,14 +47,14 @@ FILE: prompt.kt
         public final fun copy(run: R|suspend (S) -> kotlin/Pair<A, S>| = this@R|foo/bar/State|.R|foo/bar/State.run|): R|foo/bar/State<S, A>|
 
     }
-    public final typealias StateOf<S> = R|io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>|
-    context(m: R|foo/bar/Monad<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>>|)
-    public final suspend fun <S, A, B> R|foo/bar/Prompt<io/github/kyay10/highkt/K<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>, A>>|.b2(a: R|io/github/kyay10/highkt/K<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>, B>|): R|B| {
-        ^b2 R|foo/bar/b|<R|{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>|, R|A|, R|B|>(R|<local>/m|, this@R|foo/bar/b2|, R|<local>/a|)
+    public final typealias StateOf<S> = R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, S>|
+    context(m: R|foo/bar/Monad<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, S>>|)
+    public final suspend fun <S, A, B> R|foo/bar/Prompt<io/github/kyay10/highkt/K<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, S>, A>>|.b2(a: R|io/github/kyay10/highkt/K<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, S>, B>|): R|B| {
+        ^b2 R|foo/bar/b|<R|{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, S>|, R|A|, R|B|>(R|<local>/m|, this@R|foo/bar/b2|, R|<local>/a|)
     }
-    context(m: R|foo/bar/Monad<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>>|)
-    public final suspend fun <S, A, B> R|foo/bar/Prompt<foo/bar/State<S, A>>|.b3(a: R|io/github/kyay10/highkt/K<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>, B>|): R|B| {
-        ^b3 R|foo/bar/b|<R|{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<foo/bar/State<*, *>, S>|, R|A|, R|B|>(R|<local>/m|, this@R|foo/bar/b3|, R|<local>/a|)
+    context(m: R|foo/bar/Monad<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, S>>|)
+    public final suspend fun <S, A, B> R|foo/bar/Prompt<foo/bar/State<S, A>>|.b3(a: R|io/github/kyay10/highkt/K<{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, S>, B>|): R|B| {
+        ^b3 R|foo/bar/b|<R|{foo/bar/StateOf<S>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, S>|, R|A|, R|B|>(R|<local>/m|, this@R|foo/bar/b3|, R|<local>/a|)
     }
     public final fun box(): R|kotlin/String| {
         ^box String(OK)

@@ -39,7 +39,7 @@ FILE: simple.kt
         }
         )
     }
-    public final object ListMonad : R|foo/bar/Monad<kotlin/collections/List<*>>| {
+    public final object ListMonad : R|foo/bar/Monad<io/github/kyay10/highkt/Constructor<kotlin/collections/List<*>>>| {
         private constructor(): R|foo/bar/ListMonad| {
             super<R|kotlin/Any|>()
         }
@@ -53,7 +53,7 @@ FILE: simple.kt
         }
 
     }
-    public final class PairFunctor<L> : R|foo/bar/Functor<io/github/kyay10/highkt/K<kotlin/Pair<*, *>, L>>| {
+    public final class PairFunctor<L> : R|foo/bar/Functor<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<kotlin/Pair<*, *>>, L>>| {
         public constructor<L>(): R|foo/bar/PairFunctor<L>| {
             super<R|kotlin/Any|>()
         }
@@ -79,7 +79,7 @@ FILE: simple.kt
         public final fun copy(value: R|io/github/kyay10/highkt/K<F, io/github/kyay10/highkt/K<G, A>>| = this@R|foo/bar/Composed|.R|foo/bar/Composed.value|): R|foo/bar/Composed<F, G, A>|
 
     }
-    public final typealias Compose<F, G> = R|{io/github/kyay10/highkt/K2<foo/bar/Composed<*, *, *>, F, G>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Composed<*, *, *>, F>, G>|
+    public final typealias Compose<F, G> = R|{io/github/kyay10/highkt/K2<io/github/kyay10/highkt/Constructor<foo/bar/Composed<*, *, *>>, F, G>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/Composed<*, *, *>>, F>, G>|
     context(ff: R|foo/bar/Functor<F>|, gg: R|foo/bar/Functor<G>|)
     public final fun <F, G> composeFunctors(): R|foo/bar/Functor<foo/bar/Compose<F, G>>| {
         ^composeFunctors object : R|foo/bar/Functor<foo/bar/Compose<F, G>>| {
@@ -88,13 +88,10 @@ FILE: simple.kt
             }
 
             public open override fun <A, B> R|foo/bar/Composed<F, G, A>|.fmap(f: R|(A) -> B|): R|foo/bar/Composed<F, G, B>| {
-                ^fmap R|kotlin/context|<R|foo/bar/Functor<F>|, R|foo/bar/Functor<G>|, R|foo/bar/Composed<F, G, B>|>(R|<local>/ff|, R|<local>/gg|, <L> = context(<unused var>: R|foo/bar/Functor<F>|, <unused var>: R|foo/bar/Functor<G>|) context@fun <anonymous>(): R|foo/bar/Composed<F, G, B>| <inline=Inline, kind=EXACTLY_ONCE>  {
-                    ^ R|foo/bar/Composed.Composed|<R|F|, R|G|, R|B|>(context(R|<local>/<unused var>|) this@R|foo/bar/<anonymous>.fmap|.R|SubstitutionOverride<foo/bar/Composed.value: R|io/github/kyay10/highkt/K<F, io/github/kyay10/highkt/K<G, A>>|>|.R|foo/bar/fmap|<R|F|, R|io/github/kyay10/highkt/K<G, A>|, R|io/github/kyay10/highkt/K<G, B>|>(<L> = fmap@fun <anonymous>(it: R|io/github/kyay10/highkt/K<G, A>|): R|io/github/kyay10/highkt/K<G, B>| <inline=NoInline>  {
-                        ^ context(R|<local>/<unused var>|) R|<local>/it|.R|foo/bar/fmap|<R|G|, R|A|, R|B|>(R|<local>/f|)
-                    }
-                    ))
+                ^fmap R|foo/bar/Composed.Composed|<R|F|, R|G|, R|B|>(context(R|<local>/ff|) this@R|foo/bar/<anonymous>.fmap|.R|SubstitutionOverride<foo/bar/Composed.value: R|io/github/kyay10/highkt/K<F, io/github/kyay10/highkt/K<G, A>>|>|.R|foo/bar/fmap|<R|F|, R|io/github/kyay10/highkt/K<G, A>|, R|io/github/kyay10/highkt/K<G, B>|>(<L> = fmap@fun <anonymous>(it: R|io/github/kyay10/highkt/K<G, A>|): R|io/github/kyay10/highkt/K<G, B>| <inline=NoInline>  {
+                    ^ context(R|<local>/gg|) R|<local>/it|.R|foo/bar/fmap|<R|G|, R|A|, R|B|>(R|<local>/f|)
                 }
-                )
+                ))
             }
 
         }
@@ -113,6 +110,7 @@ FILE: simple.kt
         public final fun copy(run: R|(R) -> A| = this@R|foo/bar/Reader|.R|foo/bar/Reader.run|): R|foo/bar/Reader<R, A>|
 
     }
+    public final typealias ConstK = R|io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>|
     public final data class Const<C, A> : R|kotlin/Any| {
         public constructor<C, A>(value: R|C|): R|foo/bar/Const<C, A>| {
             super<R|kotlin/Any|>()
@@ -126,6 +124,7 @@ FILE: simple.kt
         public final fun copy(value: R|C| = this@R|foo/bar/Const|.R|foo/bar/Const.value|): R|foo/bar/Const<C, A>|
 
     }
+    public final typealias IdentityK = R|io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>|
     public final data class Identity<A> : R|kotlin/Any| {
         public constructor<A>(value: R|A|): R|foo/bar/Identity<A>| {
             super<R|kotlin/Any|>()
@@ -145,7 +144,7 @@ FILE: simple.kt
         }
 
     }
-    public final class ReaderMonad<R> : R|foo/bar/Monad<io/github/kyay10/highkt/K<foo/bar/Reader<*, *>, R>>| {
+    public final class ReaderMonad<R> : R|foo/bar/Monad<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/Reader<*, *>>, R>>| {
         public constructor<R>(): R|foo/bar/ReaderMonad<R>| {
             super<R|kotlin/Any|>()
         }
@@ -169,7 +168,7 @@ FILE: simple.kt
         }
 
     }
-    public final class ConstFunctor<C> : R|foo/bar/Functor<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, C>>| {
+    public final class ConstFunctor<C> : R|foo/bar/Functor<io/github/kyay10/highkt/K<foo/bar/ConstK, C>>| {
         public constructor<C>(): R|foo/bar/ConstFunctor<C>| {
             super<R|kotlin/Any|>()
         }
@@ -179,7 +178,7 @@ FILE: simple.kt
         }
 
     }
-    public final object UnitMonad : R|foo/bar/Monad<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>| {
+    public final object UnitMonad : R|foo/bar/Monad<io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>>| {
         private constructor(): R|foo/bar/UnitMonad| {
             super<R|kotlin/Any|>()
         }
@@ -193,7 +192,7 @@ FILE: simple.kt
         }
 
     }
-    public final object IdentityFunctor : R|foo/bar/Functor<foo/bar/Identity<*>>| {
+    public final object IdentityFunctor : R|foo/bar/Functor<foo/bar/IdentityK>| {
         private constructor(): R|foo/bar/IdentityFunctor| {
             super<R|kotlin/Any|>()
         }
@@ -271,7 +270,7 @@ FILE: simple.kt
         public final fun copy(value: R|{io/github/kyay10/highkt/K2<F, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, A>, B>| = this@R|foo/bar/Swapped|.R|foo/bar/Swapped.value|): R|foo/bar/Swapped<F, B, A>|
 
     }
-    public final typealias Swap<F> = R|io/github/kyay10/highkt/K<foo/bar/Swapped<*, *, *>, F>|
+    public final typealias Swap<F> = R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/Swapped<*, *, *>>, F>|
     context(<unused var>: R|foo/bar/BiFunctor<F>|)
     public final fun <F, A> leftFunctor(): R|foo/bar/Functor<io/github/kyay10/highkt/K<foo/bar/Swap<F>, A>>| {
         ^leftFunctor object : R|foo/bar/Functor<io/github/kyay10/highkt/K<foo/bar/Swap<F>, A>>| {
@@ -286,6 +285,7 @@ FILE: simple.kt
         }
 
     }
+    public final typealias EitherK = R|io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>|
     public sealed class Either<A, B> : R|kotlin/Any| {
         protected constructor<A, B>(): R|foo/bar/Either<A, B>| {
             super<R|kotlin/Any|>()
@@ -318,7 +318,7 @@ FILE: simple.kt
         public final fun copy(value: R|B| = this@R|foo/bar/Right|.R|foo/bar/Right.value|): R|foo/bar/Right<A, B>|
 
     }
-    public final object EitherBiFunctor : R|foo/bar/BiFunctor<foo/bar/Either<*, *>>| {
+    public final object EitherBiFunctor : R|foo/bar/BiFunctor<foo/bar/EitherK>| {
         private constructor(): R|foo/bar/EitherBiFunctor| {
             super<R|kotlin/Any|>()
         }
@@ -336,7 +336,7 @@ FILE: simple.kt
         }
 
     }
-    public final object PairBiFunctor : R|foo/bar/BiFunctor<kotlin/Pair<*, *>>| {
+    public final object PairBiFunctor : R|foo/bar/BiFunctor<io/github/kyay10/highkt/Constructor<kotlin/Pair<*, *>>>| {
         private constructor(): R|foo/bar/PairBiFunctor| {
             super<R|kotlin/Any|>()
         }
@@ -362,7 +362,7 @@ FILE: simple.kt
         public final fun copy(value: R|{io/github/kyay10/highkt/K2<Bi, io/github/kyay10/highkt/K<F, A>, io/github/kyay10/highkt/K<G, B>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<Bi, io/github/kyay10/highkt/K<F, A>>, io/github/kyay10/highkt/K<G, B>>| = this@R|foo/bar/BiComposed|.R|foo/bar/BiComposed.value|): R|foo/bar/BiComposed<Bi, F, G, A, B>|
 
     }
-    public final typealias BiCompose<Bi, F, G> = R|{io/github/kyay10/highkt/K3<foo/bar/BiComposed<*, *, *, *, *>, Bi, F, G>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<foo/bar/BiComposed<*, *, *, *, *>, Bi, F>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, Bi>, F>, G>|
+    public final typealias BiCompose<Bi, F, G> = R|{io/github/kyay10/highkt/K3<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, Bi, F, G>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, Bi, F>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, Bi>, F>, G>|
     context(<unused var>: R|foo/bar/BiFunctor<BF>|, <unused var>: R|foo/bar/Functor<F>|, <unused var>: R|foo/bar/Functor<G>|)
     public final fun <BF, F, G> composeBiFunctors(): R|foo/bar/BiFunctor<foo/bar/BiCompose<BF, F, G>>| {
         ^composeBiFunctors object : R|foo/bar/BiFunctor<foo/bar/BiCompose<BF, F, G>>| {
@@ -383,16 +383,16 @@ FILE: simple.kt
         }
 
     }
-    public final typealias Maybe<A> = R|foo/bar/BiComposed<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>, kotlin/Unit, A>|
-    public final typealias MaybeK = R|io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>, kotlin/Unit>|
-    public final val maybeFunctor: R|foo/bar/Functor<{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>, kotlin/Unit>>| = R|kotlin/context|<R|foo/bar/EitherBiFunctor|, R|foo/bar/ConstFunctor<kotlin/Unit>|, R|foo/bar/IdentityFunctor|, R|foo/bar/Functor<io/github/kyay10/highkt/K<{foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>, foo/bar/Identity<*>>, kotlin/Unit>>|>(Q|foo/bar/EitherBiFunctor|, R|foo/bar/ConstFunctor.ConstFunctor|<R|kotlin/Unit|>(), Q|foo/bar/IdentityFunctor|, <L> = context(<unused var>: R|foo/bar/EitherBiFunctor|, <unused var>: R|foo/bar/ConstFunctor<kotlin/Unit>|, <unused var>: R|foo/bar/IdentityFunctor|) context@fun <anonymous>(): R|foo/bar/Functor<io/github/kyay10/highkt/K<{foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>, foo/bar/Identity<*>>, kotlin/Unit>>| <inline=Inline, kind=EXACTLY_ONCE>  {
-        ^ R|kotlin/context|<R|foo/bar/BiFunctor<foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>>|, R|foo/bar/Functor<io/github/kyay10/highkt/K<{foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>, foo/bar/Identity<*>>, kotlin/Unit>>|>(context(R|<local>/<unused var>|, R|<local>/<unused var>|, R|<local>/<unused var>|) R|foo/bar/composeBiFunctors|<R|foo/bar/Either<*, *>|, R|io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>|, R|foo/bar/Identity<*>|>(), <L> = context(<unused var>: R|foo/bar/BiFunctor<foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>>|) context@fun <anonymous>(): R|foo/bar/Functor<io/github/kyay10/highkt/K<{foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>, foo/bar/Identity<*>>, kotlin/Unit>>| <inline=Inline, kind=EXACTLY_ONCE>  {
-            ^ context(R|<local>/<unused var>|) R|foo/bar/rightFunctor|<R|{foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>>, foo/bar/Identity<*>>|, R|kotlin/Unit|>()
+    public final typealias Maybe<A> = R|foo/bar/BiComposed<foo/bar/EitherK, io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>, foo/bar/IdentityK, kotlin/Unit, A>|
+    public final typealias MaybeK = R|io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/EitherK, io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>, foo/bar/IdentityK>, kotlin/Unit>|
+    public final val maybeFunctor: R|foo/bar/Functor<{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/EitherK, io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>, foo/bar/IdentityK>, kotlin/Unit>>| = R|kotlin/context|<R|foo/bar/EitherBiFunctor|, R|foo/bar/ConstFunctor<kotlin/Unit>|, R|foo/bar/IdentityFunctor|, R|foo/bar/Functor<io/github/kyay10/highkt/K<{foo/bar/BiCompose<{foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>, {foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, {foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, {foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>>, {foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>>, kotlin/Unit>>|>(Q|foo/bar/EitherBiFunctor|, R|foo/bar/ConstFunctor.ConstFunctor|<R|kotlin/Unit|>(), Q|foo/bar/IdentityFunctor|, <L> = context(<unused var>: R|foo/bar/EitherBiFunctor|, <unused var>: R|foo/bar/ConstFunctor<kotlin/Unit>|, <unused var>: R|foo/bar/IdentityFunctor|) context@fun <anonymous>(): R|foo/bar/Functor<io/github/kyay10/highkt/K<{foo/bar/BiCompose<{foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>, {foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, {foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, {foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>>, {foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>>, kotlin/Unit>>| <inline=Inline, kind=EXACTLY_ONCE>  {
+        ^ R|kotlin/context|<R|foo/bar/BiFunctor<foo/bar/BiCompose<{foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>, {foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>>>|, R|foo/bar/Functor<io/github/kyay10/highkt/K<{foo/bar/BiCompose<{foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>, {foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, {foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, {foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>>, {foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>>, kotlin/Unit>>|>(context(R|<local>/<unused var>|, R|<local>/<unused var>|, R|<local>/<unused var>|) R|foo/bar/composeBiFunctors|<R|{foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>|, R|io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>|, R|{foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>|>(), <L> = context(<unused var>: R|foo/bar/BiFunctor<foo/bar/BiCompose<{foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>, {foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>>>|) context@fun <anonymous>(): R|foo/bar/Functor<io/github/kyay10/highkt/K<{foo/bar/BiCompose<{foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>, {foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, {foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, {foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>>, {foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>>, kotlin/Unit>>| <inline=Inline, kind=EXACTLY_ONCE>  {
+            ^ context(R|<local>/<unused var>|) R|foo/bar/rightFunctor|<R|{foo/bar/BiCompose<{foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>, {foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, {foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, {foo/bar/EitherK=} io/github/kyay10/highkt/Constructor<foo/bar/Either<*, *>>>, io/github/kyay10/highkt/K<{foo/bar/ConstK=} io/github/kyay10/highkt/Constructor<foo/bar/Const<*, *>>, kotlin/Unit>>, {foo/bar/IdentityK=} io/github/kyay10/highkt/Constructor<foo/bar/Identity<*>>>|, R|kotlin/Unit|>()
         }
         )
     }
     )
-        public get(): R|foo/bar/Functor<{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>, kotlin/Unit>>|
+        public get(): R|foo/bar/Functor<{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/EitherK, io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>, foo/bar/IdentityK>, kotlin/Unit>>|
     public abstract interface NT<F, G> : R|kotlin/Any| {
         public abstract operator fun <A> invoke(fa: R|io/github/kyay10/highkt/K<F, A>|): R|io/github/kyay10/highkt/K<G, A>|
 
@@ -446,7 +446,7 @@ FILE: simple.kt
     }
     private final fun listExample(): R|kotlin/Unit| {
         ^listExample R|kotlin/context|<R|foo/bar/ListMonad|, R|kotlin/Unit|>(Q|foo/bar/ListMonad|, <L> = context(<unused var>: R|foo/bar/ListMonad|) context@fun <anonymous>(): R|kotlin/Unit| <inline=Inline, kind=EXACTLY_ONCE>  {
-            lval result: R|kotlin/collections/List<kotlin/String>| = context(R|<local>/<unused var>|) R|kotlin/collections/listOf|<R|kotlin/String|>(vararg(String(Hello), String(World))).R|foo/bar/fmap|<R|kotlin/collections/List<*>|, R|kotlin/String|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/String|): R|kotlin/String| <inline=NoInline>  {
+            lval result: R|kotlin/collections/List<kotlin/String>| = context(R|<local>/<unused var>|) R|kotlin/collections/listOf|<R|kotlin/String|>(vararg(String(Hello), String(World))).R|foo/bar/fmap|<R|io/github/kyay10/highkt/Constructor<kotlin/collections/List<*>>|, R|kotlin/String|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/String|): R|kotlin/String| <inline=NoInline>  {
                 ^ <strcat>(R|<local>/it|, String(!))
             }
             )
@@ -461,7 +461,7 @@ FILE: simple.kt
     }
     private final fun pairExample(): R|kotlin/Unit| {
         ^pairExample R|kotlin/context|<R|foo/bar/PairFunctor<kotlin/Int>|, R|kotlin/Unit|>(R|foo/bar/PairFunctor.PairFunctor|<R|kotlin/Int|>(), <L> = context(<unused var>: R|foo/bar/PairFunctor<kotlin/Int>|) context@fun <anonymous>(): R|kotlin/Unit| <inline=Inline, kind=EXACTLY_ONCE>  {
-            lval result: R|kotlin/Pair<kotlin/Int, kotlin/String>| = context(R|<local>/<unused var>|) Int(1).R|kotlin/to|<R|kotlin/Int|, R|kotlin/String|>(String(Hello)).R|foo/bar/fmap|<R|io/github/kyay10/highkt/K<kotlin/Pair<*, *>, kotlin/Int>|, R|kotlin/String|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/String|): R|kotlin/String| <inline=NoInline>  {
+            lval result: R|kotlin/Pair<kotlin/Int, kotlin/String>| = context(R|<local>/<unused var>|) Int(1).R|kotlin/to|<R|kotlin/Int|, R|kotlin/String|>(String(Hello)).R|foo/bar/fmap|<R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<kotlin/Pair<*, *>>, kotlin/Int>|, R|kotlin/String|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/String|): R|kotlin/String| <inline=NoInline>  {
                 ^ <strcat>(R|<local>/it|, String(!))
             }
             )
@@ -475,13 +475,13 @@ FILE: simple.kt
         )
     }
     private final fun maybeExample(): R|kotlin/Unit| {
-        ^maybeExample R|kotlin/context|<R|foo/bar/Functor<{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>, kotlin/Unit>>|, R|kotlin/Unit|>(R|foo/bar/maybeFunctor|, <L> = context(<unused var>: R|foo/bar/Functor<{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>, kotlin/Unit>>|) context@fun <anonymous>(): R|kotlin/Unit| <inline=Inline, kind=EXACTLY_ONCE>  {
-            lval aMaybe: R|{foo/bar/Maybe<kotlin/Int>=} foo/bar/BiComposed<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>, kotlin/Unit, kotlin/Int>| = R|foo/bar/BiComposed.BiComposed|<R|kotlin/Int|>(R|foo/bar/Right.Right|<R|{io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, kotlin/Unit> ~>} foo/bar/Const<kotlin/Unit, kotlin/Unit>|, R|{io/github/kyay10/highkt/K<foo/bar/Identity<*>, kotlin/Int> ~>} foo/bar/Identity<kotlin/Int>|>(R|foo/bar/Identity.Identity|<R|kotlin/Int|>(Int(10))))
-            lval b: R|{foo/bar/Maybe<kotlin/String>=} foo/bar/BiComposed<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>, kotlin/Unit, kotlin/String>| = context(R|<local>/<unused var>|) R|<local>/aMaybe|.R|foo/bar/fmap|<R|{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>>, kotlin/Unit>|, R|kotlin/Int|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/Int|): R|kotlin/String| <inline=NoInline>  {
+        ^maybeExample R|kotlin/context|<R|foo/bar/Functor<{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/EitherK, io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>, foo/bar/IdentityK>, kotlin/Unit>>|, R|kotlin/Unit|>(R|foo/bar/maybeFunctor|, <L> = context(<unused var>: R|foo/bar/Functor<{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/EitherK, io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>, foo/bar/IdentityK>, kotlin/Unit>>|) context@fun <anonymous>(): R|kotlin/Unit| <inline=Inline, kind=EXACTLY_ONCE>  {
+            lval aMaybe: R|{foo/bar/Maybe<kotlin/Int>=} foo/bar/BiComposed<foo/bar/EitherK, io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>, foo/bar/IdentityK, kotlin/Unit, kotlin/Int>| = R|foo/bar/BiComposed.BiComposed|<R|kotlin/Int|>(R|foo/bar/Right.Right|<R|{io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>, kotlin/Unit> ~>} foo/bar/Const<kotlin/Unit, kotlin/Unit>|, R|{io/github/kyay10/highkt/K<foo/bar/IdentityK, kotlin/Int> ~>} foo/bar/Identity<kotlin/Int>|>(R|foo/bar/Identity.Identity|<R|kotlin/Int|>(Int(10))))
+            lval b: R|{foo/bar/Maybe<kotlin/String>=} foo/bar/BiComposed<foo/bar/EitherK, io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>, foo/bar/IdentityK, kotlin/Unit, kotlin/String>| = context(R|<local>/<unused var>|) R|<local>/aMaybe|.R|foo/bar/fmap|<R|{foo/bar/MaybeK=} io/github/kyay10/highkt/K<foo/bar/BiCompose<foo/bar/EitherK, io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>, foo/bar/IdentityK>, kotlin/Unit>|, R|kotlin/Int|, R|kotlin/String|>(<L> = fmap@fun <anonymous>(it: R|kotlin/Int|): R|kotlin/String| <inline=NoInline>  {
                 ^ R|<local>/it|.R|kotlin/Int.toString|()
             }
             )
-            lval expected: R|{foo/bar/Maybe<kotlin/String>=} foo/bar/BiComposed<foo/bar/Either<*, *>, io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, foo/bar/Identity<*>, kotlin/Unit, kotlin/String>| = R|foo/bar/BiComposed.BiComposed|<R|kotlin/String|>(R|foo/bar/Right.Right|<R|{io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Const<*, *>, kotlin/Unit>, kotlin/Unit> ~>} foo/bar/Const<kotlin/Unit, kotlin/Unit>|, R|{io/github/kyay10/highkt/K<foo/bar/Identity<*>, kotlin/String> ~>} foo/bar/Identity<kotlin/String>|>(R|foo/bar/Identity.Identity|<R|kotlin/String|>(String(10))))
+            lval expected: R|{foo/bar/Maybe<kotlin/String>=} foo/bar/BiComposed<foo/bar/EitherK, io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>, foo/bar/IdentityK, kotlin/Unit, kotlin/String>| = R|foo/bar/BiComposed.BiComposed|<R|kotlin/String|>(R|foo/bar/Right.Right|<R|{io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/ConstK, kotlin/Unit>, kotlin/Unit> ~>} foo/bar/Const<kotlin/Unit, kotlin/Unit>|, R|{io/github/kyay10/highkt/K<foo/bar/IdentityK, kotlin/String> ~>} foo/bar/Identity<kotlin/String>|>(R|foo/bar/Identity.Identity|<R|kotlin/String|>(String(10))))
             when () {
                 !=(R|<local>/b|, R|<local>/expected|) ->  {
                     R|kotlin/error|(<strcat>(R|<local>/b|))

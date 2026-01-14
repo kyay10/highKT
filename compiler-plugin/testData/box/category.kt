@@ -25,7 +25,7 @@ fun <Cat, A> K2<Cat, *, A>.target() = with(category) { this@target.target<A>() }
 
 @TypeFunction
 interface Opposite<Cat, A, B> : K2<Cat, B, A>
-typealias Opp<Arr> = K<Opposite<*, *, *>, Arr>
+typealias Opp<Arr> = K<Constructor<Opposite<*, *, *>>, Arr>
 
 context(c: Category<Cat>)
 fun <Cat> oppositeCategory(): Category<Opp<Cat>> = object : Category<Opp<Cat>> {
@@ -35,7 +35,7 @@ fun <Cat> oppositeCategory(): Category<Opp<Cat>> = object : Category<Opp<Cat>> {
 }
 
 typealias Arrow<A, B> = (A) -> B
-typealias ArrowK = Arrow<*, *>
+typealias ArrowK = Constructor<Arrow<*, *>>
 
 fun <A> idArrow() = { a: A -> a }
 
@@ -48,21 +48,21 @@ object ArrowCategory : Category<ArrowK> {
 
 @TypeFunction
 interface TypePaired<A, B, F> : K2<F, A, B>
-typealias TypePair<A, B> = K2<TypePaired<*, *, *>, A, B>
+typealias TypePair<A, B> = K2<Constructor<TypePaired<*, *, *>>, A, B>
 
 @TypeFunction
 interface TypePairedFirst<A, B> : Id<A>
-typealias TypePairFirst<P> = K<P, TypePairedFirst<*, *>>
+typealias TypePairFirst<P> = K<P, Constructor<TypePairedFirst<*, *>>>
 
 @TypeFunction
 interface TypePairedSecond<A, B> : Id<B>
-typealias TypePairSecond<P> = K<P, TypePairedSecond<*, *>>
+typealias TypePairSecond<P> = K<P, Constructor<TypePairedSecond<*, *>>>
 
 @TypeFunction
 interface MorphismProduct<C1, C2, PA, PB> :
-  K2<Pair<*, *>, K2<C1, TypePairFirst<PA>, TypePairFirst<PB>>, K2<C2, TypePairSecond<PA>, TypePairSecond<PB>>>
+  K2<Constructor<Pair<*, *>>, K2<C1, TypePairFirst<PA>, TypePairFirst<PB>>, K2<C2, TypePairSecond<PA>, TypePairSecond<PB>>>
 typealias MorphismProducted<C1, C2, PA, PB> = Pair<K2<C1, TypePairFirst<PA>, TypePairFirst<PB>>, K2<C2, TypePairSecond<PA>, TypePairSecond<PB>>>
-typealias Product<C1, C2> = K2<MorphismProduct<*, *, *, *>, C1, C2>
+typealias Product<C1, C2> = K2<Constructor<MorphismProduct<*, *, *, *>>, C1, C2>
 
 context(_: Category<C1>, _: Category<C2>)
 fun <C1, C2> productCategory(): Category<Product<C1, C2>> = object : Category<Product<C1, C2>> {
@@ -89,7 +89,7 @@ fun <C> identityFunctor(): Functor<C, C, Identity> = object : Functor<C, C, Iden
 
 @TypeFunction
 interface Composition<F, G, A> : K<F, K<G, A>>
-typealias Compose<F, G> = K2<Composition<*, *, *>, F, G>
+typealias Compose<F, G> = K2<Constructor<Composition<*, *, *>>, F, G>
 
 context(f: Functor<D, E, F>, g: Functor<C, D, G>)
 fun <C, D, E, F, G> composeFunctors(): Functor<C, E, Compose<F, G>> = object : Functor<C, E, Compose<F, G>> {
@@ -111,7 +111,7 @@ interface Nat<C, D, F, G> : K2<NatK<C, D>, F, G> {
   val secondFunctor: Functor<C, D, G>
   operator fun <A> get(c: Obj<C, A>): Component<D, F, G, A>
 }
-typealias NatK<C, D> = K2<Nat<*, *, *, *>, C, D>
+typealias NatK<C, D> = K2<Constructor<Nat<*, *, *, *>>, C, D>
 
 fun <C, D, F, G, A, B> Nat<C, D, F, G>.at(h: K2<C, A, B>) =
   context(firstFunctor, firstFunctor.firstCategory, firstFunctor.secondCategory) {
@@ -173,9 +173,7 @@ infix fun <C, D, F, G, H> Nat<C, D, G, H>.vertical(other: Nat<C, D, F, G>): Nat<
 
 context(cd: Category<D>)
 fun <C, D> functorCategory(): Category<NatK<C, D>> = object : Category<NatK<C, D>> {
-  override fun <F, G, H> Nat<C, D, G, H>.compose(g: Nat<C, D, F, G>) = context(cd) { // KT-81441
-    this vertical g
-  }
+  override fun <F, G, H> Nat<C, D, G, H>.compose(g: Nat<C, D, F, G>) = this vertical g
 
   override fun <F> Nat<C, D, F, *>.source() = context(firstFunctor) { identityNat() }
   override fun <F> Nat<C, D, *, F>.target() = context(secondFunctor) { identityNat() }
@@ -183,10 +181,11 @@ fun <C, D> functorCategory(): Category<NatK<C, D>> = object : Category<NatK<C, D
 
 @TypeFunction
 interface FunctorCompose<P> : Compose<TypePairFirst<P>, TypePairSecond<P>>
+typealias FunctorComposeK = Constructor<FunctorCompose<*>>
 
 context(_: Category<C>, _: Category<D>, _: Category<E>)
-fun <C, D, E> functorComposeFunctor(): Functor<Product<NatK<D, E>, NatK<C, D>>, NatK<C, E>, FunctorCompose<*>> =
-  object : Functor<Product<NatK<D, E>, NatK<C, D>>, NatK<C, E>, FunctorCompose<*>> {
+fun <C, D, E> functorComposeFunctor(): Functor<Product<NatK<D, E>, NatK<C, D>>, NatK<C, E>, FunctorComposeK> =
+  object : Functor<Product<NatK<D, E>, NatK<C, D>>, NatK<C, E>, FunctorComposeK> {
     override val firstCategory = context(functorCategory<D, E>(), functorCategory<C, D>()) {
       productCategory<NatK<D, E>, NatK<C, D>>()
     }
@@ -215,9 +214,9 @@ interface TensorProduct<Cat, F, I> : Functor<Product<Cat, Cat>, Cat, F> {
 }
 
 context(k: Category<Cat>)
-fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorCompose<*>, Identity> =
-  object : TensorProduct<EndoK<Cat>, FunctorCompose<*>, Identity>,
-    Functor<Product<EndoK<Cat>, EndoK<Cat>>, EndoK<Cat>, FunctorCompose<*>> by functorComposeFunctor<Cat, Cat, Cat>() {
+fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorComposeK, Identity> =
+  object : TensorProduct<EndoK<Cat>, FunctorComposeK, Identity>,
+    Functor<Product<EndoK<Cat>, EndoK<Cat>>, EndoK<Cat>, FunctorComposeK> by functorComposeFunctor<Cat, Cat, Cat>() {
     override val unitObject = context(identityFunctor<Cat>()) { identityNat<Cat, Cat, Identity>() }
 
     override fun <A> leftUnitor(a: Endo<Cat, A, A>) = context(a.firstFunctor, identityFunctor<Cat>()) {
@@ -294,7 +293,7 @@ interface MonoidObject<Cat, F, I, A> : TensorProduct<Cat, F, I> {
   fun plus(): K2<Cat, K<F, TypePair<A, A>>, A>
 }
 
-typealias Monad<C, F> = MonoidObject<EndoK<C>, FunctorCompose<*>, Identity, F>
+typealias Monad<C, F> = MonoidObject<EndoK<C>, FunctorComposeK, Identity, F>
 typealias NormalMonad<F> = Monad<ArrowK, F>
 
 interface UsualMonad<M> {
@@ -318,7 +317,7 @@ fun <M> UsualMonad<M>.toNormalFunctor(): Functor<ArrowK, ArrowK, M> = object : F
 
 fun <M> UsualMonad<M>.toNormalMonad(): NormalMonad<M> = context(toNormalFunctor(), ArrowCategory) {
   object : NormalMonad<M>,
-    TensorProduct<EndoK<ArrowK>, FunctorCompose<*>, Identity> by endoFunctorComposeTensor<ArrowK>() {
+    TensorProduct<EndoK<ArrowK>, FunctorComposeK, Identity> by endoFunctorComposeTensor<ArrowK>() {
     override fun empty() = object : Nat<ArrowK, ArrowK, Identity, M> {
       override val firstFunctor = identityFunctor<ArrowK>()
       override val secondFunctor = contextOf<Functor<ArrowK, ArrowK, M>>()

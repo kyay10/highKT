@@ -52,7 +52,7 @@ FILE: simple2.kt
         public final fun copy(value: R|{io/github/kyay10/highkt/K2<Bi, io/github/kyay10/highkt/K<F, A>, io/github/kyay10/highkt/K<G, B>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<Bi, io/github/kyay10/highkt/K<F, A>>, io/github/kyay10/highkt/K<G, B>>| = this@R|foo/bar/BiComposed|.R|foo/bar/BiComposed.value|): R|foo/bar/BiComposed<Bi, F, G, A, B>|
 
     }
-    public final typealias BiCompose<Bi, F, G> = R|{io/github/kyay10/highkt/K3<foo/bar/BiComposed<*, *, *, *, *>, Bi, F, G>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<foo/bar/BiComposed<*, *, *, *, *>, Bi, F>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/BiComposed<*, *, *, *, *>, Bi>, F>, G>|
+    public final typealias BiCompose<Bi, F, G> = R|{io/github/kyay10/highkt/K3<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, Bi, F, G>=} io/github/kyay10/highkt/K<{io/github/kyay10/highkt/K2<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, Bi, F>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/BiComposed<*, *, *, *, *>>, Bi>, F>, G>|
     context(<unused var>: R|foo/bar/BiFunctor<BF>|, <unused var>: R|foo/bar/Functor<F>|, <unused var>: R|foo/bar/Functor<G>|)
     public final fun <BF, F, G> composeBiFunctors(): R|foo/bar/BiFunctor<foo/bar/BiCompose<BF, F, G>>| {
         ^composeBiFunctors object : R|foo/bar/BiFunctor<foo/bar/BiCompose<BF, F, G>>| {

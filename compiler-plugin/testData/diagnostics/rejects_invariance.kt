@@ -1,5 +1,6 @@
 // RUN_PIPELINE_TILL: FRONTEND
 
+import io.github.kyay10.highkt.Constructor
 import io.github.kyay10.highkt.Out
 
 interface Functor<F> {
@@ -8,7 +9,7 @@ interface Functor<F> {
 
 class Invariant<A>
 
-fun Functor<Invariant<*>>.test(x: Invariant<Int>) {
+fun Functor<Constructor<Invariant<*>>>.test(x: Invariant<Int>) {
   val y: Invariant<String> <!INITIALIZER_TYPE_MISMATCH!>=<!> x.fmap { it.toString() }
   val z: Invariant<out String> = x.fmap { it.toString() }
 }

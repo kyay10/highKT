@@ -22,7 +22,7 @@ suspend fun <F, A, B> K<F, B>.bind(): B = TODO()
 suspend fun <F, A, B> b(m: Monad<F>, prompt: Prompt<K<F, A>>, a: K<F, B>): B = context(m, prompt) { a.bind() }
 
 data class State<S, out A>(val run: suspend (S) -> Pair<A, S>)
-typealias StateOf<S> = K<State<*, *>, S>
+typealias StateOf<S> = K<Constructor<State<*, *>>, S>
 
 context(m: Monad<StateOf<S>>)
 suspend fun <S, A, B> Prompt<K<StateOf<S>, A>>.b2(a: K<StateOf<S>, B>): B =
