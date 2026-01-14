@@ -6,6 +6,8 @@ import org.jetbrains.kotlin.fir.plugin.createConeType
 import org.jetbrains.kotlin.fir.resolve.createParametersSubstitutor
 import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.resolve.toRegularClassSymbol
+import org.jetbrains.kotlin.fir.resolve.toSymbol
+import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
 import org.jetbrains.kotlin.fir.types.ConeFlexibleType
 import org.jetbrains.kotlin.fir.types.ConeIntersectionType
@@ -19,7 +21,6 @@ import org.jetbrains.kotlin.fir.types.classId
 import org.jetbrains.kotlin.fir.types.constructType
 import org.jetbrains.kotlin.fir.types.isMarkedNullable
 import org.jetbrains.kotlin.fir.types.isStarProjection
-import org.jetbrains.kotlin.fir.types.isSubtypeOf
 import org.jetbrains.kotlin.fir.types.replaceType
 import org.jetbrains.kotlin.fir.types.toTrivialFlexibleType
 import org.jetbrains.kotlin.fir.types.type
@@ -31,14 +32,14 @@ context(c: SessionHolder)
 private fun ConeKotlinType.applyKOnTheOutside(): ConeKotlinType? {
   val (realType, appliedTypes) = deconstructIfKType() ?: return null
   return realType.toRegularClassSymbol()?.applyTypeFunctions(appliedTypes)
-    ?.withNullability(isMarkedNullable, c.session.typeContext, preserveAttributes = true)
+    ?.withNullability(isMarkedNullable, c.session.typeContext, attributes = attributes.add(ExpandedTypeAttribute(this)), preserveAttributes = true)
 }
 
 context(c: SessionHolder)
 private fun ConeKotlinType.deconstructIfKType(): Pair<ConeKotlinType, List<ConeTypeProjection>>? {
   var realType: ConeKotlinType = fullyExpandedType()
   val appliedTypes = buildList {
-    while (realType.isK()) {
+    while (realType.isK && realType.typeArguments.size == 2) {
       add(0, realType.typeArguments[1])
       realType = realType.typeArguments[0].type?.fullyExpandedType() ?: return null // Caused by malformed K type
     }
@@ -46,13 +47,14 @@ private fun ConeKotlinType.deconstructIfKType(): Pair<ConeKotlinType, List<ConeT
   }
   if (appliedTypes.isEmpty()) return null // implies this was not a K at all
   // Could be relaxed
-  require(realType.typeArguments.none { !it.isStarProjection }) { "K can only be applied to star projections; was called with $realType" }
+  if (realType.typeArguments.any { !it.isStarProjection }) return null
   return realType to appliedTypes
 }
 
 context(c: SessionHolder)
-private fun ConeKotlinType.deconstructNormalType(): Pair<ConeKotlinType, List<ConeTypeProjection>> {
+private fun ConeKotlinType.deconstructNormalType(): Pair<ConeKotlinType, List<ConeTypeProjection>>? {
   val realType = fullyExpandedType()
+  if (realType.isK) return null
   return realType to realType.typeArguments.toList()
 }
 
@@ -61,23 +63,27 @@ private tailrec fun FirRegularClassSymbol.applyTypeFunctions(
   appliedTypes: List<ConeTypeProjection>, default: ConeKotlinType? = null
 ): ConeKotlinType? {
   if (ownTypeParameterSymbols.size > appliedTypes.size) return default // partially-applied type
-  require(classId != K_CLASS_ID) { "Should not be called on K; was called with arguments $appliedTypes" }
-  if (!hasAnnotation(TYPE_FUNCTION_CLASS_ID, c.session)) {
+  if (classId == K_CLASS_ID) return default // should not be called on K
+  if (!isTypeFunction()) {
     if (ownTypeParameterSymbols.size != appliedTypes.size) return default
     return constructType(appliedTypes.toTypedArray())
   }
   // TODO what if K<Identity, in/out A>?
-  val substituted = if (classId == IDENTITY_CLASS_ID) appliedTypes.first().type else {
+  val substituted = (if (classId == IDENTITY_CLASS_ID) appliedTypes.first().type else {
     val superType = resolvedSuperTypeRefs.single().coneType
     val substitutor = createParametersSubstitutor(c.session, ownTypeParameterSymbols.zip(appliedTypes).toMap())
     substitutor.substituteOrNull(superType)
-  } ?: return default
+  }) ?: return default
   val appliedTypes = appliedTypes.drop(ownTypeParameterSymbols.size)
   val newDefault = substituted.createKType(appliedTypes)
   val (realType, newApplied) = substituted.deconstructIfKType() ?: substituted.deconstructNormalType()
+  ?: return newDefault
   val symbol = realType.toRegularClassSymbol() ?: return newDefault
   return symbol.applyTypeFunctions(newApplied + appliedTypes, newDefault)
 }
+
+context(c: SessionHolder)
+fun FirBasedSymbol<*>.isTypeFunction(): Boolean = hasAnnotation(TYPE_FUNCTION_CLASS_ID, c.session)
 
 // TODO: application order?
 context(c: SessionHolder)
@@ -120,8 +126,9 @@ fun ConeKotlinType.toCanonicalKType(): ConeKotlinType? {
   }
   if (this is ConeIntersectionType) return mapTypesNotNull { it.toCanonicalKType() }
   if (typeArguments.isEmpty()) return null
-  if (isK()) return null
-  return withNullability(false, c.session.typeContext, preserveAttributes = true).withArguments { ConeStarProjection }
+  if (isK) return null
+  val symbol = toSymbol() ?: return null
+  return symbol.constructType(Array(typeArguments.size) { ConeStarProjection })
     .createKType(typeArguments.asList())
     .withNullability(canBeNull(c.session), c.session.typeContext, preserveAttributes = true)
 }
@@ -131,19 +138,7 @@ private fun ConeKotlinType.createKType(typeArguments: List<ConeTypeProjection>) 
   typeArguments.fold(this) { acc, arg -> K_CLASS_ID.createConeType(c.session, arrayOf(acc, arg)) }
 
 context(_: SessionHolder)
-fun ConeKotlinType.canonicalize(shouldCanonicalize: Boolean): ConeKotlinType =
-  if (shouldCanonicalize) toCanonicalKType() ?: this else this
-
-context(_: SessionHolder)
-fun ConeKotlinType.applyKAndCanonicalizeList(): List<ConeKotlinType> = applyKEverywhere()?.let {
-  listOfNotNull(it, it.toCanonicalKType())
-} ?: listOfNotNull(toCanonicalKType())
-
-context(_: SessionHolder)
-fun ConeKotlinType?.isK() = this != null && fullyExpandedType().classId == K_CLASS_ID
-
-context(c: SessionHolder)
-infix fun ConeKotlinType.expandsTo(other: ConeKotlinType) = isSubtypeOf(other.applyKOrSelf(), c.session)
+val ConeKotlinType?.isK get() = this != null && fullyExpandedType().classId == K_CLASS_ID
 
 context(c: SessionHolder)
 private inline fun ConeIntersectionType.mapTypesNotNull(func: (ConeKotlinType) -> ConeKotlinType?): ConeKotlinType? =

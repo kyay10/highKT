@@ -1,0 +1,251 @@
+FILE fqName:foo.bar fileName:/prompt.kt
+  CLASS CLASS name:Prompt modality:FINAL visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Prompt<R of foo.bar.Prompt>
+    TYPE_PARAMETER name:R index:0 variance: superTypes:[kotlin.Any?] reified:false
+    CONSTRUCTOR visibility:public returnType:foo.bar.Prompt<R of foo.bar.Prompt> [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Prompt modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+  CLASS CLASS name:State modality:FINAL visibility:public [data] superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.State<S of foo.bar.State, A of foo.bar.State>
+    TYPE_PARAMETER name:S index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance:out superTypes:[kotlin.Any?] reified:false
+    PROPERTY name:run visibility:public modality:FINAL [val]
+      FIELD PROPERTY_BACKING_FIELD name:run type:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> visibility:private [final]
+        EXPRESSION_BODY
+          GET_VAR 'run: kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> declared in foo.bar.State.<init>' type=kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-run> visibility:public modality:FINAL returnType:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>>
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.State<S of foo.bar.State, A of foo.bar.State>
+        correspondingProperty: PROPERTY name:run visibility:public modality:FINAL [val]
+        BLOCK_BODY
+          RETURN type=kotlin.Nothing from='public final fun <get-run> (): kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> declared in foo.bar.State'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:run type:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> visibility:private [final]' type=kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> origin=null
+              receiver: GET_VAR '<this>: foo.bar.State<S of foo.bar.State, A of foo.bar.State> declared in foo.bar.State.<get-run>' type=foo.bar.State<S of foo.bar.State, A of foo.bar.State> origin=null
+    CONSTRUCTOR visibility:public returnType:foo.bar.State<S of foo.bar.State, A of foo.bar.State> [primary]
+      VALUE_PARAMETER kind:Regular name:run index:0 type:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>>
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:State modality:FINAL visibility:public [data] superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN GENERATED_DATA_CLASS_MEMBER name:component1 visibility:public modality:FINAL returnType:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> [operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.State<S of foo.bar.State, A of foo.bar.State>
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun component1 (): kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> declared in foo.bar.State'
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:run type:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> visibility:private [final]' type=kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> origin=null
+            receiver: GET_VAR '<this>: foo.bar.State<S of foo.bar.State, A of foo.bar.State> declared in foo.bar.State.component1' type=foo.bar.State<S of foo.bar.State, A of foo.bar.State> origin=null
+    FUN GENERATED_DATA_CLASS_MEMBER name:copy visibility:public modality:FINAL returnType:foo.bar.State<S of foo.bar.State, A of foo.bar.State>
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.State<S of foo.bar.State, A of foo.bar.State>
+      VALUE_PARAMETER kind:Regular name:run index:1 type:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>>
+        EXPRESSION_BODY
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:run type:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> visibility:private [final]' type=kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> origin=null
+            receiver: GET_VAR '<this>: foo.bar.State<S of foo.bar.State, A of foo.bar.State> declared in foo.bar.State.copy' type=foo.bar.State<S of foo.bar.State, A of foo.bar.State> origin=null
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun copy (run: kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>>): foo.bar.State<S of foo.bar.State, A of foo.bar.State> declared in foo.bar.State'
+          CONSTRUCTOR_CALL 'public constructor <init> (run: kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>>) declared in foo.bar.State' type=foo.bar.State<S of foo.bar.State, A of foo.bar.State> origin=null
+            TYPE_ARG (of class) S: S of foo.bar.State
+            TYPE_ARG (of class) A: A of foo.bar.State
+            ARG run: GET_VAR 'run: kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> declared in foo.bar.State.copy' type=kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> origin=null
+    FUN GENERATED_DATA_CLASS_MEMBER name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.State<S of foo.bar.State, A of foo.bar.State>
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+      BLOCK_BODY
+        WHEN type=kotlin.Unit origin=null
+          BRANCH
+            if: CALL 'public final fun EQEQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQEQ
+              ARG arg0: GET_VAR '<this>: foo.bar.State<S of foo.bar.State, A of foo.bar.State> declared in foo.bar.State.equals' type=foo.bar.State<S of foo.bar.State, A of foo.bar.State> origin=null
+              ARG arg1: GET_VAR 'other: kotlin.Any? declared in foo.bar.State.equals' type=kotlin.Any? origin=null
+            then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.State'
+              CONST Boolean type=kotlin.Boolean value=true
+        WHEN type=kotlin.Unit origin=null
+          BRANCH
+            if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=foo.bar.State<S of foo.bar.State, A of foo.bar.State>
+              GET_VAR 'other: kotlin.Any? declared in foo.bar.State.equals' type=kotlin.Any? origin=null
+            then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.State'
+              CONST Boolean type=kotlin.Boolean value=false
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:foo.bar.State<S of foo.bar.State, A of foo.bar.State> [val]
+          TYPE_OP type=foo.bar.State<S of foo.bar.State, A of foo.bar.State> origin=IMPLICIT_CAST typeOperand=foo.bar.State<S of foo.bar.State, A of foo.bar.State>
+            GET_VAR 'other: kotlin.Any? declared in foo.bar.State.equals' type=kotlin.Any? origin=null
+        WHEN type=kotlin.Unit origin=null
+          BRANCH
+            if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+              ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                ARG arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:run type:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> visibility:private [final]' type=kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> origin=null
+                  receiver: GET_VAR '<this>: foo.bar.State<S of foo.bar.State, A of foo.bar.State> declared in foo.bar.State.equals' type=foo.bar.State<S of foo.bar.State, A of foo.bar.State> origin=null
+                ARG arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:run type:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> visibility:private [final]' type=kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> origin=null
+                  receiver: GET_VAR 'val tmp_0: foo.bar.State<S of foo.bar.State, A of foo.bar.State> declared in foo.bar.State.equals' type=foo.bar.State<S of foo.bar.State, A of foo.bar.State> origin=null
+            then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.State'
+              CONST Boolean type=kotlin.Boolean value=false
+        RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.State'
+          CONST Boolean type=kotlin.Boolean value=true
+    FUN GENERATED_DATA_CLASS_MEMBER name:hashCode visibility:public modality:OPEN returnType:kotlin.Int
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.State<S of foo.bar.State, A of foo.bar.State>
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun hashCode (): kotlin.Int declared in foo.bar.State'
+          CALL 'public open fun hashCode (): kotlin.Int declared in kotlin.coroutines.SuspendFunction1' type=kotlin.Int origin=null
+            ARG <this>: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:run type:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> visibility:private [final]' type=kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> origin=null
+              receiver: GET_VAR '<this>: foo.bar.State<S of foo.bar.State, A of foo.bar.State> declared in foo.bar.State.hashCode' type=foo.bar.State<S of foo.bar.State, A of foo.bar.State> origin=null
+    FUN GENERATED_DATA_CLASS_MEMBER name:toString visibility:public modality:OPEN returnType:kotlin.String
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.State<S of foo.bar.State, A of foo.bar.State>
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in foo.bar.State'
+          STRING_CONCATENATION type=kotlin.String
+            CONST String type=kotlin.String value="State("
+            CONST String type=kotlin.String value="run="
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:run type:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> visibility:private [final]' type=kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>> origin=null
+              receiver: GET_VAR '<this>: foo.bar.State<S of foo.bar.State, A of foo.bar.State> declared in foo.bar.State.toString' type=foo.bar.State<S of foo.bar.State, A of foo.bar.State> origin=null
+            CONST String type=kotlin.String value=")"
+  CLASS INTERFACE name:Monad modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Monad<F of foo.bar.Monad>
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    FUN name:flatMap visibility:public modality:ABSTRACT returnType:kotlin.Any?
+      TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Monad<F of foo.bar.Monad>
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
+      VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.coroutines.SuspendFunction1<A of foo.bar.Monad.flatMap, kotlin.Any?>
+    FUN name:pure visibility:public modality:ABSTRACT returnType:kotlin.Any?
+      TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Monad<F of foo.bar.Monad>
+      VALUE_PARAMETER kind:Regular name:a index:1 type:A of foo.bar.Monad.pure
+  FUN name:b visibility:public modality:FINAL returnType:B of foo.bar.b [suspend]
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:2 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER kind:Regular name:m index:0 type:foo.bar.Monad<F of foo.bar.b>
+    VALUE_PARAMETER kind:Regular name:prompt index:1 type:foo.bar.Prompt<kotlin.Any?>
+    VALUE_PARAMETER kind:Regular name:a index:2 type:kotlin.Any?
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun b <F, A, B> (m: foo.bar.Monad<F of foo.bar.b>, prompt: foo.bar.Prompt<kotlin.Any?>, a: kotlin.Any?): B of foo.bar.b declared in foo.bar'
+        CALL 'public final fun context <A, B, R> (a: A of kotlin.context, b: B of kotlin.context, block: @[ContextFunctionTypeParams(count = 2)] kotlin.Function2<A of kotlin.context, B of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=B of foo.bar.b origin=null
+          TYPE_ARG A: foo.bar.Monad<F of foo.bar.b>
+          TYPE_ARG B: foo.bar.Prompt<kotlin.Any?>
+          TYPE_ARG R: B of foo.bar.b
+          ARG a: GET_VAR 'm: foo.bar.Monad<F of foo.bar.b> declared in foo.bar.b' type=foo.bar.Monad<F of foo.bar.b> origin=null
+          ARG b: GET_VAR 'prompt: foo.bar.Prompt<kotlin.Any?> declared in foo.bar.b' type=foo.bar.Prompt<kotlin.Any?> origin=null
+          ARG block: FUN_EXPR type=kotlin.Function2<foo.bar.Monad<F of foo.bar.b>, foo.bar.Prompt<kotlin.Any?>, B of foo.bar.b> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:B of foo.bar.b
+              VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Monad index:0 type:foo.bar.Monad<F of foo.bar.b>
+              VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Prompt index:1 type:foo.bar.Prompt<kotlin.Any?>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-Monad: foo.bar.Monad<F of foo.bar.b>, $context-Prompt: foo.bar.Prompt<kotlin.Any?>): B of foo.bar.b declared in foo.bar.b'
+                  CALL 'public final fun bind <F, A, B> ($context-Prompt: foo.bar.Prompt<kotlin.Any?>, $context-Monad: foo.bar.Monad<F of foo.bar.bind>, <this>: kotlin.Any?): B of foo.bar.bind declared in foo.bar' type=B of foo.bar.b origin=null
+                    TYPE_ARG F: F of foo.bar.b
+                    TYPE_ARG A: A of foo.bar.b
+                    TYPE_ARG B: B of foo.bar.b
+                    ARG $context-Prompt: GET_VAR '$context-Prompt: foo.bar.Prompt<kotlin.Any?> declared in foo.bar.b.<anonymous>' type=foo.bar.Prompt<kotlin.Any?> origin=null
+                    ARG $context-Monad: GET_VAR '$context-Monad: foo.bar.Monad<F of foo.bar.b> declared in foo.bar.b.<anonymous>' type=foo.bar.Monad<F of foo.bar.b> origin=null
+                    ARG <this>: GET_VAR 'a: kotlin.Any? declared in foo.bar.b' type=kotlin.Any? origin=null
+  FUN name:b2 visibility:public modality:FINAL returnType:B of foo.bar.b2 [suspend]
+    TYPE_PARAMETER name:S index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:2 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER kind:Context name:m index:0 type:foo.bar.Monad<kotlin.Any?>
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:foo.bar.Prompt<kotlin.Any?>
+    VALUE_PARAMETER kind:Regular name:a index:2 type:kotlin.Any?
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun b2 <S, A, B> (m: foo.bar.Monad<kotlin.Any?>, <this>: foo.bar.Prompt<kotlin.Any?>, a: kotlin.Any?): B of foo.bar.b2 declared in foo.bar'
+        CALL 'public final fun b <F, A, B> (m: foo.bar.Monad<F of foo.bar.b>, prompt: foo.bar.Prompt<kotlin.Any?>, a: kotlin.Any?): B of foo.bar.b declared in foo.bar' type=B of foo.bar.b2 origin=null
+          TYPE_ARG F: kotlin.Any?
+          TYPE_ARG A: A of foo.bar.b2
+          TYPE_ARG B: B of foo.bar.b2
+          ARG m: GET_VAR 'm: foo.bar.Monad<kotlin.Any?> declared in foo.bar.b2' type=foo.bar.Monad<kotlin.Any?> origin=null
+          ARG prompt: GET_VAR '<this>: foo.bar.Prompt<kotlin.Any?> declared in foo.bar.b2' type=foo.bar.Prompt<kotlin.Any?> origin=null
+          ARG a: GET_VAR 'a: kotlin.Any? declared in foo.bar.b2' type=kotlin.Any? origin=null
+  FUN name:b3 visibility:public modality:FINAL returnType:B of foo.bar.b3 [suspend]
+    TYPE_PARAMETER name:S index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:2 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER kind:Context name:m index:0 type:foo.bar.Monad<kotlin.Any?>
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:foo.bar.Prompt<foo.bar.State<S of foo.bar.b3, A of foo.bar.b3>>
+    VALUE_PARAMETER kind:Regular name:a index:2 type:kotlin.Any?
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun b3 <S, A, B> (m: foo.bar.Monad<kotlin.Any?>, <this>: foo.bar.Prompt<foo.bar.State<S of foo.bar.b3, A of foo.bar.b3>>, a: kotlin.Any?): B of foo.bar.b3 declared in foo.bar'
+        CALL 'public final fun b <F, A, B> (m: foo.bar.Monad<F of foo.bar.b>, prompt: foo.bar.Prompt<kotlin.Any?>, a: kotlin.Any?): B of foo.bar.b declared in foo.bar' type=B of foo.bar.b3 origin=null
+          TYPE_ARG F: kotlin.Any?
+          TYPE_ARG A: A of foo.bar.b3
+          TYPE_ARG B: B of foo.bar.b3
+          ARG m: GET_VAR 'm: foo.bar.Monad<kotlin.Any?> declared in foo.bar.b3' type=foo.bar.Monad<kotlin.Any?> origin=null
+          ARG prompt: GET_VAR '<this>: foo.bar.Prompt<foo.bar.State<S of foo.bar.b3, A of foo.bar.b3>> declared in foo.bar.b3' type=foo.bar.Prompt<foo.bar.State<S of foo.bar.b3, A of foo.bar.b3>> origin=null
+          ARG a: GET_VAR 'a: kotlin.Any? declared in foo.bar.b3' type=kotlin.Any? origin=null
+  FUN name:bind visibility:public modality:FINAL returnType:B of foo.bar.bind [suspend]
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:2 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Prompt index:0 type:foo.bar.Prompt<kotlin.Any?>
+    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Monad index:1 type:foo.bar.Monad<F of foo.bar.bind>
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:2 type:kotlin.Any?
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun bind <F, A, B> ($context-Prompt: foo.bar.Prompt<kotlin.Any?>, $context-Monad: foo.bar.Monad<F of foo.bar.bind>, <this>: kotlin.Any?): B of foo.bar.bind declared in foo.bar'
+        CALL 'public final fun TODO (): kotlin.Nothing declared in kotlin' type=kotlin.Nothing origin=null
+  FUN name:box visibility:public modality:FINAL returnType:kotlin.String
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in foo.bar'
+        CONST String type=kotlin.String value="OK"
+  FUN name:flatMap visibility:public modality:FINAL returnType:kotlin.Any?
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:2 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER kind:Context name:m index:0 type:foo.bar.Monad<F of foo.bar.flatMap>
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
+    VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.coroutines.SuspendFunction1<A of foo.bar.flatMap, kotlin.Any?>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun flatMap <F, A, B> (m: foo.bar.Monad<F of foo.bar.flatMap>, <this>: kotlin.Any?, f: kotlin.coroutines.SuspendFunction1<A of foo.bar.flatMap, kotlin.Any?>): kotlin.Any? declared in foo.bar'
+        CALL 'public final fun with <T, R> (receiver: T of kotlin.with, block: @[ExtensionFunctionType] kotlin.Function1<T of kotlin.with, R of kotlin.with>): R of kotlin.with declared in kotlin' type=kotlin.Any? origin=null
+          TYPE_ARG T: foo.bar.Monad<F of foo.bar.flatMap>
+          TYPE_ARG R: kotlin.Any?
+          ARG receiver: GET_VAR 'm: foo.bar.Monad<F of foo.bar.flatMap> declared in foo.bar.flatMap' type=foo.bar.Monad<F of foo.bar.flatMap> origin=null
+          ARG block: FUN_EXPR type=@[ExtensionFunctionType] kotlin.Function1<foo.bar.Monad<F of foo.bar.flatMap>, kotlin.Any?> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
+              VALUE_PARAMETER kind:ExtensionReceiver name:$this$with index:0 type:foo.bar.Monad<F of foo.bar.flatMap>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> ($this$with: foo.bar.Monad<F of foo.bar.flatMap>): kotlin.Any? declared in foo.bar.flatMap'
+                  CALL 'public abstract fun flatMap <A, B> (<this>: kotlin.Any?, f: kotlin.coroutines.SuspendFunction1<A of foo.bar.Monad.flatMap, kotlin.Any?>): kotlin.Any? declared in foo.bar.Monad' type=kotlin.Any? origin=null
+                    TYPE_ARG A: A of foo.bar.flatMap
+                    TYPE_ARG B: B of foo.bar.flatMap
+                    ARG <this>(index:0): GET_VAR '$this$with: foo.bar.Monad<F of foo.bar.flatMap> declared in foo.bar.flatMap.<anonymous>' type=foo.bar.Monad<F of foo.bar.flatMap> origin=IMPLICIT_ARGUMENT
+                    ARG <this>(index:1): GET_VAR '<this>: kotlin.Any? declared in foo.bar.flatMap' type=kotlin.Any? origin=null
+                    ARG f: GET_VAR 'f: kotlin.coroutines.SuspendFunction1<A of foo.bar.flatMap, kotlin.Any?> declared in foo.bar.flatMap' type=kotlin.coroutines.SuspendFunction1<A of foo.bar.flatMap, kotlin.Any?> origin=null
+  FUN name:pure visibility:public modality:FINAL returnType:kotlin.Any?
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER kind:Context name:m index:0 type:foo.bar.Monad<F of foo.bar.pure>
+    VALUE_PARAMETER kind:Regular name:a index:1 type:A of foo.bar.pure
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun pure <F, A> (m: foo.bar.Monad<F of foo.bar.pure>, a: A of foo.bar.pure): kotlin.Any? declared in foo.bar'
+        CALL 'public abstract fun pure <A> (a: A of foo.bar.Monad.pure): kotlin.Any? declared in foo.bar.Monad' type=kotlin.Any? origin=null
+          TYPE_ARG A: A of foo.bar.pure
+          ARG <this>: GET_VAR 'm: foo.bar.Monad<F of foo.bar.pure> declared in foo.bar.pure' type=foo.bar.Monad<F of foo.bar.pure> origin=null
+          ARG a: GET_VAR 'a: A of foo.bar.pure declared in foo.bar.pure' type=A of foo.bar.pure origin=null
+  TYPEALIAS name:StateOf visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:S index:0 variance: superTypes:[kotlin.Any?] reified:false
