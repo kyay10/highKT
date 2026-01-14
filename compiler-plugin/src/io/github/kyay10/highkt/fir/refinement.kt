@@ -2,7 +2,6 @@ package io.github.kyay10.highkt.fir
 
 import org.jetbrains.kotlin.fir.SessionHolder
 import org.jetbrains.kotlin.fir.plugin.createConeType
-import org.jetbrains.kotlin.fir.resolve.directExpansionType
 import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.resolve.toClassLikeSymbol
 import org.jetbrains.kotlin.fir.resolve.toSymbol
@@ -30,17 +29,18 @@ import org.jetbrains.kotlin.fir.types.withArguments
 import org.jetbrains.kotlin.fir.types.withNullability
 
 context(c: SessionHolder)
-private fun ConeKotlinType.applyKOnTheOutside(): ConeKotlinType? {
-  val (realType, appliedTypes) = deconstructIfKType() ?: return null
-  return realType.toClassLikeSymbol()?.applyTypeFunctions(appliedTypes)
-    ?.withNullability(isMarkedNullable, c.session.typeContext, attributes = attributes.add(ExpandedTypeAttribute(this)), preserveAttributes = true)
-}
+private fun ConeKotlinType.applyKOnTheOutside() = applyTypeFunctions(emptyList(), null)?.withNullability(
+  isMarkedNullable,
+  c.session.typeContext,
+  attributes = attributes.add(ExpandedTypeAttribute(this)),
+  preserveAttributes = true
+)
 
 context(c: SessionHolder)
-private fun ConeKotlinType.deconstructIfKType(): Pair<ConeKotlinType, List<ConeTypeProjection>>? {
+private fun ConeKotlinType.deconstructIfKType(): Pair<FirClassLikeSymbol<*>, List<ConeTypeProjection>>? {
   var realType: ConeKotlinType = fullyExpandedType()
   val appliedTypes = buildList {
-    while (realType.isK && realType.typeArguments.size == 2) {
+    while (realType.isK) {
       add(0, realType.typeArguments[1])
       realType = realType.typeArguments[0].type?.fullyExpandedType() ?: return null // Caused by malformed K type
     }
@@ -54,41 +54,26 @@ private fun ConeKotlinType.deconstructIfKType(): Pair<ConeKotlinType, List<ConeT
   }
   // Could be relaxed
   if (realType.typeArguments.any { !it.isStarProjection }) return null
-  return realType to appliedTypes
+  return realType.toClassLikeSymbol()?.let { it to appliedTypes }
 }
 
 context(c: SessionHolder)
-private fun ConeKotlinType.deconstructNormalType(): Pair<ConeKotlinType, List<ConeTypeProjection>>? {
-  val realType = fullyExpandedType()
-  if (realType.isK) return null
-  return realType to realType.typeArguments.toList()
-}
-
-context(c: SessionHolder)
-private tailrec fun FirClassLikeSymbol<*>.applyTypeFunctions(
-  appliedTypes: List<ConeTypeProjection>, default: ConeKotlinType? = null
+private tailrec fun ConeKotlinType.applyTypeFunctions(
+  extraTypes: List<ConeTypeProjection>, default: ConeKotlinType?
 ): ConeKotlinType? {
-  val isIdentity = classId == IDENTITY_CLASS_ID
-  val typeParameterSize = if (isIdentity) 1 else ownTypeParameterSymbols.size
-  if (typeParameterSize > appliedTypes.size) return default // partially-applied type
-  if (classId == K_CLASS_ID) return default // should not be called on K
-  var tookAStep = isIdentity
+  val (symbol, appliedTypes) = deconstructIfKType() ?: return default
+  val isIdentity = symbol.classId == IDENTITY_CLASS_ID
+  val typeParameterSize = if (isIdentity) 1 else symbol.ownTypeParameterSymbols.size
+  val (immediatelyUsableTypes, extraTypes) = (appliedTypes + extraTypes).splitAtOrNull(typeParameterSize) ?: return default // partially-applied type
   // TODO what if K<Identity, in/out A>?
-  val substituted = if (isIdentity) appliedTypes.first().type ?: return default else {
-    val constructed = constructType(appliedTypes.take(typeParameterSize).toTypedArray())
-    val expanded = constructed.directExpansionType(c.session)
-    if (expanded == null) constructed else {
-      tookAStep = true
-      expanded
-    }
-  }
-  val appliedTypes = appliedTypes.drop(typeParameterSize)
-  val newDefault = substituted.createKType(appliedTypes)
-  if (!tookAStep) return newDefault
-  val (realType, newApplied) = substituted.deconstructIfKType() ?: substituted.deconstructNormalType()
-  ?: return newDefault
-  val symbol = realType.toClassLikeSymbol() ?: return newDefault
-  return symbol.applyTypeFunctions(newApplied + appliedTypes, newDefault)
+  val substituted = if (isIdentity) immediatelyUsableTypes.single().type ?: return default else
+    symbol.constructType(immediatelyUsableTypes.toTypedArray()).fullyExpandedType()
+  return substituted.applyTypeFunctions(extraTypes, substituted.createKType(extraTypes))
+}
+
+private fun <T> List<T>.splitAtOrNull(index: Int): Pair<List<T>, List<T>>? {
+  if (index !in 0..size) return null
+  return subList(0, index) to subList(index, size)
 }
 
 // TODO: application order?
