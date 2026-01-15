@@ -1,0 +1,108 @@
+FILE: prompt2.kt
+    package foo.bar
+
+    public final class Prompt<R> : R|kotlin/Any| {
+        public constructor<R>(): R|foo/bar/Prompt<R>| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    public abstract interface Monad<F> : R|kotlin/Any| {
+        public abstract fun <A> pure(a: R|A|): R|io/github/kyay10/highkt/K<F, A>|
+
+        public abstract fun <A, B> R|io/github/kyay10/highkt/K<F, A>|.flatMap(f: R|suspend (A) -> io/github/kyay10/highkt/K<F, B>|): R|io/github/kyay10/highkt/K<F, B>|
+
+    }
+    context(m: R|foo/bar/Monad<F>|)
+    public final fun <F, A> pure(a: R|A|): R|io/github/kyay10/highkt/K<F, A>| {
+        ^pure R|<local>/m|.R|SubstitutionOverride<foo/bar/Monad.pure: R|io/github/kyay10/highkt/K<F, A>|>|<R|A|>(R|<local>/a|)
+    }
+    context(m: R|foo/bar/Monad<F>|)
+    public final fun <F, A, B> R|io/github/kyay10/highkt/K<F, A>|.flatMap(f: R|suspend (A) -> io/github/kyay10/highkt/K<F, B>|): R|io/github/kyay10/highkt/K<F, B>| {
+        ^flatMap R|kotlin/with|<R|foo/bar/Monad<F>|, R|io/github/kyay10/highkt/K<F, B>|>(R|<local>/m|, <L> = with@fun R|foo/bar/Monad<F>|.<anonymous>(): R|io/github/kyay10/highkt/K<F, B>| <inline=Inline, kind=EXACTLY_ONCE>  {
+            ^ (this@R|special/anonymous|, this@R|foo/bar/flatMap|).R|SubstitutionOverride<foo/bar/Monad.flatMap: R|io/github/kyay10/highkt/K<F, B>|>|<R|A|, R|B|>(R|<local>/f|)
+        }
+        )
+    }
+    context(<unused var>: R|foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>|, <unused var>: R|foo/bar/Monad<F>|)
+    public final suspend fun <F, A, B> R|io/github/kyay10/highkt/K<F, B>|.bind(): R|B| {
+        ^bind R|kotlin/TODO|()
+    }
+    context(<unused var>: R|foo/bar/Monad<F>|)
+    public final suspend fun <F, A> monadReset(body: R|suspend foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>.() -> A|): R|io/github/kyay10/highkt/K<F, A>| {
+        ^monadReset R|kotlin/TODO|()
+    }
+    public final suspend fun <F, A> R|foo/bar/Monad<F>|.reset(body: R|@ContextFunctionTypeParams(1) suspend context(foo/bar/Monad<F>) foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>.() -> A|): R|io/github/kyay10/highkt/K<F, A>| {
+        ^reset context(this@R|foo/bar/reset|) R|foo/bar/monadReset|<R|F|, R|A|>(<L> = monadReset@fun R|foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>|.<anonymous>(): R|A| <inline=NoInline>  {
+            ^ R|<local>/body|.R|SubstitutionOverride<kotlin/coroutines/SuspendFunction2.invoke: R|A|>|(this@R|foo/bar/reset|, this@R|special/anonymous|)
+        }
+        )
+    }
+    public final typealias State<S, A> = R|suspend (S) -> kotlin/Pair<A, S>|
+    public final typealias StateOf<S> = R|io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, S>|
+    public final class StateMonad<S> : R|foo/bar/Monad<foo/bar/StateOf<S>>| {
+        public constructor<S>(): R|foo/bar/StateMonad<S>| {
+            super<R|kotlin/Any|>()
+        }
+
+        public open override fun <A> pure(a: R|A|): R|suspend (S) -> kotlin/Pair<A, S>| {
+            ^pure suspend fun <anonymous>(s: R|S|): R|kotlin/Pair<A, S>| <inline=NoInline>  {
+                ^ R|kotlin/Pair.Pair|<R|A|, R|S|>(R|<local>/a|, R|<local>/s|)
+            }
+
+        }
+
+        public open override fun <A, B> R|{foo/bar/State<S, A>=} suspend (S) -> kotlin/Pair<A, S>|.flatMap(f: R|suspend (A) -> suspend (S) -> kotlin/Pair<B, S>|): R|suspend (S) -> kotlin/Pair<B, S>| {
+            ^flatMap suspend fun <anonymous>(s0: R|S|): R|kotlin/Pair<B, S>| <inline=NoInline>  {
+                lval <destruct>: R|kotlin/Pair<A, S>| = this@R|foo/bar/StateMonad.flatMap|.R|SubstitutionOverride<kotlin/coroutines/SuspendFunction1.invoke: R|kotlin/Pair<A, S>|>|(R|<local>/s0|)
+                lval a: R|A| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component1: R|A|>|()
+                lval s1: R|S| = R|<local>/<destruct>|.R|SubstitutionOverride<kotlin/Pair.component2: R|S|>|()
+                ^ R|<local>/f|.R|SubstitutionOverride<kotlin/coroutines/SuspendFunction1.invoke: R|{foo/bar/State<S, B>=} suspend (S) -> kotlin/Pair<B, S>|>|(R|<local>/a|).R|SubstitutionOverride<kotlin/coroutines/SuspendFunction1.invoke: R|kotlin/Pair<B, S>|>|(R|<local>/s1|)
+            }
+
+        }
+
+    }
+    public final suspend fun stateMonad(): R|kotlin/Unit| {
+        local final data class CounterState : R|kotlin/Any| {
+            public constructor(count: R|kotlin/Int|): R|<local>/CounterState| {
+                super<R|kotlin/Any|>()
+            }
+
+            public final val count: R|kotlin/Int| = R|<local>/count|
+                public get(): R|kotlin/Int|
+
+            public final operator fun component1(): R|kotlin/Int|
+
+            public final fun copy(count: R|kotlin/Int| = this@R|<local>/CounterState|.R|<local>/count|): R|<local>/CounterState|
+
+        }
+
+        lval incrementCounter: R|{foo/bar/State<<local>/CounterState, kotlin/Unit>=} suspend (<local>/CounterState) -> kotlin/Pair<kotlin/Unit, <local>/CounterState>| = suspend fun <anonymous>(state: R|<local>/CounterState|): R|kotlin/Pair<kotlin/Unit, <local>/CounterState>| <inline=NoInline>  {
+            ^ Q|kotlin/Unit|.R|kotlin/to|<R|kotlin/Unit|, R|<local>/CounterState|>(R|<local>/state|.R|foo/bar/CounterState.copy|(R|<local>/state|.R|<local>/count|.R|kotlin/Int.plus|(Int(1))))
+        }
+
+        lval doubleCounter: R|{foo/bar/State<<local>/CounterState, kotlin/Unit>=} suspend (<local>/CounterState) -> kotlin/Pair<kotlin/Unit, <local>/CounterState>| = suspend fun <anonymous>(state: R|<local>/CounterState|): R|kotlin/Pair<kotlin/Unit, <local>/CounterState>| <inline=NoInline>  {
+            ^ Q|kotlin/Unit|.R|kotlin/to|<R|kotlin/Unit|, R|<local>/CounterState|>(R|<local>/state|.R|foo/bar/CounterState.copy|(R|<local>/state|.R|<local>/count|.R|kotlin/Int.times|(Int(2))))
+        }
+
+        lval result: R|kotlin/Pair<kotlin/Unit, <local>/CounterState>| = R|foo/bar/StateMonad.StateMonad|<R|<local>/CounterState|>().R|foo/bar/reset|<R|{foo/bar/StateOf<<local>/CounterState>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, <local>/CounterState>|, R|kotlin/Unit|>(<L> = context(<unused var>: R|foo/bar/Monad<{foo/bar/StateOf<<local>/CounterState>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, <local>/CounterState>>|) reset@fun R|foo/bar/Prompt<io/github/kyay10/highkt/K<{foo/bar/StateOf<<local>/CounterState>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, <local>/CounterState>, kotlin/Unit>>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+            context(this@R|special/anonymous|, R|<local>/<unused var>|) R|<local>/incrementCounter|.R|foo/bar/bind|<R|{foo/bar/StateOf<<local>/CounterState>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, <local>/CounterState>|, R|kotlin/Unit|, R|kotlin/Unit|>()
+            context(this@R|special/anonymous|, R|<local>/<unused var>|) R|<local>/doubleCounter|.R|foo/bar/bind|<R|{foo/bar/StateOf<<local>/CounterState>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, <local>/CounterState>|, R|kotlin/Unit|, R|kotlin/Unit|>()
+            context(this@R|special/anonymous|, R|<local>/<unused var>|) R|<local>/doubleCounter|.R|foo/bar/bind|<R|{foo/bar/StateOf<<local>/CounterState>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, <local>/CounterState>|, R|kotlin/Unit|, R|kotlin/Unit|>()
+        }
+        ).R|SubstitutionOverride<kotlin/coroutines/SuspendFunction1.invoke: R|kotlin/Pair<kotlin/Unit, <local>/CounterState>|>|(R|<local>/CounterState.CounterState|(Int(0)))
+        lval expected: R|kotlin/Pair<kotlin/Unit, <local>/CounterState>| = R|kotlin/context|<R|foo/bar/StateMonad<<local>/CounterState>|, R|kotlin/Pair<kotlin/Unit, <local>/CounterState>|>(R|foo/bar/StateMonad.StateMonad|<R|<local>/CounterState|>(), <L> = context(<unused var>: R|foo/bar/StateMonad<<local>/CounterState>|) context@fun <anonymous>(): R|kotlin/Pair<kotlin/Unit, <local>/CounterState>| <inline=Inline, kind=EXACTLY_ONCE>  {
+            ^ context(R|<local>/<unused var>|) R|<local>/incrementCounter|.R|foo/bar/flatMap|<R|{foo/bar/StateOf<<local>/CounterState>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, <local>/CounterState>|, R|kotlin/Unit|, R|kotlin/Unit|>(<L> = flatMap@fun <anonymous>(it: R|kotlin/Unit|): R|io/github/kyay10/highkt/K<{foo/bar/StateOf<<local>/CounterState>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, <local>/CounterState>, kotlin/Unit>| <inline=NoInline>  {
+                ^ context(R|<local>/<unused var>|) R|<local>/doubleCounter|.R|foo/bar/flatMap|<R|{foo/bar/StateOf<<local>/CounterState>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, <local>/CounterState>|, R|kotlin/Unit|, R|kotlin/Unit|>(<L> = flatMap@fun <anonymous>(it: R|kotlin/Unit|): R|io/github/kyay10/highkt/K<{foo/bar/StateOf<<local>/CounterState>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/State<*, *>>, <local>/CounterState>, kotlin/Unit>| <inline=NoInline>  {
+                    ^ R|<local>/doubleCounter|
+                }
+                )
+            }
+            ).R|SubstitutionOverride<kotlin/coroutines/SuspendFunction1.invoke: R|kotlin/Pair<kotlin/Unit, <local>/CounterState>|>|(R|<local>/CounterState.CounterState|(Int(0)))
+        }
+        )
+    }
+    public final fun box(): R|kotlin/String| {
+        ^box String(OK)
+    }

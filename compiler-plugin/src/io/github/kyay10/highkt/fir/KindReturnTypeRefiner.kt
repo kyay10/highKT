@@ -22,6 +22,7 @@ import org.jetbrains.kotlin.fir.types.ConeRigidType
 import org.jetbrains.kotlin.fir.types.ConeTypeApproximator
 import org.jetbrains.kotlin.fir.types.ConeTypePreparator
 import org.jetbrains.kotlin.fir.types.TypeComponents
+import org.jetbrains.kotlin.fir.types.abbreviatedType
 import org.jetbrains.kotlin.fir.types.correspondingSupertypesCache
 import org.jetbrains.kotlin.fir.types.getConstructor
 import org.jetbrains.kotlin.fir.types.replaceType
@@ -143,11 +144,12 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
   private fun ConeKotlinType.options(): List<ConeKotlinType> = buildList {
     var current: ConeKotlinType? = this@options
     while(current != null) {
+      current.abbreviatedType?.toCanonicalKType()?.let(::add)
       current.toCanonicalKType()?.let(::add)
       add(current)
       current = current.attributes.expandedType?.coneType
     }
-  }
+  }.asReversed()
 
   override fun RigidTypeMarker.fastCorrespondingSupertypes(constructor: TypeConstructorMarker): List<ConeClassLikeType>? {
     val superType = (constructor as? ConeClassLikeLookupTagWithType)?.type
@@ -160,13 +162,11 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
         var i = 0
         it.withArguments { arg ->
           val expectedArg = superType.typeArguments[i++]
-          if (expectedArg.type.isK && arg.variance != Variance.OUT_VARIANCE && !arg.type.isK) {
-            val replacement = arg.type?.options()?.first()
-            if (replacement !== arg.type) {
-              replacedAny = true
-              arg.replaceType(replacement?.withAttributes(replacement.attributes.add(LeaveUnevaluatedAttribute)))
-            } else arg
-          } else arg
+          if (!expectedArg.type.isK || arg.variance == Variance.OUT_VARIANCE || arg.type.isK) return@withArguments arg
+          val argType = arg.type ?: return@withArguments arg
+          val replacement = argType.options().firstOrNull { it !== arg.type } ?: return@withArguments arg
+          replacedAny = true
+          arg.replaceType(replacement.withAttributes(replacement.attributes.add(LeaveUnevaluatedAttribute)).takeIf { true })
         }.takeIf { replacedAny } ?: it
       }
     }

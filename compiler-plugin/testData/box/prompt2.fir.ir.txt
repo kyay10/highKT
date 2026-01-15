@@ -1,0 +1,392 @@
+FILE fqName:foo.bar fileName:/prompt2.kt
+  CLASS CLASS name:Prompt modality:FINAL visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Prompt<R of foo.bar.Prompt>
+    TYPE_PARAMETER name:R index:0 variance: superTypes:[kotlin.Any?] reified:false
+    CONSTRUCTOR visibility:public returnType:foo.bar.Prompt<R of foo.bar.Prompt> [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Prompt modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+  CLASS CLASS name:StateMonad modality:FINAL visibility:public superTypes:[foo.bar.Monad<kotlin.Any?>]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.StateMonad<S of foo.bar.StateMonad>
+    TYPE_PARAMETER name:S index:0 variance: superTypes:[kotlin.Any?] reified:false
+    CONSTRUCTOR visibility:public returnType:foo.bar.StateMonad<S of foo.bar.StateMonad> [primary]
+      BLOCK_BODY
+        DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:StateMonad modality:FINAL visibility:public superTypes:[foo.bar.Monad<kotlin.Any?>]' type=kotlin.Unit
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.Monad
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in foo.bar.Monad
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in foo.bar.Monad
+    FUN name:flatMap visibility:public modality:OPEN returnType:kotlin.Any?
+      TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.StateMonad<S of foo.bar.StateMonad>
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
+      VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.coroutines.SuspendFunction1<A of foo.bar.StateMonad.flatMap, kotlin.Any?>
+      overridden:
+        public abstract fun flatMap <A, B> (<this>: kotlin.Any?, f: kotlin.coroutines.SuspendFunction1<A of foo.bar.Monad.flatMap, kotlin.Any?>): kotlin.Any? declared in foo.bar.Monad
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun flatMap <A, B> (<this>: kotlin.Any?, f: kotlin.coroutines.SuspendFunction1<A of foo.bar.StateMonad.flatMap, kotlin.Any?>): kotlin.Any? declared in foo.bar.StateMonad'
+          FUN_EXPR type=kotlin.coroutines.SuspendFunction1<S of foo.bar.StateMonad, kotlin.Pair<B of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad>> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Pair<B of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad> [suspend]
+              VALUE_PARAMETER kind:Regular name:s0 index:0 type:S of foo.bar.StateMonad
+              BLOCK_BODY
+                VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlin.Pair<A of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad> [val]
+                  CALL 'public abstract fun invoke (p1: P1 of kotlin.coroutines.SuspendFunction1): R of kotlin.coroutines.SuspendFunction1 declared in kotlin.coroutines.SuspendFunction1' type=kotlin.Pair<A of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad> origin=null
+                    ARG <this>: GET_VAR '<this>(index:1): kotlin.Any? declared in foo.bar.StateMonad.flatMap' type=kotlin.coroutines.SuspendFunction1<S of foo.bar.StateMonad, kotlin.Pair<A of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad>> origin=null
+                    ARG p1: GET_VAR 's0: S of foo.bar.StateMonad declared in foo.bar.StateMonad.flatMap.<anonymous>' type=S of foo.bar.StateMonad origin=null
+                VAR name:a type:A of foo.bar.StateMonad.flatMap [val]
+                  CALL 'public final fun component1 (): A of kotlin.Pair declared in kotlin.Pair' type=A of foo.bar.StateMonad.flatMap origin=COMPONENT_N(index=1)
+                    ARG <this>: GET_VAR 'val tmp_0: kotlin.Pair<A of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad> declared in foo.bar.StateMonad.flatMap.<anonymous>' type=kotlin.Pair<A of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad> origin=null
+                VAR name:s1 type:S of foo.bar.StateMonad [val]
+                  CALL 'public final fun component2 (): B of kotlin.Pair declared in kotlin.Pair' type=S of foo.bar.StateMonad origin=COMPONENT_N(index=2)
+                    ARG <this>: GET_VAR 'val tmp_0: kotlin.Pair<A of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad> declared in foo.bar.StateMonad.flatMap.<anonymous>' type=kotlin.Pair<A of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad> origin=null
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> (s0: S of foo.bar.StateMonad): kotlin.Pair<B of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad> declared in foo.bar.StateMonad.flatMap'
+                  CALL 'public abstract fun invoke (p1: P1 of kotlin.coroutines.SuspendFunction1): R of kotlin.coroutines.SuspendFunction1 declared in kotlin.coroutines.SuspendFunction1' type=kotlin.Pair<B of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad> origin=null
+                    ARG <this>: CALL 'public abstract fun invoke (p1: P1 of kotlin.coroutines.SuspendFunction1): R of kotlin.coroutines.SuspendFunction1 declared in kotlin.coroutines.SuspendFunction1' type=kotlin.coroutines.SuspendFunction1<S of foo.bar.StateMonad, kotlin.Pair<B of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad>> origin=null
+                      ARG <this>: GET_VAR 'f: kotlin.coroutines.SuspendFunction1<A of foo.bar.StateMonad.flatMap, kotlin.Any?> declared in foo.bar.StateMonad.flatMap' type=kotlin.coroutines.SuspendFunction1<A of foo.bar.StateMonad.flatMap, kotlin.coroutines.SuspendFunction1<S of foo.bar.StateMonad, kotlin.Pair<B of foo.bar.StateMonad.flatMap, S of foo.bar.StateMonad>>> origin=VARIABLE_AS_FUNCTION
+                      ARG p1: GET_VAR 'val a: A of foo.bar.StateMonad.flatMap declared in foo.bar.StateMonad.flatMap.<anonymous>' type=A of foo.bar.StateMonad.flatMap origin=null
+                    ARG p1: GET_VAR 'val s1: S of foo.bar.StateMonad declared in foo.bar.StateMonad.flatMap.<anonymous>' type=S of foo.bar.StateMonad origin=null
+    FUN name:pure visibility:public modality:OPEN returnType:kotlin.coroutines.SuspendFunction1<S of foo.bar.StateMonad, kotlin.Pair<A of foo.bar.StateMonad.pure, S of foo.bar.StateMonad>>
+      TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.StateMonad<S of foo.bar.StateMonad>
+      VALUE_PARAMETER kind:Regular name:a index:1 type:A of foo.bar.StateMonad.pure
+      overridden:
+        public abstract fun pure <A> (a: A of foo.bar.Monad.pure): kotlin.Any? declared in foo.bar.Monad
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public open fun pure <A> (a: A of foo.bar.StateMonad.pure): kotlin.coroutines.SuspendFunction1<S of foo.bar.StateMonad, kotlin.Pair<A of foo.bar.StateMonad.pure, S of foo.bar.StateMonad>> declared in foo.bar.StateMonad'
+          FUN_EXPR type=kotlin.coroutines.SuspendFunction1<S of foo.bar.StateMonad, kotlin.Pair<A of foo.bar.StateMonad.pure, S of foo.bar.StateMonad>> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Pair<A of foo.bar.StateMonad.pure, S of foo.bar.StateMonad> [suspend]
+              VALUE_PARAMETER kind:Regular name:s index:0 type:S of foo.bar.StateMonad
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> (s: S of foo.bar.StateMonad): kotlin.Pair<A of foo.bar.StateMonad.pure, S of foo.bar.StateMonad> declared in foo.bar.StateMonad.pure'
+                  CONSTRUCTOR_CALL 'public constructor <init> (first: A of kotlin.Pair, second: B of kotlin.Pair) declared in kotlin.Pair' type=kotlin.Pair<A of foo.bar.StateMonad.pure, S of foo.bar.StateMonad> origin=null
+                    TYPE_ARG (of class) A: A of foo.bar.StateMonad.pure
+                    TYPE_ARG (of class) B: S of foo.bar.StateMonad
+                    ARG first: GET_VAR 'a: A of foo.bar.StateMonad.pure declared in foo.bar.StateMonad.pure' type=A of foo.bar.StateMonad.pure origin=null
+                    ARG second: GET_VAR 's: S of foo.bar.StateMonad declared in foo.bar.StateMonad.pure.<anonymous>' type=S of foo.bar.StateMonad origin=null
+  CLASS INTERFACE name:Monad modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
+    thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Monad<F of foo.bar.Monad>
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+      overridden:
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
+    FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+      overridden:
+        public open fun toString (): kotlin.String declared in kotlin.Any
+    FUN name:flatMap visibility:public modality:ABSTRACT returnType:kotlin.Any?
+      TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+      TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Monad<F of foo.bar.Monad>
+      VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
+      VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.coroutines.SuspendFunction1<A of foo.bar.Monad.flatMap, kotlin.Any?>
+    FUN name:pure visibility:public modality:ABSTRACT returnType:kotlin.Any?
+      TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Monad<F of foo.bar.Monad>
+      VALUE_PARAMETER kind:Regular name:a index:1 type:A of foo.bar.Monad.pure
+  FUN name:bind visibility:public modality:FINAL returnType:B of foo.bar.bind [suspend]
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:2 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Prompt index:0 type:foo.bar.Prompt<kotlin.Any?>
+    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Monad index:1 type:foo.bar.Monad<F of foo.bar.bind>
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:2 type:kotlin.Any?
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun bind <F, A, B> ($context-Prompt: foo.bar.Prompt<kotlin.Any?>, $context-Monad: foo.bar.Monad<F of foo.bar.bind>, <this>: kotlin.Any?): B of foo.bar.bind declared in foo.bar'
+        CALL 'public final fun TODO (): kotlin.Nothing declared in kotlin' type=kotlin.Nothing origin=null
+  FUN name:box visibility:public modality:FINAL returnType:kotlin.String
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in foo.bar'
+        CONST String type=kotlin.String value="OK"
+  FUN name:flatMap visibility:public modality:FINAL returnType:kotlin.Any?
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:B index:2 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER kind:Context name:m index:0 type:foo.bar.Monad<F of foo.bar.flatMap>
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:1 type:kotlin.Any?
+    VALUE_PARAMETER kind:Regular name:f index:2 type:kotlin.coroutines.SuspendFunction1<A of foo.bar.flatMap, kotlin.Any?>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun flatMap <F, A, B> (m: foo.bar.Monad<F of foo.bar.flatMap>, <this>: kotlin.Any?, f: kotlin.coroutines.SuspendFunction1<A of foo.bar.flatMap, kotlin.Any?>): kotlin.Any? declared in foo.bar'
+        CALL 'public final fun with <T, R> (receiver: T of kotlin.with, block: @[ExtensionFunctionType] kotlin.Function1<T of kotlin.with, R of kotlin.with>): R of kotlin.with declared in kotlin' type=kotlin.Any? origin=null
+          TYPE_ARG T: foo.bar.Monad<F of foo.bar.flatMap>
+          TYPE_ARG R: kotlin.Any?
+          ARG receiver: GET_VAR 'm: foo.bar.Monad<F of foo.bar.flatMap> declared in foo.bar.flatMap' type=foo.bar.Monad<F of foo.bar.flatMap> origin=null
+          ARG block: FUN_EXPR type=@[ExtensionFunctionType] kotlin.Function1<foo.bar.Monad<F of foo.bar.flatMap>, kotlin.Any?> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
+              VALUE_PARAMETER kind:ExtensionReceiver name:$this$with index:0 type:foo.bar.Monad<F of foo.bar.flatMap>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> ($this$with: foo.bar.Monad<F of foo.bar.flatMap>): kotlin.Any? declared in foo.bar.flatMap'
+                  CALL 'public abstract fun flatMap <A, B> (<this>: kotlin.Any?, f: kotlin.coroutines.SuspendFunction1<A of foo.bar.Monad.flatMap, kotlin.Any?>): kotlin.Any? declared in foo.bar.Monad' type=kotlin.Any? origin=null
+                    TYPE_ARG A: A of foo.bar.flatMap
+                    TYPE_ARG B: B of foo.bar.flatMap
+                    ARG <this>(index:0): GET_VAR '$this$with: foo.bar.Monad<F of foo.bar.flatMap> declared in foo.bar.flatMap.<anonymous>' type=foo.bar.Monad<F of foo.bar.flatMap> origin=IMPLICIT_ARGUMENT
+                    ARG <this>(index:1): GET_VAR '<this>: kotlin.Any? declared in foo.bar.flatMap' type=kotlin.Any? origin=null
+                    ARG f: GET_VAR 'f: kotlin.coroutines.SuspendFunction1<A of foo.bar.flatMap, kotlin.Any?> declared in foo.bar.flatMap' type=kotlin.coroutines.SuspendFunction1<A of foo.bar.flatMap, kotlin.Any?> origin=null
+  FUN name:monadReset visibility:public modality:FINAL returnType:kotlin.Any? [suspend]
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Monad index:0 type:foo.bar.Monad<F of foo.bar.monadReset>
+    VALUE_PARAMETER kind:Regular name:body index:1 type:@[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<foo.bar.Prompt<kotlin.Any?>, A of foo.bar.monadReset>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun monadReset <F, A> ($context-Monad: foo.bar.Monad<F of foo.bar.monadReset>, body: @[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<foo.bar.Prompt<kotlin.Any?>, A of foo.bar.monadReset>): kotlin.Any? declared in foo.bar'
+        CALL 'public final fun TODO (): kotlin.Nothing declared in kotlin' type=kotlin.Nothing origin=null
+  FUN name:pure visibility:public modality:FINAL returnType:kotlin.Any?
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER kind:Context name:m index:0 type:foo.bar.Monad<F of foo.bar.pure>
+    VALUE_PARAMETER kind:Regular name:a index:1 type:A of foo.bar.pure
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun pure <F, A> (m: foo.bar.Monad<F of foo.bar.pure>, a: A of foo.bar.pure): kotlin.Any? declared in foo.bar'
+        CALL 'public abstract fun pure <A> (a: A of foo.bar.Monad.pure): kotlin.Any? declared in foo.bar.Monad' type=kotlin.Any? origin=null
+          TYPE_ARG A: A of foo.bar.pure
+          ARG <this>: GET_VAR 'm: foo.bar.Monad<F of foo.bar.pure> declared in foo.bar.pure' type=foo.bar.Monad<F of foo.bar.pure> origin=null
+          ARG a: GET_VAR 'a: A of foo.bar.pure declared in foo.bar.pure' type=A of foo.bar.pure origin=null
+  FUN name:reset visibility:public modality:FINAL returnType:kotlin.Any? [suspend]
+    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+    VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:0 type:foo.bar.Monad<F of foo.bar.reset>
+    VALUE_PARAMETER kind:Regular name:body index:1 type:@[ExtensionFunctionType] kotlin.coroutines.SuspendFunction2<foo.bar.Monad<F of foo.bar.reset>, foo.bar.Prompt<kotlin.Any?>, A of foo.bar.reset>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun reset <F, A> (<this>: foo.bar.Monad<F of foo.bar.reset>, body: @[ExtensionFunctionType] kotlin.coroutines.SuspendFunction2<foo.bar.Monad<F of foo.bar.reset>, foo.bar.Prompt<kotlin.Any?>, A of foo.bar.reset>): kotlin.Any? declared in foo.bar'
+        CALL 'public final fun monadReset <F, A> ($context-Monad: foo.bar.Monad<F of foo.bar.monadReset>, body: @[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<foo.bar.Prompt<kotlin.Any?>, A of foo.bar.monadReset>): kotlin.Any? declared in foo.bar' type=kotlin.Any? origin=null
+          TYPE_ARG F: F of foo.bar.reset
+          TYPE_ARG A: A of foo.bar.reset
+          ARG $context-Monad: GET_VAR '<this>: foo.bar.Monad<F of foo.bar.reset> declared in foo.bar.reset' type=foo.bar.Monad<F of foo.bar.reset> origin=IMPLICIT_ARGUMENT
+          ARG body: FUN_EXPR type=@[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<foo.bar.Prompt<kotlin.Any?>, A of foo.bar.reset> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:A of foo.bar.reset [suspend]
+              VALUE_PARAMETER kind:ExtensionReceiver name:$this$monadReset index:0 type:foo.bar.Prompt<kotlin.Any?>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> ($this$monadReset: foo.bar.Prompt<kotlin.Any?>): A of foo.bar.reset declared in foo.bar.reset'
+                  CALL 'public abstract fun invoke (p1: P1 of kotlin.coroutines.SuspendFunction2, p2: P2 of kotlin.coroutines.SuspendFunction2): R of kotlin.coroutines.SuspendFunction2 declared in kotlin.coroutines.SuspendFunction2' type=A of foo.bar.reset origin=null
+                    ARG <this>: GET_VAR 'body: @[ExtensionFunctionType] kotlin.coroutines.SuspendFunction2<foo.bar.Monad<F of foo.bar.reset>, foo.bar.Prompt<kotlin.Any?>, A of foo.bar.reset> declared in foo.bar.reset' type=@[ExtensionFunctionType] kotlin.coroutines.SuspendFunction2<foo.bar.Monad<F of foo.bar.reset>, foo.bar.Prompt<kotlin.Any?>, A of foo.bar.reset> origin=VARIABLE_AS_FUNCTION
+                    ARG p1: GET_VAR '<this>: foo.bar.Monad<F of foo.bar.reset> declared in foo.bar.reset' type=foo.bar.Monad<F of foo.bar.reset> origin=IMPLICIT_ARGUMENT
+                    ARG p2: GET_VAR '$this$monadReset: foo.bar.Prompt<kotlin.Any?> declared in foo.bar.reset.<anonymous>' type=foo.bar.Prompt<kotlin.Any?> origin=IMPLICIT_ARGUMENT
+  FUN name:stateMonad visibility:public modality:FINAL returnType:kotlin.Unit [suspend]
+    BLOCK_BODY
+      CLASS CLASS name:CounterState modality:FINAL visibility:local [data] superTypes:[kotlin.Any]
+        thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.stateMonad.CounterState
+        PROPERTY name:count visibility:public modality:FINAL [val]
+          FIELD PROPERTY_BACKING_FIELD name:count type:kotlin.Int visibility:private [final]
+            EXPRESSION_BODY
+              GET_VAR 'count: kotlin.Int declared in foo.bar.stateMonad.CounterState.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+          FUN DEFAULT_PROPERTY_ACCESSOR name:<get-count> visibility:public modality:FINAL returnType:kotlin.Int
+            VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.stateMonad.CounterState
+            correspondingProperty: PROPERTY name:count visibility:public modality:FINAL [val]
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='public final fun <get-count> (): kotlin.Int declared in foo.bar.stateMonad.CounterState'
+                GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:count type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                  receiver: GET_VAR '<this>: foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.CounterState.<get-count>' type=foo.bar.stateMonad.CounterState origin=null
+        CONSTRUCTOR visibility:public returnType:foo.bar.stateMonad.CounterState [primary]
+          VALUE_PARAMETER kind:Regular name:count index:0 type:kotlin.Int
+          BLOCK_BODY
+            DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+            INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:CounterState modality:FINAL visibility:local [data] superTypes:[kotlin.Any]' type=kotlin.Unit
+        FUN GENERATED_DATA_CLASS_MEMBER name:component1 visibility:public modality:FINAL returnType:kotlin.Int [operator]
+          VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.stateMonad.CounterState
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='public final fun component1 (): kotlin.Int declared in foo.bar.stateMonad.CounterState'
+              GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:count type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                receiver: GET_VAR '<this>: foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.CounterState.component1' type=foo.bar.stateMonad.CounterState origin=null
+        FUN GENERATED_DATA_CLASS_MEMBER name:copy visibility:public modality:FINAL returnType:foo.bar.stateMonad.CounterState
+          VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.stateMonad.CounterState
+          VALUE_PARAMETER kind:Regular name:count index:1 type:kotlin.Int
+            EXPRESSION_BODY
+              GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:count type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                receiver: GET_VAR '<this>: foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.CounterState.copy' type=foo.bar.stateMonad.CounterState origin=null
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='public final fun copy (count: kotlin.Int): foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.CounterState'
+              CONSTRUCTOR_CALL 'public constructor <init> (count: kotlin.Int) declared in foo.bar.stateMonad.CounterState' type=foo.bar.stateMonad.CounterState origin=null
+                ARG count: GET_VAR 'count: kotlin.Int declared in foo.bar.stateMonad.CounterState.copy' type=kotlin.Int origin=null
+        FUN GENERATED_DATA_CLASS_MEMBER name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [operator]
+          VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.stateMonad.CounterState
+          VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+          overridden:
+            public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
+          BLOCK_BODY
+            WHEN type=kotlin.Unit origin=null
+              BRANCH
+                if: CALL 'public final fun EQEQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQEQ
+                  ARG arg0: GET_VAR '<this>: foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.CounterState.equals' type=foo.bar.stateMonad.CounterState origin=null
+                  ARG arg1: GET_VAR 'other: kotlin.Any? declared in foo.bar.stateMonad.CounterState.equals' type=kotlin.Any? origin=null
+                then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.stateMonad.CounterState'
+                  CONST Boolean type=kotlin.Boolean value=true
+            WHEN type=kotlin.Unit origin=null
+              BRANCH
+                if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=foo.bar.stateMonad.CounterState
+                  GET_VAR 'other: kotlin.Any? declared in foo.bar.stateMonad.CounterState.equals' type=kotlin.Any? origin=null
+                then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.stateMonad.CounterState'
+                  CONST Boolean type=kotlin.Boolean value=false
+            VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:foo.bar.stateMonad.CounterState [val]
+              TYPE_OP type=foo.bar.stateMonad.CounterState origin=IMPLICIT_CAST typeOperand=foo.bar.stateMonad.CounterState
+                GET_VAR 'other: kotlin.Any? declared in foo.bar.stateMonad.CounterState.equals' type=kotlin.Any? origin=null
+            WHEN type=kotlin.Unit origin=null
+              BRANCH
+                if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
+                  ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
+                    ARG arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:count type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                      receiver: GET_VAR '<this>: foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.CounterState.equals' type=foo.bar.stateMonad.CounterState origin=null
+                    ARG arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:count type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                      receiver: GET_VAR 'val tmp_1: foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.CounterState.equals' type=foo.bar.stateMonad.CounterState origin=null
+                then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.stateMonad.CounterState'
+                  CONST Boolean type=kotlin.Boolean value=false
+            RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.stateMonad.CounterState'
+              CONST Boolean type=kotlin.Boolean value=true
+        FUN GENERATED_DATA_CLASS_MEMBER name:hashCode visibility:public modality:OPEN returnType:kotlin.Int
+          VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.stateMonad.CounterState
+          overridden:
+            public open fun hashCode (): kotlin.Int declared in kotlin.Any
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='public open fun hashCode (): kotlin.Int declared in foo.bar.stateMonad.CounterState'
+              CALL 'public open fun hashCode (): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=null
+                ARG <this>: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:count type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                  receiver: GET_VAR '<this>: foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.CounterState.hashCode' type=foo.bar.stateMonad.CounterState origin=null
+        FUN GENERATED_DATA_CLASS_MEMBER name:toString visibility:public modality:OPEN returnType:kotlin.String
+          VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.stateMonad.CounterState
+          overridden:
+            public open fun toString (): kotlin.String declared in kotlin.Any
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in foo.bar.stateMonad.CounterState'
+              STRING_CONCATENATION type=kotlin.String
+                CONST String type=kotlin.String value="CounterState("
+                CONST String type=kotlin.String value="count="
+                GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:count type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                  receiver: GET_VAR '<this>: foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.CounterState.toString' type=foo.bar.stateMonad.CounterState origin=null
+                CONST String type=kotlin.String value=")"
+      VAR name:incrementCounter type:kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> [val]
+        FUN_EXPR type=kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> origin=LAMBDA
+          FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState> [suspend]
+            VALUE_PARAMETER kind:Regular name:state index:0 type:foo.bar.stateMonad.CounterState
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='local final fun <anonymous> (state: foo.bar.stateMonad.CounterState): kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState> declared in foo.bar.stateMonad'
+                CALL 'public final fun to <A, B> (<this>: A of kotlin.to, that: B of kotlin.to): kotlin.Pair<A of kotlin.to, B of kotlin.to> declared in kotlin' type=kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState> origin=null
+                  TYPE_ARG A: kotlin.Unit
+                  TYPE_ARG B: foo.bar.stateMonad.CounterState
+                  ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Unit modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+                  ARG that: CALL 'public final fun copy (count: kotlin.Int): foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.CounterState' type=foo.bar.stateMonad.CounterState origin=null
+                    ARG <this>: GET_VAR 'state: foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.<anonymous>' type=foo.bar.stateMonad.CounterState origin=null
+                    ARG count: CALL 'public final fun plus (other: kotlin.Int): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=PLUS
+                      ARG <this>: CALL 'public final fun <get-count> (): kotlin.Int declared in foo.bar.stateMonad.CounterState' type=kotlin.Int origin=GET_PROPERTY
+                        ARG <this>: GET_VAR 'state: foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.<anonymous>' type=foo.bar.stateMonad.CounterState origin=null
+                      ARG other: CONST Int type=kotlin.Int value=1
+      VAR name:doubleCounter type:kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> [val]
+        FUN_EXPR type=kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> origin=LAMBDA
+          FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState> [suspend]
+            VALUE_PARAMETER kind:Regular name:state index:0 type:foo.bar.stateMonad.CounterState
+            BLOCK_BODY
+              RETURN type=kotlin.Nothing from='local final fun <anonymous> (state: foo.bar.stateMonad.CounterState): kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState> declared in foo.bar.stateMonad'
+                CALL 'public final fun to <A, B> (<this>: A of kotlin.to, that: B of kotlin.to): kotlin.Pair<A of kotlin.to, B of kotlin.to> declared in kotlin' type=kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState> origin=null
+                  TYPE_ARG A: kotlin.Unit
+                  TYPE_ARG B: foo.bar.stateMonad.CounterState
+                  ARG <this>: GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Unit modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
+                  ARG that: CALL 'public final fun copy (count: kotlin.Int): foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.CounterState' type=foo.bar.stateMonad.CounterState origin=null
+                    ARG <this>: GET_VAR 'state: foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.<anonymous>' type=foo.bar.stateMonad.CounterState origin=null
+                    ARG count: CALL 'public final fun times (other: kotlin.Int): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=MUL
+                      ARG <this>: CALL 'public final fun <get-count> (): kotlin.Int declared in foo.bar.stateMonad.CounterState' type=kotlin.Int origin=GET_PROPERTY
+                        ARG <this>: GET_VAR 'state: foo.bar.stateMonad.CounterState declared in foo.bar.stateMonad.<anonymous>' type=foo.bar.stateMonad.CounterState origin=null
+                      ARG other: CONST Int type=kotlin.Int value=2
+      VAR name:result type:kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState> [val]
+        CALL 'public abstract fun invoke (p1: P1 of kotlin.coroutines.SuspendFunction1): R of kotlin.coroutines.SuspendFunction1 declared in kotlin.coroutines.SuspendFunction1' type=kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState> origin=null
+          ARG <this>: CALL 'public final fun reset <F, A> (<this>: foo.bar.Monad<F of foo.bar.reset>, body: @[ExtensionFunctionType] kotlin.coroutines.SuspendFunction2<foo.bar.Monad<F of foo.bar.reset>, foo.bar.Prompt<kotlin.Any?>, A of foo.bar.reset>): kotlin.Any? declared in foo.bar' type=kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> origin=null
+            TYPE_ARG F: kotlin.Any?
+            TYPE_ARG A: kotlin.Unit
+            ARG <this>: CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.StateMonad' type=foo.bar.StateMonad<foo.bar.stateMonad.CounterState> origin=null
+              TYPE_ARG (of class) S: foo.bar.stateMonad.CounterState
+            ARG body: FUN_EXPR type=@[ExtensionFunctionType] kotlin.coroutines.SuspendFunction2<foo.bar.Monad<kotlin.Any?>, foo.bar.Prompt<kotlin.Any?>, kotlin.Unit> origin=LAMBDA
+              FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Unit [suspend]
+                VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Monad index:0 type:foo.bar.Monad<kotlin.Any?>
+                VALUE_PARAMETER kind:ExtensionReceiver name:$this$reset index:1 type:foo.bar.Prompt<kotlin.Any?>
+                BLOCK_BODY
+                  CALL 'public final fun bind <F, A, B> ($context-Prompt: foo.bar.Prompt<kotlin.Any?>, $context-Monad: foo.bar.Monad<F of foo.bar.bind>, <this>: kotlin.Any?): B of foo.bar.bind declared in foo.bar' type=kotlin.Unit origin=null
+                    TYPE_ARG F: kotlin.Any?
+                    TYPE_ARG A: kotlin.Unit
+                    TYPE_ARG B: kotlin.Unit
+                    ARG $context-Prompt: GET_VAR '$this$reset: foo.bar.Prompt<kotlin.Any?> declared in foo.bar.stateMonad.<anonymous>' type=foo.bar.Prompt<kotlin.Any?> origin=IMPLICIT_ARGUMENT
+                    ARG $context-Monad: GET_VAR '$context-Monad: foo.bar.Monad<kotlin.Any?> declared in foo.bar.stateMonad.<anonymous>' type=foo.bar.Monad<kotlin.Any?> origin=null
+                    ARG <this>: GET_VAR 'val incrementCounter: kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> declared in foo.bar.stateMonad' type=kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> origin=null
+                  CALL 'public final fun bind <F, A, B> ($context-Prompt: foo.bar.Prompt<kotlin.Any?>, $context-Monad: foo.bar.Monad<F of foo.bar.bind>, <this>: kotlin.Any?): B of foo.bar.bind declared in foo.bar' type=kotlin.Unit origin=null
+                    TYPE_ARG F: kotlin.Any?
+                    TYPE_ARG A: kotlin.Unit
+                    TYPE_ARG B: kotlin.Unit
+                    ARG $context-Prompt: GET_VAR '$this$reset: foo.bar.Prompt<kotlin.Any?> declared in foo.bar.stateMonad.<anonymous>' type=foo.bar.Prompt<kotlin.Any?> origin=IMPLICIT_ARGUMENT
+                    ARG $context-Monad: GET_VAR '$context-Monad: foo.bar.Monad<kotlin.Any?> declared in foo.bar.stateMonad.<anonymous>' type=foo.bar.Monad<kotlin.Any?> origin=null
+                    ARG <this>: GET_VAR 'val doubleCounter: kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> declared in foo.bar.stateMonad' type=kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> origin=null
+                  CALL 'public final fun bind <F, A, B> ($context-Prompt: foo.bar.Prompt<kotlin.Any?>, $context-Monad: foo.bar.Monad<F of foo.bar.bind>, <this>: kotlin.Any?): B of foo.bar.bind declared in foo.bar' type=kotlin.Unit origin=null
+                    TYPE_ARG F: kotlin.Any?
+                    TYPE_ARG A: kotlin.Unit
+                    TYPE_ARG B: kotlin.Unit
+                    ARG $context-Prompt: GET_VAR '$this$reset: foo.bar.Prompt<kotlin.Any?> declared in foo.bar.stateMonad.<anonymous>' type=foo.bar.Prompt<kotlin.Any?> origin=IMPLICIT_ARGUMENT
+                    ARG $context-Monad: GET_VAR '$context-Monad: foo.bar.Monad<kotlin.Any?> declared in foo.bar.stateMonad.<anonymous>' type=foo.bar.Monad<kotlin.Any?> origin=null
+                    ARG <this>: GET_VAR 'val doubleCounter: kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> declared in foo.bar.stateMonad' type=kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> origin=null
+          ARG p1: CONSTRUCTOR_CALL 'public constructor <init> (count: kotlin.Int) declared in foo.bar.stateMonad.CounterState' type=foo.bar.stateMonad.CounterState origin=null
+            ARG count: CONST Int type=kotlin.Int value=0
+      VAR name:expected type:kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState> [val]
+        CALL 'public final fun context <T, R> (with: T of kotlin.context, block: @[ContextFunctionTypeParams(count = 1)] kotlin.Function1<T of kotlin.context, R of kotlin.context>): R of kotlin.context declared in kotlin' type=kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState> origin=null
+          TYPE_ARG T: foo.bar.StateMonad<foo.bar.stateMonad.CounterState>
+          TYPE_ARG R: kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>
+          ARG with: CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.StateMonad' type=foo.bar.StateMonad<foo.bar.stateMonad.CounterState> origin=null
+            TYPE_ARG (of class) S: foo.bar.stateMonad.CounterState
+          ARG block: FUN_EXPR type=kotlin.Function1<foo.bar.StateMonad<foo.bar.stateMonad.CounterState>, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> origin=LAMBDA
+            FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>
+              VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-StateMonad index:0 type:foo.bar.StateMonad<foo.bar.stateMonad.CounterState>
+              BLOCK_BODY
+                RETURN type=kotlin.Nothing from='local final fun <anonymous> ($context-StateMonad: foo.bar.StateMonad<foo.bar.stateMonad.CounterState>): kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState> declared in foo.bar.stateMonad'
+                  CALL 'public abstract fun invoke (p1: P1 of kotlin.coroutines.SuspendFunction1): R of kotlin.coroutines.SuspendFunction1 declared in kotlin.coroutines.SuspendFunction1' type=kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState> origin=null
+                    ARG <this>: CALL 'public final fun flatMap <F, A, B> (m: foo.bar.Monad<F of foo.bar.flatMap>, <this>: kotlin.Any?, f: kotlin.coroutines.SuspendFunction1<A of foo.bar.flatMap, kotlin.Any?>): kotlin.Any? declared in foo.bar' type=kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> origin=null
+                      TYPE_ARG F: kotlin.Any?
+                      TYPE_ARG A: kotlin.Unit
+                      TYPE_ARG B: kotlin.Unit
+                      ARG m: GET_VAR '$context-StateMonad: foo.bar.StateMonad<foo.bar.stateMonad.CounterState> declared in foo.bar.stateMonad.<anonymous>' type=foo.bar.StateMonad<foo.bar.stateMonad.CounterState> origin=null
+                      ARG <this>: GET_VAR 'val incrementCounter: kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> declared in foo.bar.stateMonad' type=kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> origin=null
+                      ARG f: FUN_EXPR type=kotlin.coroutines.SuspendFunction1<kotlin.Unit, kotlin.Any?> origin=LAMBDA
+                        FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any? [suspend]
+                          VALUE_PARAMETER kind:Regular name:it index:0 type:kotlin.Unit
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: kotlin.Unit): kotlin.Any? declared in foo.bar.stateMonad.<anonymous>'
+                              CALL 'public final fun flatMap <F, A, B> (m: foo.bar.Monad<F of foo.bar.flatMap>, <this>: kotlin.Any?, f: kotlin.coroutines.SuspendFunction1<A of foo.bar.flatMap, kotlin.Any?>): kotlin.Any? declared in foo.bar' type=kotlin.Any? origin=null
+                                TYPE_ARG F: kotlin.Any?
+                                TYPE_ARG A: kotlin.Unit
+                                TYPE_ARG B: kotlin.Unit
+                                ARG m: GET_VAR '$context-StateMonad: foo.bar.StateMonad<foo.bar.stateMonad.CounterState> declared in foo.bar.stateMonad.<anonymous>' type=foo.bar.StateMonad<foo.bar.stateMonad.CounterState> origin=null
+                                ARG <this>: GET_VAR 'val doubleCounter: kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> declared in foo.bar.stateMonad' type=kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> origin=null
+                                ARG f: FUN_EXPR type=kotlin.coroutines.SuspendFunction1<kotlin.Unit, kotlin.Any?> origin=LAMBDA
+                                  FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any? [suspend]
+                                    VALUE_PARAMETER kind:Regular name:it index:0 type:kotlin.Unit
+                                    BLOCK_BODY
+                                      RETURN type=kotlin.Nothing from='local final fun <anonymous> (it: kotlin.Unit): kotlin.Any? declared in foo.bar.stateMonad.<anonymous>.<anonymous>'
+                                        GET_VAR 'val doubleCounter: kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> declared in foo.bar.stateMonad' type=kotlin.coroutines.SuspendFunction1<foo.bar.stateMonad.CounterState, kotlin.Pair<kotlin.Unit, foo.bar.stateMonad.CounterState>> origin=null
+                    ARG p1: CONSTRUCTOR_CALL 'public constructor <init> (count: kotlin.Int) declared in foo.bar.stateMonad.CounterState' type=foo.bar.stateMonad.CounterState origin=null
+                      ARG count: CONST Int type=kotlin.Int value=0
+  TYPEALIAS name:State visibility:public expandedType:kotlin.coroutines.SuspendFunction1<S of foo.bar.State, kotlin.Pair<A of foo.bar.State, S of foo.bar.State>>
+    TYPE_PARAMETER name:S index:0 variance: superTypes:[kotlin.Any?] reified:false
+    TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false
+  TYPEALIAS name:StateOf visibility:public expandedType:kotlin.Any?
+    TYPE_PARAMETER name:S index:0 variance: superTypes:[kotlin.Any?] reified:false
