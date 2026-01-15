@@ -164,6 +164,7 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
           val expectedArg = superType.typeArguments[i++]
           if (!expectedArg.type.isK || arg.variance == Variance.OUT_VARIANCE || arg.type.isK) return@withArguments arg
           val argType = arg.type ?: return@withArguments arg
+          // TODO try all options
           val replacement = argType.options().firstOrNull { it !== arg.type } ?: return@withArguments arg
           replacedAny = true
           arg.replaceType(replacement.withAttributes(replacement.attributes.add(LeaveUnevaluatedAttribute)).takeIf { true })
