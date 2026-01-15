@@ -140,8 +140,14 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
   private fun ConeKotlinType.cachedCorrespondingSupertypes(constructor: TypeConstructorMarker) =
     session.correspondingSupertypesCache.getCorrespondingSupertypes(this, constructor)
 
-  private fun ConeKotlinType.options(): List<ConeKotlinType> =
-    listOfNotNull(attributes.expandedType?.coneType, toCanonicalKType(), this)
+  private fun ConeKotlinType.options(): List<ConeKotlinType> = buildList {
+    var current: ConeKotlinType? = this@options
+    while(current != null) {
+      current.toCanonicalKType()?.let(::add)
+      add(current)
+      current = current.attributes.expandedType?.coneType
+    }
+  }
 
   override fun RigidTypeMarker.fastCorrespondingSupertypes(constructor: TypeConstructorMarker): List<ConeClassLikeType>? {
     val superType = (constructor as? ConeClassLikeLookupTagWithType)?.type

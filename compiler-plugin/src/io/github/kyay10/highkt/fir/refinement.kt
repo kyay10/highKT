@@ -2,9 +2,11 @@ package io.github.kyay10.highkt.fir
 
 import org.jetbrains.kotlin.fir.SessionHolder
 import org.jetbrains.kotlin.fir.plugin.createConeType
+import org.jetbrains.kotlin.fir.resolve.directExpansionType
 import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.resolve.toClassLikeSymbol
 import org.jetbrains.kotlin.fir.resolve.toSymbol
+import org.jetbrains.kotlin.fir.resolve.withCombinedAttributesFrom
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassLikeSymbol
 import org.jetbrains.kotlin.fir.types.ConeClassLikeType
 import org.jetbrains.kotlin.fir.types.ConeFlexibleType
@@ -15,7 +17,6 @@ import org.jetbrains.kotlin.fir.types.ConeStarProjection
 import org.jetbrains.kotlin.fir.types.ConeTypeIntersector
 import org.jetbrains.kotlin.fir.types.ConeTypeProjection
 import org.jetbrains.kotlin.fir.types.abbreviatedTypeOrSelf
-import org.jetbrains.kotlin.fir.types.canBeNull
 import org.jetbrains.kotlin.fir.types.classId
 import org.jetbrains.kotlin.fir.types.constructType
 import org.jetbrains.kotlin.fir.types.isMarkedNullable
@@ -26,15 +27,11 @@ import org.jetbrains.kotlin.fir.types.toTrivialFlexibleType
 import org.jetbrains.kotlin.fir.types.type
 import org.jetbrains.kotlin.fir.types.typeContext
 import org.jetbrains.kotlin.fir.types.withArguments
+import org.jetbrains.kotlin.fir.types.withAttributes
 import org.jetbrains.kotlin.fir.types.withNullability
 
 context(c: SessionHolder)
-private fun ConeKotlinType.applyKOnTheOutside() = applyTypeFunctions(emptyList(), null)?.withNullability(
-  isMarkedNullable,
-  c.session.typeContext,
-  attributes = attributes.add(ExpandedTypeAttribute(this)),
-  preserveAttributes = true
-)
+private fun ConeKotlinType.applyKOnTheOutside(): ConeKotlinType? = applyTypeFunctions(null)
 
 context(c: SessionHolder)
 private fun ConeKotlinType.deconstructIfKType(): Pair<FirClassLikeSymbol<*>, List<ConeTypeProjection>>? {
@@ -58,17 +55,32 @@ private fun ConeKotlinType.deconstructIfKType(): Pair<FirClassLikeSymbol<*>, Lis
 }
 
 context(c: SessionHolder)
-private tailrec fun ConeKotlinType.applyTypeFunctions(
-  extraTypes: List<ConeTypeProjection>, default: ConeKotlinType?
-): ConeKotlinType? {
+private fun ConeClassLikeType.fullyExpandedTypeWithAttribute(): ConeClassLikeType {
+  val directExpansionType = directExpansionType(c.session) ?: return this
+  val expansion = directExpansionType.fullyExpandedTypeWithAttribute()
+  // TODO seems unnecessary since tests pass without it
+  return expansion.withAttributes(expansion.attributes.add(ExpandedTypeAttribute(this)))
+}
+
+context(c: SessionHolder)
+private tailrec fun ConeKotlinType.applyTypeFunctions(default: ConeKotlinType?): ConeKotlinType? {
   val (symbol, appliedTypes) = deconstructIfKType() ?: return default
   val isIdentity = symbol.classId == IDENTITY_CLASS_ID
   val typeParameterSize = if (isIdentity) 1 else symbol.ownTypeParameterSymbols.size
-  val (immediatelyUsableTypes, extraTypes) = (appliedTypes + extraTypes).splitAtOrNull(typeParameterSize) ?: return default // partially-applied type
+  val (immediatelyUsableTypes, extraTypes) = appliedTypes.splitAtOrNull(typeParameterSize) ?: return default // partially-applied type
   // TODO what if K<Identity, in/out A>?
   val substituted = if (isIdentity) immediatelyUsableTypes.single().type ?: return default else
-    symbol.constructType(immediatelyUsableTypes.toTypedArray()).fullyExpandedType()
-  return substituted.applyTypeFunctions(extraTypes, substituted.createKType(extraTypes))
+    symbol.constructType(immediatelyUsableTypes.toTypedArray()).fullyExpandedTypeWithAttribute()
+  val newKType = substituted.createKType(extraTypes).withCombinedAttributesFrom(this).let {
+    val newAttributes = it.attributes.add(ExpandedTypeAttribute(this))
+    if(isMarkedNullable) it.withNullability(
+      true,
+      c.session.typeContext,
+      attributes = newAttributes,
+      preserveAttributes = true
+    ) else it.withAttributes(newAttributes)
+  }
+  return newKType.applyTypeFunctions(newKType)
 }
 
 private fun <T> List<T>.splitAtOrNull(index: Int): Pair<List<T>, List<T>>? {
@@ -122,7 +134,7 @@ fun ConeKotlinType.toCanonicalKType(): ConeKotlinType? {
   val constructor = symbol.constructType(Array(typeArguments.size) { ConeStarProjection })
   return CONSTRUCTOR_CLASS_ID.createConeType(c.session, arrayOf(constructor))
     .createKType(typeArguments.asList())
-    .withNullability(canBeNull(c.session), c.session.typeContext, preserveAttributes = true)
+    .withNullability(isMarkedNullable, c.session.typeContext, attributes, preserveAttributes = true)
 }
 
 context(c: SessionHolder)
