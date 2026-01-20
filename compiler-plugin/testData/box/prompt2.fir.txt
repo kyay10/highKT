@@ -26,11 +26,11 @@ FILE: prompt2.kt
     }
     context(<unused var>: R|foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>|, <unused var>: R|foo/bar/Monad<F>|)
     public final suspend fun <F, A, B> R|io/github/kyay10/highkt/K<F, B>|.bind(): R|B| {
-        ^bind R|kotlin/TODO|()
+        ^bind throw R|kotlin/NotImplementedError.NotImplementedError|()
     }
     context(<unused var>: R|foo/bar/Monad<F>|)
     public final suspend fun <F, A> monadReset(body: R|suspend foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>.() -> A|): R|io/github/kyay10/highkt/K<F, A>| {
-        ^monadReset R|kotlin/TODO|()
+        ^monadReset throw R|kotlin/NotImplementedError.NotImplementedError|()
     }
     public final suspend fun <F, A> R|foo/bar/Monad<F>|.reset(body: R|@ContextFunctionTypeParams(1) suspend context(foo/bar/Monad<F>) foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>.() -> A|): R|io/github/kyay10/highkt/K<F, A>| {
         ^reset context(this@R|foo/bar/reset|) R|foo/bar/monadReset|<R|F|, R|A|>(<L> = monadReset@fun R|foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>|.<anonymous>(): R|A| <inline=NoInline>  {

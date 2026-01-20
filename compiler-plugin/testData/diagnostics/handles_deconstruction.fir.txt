@@ -7,12 +7,12 @@ FILE: handles_deconstruction.kt
         }
 
         public final operator fun invoke(arg: R|T|): R|R| {
-            ^invoke R|kotlin/TODO|()
+            ^invoke throw R|kotlin/NotImplementedError.NotImplementedError|()
         }
 
     }
     public final fun <A, E> R|Handler<E>|.useWithFinal(body: R|(kotlin/Pair<SubCont<A, E>, SubCont<A, E>>) -> E|): R|A| {
-        R|kotlin/TODO|()
+        ^useWithFinal throw R|kotlin/NotImplementedError.NotImplementedError|()
     }
     public final class Scheduler2 : R|Handler<kotlin/Unit>| {
         public constructor(): R|Scheduler2| {

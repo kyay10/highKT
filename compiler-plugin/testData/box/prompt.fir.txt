@@ -26,7 +26,7 @@ FILE: prompt.kt
     }
     context(<unused var>: R|foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>|, <unused var>: R|foo/bar/Monad<F>|)
     public final suspend fun <F, A, B> R|io/github/kyay10/highkt/K<F, B>|.bind(): R|B| {
-        ^bind R|kotlin/TODO|()
+        ^bind throw R|kotlin/NotImplementedError.NotImplementedError|()
     }
     public final suspend fun <F, A, B> b(m: R|foo/bar/Monad<F>|, prompt: R|foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>|, a: R|io/github/kyay10/highkt/K<F, B>|): R|B| {
         ^b R|kotlin/context|<R|foo/bar/Monad<F>|, R|foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>|, R|B|>(R|<local>/m|, R|<local>/prompt|, <L> = context(<unused var>: R|foo/bar/Monad<F>|, <unused var>: R|foo/bar/Prompt<io/github/kyay10/highkt/K<F, A>>|) context@fun <anonymous>(): R|B| <inline=Inline, kind=EXACTLY_ONCE>  {

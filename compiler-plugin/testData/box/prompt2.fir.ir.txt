@@ -121,8 +121,8 @@ FILE fqName:foo.bar fileName:/prompt2.kt
     VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Monad index:1 type:foo.bar.Monad<F of foo.bar.bind>
     VALUE_PARAMETER kind:ExtensionReceiver name:<this> index:2 type:kotlin.Any?
     BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun bind <F, A, B> ($context-Prompt: foo.bar.Prompt<kotlin.Any?>, $context-Monad: foo.bar.Monad<F of foo.bar.bind>, <this>: kotlin.Any?): B of foo.bar.bind declared in foo.bar'
-        CALL 'public final fun TODO (): kotlin.Nothing declared in kotlin' type=kotlin.Nothing origin=null
+      THROW type=kotlin.Nothing
+        CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in kotlin.NotImplementedError' type=kotlin.NotImplementedError origin=null
   FUN name:box visibility:public modality:FINAL returnType:kotlin.String
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in foo.bar'
@@ -157,8 +157,8 @@ FILE fqName:foo.bar fileName:/prompt2.kt
     VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-Monad index:0 type:foo.bar.Monad<F of foo.bar.monadReset>
     VALUE_PARAMETER kind:Regular name:body index:1 type:@[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<foo.bar.Prompt<kotlin.Any?>, A of foo.bar.monadReset>
     BLOCK_BODY
-      RETURN type=kotlin.Nothing from='public final fun monadReset <F, A> ($context-Monad: foo.bar.Monad<F of foo.bar.monadReset>, body: @[ExtensionFunctionType] kotlin.coroutines.SuspendFunction1<foo.bar.Prompt<kotlin.Any?>, A of foo.bar.monadReset>): kotlin.Any? declared in foo.bar'
-        CALL 'public final fun TODO (): kotlin.Nothing declared in kotlin' type=kotlin.Nothing origin=null
+      THROW type=kotlin.Nothing
+        CONSTRUCTOR_CALL 'public constructor <init> (message: kotlin.String) declared in kotlin.NotImplementedError' type=kotlin.NotImplementedError origin=null
   FUN name:pure visibility:public modality:FINAL returnType:kotlin.Any?
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false

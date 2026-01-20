@@ -2,9 +2,7 @@
 // LANGUAGE: +ContextParameters
 
 class Amb
-class Exc {
-  fun raise(): Nothing = TODO()
-}
+class Exc { fun raise(): Nothing = throw NotImplementedError() }
 
 class Stream<A>
 

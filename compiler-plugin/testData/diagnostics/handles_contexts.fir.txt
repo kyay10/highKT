@@ -11,7 +11,7 @@ FILE: handles_contexts.kt
         }
 
         public final fun raise(): R|kotlin/Nothing| {
-            ^raise R|kotlin/TODO|()
+            ^raise throw R|kotlin/NotImplementedError.NotImplementedError|()
         }
 
     }

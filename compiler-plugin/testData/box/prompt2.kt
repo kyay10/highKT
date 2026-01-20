@@ -18,11 +18,10 @@ context(m: Monad<F>)
 fun <F, A, B> K<F, A>.flatMap(f: suspend (A) -> K<F, B>): K<F, B> = with(m) { this@flatMap.flatMap(f) }
 
 context(_: Prompt<K<F, A>>, _: Monad<F>)
-suspend fun <F, A, B> K<F, B>.bind(): B = TODO()
-
+suspend fun <F, A, B> K<F, B>.bind(): B = throw NotImplementedError()
 
 context(_: Monad<F>)
-suspend fun <F, A> monadReset(body: suspend Prompt<K<F, A>>.() -> A): K<F, A> = TODO()
+suspend fun <F, A> monadReset(body: suspend Prompt<K<F, A>>.() -> A): K<F, A> = throw NotImplementedError()
 
 suspend fun <F, A> Monad<F>.reset(body: suspend context(Monad<F>) Prompt<K<F, A>>.() -> A) = monadReset { body() }
 
