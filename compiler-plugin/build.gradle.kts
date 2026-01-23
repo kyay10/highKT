@@ -4,6 +4,7 @@ plugins {
   id("com.github.gmazzo.buildconfig")
   idea
   id("module.publication")
+  id("com.diffplug.spotless")
 }
 
 sourceSets {
@@ -116,6 +117,16 @@ publishing {
     create<MavenPublication>("maven") {
       artifactId = "compiler-plugin"
       from(components["java"])
+    }
+  }
+}
+
+spotless {
+  kotlin {
+    targetExclude("testData/**", "test-gen/**")
+    ktfmt().googleStyle().configure {
+      it.setContinuationIndent(2)
+      it.setMaxWidth(120)
     }
   }
 }

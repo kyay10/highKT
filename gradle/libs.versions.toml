@@ -5,6 +5,7 @@ binary-compatibility-validator = "0.16.3"
 nexus-publish = "2.0.0"
 gradle-plugin-publish = "2.0.0"
 arrow = "2.2.0-beta.3"
+spotless = "8.2.0"
 
 [libraries]
 nexus-publish = { module = "io.github.gradle-nexus.publish-plugin:io.github.gradle-nexus.publish-plugin.gradle.plugin", version.ref = "nexus-publish" }

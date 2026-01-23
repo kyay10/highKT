@@ -17,10 +17,9 @@ open class AbstractJvmDiagnosticTest : AbstractFirPhasedDiagnosticTest(FirParser
     return EnvironmentBasedStandardLibrariesPathProvider
   }
 
-  override fun configure(builder: TestConfigurationBuilder) {
-    super.configure(builder)
-
+  override fun configure(builder: TestConfigurationBuilder) =
     with(builder) {
+      super.configure(builder)
       /*
        * Containers of different directives, which can be used in tests:
        * - ModuleStructureDirectives
@@ -38,10 +37,6 @@ open class AbstractJvmDiagnosticTest : AbstractFirPhasedDiagnosticTest(FirParser
         +CodegenTestDirectives.IGNORE_DEXING // Avoids loading R8 from the classpath.
       }
 
-      useConfigurators(
-        ::PluginAnnotationsProvider,
-        ::ExtensionRegistrarConfigurator
-      )
+      useConfigurators(::PluginAnnotationsProvider, ::ExtensionRegistrarConfigurator)
     }
-  }
 }

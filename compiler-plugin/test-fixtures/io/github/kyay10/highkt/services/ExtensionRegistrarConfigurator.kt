@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.test.services.TestServices
 class ExtensionRegistrarConfigurator(testServices: TestServices) : EnvironmentConfigurator(testServices) {
   override fun CompilerPluginRegistrar.ExtensionStorage.registerCompilerExtensions(
     module: TestModule,
-    configuration: CompilerConfiguration
+    configuration: CompilerConfiguration,
   ) {
     FirExtensionRegistrarAdapter.registerExtension(HighKTRegistrar())
     IrGenerationExtension.registerExtension(RemoveKCastsGenerationExtension())

@@ -45,16 +45,14 @@ import org.jetbrains.kotlin.types.model.RigidTypeMarker
 import org.jetbrains.kotlin.types.model.TypeArgumentMarker
 import org.jetbrains.kotlin.types.model.TypeConstructorMarker
 
-private val UNSAFE = Class.forName("sun.misc.Unsafe").getDeclaredField("theUnsafe").apply { isAccessible = true }
-  .get(null) as sun.misc.Unsafe
+private val UNSAFE =
+  Class.forName("sun.misc.Unsafe").getDeclaredField("theUnsafe").apply { isAccessible = true }.get(null)
+    as sun.misc.Unsafe
 
-private val typeContextField = TypeComponents::class.java.getDeclaredField("typeContext").apply {
-  isAccessible = true
-}
+private val typeContextField = TypeComponents::class.java.getDeclaredField("typeContext").apply { isAccessible = true }
 
-private val typeApproximatorField = TypeComponents::class.java.getDeclaredField("typeApproximator").apply {
-  isAccessible = true
-}
+private val typeApproximatorField =
+  TypeComponents::class.java.getDeclaredField("typeApproximator").apply { isAccessible = true }
 
 @OptIn(SessionConfiguration::class)
 class KindReturnTypeRefiner(session: FirSession) : FirExpressionResolutionExtension(session), SessionHolder {
@@ -68,7 +66,7 @@ class KindReturnTypeRefiner(session: FirSession) : FirExpressionResolutionExtens
   override fun addNewImplicitReceivers(
     functionCall: FirFunctionCall,
     sessionHolder: SessionAndScopeSessionHolder,
-    containingCallableSymbol: FirBasedSymbol<*>
+    containingCallableSymbol: FirBasedSymbol<*>,
   ): List<ImplicitExtensionReceiverValue> {
     // TODO figure out how to make resolution see the member scopes of K types so that this is unnecessary
     functionCall.replaceConeTypeOrNull(functionCall.resolvedType.applyKOrSelf())
@@ -76,52 +74,61 @@ class KindReturnTypeRefiner(session: FirSession) : FirExpressionResolutionExtens
   }
 }
 
-private fun TypeComponents(inferenceContext: ConeInferenceContext): TypeComponents = with(inferenceContext.session) {
-  (UNSAFE.allocateInstance(TypeComponents::class.java) as TypeComponents).apply {
-    typeContextField.set(this, inferenceContext)
-    typeApproximatorField.set(this, ConeTypeApproximator(inferenceContext, languageVersionSettings))
+private fun TypeComponents(inferenceContext: ConeInferenceContext): TypeComponents =
+  with(inferenceContext.session) {
+    (UNSAFE.allocateInstance(TypeComponents::class.java) as TypeComponents).apply {
+      typeContextField.set(this, inferenceContext)
+      typeApproximatorField.set(this, ConeTypeApproximator(inferenceContext, languageVersionSettings))
+    }
   }
-}
 
 class ConeClassLikeLookupTagWithType(val underlying: ConeClassLikeLookupTag, val type: ConeRigidType) :
   ConeClassLikeLookupTag() {
-  override val classId: ClassId get() = underlying.classId
+  override val classId: ClassId
+    get() = underlying.classId
+
   override fun equals(other: Any?) = (other is ConeClassLikeLookupTag) && this.classId == other.classId
+
   override fun hashCode(): Int = underlying.hashCode()
 }
 
 class KindInferenceContext(override val session: FirSession) : ConeInferenceContext, SessionHolder {
-  private val underlying = object : ConeInferenceContext {
-    override val session = this@KindInferenceContext.session
-  }
+  private val underlying =
+    object : ConeInferenceContext {
+      override val session = this@KindInferenceContext.session
+    }
 
   private fun TypeConstructorMarker.normalize() = if (this is ConeClassLikeLookupTagWithType) this.underlying else this
+
   override fun TypeConstructorMarker.parametersCount() = with(underlying) { normalize().parametersCount() }
+
   override fun TypeConstructorMarker.isLocalType() = with(underlying) { normalize().isLocalType() }
+
   override fun TypeConstructorMarker.toClassLikeSymbol() = with(underlying) { normalize().toClassLikeSymbol() }
+
   override fun TypeConstructorMarker.supertypes() = with(underlying) { normalize().supertypes() }
+
   override fun createSimpleType(
     constructor: TypeConstructorMarker,
     arguments: List<TypeArgumentMarker>,
     nullable: Boolean,
     isExtensionFunction: Boolean,
     contextParameterCount: Int,
-    attributes: List<AnnotationMarker>?
-  ) = with(underlying) {
-    createSimpleType(
-      constructor.normalize(),
-      arguments,
-      nullable,
-      isExtensionFunction,
-      contextParameterCount,
-      attributes
-    )
-  }
+    attributes: List<AnnotationMarker>?,
+  ) =
+    with(underlying) {
+      createSimpleType(
+        constructor.normalize(),
+        arguments,
+        nullable,
+        isExtensionFunction,
+        contextParameterCount,
+        attributes,
+      )
+    }
 
-  override fun areEqualTypeConstructors(
-    c1: TypeConstructorMarker,
-    c2: TypeConstructorMarker
-  ) = with(underlying) { areEqualTypeConstructors(c1.normalize(), c2.normalize()) }
+  override fun areEqualTypeConstructors(c1: TypeConstructorMarker, c2: TypeConstructorMarker) =
+    with(underlying) { areEqualTypeConstructors(c1.normalize(), c2.normalize()) }
 
   override fun RigidTypeMarker.typeConstructor(): TypeConstructorMarker {
     require(this is ConeRigidType)
@@ -135,15 +142,16 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
     errorTypesEqualToAnything: Boolean,
     stubTypesEqualToAnything: Boolean,
     dnnTypesEqualToFlexible: Boolean,
-  ): TypeCheckerState = TypeCheckerState(
-    errorTypesEqualToAnything,
-    stubTypesEqualToAnything,
-    dnnTypesEqualToFlexible,
-    allowedTypeVariable = true,
-    typeSystemContext = this,
-    kotlinTypePreparator = ConeTypePreparator(session),
-    kotlinTypeRefiner = KindTypeRefiner(session)
-  )
+  ): TypeCheckerState =
+    TypeCheckerState(
+      errorTypesEqualToAnything,
+      stubTypesEqualToAnything,
+      dnnTypesEqualToFlexible,
+      allowedTypeVariable = true,
+      typeSystemContext = this,
+      kotlinTypePreparator = ConeTypePreparator(session),
+      kotlinTypeRefiner = KindTypeRefiner(session),
+    )
 
   private fun ConeKotlinType.cachedCorrespondingSupertypes(constructor: TypeConstructorMarker) =
     session.correspondingSupertypesCache.getCorrespondingSupertypes(this, constructor)
@@ -159,9 +167,11 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
       }
       current = current.attributes.expandedType?.coneType
     }
-  }.asReversed()
+  }
 
-  override fun RigidTypeMarker.fastCorrespondingSupertypes(constructor: TypeConstructorMarker): List<ConeClassLikeType>? {
+  override fun RigidTypeMarker.fastCorrespondingSupertypes(
+    constructor: TypeConstructorMarker
+  ): List<ConeClassLikeType>? {
     val expectedType = (constructor as? ConeClassLikeLookupTagWithType)?.type
     val constructor = constructor.normalize()
     require(this is ConeKotlinType)
@@ -174,25 +184,37 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
     }
     if (constructor.classId != K_CLASS_ID) {
       val superTypes = cachedCorrespondingSupertypes(constructor) ?: return null
-      val kIndices = (expectedType ?: return superTypes).typeArguments.mapIndexedNotNull { index, arg ->
-        index.takeIf { arg.type.isK }
-      }
+      val kIndices =
+        (expectedType ?: return superTypes).typeArguments.mapIndexedNotNull { index, arg ->
+          index.takeIf { arg.type.isK }
+        }
       return superTypes.flatMap { superType ->
         var acc = listOf(superType)
-        val args = superType.typeArguments.ifEmpty { return acc }
+        val args =
+          superType.typeArguments.ifEmpty {
+            return acc
+          }
         for (index in kIndices) {
           val arg = args[index]
           if (arg.variance == Variance.OUT_VARIANCE) continue
           val argType = arg.type ?: continue
-          acc = acc.flatMap { currentType ->
-            val options = argType.options().filter { it.isK }
-            options.map { option ->
-              currentType.withArguments(currentType.typeArguments.toMutableList().apply {
-                this[index] = arg.replaceType(
-                  option.withAttributes(option.attributes.add(LeaveUnevaluatedAttribute)).takeIf { true })
-              }.toTypedArray())
-            } + currentType
-          }
+          acc =
+            acc.flatMap { currentType ->
+              val options = argType.options().filter { it.isK }
+              options.map { option ->
+                currentType.withArguments(
+                  currentType.typeArguments
+                    .toMutableList()
+                    .apply {
+                      this[index] =
+                        arg.replaceType(
+                          option.withAttributes(option.attributes.add(LeaveUnevaluatedAttribute)).takeIf { true }
+                        )
+                    }
+                    .toTypedArray()
+                )
+              } + currentType
+            }
         }
         acc
       }

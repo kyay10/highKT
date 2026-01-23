@@ -18,34 +18,32 @@ open class AbstractJvmBoxTest : AbstractFirBlackBoxCodegenTestBase(FirParser.Lig
     return EnvironmentBasedStandardLibrariesPathProvider
   }
 
-  override fun configure(builder: TestConfigurationBuilder) = with(builder) {
-    super.configure(this)
+  override fun configure(builder: TestConfigurationBuilder) =
+    with(builder) {
+      super.configure(this)
 
-    /*
-     * Containers of different directives, which can be used in tests:
-     * - ModuleStructureDirectives
-     * - LanguageSettingsDirectives
-     * - DiagnosticsDirectives
-     * - FirDiagnosticsDirectives
-     * - CodegenTestDirectives
-     * - JvmEnvironmentConfigurationDirectives
-     *
-     * All of them are located in `org.jetbrains.kotlin.test.directives` package
-     */
-    defaultDirectives {
-      +CodegenTestDirectives.DUMP_IR
-      +FirDiagnosticsDirectives.FIR_DUMP
-      +JvmEnvironmentConfigurationDirectives.FULL_JDK
-      +LanguageSettingsDirectives.PROGRESSIVE_MODE
+      /*
+       * Containers of different directives, which can be used in tests:
+       * - ModuleStructureDirectives
+       * - LanguageSettingsDirectives
+       * - DiagnosticsDirectives
+       * - FirDiagnosticsDirectives
+       * - CodegenTestDirectives
+       * - JvmEnvironmentConfigurationDirectives
+       *
+       * All of them are located in `org.jetbrains.kotlin.test.directives` package
+       */
+      defaultDirectives {
+        +CodegenTestDirectives.DUMP_IR
+        +FirDiagnosticsDirectives.FIR_DUMP
+        +JvmEnvironmentConfigurationDirectives.FULL_JDK
+        +LanguageSettingsDirectives.PROGRESSIVE_MODE
 
-      +CodegenTestDirectives.IGNORE_DEXING // Avoids loading R8 from the classpath.
+        +CodegenTestDirectives.IGNORE_DEXING // Avoids loading R8 from the classpath.
+      }
+
+      useConfigurators(::PluginAnnotationsProvider, ::ExtensionRegistrarConfigurator)
+
+      useCustomRuntimeClasspathProviders(::PluginRuntimeAnnotationsProvider)
     }
-
-    useConfigurators(
-      ::PluginAnnotationsProvider,
-      ::ExtensionRegistrarConfigurator
-    )
-
-    useCustomRuntimeClasspathProviders(::PluginRuntimeAnnotationsProvider)
-  }
 }
