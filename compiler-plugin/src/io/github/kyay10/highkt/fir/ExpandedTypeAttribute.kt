@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.fir.types.ConeAttributes
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
 import org.jetbrains.kotlin.fir.types.renderForDebugging
 import org.jetbrains.kotlin.fir.types.renderReadable
+import org.jetbrains.kotlin.fir.types.withAttributes
 
 class ExpandedTypeAttribute(override val coneType: ConeKotlinType) : ConeAttributeWithConeType<ExpandedTypeAttribute>() {
   override fun copyWith(newType: ConeKotlinType) =
@@ -14,7 +15,15 @@ class ExpandedTypeAttribute(override val coneType: ConeKotlinType) : ConeAttribu
   override fun intersect(other: ExpandedTypeAttribute?) = other ?: this
   override fun isSubtypeOf(other: ExpandedTypeAttribute?) = true
   override fun renderForReadability() = "${coneType.renderReadable()} ~> "
-  override fun toString(): String = "{${coneType.renderForDebugging()} ~>}"
+  override fun toString(): String = buildList {
+    var current: ExpandedTypeAttribute? = this@ExpandedTypeAttribute
+    while (current != null) {
+      val attrs = current.coneType.attributes
+      add(0, current.coneType.withAttributes(attrs.remove(ExpandedTypeAttribute::class)))
+      current = attrs.expandedType
+    }
+  }.joinToString(" ~> ", prefix = "{", postfix = " ~>}") { it.renderForDebugging() }
+
   override fun union(other: ExpandedTypeAttribute?) = other ?: this
   override val keepInInferredDeclarationType get() = true
   override val key get() = ExpandedTypeAttribute::class

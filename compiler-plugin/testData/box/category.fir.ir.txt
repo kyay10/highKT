@@ -2942,10 +2942,7 @@ FILE fqName:foo.bar fileName:/category.kt
                       ARG <this>: GET_VAR 'other: foo.bar.Nat<C of foo.bar.vertical, D of foo.bar.vertical, F of foo.bar.vertical, G of foo.bar.vertical> declared in foo.bar.vertical' type=foo.bar.Nat<C of foo.bar.vertical, D of foo.bar.vertical, F of foo.bar.vertical, G of foo.bar.vertical> origin=null
                       ARG c: GET_VAR 'c: kotlin.Any? declared in foo.bar.vertical.<no name provided>.get' type=kotlin.Any? origin=null
           CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.vertical.<no name provided>' type=foo.bar.vertical.<no name provided><C of foo.bar.vertical, D of foo.bar.vertical, F of foo.bar.vertical, G of foo.bar.vertical, H of foo.bar.vertical> origin=OBJECT_LITERAL
-  TYPEALIAS name:Arrow visibility:public expandedType:kotlin.Function1<A of foo.bar.Arrow, B of foo.bar.Arrow>
-    TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
-  TYPEALIAS name:ArrowK visibility:public expandedType:io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
+  TYPEALIAS name:Arrow visibility:public expandedType:io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
   TYPEALIAS name:BiFunctor visibility:public expandedType:foo.bar.Functor<kotlin.Any?, E of foo.bar.BiFunctor, F of foo.bar.BiFunctor>
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:D index:1 variance: superTypes:[kotlin.Any?] reified:false
@@ -2991,10 +2988,6 @@ FILE fqName:foo.bar fileName:/category.kt
     TYPE_PARAMETER name:D index:1 variance: superTypes:[kotlin.Any?] reified:false
   TYPEALIAS name:NormalMonad visibility:public expandedType:foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, F of foo.bar.NormalMonad>
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
-  TYPEALIAS name:NormalNat visibility:public expandedType:foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, F of foo.bar.NormalNat, G of foo.bar.NormalNat>
-    TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
-    TYPE_PARAMETER name:G index:1 variance: superTypes:[kotlin.Any?] reified:false
-  TYPEALIAS name:NormalNatK visibility:public expandedType:kotlin.Any?
   TYPEALIAS name:Obj visibility:public expandedType:kotlin.Any?
     TYPE_PARAMETER name:Cat index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:A index:1 variance: superTypes:[kotlin.Any?] reified:false

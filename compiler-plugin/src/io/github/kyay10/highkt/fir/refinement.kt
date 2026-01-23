@@ -6,8 +6,9 @@ import org.jetbrains.kotlin.fir.resolve.directExpansionType
 import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.resolve.toClassLikeSymbol
 import org.jetbrains.kotlin.fir.resolve.toSymbol
-import org.jetbrains.kotlin.fir.resolve.withCombinedAttributesFrom
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassLikeSymbol
+import org.jetbrains.kotlin.fir.types.AbbreviatedTypeAttribute
+import org.jetbrains.kotlin.fir.types.ConeAttributes
 import org.jetbrains.kotlin.fir.types.ConeClassLikeType
 import org.jetbrains.kotlin.fir.types.ConeFlexibleType
 import org.jetbrains.kotlin.fir.types.ConeIntersectionType
@@ -16,6 +17,7 @@ import org.jetbrains.kotlin.fir.types.ConeRigidType
 import org.jetbrains.kotlin.fir.types.ConeStarProjection
 import org.jetbrains.kotlin.fir.types.ConeTypeIntersector
 import org.jetbrains.kotlin.fir.types.ConeTypeProjection
+import org.jetbrains.kotlin.fir.types.abbreviatedType
 import org.jetbrains.kotlin.fir.types.abbreviatedTypeOrSelf
 import org.jetbrains.kotlin.fir.types.classId
 import org.jetbrains.kotlin.fir.types.constructType
@@ -29,9 +31,6 @@ import org.jetbrains.kotlin.fir.types.typeContext
 import org.jetbrains.kotlin.fir.types.withArguments
 import org.jetbrains.kotlin.fir.types.withAttributes
 import org.jetbrains.kotlin.fir.types.withNullability
-
-context(c: SessionHolder)
-private fun ConeKotlinType.applyKOnTheOutside(): ConeKotlinType? = applyTypeFunctions(null)
 
 context(c: SessionHolder)
 private fun ConeKotlinType.deconstructIfKType(): Pair<FirClassLikeSymbol<*>, List<ConeTypeProjection>>? {
@@ -58,29 +57,36 @@ context(c: SessionHolder)
 private fun ConeClassLikeType.fullyExpandedTypeWithAttribute(): ConeClassLikeType {
   val directExpansionType = directExpansionType(c.session) ?: return this
   val expansion = directExpansionType.fullyExpandedTypeWithAttribute()
-  // TODO seems unnecessary since tests pass without it
-  return expansion.withAttributes(expansion.attributes.add(ExpandedTypeAttribute(this)))
+  return expansion.withExpanded(this, directExpansionType.abbreviatedType?.takeIf { !it.isK })
 }
 
+private fun <T : ConeKotlinType> T.withExpanded(expanded: ConeKotlinType, intermediate: ConeKotlinType?): T =
+  withAttributes(attributes.withExpanded(expanded, intermediate))
+
+private fun ConeAttributes.withExpanded(expanded: ConeKotlinType, intermediate: ConeKotlinType?): ConeAttributes =
+  add(
+    ExpandedTypeAttribute(
+      intermediate?.withExpanded(
+        expanded,
+        intermediate.attributes.expandedType?.coneType.takeIf { it !== expanded }
+      ) ?: expanded))
+
 context(c: SessionHolder)
-private tailrec fun ConeKotlinType.applyTypeFunctions(default: ConeKotlinType?): ConeKotlinType? {
-  val (symbol, appliedTypes) = deconstructIfKType() ?: return default
+private tailrec fun ConeKotlinType.applyTypeFunctions(): ConeKotlinType {
+  if (attributes.shouldLeaveUnevaluated) return this
+  val (symbol, appliedTypes) = deconstructIfKType() ?: return this
   val isIdentity = symbol.classId == IDENTITY_CLASS_ID
   val typeParameterSize = if (isIdentity) 1 else symbol.ownTypeParameterSymbols.size
-  val (immediatelyUsableTypes, extraTypes) = appliedTypes.splitAtOrNull(typeParameterSize) ?: return default // partially-applied type
+  val (immediatelyUsableTypes, extraTypes) = appliedTypes.splitAtOrNull(typeParameterSize)
+    ?: return this // partially-applied type
   // TODO what if K<Identity, in/out A>?
-  val substituted = if (isIdentity) immediatelyUsableTypes.single().type ?: return default else
+  val substituted = if (isIdentity) immediatelyUsableTypes.single().type ?: return this else
     symbol.constructType(immediatelyUsableTypes.toTypedArray()).fullyExpandedTypeWithAttribute()
-  val newKType = substituted.createKType(extraTypes).withCombinedAttributesFrom(this).let {
-    val newAttributes = it.attributes.add(ExpandedTypeAttribute(this))
-    if(isMarkedNullable) it.withNullability(
-      true,
-      c.session.typeContext,
-      attributes = newAttributes,
-      preserveAttributes = true
-    ) else it.withAttributes(newAttributes)
-  }
-  return newKType.applyTypeFunctions(newKType)
+  val newKType = substituted.createKType(extraTypes).withCombinedAttributesFrom(
+    attributes.remove(ExpandedTypeAttribute::class).remove(AbbreviatedTypeAttribute::class)
+  )
+  val newAttributes = newKType.attributes.withExpanded(this, newKType.attributes.expandedType?.coneType)
+  return newKType.addNullability(isMarkedNullable, newAttributes).applyTypeFunctions()
 }
 
 private fun <T> List<T>.splitAtOrNull(index: Int): Pair<List<T>, List<T>>? {
@@ -101,17 +107,14 @@ private fun ConeKotlinType.applyKEverywhere(): ConeKotlinType? {
   }
   if (this is ConeIntersectionType) return mapTypesNotNull { it.applyKEverywhere() }
   if (typeArguments.isEmpty()) return null
-  val appliedOutside = applyKOnTheOutside()
-  if (appliedOutside?.typeArguments?.isEmpty() == true) return appliedOutside
-  val currentType = appliedOutside ?: this
-  var replacedAny = appliedOutside != null
-  val withReplacedArguments = currentType.withArguments { arg ->
+  val appliedOutside = applyTypeFunctions()
+  var replacedAny = appliedOutside !== this
+  return appliedOutside.withArgumentsSafe { arg ->
     arg.type?.applyKEverywhere()?.let {
       replacedAny = true
       arg.replaceType(it)
     } ?: arg
-  }
-  return withReplacedArguments.takeIf { replacedAny }
+  }.takeIf { replacedAny }
 }
 
 context(c: SessionHolder)
@@ -134,7 +137,7 @@ fun ConeKotlinType.toCanonicalKType(): ConeKotlinType? {
   val constructor = symbol.constructType(Array(typeArguments.size) { ConeStarProjection })
   return CONSTRUCTOR_CLASS_ID.createConeType(c.session, arrayOf(constructor))
     .createKType(typeArguments.asList())
-    .withNullability(isMarkedNullable, c.session.typeContext, attributes, preserveAttributes = true)
+    .addNullability(isMarkedNullable, attributes)
 }
 
 context(c: SessionHolder)
@@ -151,3 +154,16 @@ private inline fun ConeIntersectionType.mapTypesNotNull(func: (ConeKotlinType) -
 
 private fun ConeKotlinType.withUpperBound(upper: ConeKotlinType?): ConeKotlinType =
   if (this is ConeIntersectionType) ConeIntersectionType(intersectedTypes, upper) else this
+
+private inline fun <T : ConeKotlinType> T.withArgumentsSafe(replacement: (ConeTypeProjection) -> ConeTypeProjection): T =
+  if (typeArguments.isEmpty()) this else withArguments(replacement)
+
+context(c: SessionHolder)
+private fun <T : ConeKotlinType> T.addNullability(nullable: Boolean, attributes: ConeAttributes = this.attributes): T =
+  withNullability(nullable || isMarkedNullable, c.session.typeContext, attributes, preserveAttributes = true)
+
+private fun ConeKotlinType.withCombinedAttributesFrom(other: ConeAttributes): ConeKotlinType {
+  if (other.isEmpty()) return this
+  val combinedConeAttributes = attributes.add(other)
+  return withAttributes(combinedConeAttributes)
+}
