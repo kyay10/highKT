@@ -164,6 +164,7 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
         val newArgs =
           superType.typeArguments.mapIndexed { i, arg ->
             if (expectedType.typeArguments[i].type is ConeClassLikeType) { // deconstructing, thus apply arguments
+              if (arg.variance == Variance.OUT_VARIANCE) return@mapIndexed arg
               val applied = arg.type?.applyKOrSelf()?.takeIf { it !== arg.type } ?: return@mapIndexed arg
               replacedAny = true
               arg.replaceType(applied.takeIf { true })
@@ -200,7 +201,7 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
       val thisArg = this.typeArguments.firstOrNull()?.type?.abbreviatedTypeOrSelf ?: return null
       val expectedArg = expectedType?.typeArguments?.firstOrNull()?.type?.abbreviatedTypeOrSelf ?: return null
       return if (thisArg.classId != expectedArg.classId) emptyList()
-      else cachedCorrespondingSupertypes(constructor, expectedType)
+      else cachedCorrespondingSupertypes(constructor, null)
     }
     if (constructor.classId != K_CLASS_ID) {
       val superTypes = cachedCorrespondingSupertypes(constructor, expectedType) ?: return null
@@ -212,12 +213,12 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
         var acc = listOf(superType)
         val args =
           superType.typeArguments.ifEmpty {
-            return acc
+            return@flatMap acc
           }
         for (index in kIndices) {
           val arg = args[index]
           if (arg.variance == Variance.OUT_VARIANCE) continue
-          val argType = arg.type?.applyKOrSelf() ?: continue
+          val argType = arg.type ?: continue
           acc =
             acc.flatMap { currentType ->
               argType.options().map { option ->
@@ -238,7 +239,7 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
         acc
       }
     }
-    return options().flatMap { it.cachedCorrespondingSupertypes(constructor, expectedType) ?: return null }
+    return options().flatMap { it.cachedCorrespondingSupertypes(constructor, null) ?: return null }
   }
 }
 
