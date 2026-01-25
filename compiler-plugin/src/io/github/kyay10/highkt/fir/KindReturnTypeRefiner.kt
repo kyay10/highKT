@@ -152,8 +152,26 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
       kotlinTypeRefiner = KindTypeRefiner(session),
     )
 
-  private fun ConeKotlinType.cachedCorrespondingSupertypes(constructor: TypeConstructorMarker) =
-    session.correspondingSupertypesCache.getCorrespondingSupertypes(this, constructor)
+  private fun ConeKotlinType.cachedCorrespondingSupertypes(
+    constructor: TypeConstructorMarker,
+    expectedType: ConeRigidType?,
+  ): List<ConeClassLikeType>? {
+    val superTypes = session.correspondingSupertypesCache.getCorrespondingSupertypes(this, constructor)
+    return if (expectedType == null) superTypes
+    else
+      superTypes?.map { superType ->
+        var replacedAny = false
+        val newArgs =
+          superType.typeArguments.mapIndexed { i, arg ->
+            if (expectedType.typeArguments[i].type is ConeClassLikeType) { // deconstructing, thus apply arguments
+              val applied = arg.type?.applyKOrSelf()?.takeIf { it !== arg.type } ?: return@mapIndexed arg
+              replacedAny = true
+              arg.replaceType(applied.takeIf { true })
+            } else arg
+          }
+        if (replacedAny) superType.withArgumentsSafe(newArgs.toTypedArray()) else superType
+      }
+  }
 
   private fun ConeKotlinType.options(): List<ConeKotlinType> = buildList {
     // Invariant: current.isK
@@ -181,10 +199,11 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
       // nominal handling of Constructor types based on abbreviations
       val thisArg = this.typeArguments.firstOrNull()?.type?.abbreviatedTypeOrSelf ?: return null
       val expectedArg = expectedType?.typeArguments?.firstOrNull()?.type?.abbreviatedTypeOrSelf ?: return null
-      return if (thisArg.classId != expectedArg.classId) emptyList() else cachedCorrespondingSupertypes(constructor)
+      return if (thisArg.classId != expectedArg.classId) emptyList()
+      else cachedCorrespondingSupertypes(constructor, expectedType)
     }
     if (constructor.classId != K_CLASS_ID) {
-      val superTypes = cachedCorrespondingSupertypes(constructor) ?: return null
+      val superTypes = cachedCorrespondingSupertypes(constructor, expectedType) ?: return null
       val kIndices =
         (expectedType ?: return superTypes).typeArguments.mapIndexedNotNull { index, arg ->
           index.takeIf { arg.type.isK }
@@ -198,11 +217,10 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
         for (index in kIndices) {
           val arg = args[index]
           if (arg.variance == Variance.OUT_VARIANCE) continue
-          val argType = arg.type ?: continue
+          val argType = arg.type?.applyKOrSelf() ?: continue
           acc =
             acc.flatMap { currentType ->
-              val options = argType.options().filter { it.isK }
-              options.map { option ->
+              argType.options().map { option ->
                 currentType.withArguments(
                   currentType.typeArguments
                     .toMutableList()
@@ -220,7 +238,7 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
         acc
       }
     }
-    return options().flatMap { it.cachedCorrespondingSupertypes(constructor) ?: return null }
+    return options().flatMap { it.cachedCorrespondingSupertypes(constructor, expectedType) ?: return null }
   }
 }
 

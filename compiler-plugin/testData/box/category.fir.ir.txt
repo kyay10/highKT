@@ -2848,7 +2848,7 @@ FILE fqName:foo.bar fileName:/category.kt
               BLOCK_BODY
                 RETURN type=kotlin.Nothing from='public open fun pure <A> (a: A of foo.bar.toUsualMonad.<no name provided>.pure): kotlin.Any? declared in foo.bar.toUsualMonad.<no name provided>'
                   CALL 'public abstract fun invoke (p1: P1 of kotlin.Function1): R of kotlin.Function1 declared in kotlin.Function1' type=kotlin.Any? origin=INVOKE
-                    ARG <this>: CALL 'public abstract fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.Nat' type=kotlin.Function1<A of foo.bar.toUsualMonad.<no name provided>.pure, kotlin.Any?> origin=GET_ARRAY_ELEMENT
+                    ARG <this>: CALL 'public abstract fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.Nat' type=kotlin.Function1<kotlin.Any?, kotlin.Any?> origin=GET_ARRAY_ELEMENT
                       TYPE_ARG A: A of foo.bar.toUsualMonad.<no name provided>.pure
                       ARG <this>: CALL 'public abstract fun empty (): kotlin.Any? declared in foo.bar.MonoidObject' type=foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> origin=null
                         ARG <this>: GET_VAR '<this>: foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> declared in foo.bar.toUsualMonad' type=foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> origin=IMPLICIT_ARGUMENT

@@ -1615,13 +1615,13 @@ FILE fqName:foo.bar fileName:/type_functions.kt
                     TYPE_ARG (of class) A: kotlin.Unit
                     TYPE_ARG (of class) B: kotlin.Int
                     ARG value: CONST Int type=kotlin.Int value=10
-                VAR name:b type:foo.bar.Either<kotlin.Unit, kotlin.String> [val]
-                  CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=foo.bar.Either<kotlin.Unit, kotlin.String> origin=null
+                VAR name:b type:foo.bar.Either<kotlin.Any?, kotlin.Any?> [val]
+                  CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=foo.bar.Either<kotlin.Any?, kotlin.Any?> origin=null
                     TYPE_ARG F: kotlin.Any?
                     TYPE_ARG A: kotlin.String
                     TYPE_ARG B: kotlin.String
                     ARG functor: GET_VAR '$context-Functor: foo.bar.Functor<kotlin.Any?> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.Functor<kotlin.Any?> origin=null
-                    ARG <this>: CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=foo.bar.Either<kotlin.Unit, kotlin.String> origin=null
+                    ARG <this>: CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=foo.bar.Either<kotlin.Any?, kotlin.Any?> origin=null
                       TYPE_ARG F: kotlin.Any?
                       TYPE_ARG A: kotlin.Int
                       TYPE_ARG B: kotlin.String
@@ -1651,11 +1651,11 @@ FILE fqName:foo.bar fileName:/type_functions.kt
                   BRANCH
                     if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
                       ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-                        ARG arg0: GET_VAR 'val b: foo.bar.Either<kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.Either<kotlin.Unit, kotlin.String> origin=null
+                        ARG arg0: GET_VAR 'val b: foo.bar.Either<kotlin.Any?, kotlin.Any?> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.Either<kotlin.Any?, kotlin.Any?> origin=null
                         ARG arg1: GET_VAR 'val expected: foo.bar.Either<kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.Either<kotlin.Unit, kotlin.String> origin=null
                     then: CALL 'public final fun error (message: kotlin.Any): kotlin.Nothing declared in kotlin' type=kotlin.Nothing origin=null
                       ARG message: STRING_CONCATENATION type=kotlin.String
-                        GET_VAR 'val b: foo.bar.Either<kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.Either<kotlin.Unit, kotlin.String> origin=null
+                        GET_VAR 'val b: foo.bar.Either<kotlin.Any?, kotlin.Any?> declared in foo.bar.maybeExample.<anonymous>' type=foo.bar.Either<kotlin.Any?, kotlin.Any?> origin=null
   FUN name:maybeExample2 visibility:private modality:FINAL returnType:kotlin.Unit
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='private final fun maybeExample2 (): kotlin.Unit declared in foo.bar'
@@ -1672,13 +1672,13 @@ FILE fqName:foo.bar fileName:/type_functions.kt
                     TYPE_ARG (of class) A: kotlin.Unit
                     TYPE_ARG (of class) B: kotlin.Int
                     ARG value: CONST Int type=kotlin.Int value=10
-                VAR name:b type:foo.bar.Either<kotlin.Unit, kotlin.String> [val]
-                  CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=foo.bar.Either<kotlin.Unit, kotlin.String> origin=null
+                VAR name:b type:foo.bar.Either<kotlin.Unit, kotlin.Any?> [val]
+                  CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=foo.bar.Either<kotlin.Unit, kotlin.Any?> origin=null
                     TYPE_ARG F: kotlin.Any?
                     TYPE_ARG A: kotlin.Int
                     TYPE_ARG B: kotlin.String
                     ARG functor: GET_VAR '$context-Functor: foo.bar.Functor<kotlin.Any?> declared in foo.bar.maybeExample2.<anonymous>' type=foo.bar.Functor<kotlin.Any?> origin=null
-                    ARG <this>: CALL 'public final fun expandTo <T> (<this>: T of io.github.kyay10.highkt.expandTo): T of io.github.kyay10.highkt.expandTo declared in io.github.kyay10.highkt' type=foo.bar.Either<kotlin.Unit, kotlin.Int> origin=null
+                    ARG <this>: CALL 'public final fun expandTo <T> (<this>: T of io.github.kyay10.highkt.expandTo): T of io.github.kyay10.highkt.expandTo declared in io.github.kyay10.highkt' type=foo.bar.Either<kotlin.Unit, kotlin.Any?> origin=null
                       TYPE_ARG T: kotlin.Any?
                       ARG <this>: GET_VAR 'val a: foo.bar.Either<kotlin.Unit, kotlin.Int> declared in foo.bar.maybeExample2.<anonymous>' type=foo.bar.Either<kotlin.Unit, kotlin.Int> origin=null
                     ARG f: FUN_EXPR type=kotlin.Function1<kotlin.Int, kotlin.String> origin=LAMBDA
@@ -1697,11 +1697,11 @@ FILE fqName:foo.bar fileName:/type_functions.kt
                   BRANCH
                     if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
                       ARG <this>: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-                        ARG arg0: GET_VAR 'val b: foo.bar.Either<kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample2.<anonymous>' type=foo.bar.Either<kotlin.Unit, kotlin.String> origin=null
+                        ARG arg0: GET_VAR 'val b: foo.bar.Either<kotlin.Unit, kotlin.Any?> declared in foo.bar.maybeExample2.<anonymous>' type=foo.bar.Either<kotlin.Unit, kotlin.Any?> origin=null
                         ARG arg1: GET_VAR 'val expected: foo.bar.Either<kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample2.<anonymous>' type=foo.bar.Either<kotlin.Unit, kotlin.String> origin=null
                     then: CALL 'public final fun error (message: kotlin.Any): kotlin.Nothing declared in kotlin' type=kotlin.Nothing origin=null
                       ARG message: STRING_CONCATENATION type=kotlin.String
-                        GET_VAR 'val b: foo.bar.Either<kotlin.Unit, kotlin.String> declared in foo.bar.maybeExample2.<anonymous>' type=foo.bar.Either<kotlin.Unit, kotlin.String> origin=null
+                        GET_VAR 'val b: foo.bar.Either<kotlin.Unit, kotlin.Any?> declared in foo.bar.maybeExample2.<anonymous>' type=foo.bar.Either<kotlin.Unit, kotlin.Any?> origin=null
   FUN name:pairExample visibility:private modality:FINAL returnType:kotlin.Unit
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='private final fun pairExample (): kotlin.Unit declared in foo.bar'

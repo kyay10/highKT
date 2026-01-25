@@ -28,7 +28,6 @@ import org.jetbrains.kotlin.fir.types.constructClassType
 import org.jetbrains.kotlin.fir.types.constructType
 import org.jetbrains.kotlin.fir.types.isMarkedNullable
 import org.jetbrains.kotlin.fir.types.renderForDebugging
-import org.jetbrains.kotlin.fir.types.replaceType
 import org.jetbrains.kotlin.fir.types.toTrivialFlexibleType
 import org.jetbrains.kotlin.fir.types.type
 import org.jetbrains.kotlin.fir.types.typeContext
@@ -153,33 +152,23 @@ private fun <T> List<T>.splitAtOrNull(index: Int): Pair<List<T>, List<T>>? {
   return subList(0, index) to subList(index, size)
 }
 
-// TODO: application order?
 context(c: SessionHolder)
-private fun ConeKotlinType.applyKEverywhere(): ConeKotlinType? {
+private fun ConeKotlinType.applyK(): ConeKotlinType? {
   if (this is ConeFlexibleType && isTrivial)
-    return (lowerBound.applyKEverywhere() as? ConeRigidType)?.toTrivialFlexibleType(c.session.typeContext)
+    return (lowerBound.applyK() as? ConeRigidType)?.toTrivialFlexibleType(c.session.typeContext)
   if (this is ConeFlexibleType) {
-    val newLowerBound = lowerBound.applyKEverywhere() as? ConeRigidType
-    val newUpperBound = upperBound.applyKEverywhere() as? ConeRigidType
+    val newLowerBound = lowerBound.applyK() as? ConeRigidType
+    val newUpperBound = upperBound.applyK() as? ConeRigidType
     if (newLowerBound != null || newUpperBound != null)
       return ConeFlexibleType(newLowerBound ?: lowerBound, newUpperBound ?: upperBound, false)
   }
-  if (this is ConeIntersectionType) return mapTypesNotNull { it.applyKEverywhere() }
+  if (this is ConeIntersectionType) return mapTypesNotNull { it.applyK() }
   if (typeArguments.isEmpty()) return null
-  val appliedOutside = applyTypeFunctions()
-  var replacedAny = appliedOutside !== this
-  return appliedOutside
-    .withArgumentsSafe { arg ->
-      arg.type?.applyKEverywhere()?.let {
-        replacedAny = true
-        arg.replaceType(it)
-      } ?: arg
-    }
-    .takeIf { replacedAny }
+  return applyTypeFunctions().takeIf { it !== this }
 }
 
 context(c: SessionHolder)
-fun ConeKotlinType.applyKOrSelf(): ConeKotlinType = applyKEverywhere() ?: this
+fun ConeKotlinType.applyKOrSelf(): ConeKotlinType = applyK() ?: this
 
 context(c: SessionHolder)
 fun ConeKotlinType.toCanonicalKType(): ConeKotlinType? {
@@ -219,9 +208,8 @@ private inline fun ConeIntersectionType.mapTypesNotNull(func: (ConeKotlinType) -
 private fun ConeKotlinType.withUpperBound(upper: ConeKotlinType?): ConeKotlinType =
   if (this is ConeIntersectionType) ConeIntersectionType(intersectedTypes, upper) else this
 
-private inline fun <T : ConeKotlinType> T.withArgumentsSafe(
-  replacement: (ConeTypeProjection) -> ConeTypeProjection
-): T = if (typeArguments.isEmpty()) this else withArguments(replacement)
+fun <T : ConeKotlinType> T.withArgumentsSafe(replacement: Array<out ConeTypeProjection>): T =
+  if (typeArguments.isEmpty()) this else withArguments(replacement)
 
 context(c: SessionHolder)
 private fun <T : ConeKotlinType> T.addNullability(nullable: Boolean, attributes: ConeAttributes = this.attributes): T =
