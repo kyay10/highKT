@@ -8,7 +8,6 @@ import org.jetbrains.kotlin.fir.expressions.FirFunctionCall
 import org.jetbrains.kotlin.fir.extensions.FirExpressionResolutionExtension
 import org.jetbrains.kotlin.fir.languageVersionSettings
 import org.jetbrains.kotlin.fir.resolve.calls.ImplicitExtensionReceiverValue
-import org.jetbrains.kotlin.fir.resolve.directExpansionType
 import org.jetbrains.kotlin.fir.resolve.inference.InferenceComponents
 import org.jetbrains.kotlin.fir.scopes.FirOverrideChecker
 import org.jetbrains.kotlin.fir.scopes.impl.FirStandardOverrideChecker
@@ -157,15 +156,17 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
     session.correspondingSupertypesCache.getCorrespondingSupertypes(this, constructor)
 
   private fun ConeKotlinType.options(): List<ConeKotlinType> = buildList {
-    var current: ConeKotlinType? = this@options
+    // Invariant: current.isK
+    // If we don't have an expanded type, we try to make one from the abbreviation
+    // else, we use the canonical form of this type
+    var current: ConeKotlinType? =
+      (abbreviatedType as? ConeClassLikeType)
+        ?.takeIf { expandedType == null && !it.isK }
+        ?.let { it.fullyExpandedTypeWithAttribute().withExpanded(it.toCanonicalKType()).toCanonicalKType() }
+        ?: toCanonicalKType()
     while (current != null) {
       add(current)
-      current.toCanonicalKType()?.let(::add)
-      current.abbreviatedType?.let {
-        (it as? ConeClassLikeType)?.directExpansionType(session)?.abbreviatedType?.toCanonicalKType()?.let(::add)
-        it.toCanonicalKType()?.let(::add)
-      }
-      current = current.attributes.expandedType?.coneType
+      current = current.expandedType
     }
   }
 

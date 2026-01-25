@@ -26,7 +26,7 @@ class ExpandedTypeAttribute(override val coneType: ConeKotlinType) :
       while (current != null) {
         val attrs = current.coneType.attributes
         add(0, current.coneType.withAttributes(attrs.remove(ExpandedTypeAttribute::class)))
-        current = attrs.expandedType
+        current = attrs.expandedTypeAttribute
       }
     }
 
@@ -42,7 +42,11 @@ class ExpandedTypeAttribute(override val coneType: ConeKotlinType) :
     get() = ExpandedTypeAttribute::class
 }
 
-val ConeAttributes.expandedType by ConeAttributes.attributeAccessor<ExpandedTypeAttribute>()
+val ConeAttributes.expandedTypeAttribute by ConeAttributes.attributeAccessor<ExpandedTypeAttribute>()
+val ConeAttributes.expandedType: ConeKotlinType?
+  get() = expandedTypeAttribute?.coneType
+val ConeKotlinType.expandedType: ConeKotlinType?
+  get() = attributes.expandedType
 
 data object LeaveUnevaluatedAttribute : ConeAttribute<LeaveUnevaluatedAttribute>() {
   override fun add(other: LeaveUnevaluatedAttribute?) = other ?: this
@@ -62,6 +66,6 @@ data object LeaveUnevaluatedAttribute : ConeAttribute<LeaveUnevaluatedAttribute>
   override fun toString(): String = "{LeaveUnevaluated}"
 }
 
-val ConeAttributes.leaveUnevaluated by ConeAttributes.attributeAccessor<LeaveUnevaluatedAttribute>()
-val ConeAttributes.shouldLeaveUnevaluated
-  get() = this.leaveUnevaluated != null
+val ConeAttributes.leaveUnevaluatedAttribute by ConeAttributes.attributeAccessor<LeaveUnevaluatedAttribute>()
+val ConeKotlinType.shouldLeaveUnevaluated
+  get() = attributes.leaveUnevaluatedAttribute != null
