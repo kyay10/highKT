@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.ir.types.IrTypeSystemContextImpl
 import org.jetbrains.kotlin.ir.types.impl.buildSimpleType
 import org.jetbrains.kotlin.ir.util.erasedUpperBound
 import org.jetbrains.kotlin.ir.util.functions
-import org.jetbrains.kotlin.ir.util.hasAnnotation
 import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.ir.util.nonDispatchParameters
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
@@ -40,9 +39,8 @@ class RemoveKCastsGenerationExtension : IrGenerationExtension {
 }
 
 private val K_FQNAME = FqName("io.github.kyay10.highkt.K")
-private val TYPE_LAMBDA_FQNAME = FqName("io.github.kyay10.highkt.TypeLambda")
 private val IrType.isK: Boolean
-  get() = erasedUpperBound.kotlinFqName == K_FQNAME || erasedUpperBound.hasAnnotation(TYPE_LAMBDA_FQNAME)
+  get() = erasedUpperBound.kotlinFqName == K_FQNAME
 private val IrType.containsK: Boolean
   get() = isK || (this as? IrSimpleType)?.arguments?.any { it is IrType && it.containsK } == true
 
