@@ -8,28 +8,41 @@ import org.jetbrains.kotlin.fir.expressions.FirFunctionCall
 import org.jetbrains.kotlin.fir.extensions.FirExpressionResolutionExtension
 import org.jetbrains.kotlin.fir.languageVersionSettings
 import org.jetbrains.kotlin.fir.resolve.calls.ImplicitExtensionReceiverValue
+import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.resolve.inference.InferenceComponents
 import org.jetbrains.kotlin.fir.scopes.FirOverrideChecker
 import org.jetbrains.kotlin.fir.scopes.impl.FirStandardOverrideChecker
+import org.jetbrains.kotlin.fir.symbols.ConeTypeParameterLookupTag
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.ConeClassLikeLookupTagImpl
+import org.jetbrains.kotlin.fir.symbols.impl.FirTypeParameterSymbol
+import org.jetbrains.kotlin.fir.types.ConeCapturedType
 import org.jetbrains.kotlin.fir.types.ConeClassLikeLookupTag
 import org.jetbrains.kotlin.fir.types.ConeClassLikeType
 import org.jetbrains.kotlin.fir.types.ConeInferenceContext
+import org.jetbrains.kotlin.fir.types.ConeIntegerConstantOperatorType
+import org.jetbrains.kotlin.fir.types.ConeIntegerLiteralConstantType
+import org.jetbrains.kotlin.fir.types.ConeIntersectionType
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
+import org.jetbrains.kotlin.fir.types.ConeLookupTagBasedType
 import org.jetbrains.kotlin.fir.types.ConeRigidType
+import org.jetbrains.kotlin.fir.types.ConeStubTypeForTypeVariableInSubtyping
 import org.jetbrains.kotlin.fir.types.ConeTypeApproximator
+import org.jetbrains.kotlin.fir.types.ConeTypeParameterType
 import org.jetbrains.kotlin.fir.types.ConeTypePreparator
+import org.jetbrains.kotlin.fir.types.ConeTypeVariableType
 import org.jetbrains.kotlin.fir.types.TypeComponents
 import org.jetbrains.kotlin.fir.types.abbreviatedType
 import org.jetbrains.kotlin.fir.types.abbreviatedTypeOrSelf
 import org.jetbrains.kotlin.fir.types.classId
 import org.jetbrains.kotlin.fir.types.correspondingSupertypesCache
 import org.jetbrains.kotlin.fir.types.getConstructor
+import org.jetbrains.kotlin.fir.types.isNullableAny
 import org.jetbrains.kotlin.fir.types.replaceType
 import org.jetbrains.kotlin.fir.types.resolvedType
 import org.jetbrains.kotlin.fir.types.type
+import org.jetbrains.kotlin.fir.types.unwrapToSimpleTypeUsingLowerBound
 import org.jetbrains.kotlin.fir.types.variance
 import org.jetbrains.kotlin.fir.types.withArguments
 import org.jetbrains.kotlin.fir.types.withAttributes
@@ -163,8 +176,9 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
         var replacedAny = false
         val newArgs =
           superType.typeArguments.mapIndexed { i, arg ->
-            if (expectedType.typeArguments[i].type is ConeClassLikeType) { // deconstructing, thus apply arguments
+            if (expectedType.typeArguments[i].type?.hasNonTrivialBounds() == true) {
               if (arg.variance == Variance.OUT_VARIANCE) return@mapIndexed arg
+              // deconstructing/pattern-matching, thus apply arguments
               val applied = arg.type?.applyKOrSelf()?.takeIf { it !== arg.type } ?: return@mapIndexed arg
               replacedAny = true
               arg.replaceType(applied.takeIf { true })
@@ -195,51 +209,55 @@ class KindInferenceContext(override val session: FirSession) : ConeInferenceCont
     val expectedType = (constructor as? ConeClassLikeLookupTagWithType)?.type
     val constructor = constructor.normalize()
     require(this is ConeKotlinType)
-    if (constructor !is ConeClassLikeLookupTag) return null
-    if (constructor.classId == CONSTRUCTOR_CLASS_ID && this.classId == CONSTRUCTOR_CLASS_ID) {
-      // nominal handling of Constructor types based on abbreviations
-      val thisArg = this.typeArguments.firstOrNull()?.type?.abbreviatedTypeOrSelf ?: return null
-      val expectedArg = expectedType?.typeArguments?.firstOrNull()?.type?.abbreviatedTypeOrSelf ?: return null
-      return if (thisArg.classId != expectedArg.classId) emptyList()
-      else cachedCorrespondingSupertypes(constructor, null)
-    }
-    if (constructor.classId != K_CLASS_ID) {
-      val superTypes = cachedCorrespondingSupertypes(constructor, expectedType) ?: return null
-      val kIndices =
-        (expectedType ?: return superTypes).typeArguments.mapIndexedNotNull { index, arg ->
-          index.takeIf { arg.type.isK }
-        }
-      return superTypes.flatMap { superType ->
-        var acc = listOf(superType)
-        val args =
-          superType.typeArguments.ifEmpty {
-            return@flatMap acc
+    return when {
+      constructor !is ConeClassLikeLookupTag -> null
+      constructor.classId == CONSTRUCTOR_CLASS_ID && this.classId == CONSTRUCTOR_CLASS_ID -> {
+        // nominal handling of Constructor types based on abbreviations
+        val thisArg = this.typeArguments.firstOrNull()?.type?.abbreviatedTypeOrSelf ?: return null
+        val expectedArg = expectedType?.typeArguments?.firstOrNull()?.type?.abbreviatedTypeOrSelf ?: return null
+        if (thisArg.classId != expectedArg.classId) emptyList() else cachedCorrespondingSupertypes(constructor, null)
+      }
+
+      constructor.classId == K_CLASS_ID ->
+        options().flatMap { it.cachedCorrespondingSupertypes(constructor, null) ?: return null }
+
+      else -> {
+        val superTypes = cachedCorrespondingSupertypes(constructor, expectedType) ?: return null
+        val kIndices =
+          (expectedType ?: return superTypes).typeArguments.mapIndexedNotNull { index, arg ->
+            index.takeIf { arg.type.isK }
           }
-        for (index in kIndices) {
-          val arg = args[index]
-          if (arg.variance == Variance.OUT_VARIANCE) continue
-          val argType = arg.type ?: continue
-          acc =
-            acc.flatMap { currentType ->
-              argType.options().map { option ->
-                currentType.withArguments(
-                  currentType.typeArguments
-                    .toMutableList()
-                    .apply {
-                      this[index] =
-                        arg.replaceType(
-                          option.withAttributes(option.attributes.add(LeaveUnevaluatedAttribute)).takeIf { true }
-                        )
-                    }
-                    .toTypedArray()
-                )
-              } + currentType
+        superTypes.flatMap { superType ->
+          var acc = listOf(superType)
+          val args =
+            superType.typeArguments.ifEmpty {
+              return@flatMap acc
             }
+          for (index in kIndices) {
+            val arg = args[index]
+            if (arg.variance == Variance.OUT_VARIANCE) continue
+            val argType = arg.type ?: continue
+            acc =
+              acc.flatMap { currentType ->
+                argType.options().map { option ->
+                  currentType.withArguments(
+                    currentType.typeArguments
+                      .toMutableList()
+                      .apply {
+                        this[index] =
+                          arg.replaceType(
+                            option.withAttributes(option.attributes.add(LeaveUnevaluatedAttribute)).takeIf { true }
+                          )
+                      }
+                      .toTypedArray()
+                  )
+                } + currentType
+              }
+          }
+          acc
         }
-        acc
       }
     }
-    return options().flatMap { it.cachedCorrespondingSupertypes(constructor, null) ?: return null }
   }
 }
 
@@ -247,3 +265,26 @@ class KindTypeRefiner(override val session: FirSession) : AbstractTypeRefiner(),
   @TypeRefinement
   override fun refineType(type: KotlinTypeMarker) = if (type !is ConeKotlinType) type else type.applyKOrSelf()
 }
+
+context(_: SessionHolder)
+private fun ConeKotlinType.hasNonTrivialBounds(): Boolean =
+  when (val type = unwrapToSimpleTypeUsingLowerBound()) {
+    is ConeClassLikeType -> !fullyExpandedType().isNullableAny
+    is ConeTypeParameterType -> type.lookupTag.typeParameterSymbol.hasNonTrivialBounds()
+    is ConeTypeVariableType ->
+      (type.typeConstructor.originalTypeParameter as? ConeTypeParameterLookupTag)?.symbol?.hasNonTrivialBounds() == true
+    is ConeStubTypeForTypeVariableInSubtyping ->
+      (type.constructor.variable.typeConstructor.originalTypeParameter as? ConeTypeParameterLookupTag)
+        ?.symbol
+        ?.hasNonTrivialBounds() == true
+    is ConeIntersectionType -> type.intersectedTypes.any { it.hasNonTrivialBounds() }
+    is ConeIntegerConstantOperatorType,
+    is ConeIntegerLiteralConstantType -> true
+
+    is ConeCapturedType,
+    is ConeLookupTagBasedType -> false
+  }
+
+context(_: SessionHolder)
+private fun FirTypeParameterSymbol.hasNonTrivialBounds(): Boolean =
+  resolvedBounds.any { it.coneType.hasNonTrivialBounds() }
