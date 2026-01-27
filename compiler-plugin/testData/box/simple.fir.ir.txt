@@ -1978,7 +1978,7 @@ FILE fqName:foo.bar fileName:/simple.kt
               VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-ListMonad index:0 type:foo.bar.ListMonad
               BLOCK_BODY
                 VAR name:result type:kotlin.collections.List<kotlin.String> [val]
-                  CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=kotlin.collections.List<kotlin.String> origin=null
+                  CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=kotlin.Any? origin=null
                     TYPE_ARG F: io.github.kyay10.highkt.Constructor<kotlin.collections.List<*>>
                     TYPE_ARG A: kotlin.String
                     TYPE_ARG B: kotlin.String
@@ -2034,7 +2034,7 @@ FILE fqName:foo.bar fileName:/simple.kt
                         TYPE_ARG (of class) A: kotlin.Int
                         ARG value: CONST Int type=kotlin.Int value=10
                 VAR name:b type:foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.String> [val]
-                  CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=foo.bar.BiComposed<io.github.kyay10.highkt.Constructor<foo.bar.Either<*, *>>, kotlin.Any?, io.github.kyay10.highkt.Constructor<foo.bar.Identity<*>>, kotlin.Unit, kotlin.String> origin=null
+                  CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=kotlin.Any? origin=null
                     TYPE_ARG F: kotlin.Any?
                     TYPE_ARG A: kotlin.Int
                     TYPE_ARG B: kotlin.String
@@ -2082,7 +2082,7 @@ FILE fqName:foo.bar fileName:/simple.kt
               VALUE_PARAMETER UNDERSCORE_PARAMETER kind:Context name:$context-PairFunctor index:0 type:foo.bar.PairFunctor<kotlin.Int>
               BLOCK_BODY
                 VAR name:result type:kotlin.Pair<kotlin.Int, kotlin.String> [val]
-                  CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=kotlin.Pair<kotlin.Int, kotlin.String> origin=null
+                  CALL 'public final fun fmap <F, A, B> (functor: foo.bar.Functor<F of foo.bar.fmap>, <this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.fmap, B of foo.bar.fmap>): kotlin.Any? declared in foo.bar' type=kotlin.Any? origin=null
                     TYPE_ARG F: kotlin.Any?
                     TYPE_ARG A: kotlin.String
                     TYPE_ARG B: kotlin.String
