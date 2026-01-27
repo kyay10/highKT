@@ -927,7 +927,7 @@ FILE fqName:foo.bar fileName:/simple.kt
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:B of foo.bar.Right visibility:private [final]' type=B of foo.bar.Right origin=null
               receiver: GET_VAR '<this>: foo.bar.Right<A of foo.bar.Right, B of foo.bar.Right> declared in foo.bar.Right.toString' type=foo.bar.Right<A of foo.bar.Right, B of foo.bar.Right> origin=null
             CONST String type=kotlin.String value=")"
-  CLASS CLASS name:Swapped modality:FINAL visibility:public [data] superTypes:[kotlin.Any?]
+  CLASS CLASS name:Swapped modality:FINAL visibility:public [data] superTypes:[kotlin.Any]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Swapped<F of foo.bar.Swapped, B of foo.bar.Swapped, A of foo.bar.Swapped>
     TYPE_PARAMETER name:F index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:B index:1 variance: superTypes:[kotlin.Any?] reified:false
@@ -947,7 +947,7 @@ FILE fqName:foo.bar fileName:/simple.kt
       VALUE_PARAMETER kind:Regular name:value index:0 type:kotlin.Any?
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Swapped modality:FINAL visibility:public [data] superTypes:[kotlin.Any?]' type=kotlin.Unit
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Swapped modality:FINAL visibility:public [data] superTypes:[kotlin.Any]' type=kotlin.Unit
     FUN GENERATED_DATA_CLASS_MEMBER name:component1 visibility:public modality:FINAL returnType:kotlin.Any? [operator]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Swapped<F of foo.bar.Swapped, B of foo.bar.Swapped, A of foo.bar.Swapped>
       BLOCK_BODY
@@ -971,7 +971,7 @@ FILE fqName:foo.bar fileName:/simple.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Swapped<F of foo.bar.Swapped, B of foo.bar.Swapped, A of foo.bar.Swapped>
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
       overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.K
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
       BLOCK_BODY
         WHEN type=kotlin.Unit origin=null
           BRANCH
@@ -1004,7 +1004,7 @@ FILE fqName:foo.bar fileName:/simple.kt
     FUN GENERATED_DATA_CLASS_MEMBER name:hashCode visibility:public modality:OPEN returnType:kotlin.Int
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Swapped<F of foo.bar.Swapped, B of foo.bar.Swapped, A of foo.bar.Swapped>
       overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun hashCode (): kotlin.Int declared in foo.bar.Swapped'
           CALL 'public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K' type=kotlin.Int origin=null
@@ -1013,7 +1013,7 @@ FILE fqName:foo.bar fileName:/simple.kt
     FUN GENERATED_DATA_CLASS_MEMBER name:toString visibility:public modality:OPEN returnType:kotlin.String
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Swapped<F of foo.bar.Swapped, B of foo.bar.Swapped, A of foo.bar.Swapped>
       overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.K
+        public open fun toString (): kotlin.String declared in kotlin.Any
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in foo.bar.Swapped'
           STRING_CONCATENATION type=kotlin.String

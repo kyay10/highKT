@@ -97,7 +97,7 @@ fun <F, A> rightFunctor() = object : Functor<K<F, A>> {
   override fun <B, C> K2<F, A, B>.fmap(f: (B) -> C) = rightMap(f)
 }
 
-data class Swapped<F, B, A>(val value: K2<F, A, B>) : K2<Swap<F>, B, A>
+data class Swapped<F, B, A>(val value: K2<F, A, B>)
 typealias Swap<F> = K<Constructor<Swapped<*, *, *>>, F>
 
 context(_: BiFunctor<F>)

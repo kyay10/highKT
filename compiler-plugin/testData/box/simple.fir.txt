@@ -257,7 +257,7 @@ FILE: simple.kt
         }
 
     }
-    public final data class Swapped<F, B, A> : R|{io/github/kyay10/highkt/K2<foo/bar/Swap<F>, B, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Swap<F>, B>, A>| {
+    public final data class Swapped<F, B, A> : R|kotlin/Any| {
         public constructor<F, B, A>(value: R|{io/github/kyay10/highkt/K2<F, A, B>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<F, A>, B>|): R|foo/bar/Swapped<F, B, A>| {
             super<R|kotlin/Any|>()
         }

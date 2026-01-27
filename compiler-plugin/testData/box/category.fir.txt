@@ -175,7 +175,7 @@ FILE: category.kt
     public final typealias BiFunctor<C, D, E, F> = R|foo/bar/Functor<foo/bar/Product<C, D>, E, F>|
     public final typealias EndoBiFunctor<C, F> = R|{foo/bar/BiFunctor<C, C, C, F>=} foo/bar/Functor<foo/bar/Product<C, C>, C, F>|
     public final typealias Component<D, F, G, A> = R|{io/github/kyay10/highkt/K2<D, io/github/kyay10/highkt/K<F, A>, io/github/kyay10/highkt/K<G, A>>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<D, io/github/kyay10/highkt/K<F, A>>, io/github/kyay10/highkt/K<G, A>>|
-    public abstract interface Nat<C, D, F, G> : R|{io/github/kyay10/highkt/K2<foo/bar/NatK<C, D>, F, G>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/NatK<C, D>, F>, G>| {
+    public abstract interface Nat<C, D, F, G> : R|kotlin/Any| {
         public abstract val firstFunctor: R|foo/bar/Functor<C, D, F>|
             public get(): R|foo/bar/Functor<C, D, F>|
 

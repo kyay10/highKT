@@ -204,7 +204,7 @@ FILE fqName:foo.bar fileName:/category.kt
         correspondingProperty: PROPERTY FAKE_OVERRIDE name:unitObject visibility:public modality:ABSTRACT [fake_override,val]
         overridden:
           public abstract fun <get-unitObject> (): kotlin.Any? declared in foo.bar.TensorProduct
-  CLASS INTERFACE name:Nat modality:ABSTRACT visibility:public superTypes:[kotlin.Any?]
+  CLASS INTERFACE name:Nat modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Nat<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat, G of foo.bar.Nat>
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
     TYPE_PARAMETER name:D index:1 variance: superTypes:[kotlin.Any?] reified:false
@@ -214,15 +214,15 @@ FILE fqName:foo.bar fileName:/category.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
       overridden:
-        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in io.github.kyay10.highkt.K
+        public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
     FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
-        public open fun hashCode (): kotlin.Int declared in io.github.kyay10.highkt.K
+        public open fun hashCode (): kotlin.Int declared in kotlin.Any
     FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
-        public open fun toString (): kotlin.String declared in io.github.kyay10.highkt.K
+        public open fun toString (): kotlin.String declared in kotlin.Any
     FUN name:get visibility:public modality:ABSTRACT returnType:kotlin.Any? [operator]
       TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.Nat<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat, G of foo.bar.Nat>

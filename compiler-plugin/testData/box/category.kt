@@ -97,7 +97,7 @@ typealias EndoBiFunctor<C, F> = BiFunctor<C, C, C, F>
 
 typealias Component<D, F, G, A> = K2<D, K<F, A>, K<G, A>>
 
-interface Nat<C, D, F, G> : K2<NatK<C, D>, F, G> {
+interface Nat<C, D, F, G> {
   val firstFunctor: Functor<C, D, F>
   val secondFunctor: Functor<C, D, G>
   operator fun <A> get(c: Obj<C, A>): Component<D, F, G, A>
