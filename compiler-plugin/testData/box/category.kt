@@ -10,18 +10,18 @@ typealias Obj<Cat, A> = K2<Cat, A, A>
 
 interface Category<Cat> {
   infix fun <A, B, C> K2<Cat, B, C>.compose(g: K2<Cat, A, B>): K2<Cat, A, C>
-  fun <A> K2<Cat, A, *>.source(): Obj<Cat, A>
-  fun <A> K2<Cat, *, A>.target(): Obj<Cat, A>
+  val <A> K2<Cat, A, *>.source: Obj<Cat, A>
+  val <A> K2<Cat, *, A>.target: Obj<Cat, A>
 }
 
 context(category: Category<Cat>)
 infix fun <Cat, A, B, C> K2<Cat, B, C>.compose(g: K2<Cat, A, B>) = with(category) { this@compose.compose(g) }
 
 context(category: Category<Cat>)
-fun <Cat, A> K2<Cat, A, *>.source() = with(category) { this@source.source<A>() }
+val <Cat, A> K2<Cat, A, *>.source get() = with(category) { this@source.source }
 
 context(category: Category<Cat>)
-fun <Cat, A> K2<Cat, *, A>.target() = with(category) { this@target.target<A>() }
+val <Cat, A> K2<Cat, *, A>.target get() = with(category) { this@target.target }
 
 typealias Opposite<Cat, A, B> = K2<Cat, B, A>
 typealias Opp<Arr> = K<Constructor<Opposite<*, *, *>>, Arr>
@@ -29,8 +29,8 @@ typealias Opp<Arr> = K<Constructor<Opposite<*, *, *>>, Arr>
 context(c: Category<Cat>)
 fun <Cat> oppositeCategory(): Category<Opp<Cat>> = object : Category<Opp<Cat>> {
   override fun <A, B, C> K2<Cat, C, B>.compose(g: K2<Cat, B, A>) = g compose this
-  override fun <A> K2<Cat, *, A>.source() = target<Cat, _>()
-  override fun <A> K2<Cat, A, *>.target() = source<Cat, _>()
+  override val <A> K2<Cat, *, A>.source get() = with(c) { this@source.target }
+  override val <A> K2<Cat, A, *>.target get() = with(c) { this@target.source }
 }
 
 typealias Arrow = Constructor<Function1<*, *>>
@@ -40,8 +40,8 @@ fun <A> idArrow() = { a: A -> a }
 object ArrowCategory : Category<Arrow> {
   override fun <A, B, C> ((B) -> C).compose(g: (A) -> B) = { a: A -> this(g(a)) }
 
-  override fun <A> Function1<A, *>.source() = idArrow<A>()
-  override fun <A> Function1<*, A>.target() = idArrow<A>()
+  override val <A> Function1<A, *>.source get() = idArrow<A>()
+  override val <A> Function1<*, A>.target get() = idArrow<A>()
 }
 
 typealias TypePaired<A, B, F> = K2<F, A, B>
@@ -61,9 +61,9 @@ fun <C1, C2> productCategory(): Category<Product<C1, C2>> = object : Category<Pr
   override fun <PA, PB, PC> MorphismProduct<C1, C2, PB, PC>.compose(g: MorphismProduct<C1, C2, PA, PB>) =
     first.compose(g.first) to second.compose(g.second)
 
-  override fun <P> MorphismProduct<C1, C2, P, *>.source() = first.source() to second.source()
+  override val <P> MorphismProduct<C1, C2, P, *>.source get() = first.source to second.source
 
-  override fun <P> MorphismProduct<C1, C2, *, P>.target() = first.target() to second.target()
+  override val <P> MorphismProduct<C1, C2, *, P>.target get() = first.target to second.target
 }
 
 interface Functor<C, D, F> {
@@ -106,7 +106,7 @@ typealias NatK<C, D> = K2<Constructor<Nat<*, *, *, *>>, C, D>
 
 fun <C, D, F, G, A, B> Nat<C, D, F, G>.at(h: K2<C, A, B>) =
   context(firstFunctor, firstFunctor.firstCategory, firstFunctor.secondCategory) {
-    get(h.target()) compose lift(h)
+    get(h.target) compose lift(h)
   }
 
 typealias Endo<C, F, G> = Nat<C, C, F, G>
@@ -164,8 +164,8 @@ context(cd: Category<D>)
 fun <C, D> functorCategory(): Category<NatK<C, D>> = object : Category<NatK<C, D>> {
   override fun <F, G, H> Nat<C, D, G, H>.compose(g: Nat<C, D, F, G>) = this vertical g
 
-  override fun <F> Nat<C, D, F, *>.source() = context(firstFunctor) { identityNat() }
-  override fun <F> Nat<C, D, *, F>.target() = context(secondFunctor) { identityNat() }
+  override val <F> Nat<C, D, F, *>.source get() = context(firstFunctor) { identityNat() }
+  override val <F> Nat<C, D, *, F>.target get() = context(secondFunctor) { identityNat() }
 }
 
 typealias FunctorCompose<P> = Compose<TypePairFirst<P>, TypePairSecond<P>>
