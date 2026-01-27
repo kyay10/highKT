@@ -57,6 +57,7 @@ class KType(val type: ConeKotlinType, val applications: List<FunctionApplication
   fun applyOnce(): KType? {
     if (applications.isEmpty()) return null
     val (lookupTag, arity) = lookupTagAndArity ?: return null
+    if (arity == 0) return null // only happens in malformed IDE examples
     val isIdentity: Boolean = lookupTag.classId == IDENTITY_CLASS_ID
     val (immediatelyUsableTypes, extraTypes) = applications.splitAtOrNull(arity) ?: return null // partially applied
     val attributes =
