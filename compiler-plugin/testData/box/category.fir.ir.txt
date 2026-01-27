@@ -176,10 +176,6 @@ FILE fqName:foo.bar fileName:/category.kt
       VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
       overridden:
         public open fun toString (): kotlin.String declared in foo.bar.TensorProduct
-    FUN name:empty visibility:public modality:ABSTRACT returnType:kotlin.Any?
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.MonoidObject<Cat of foo.bar.MonoidObject, F of foo.bar.MonoidObject, I of foo.bar.MonoidObject, A of foo.bar.MonoidObject>
-    FUN name:plus visibility:public modality:ABSTRACT returnType:kotlin.Any?
-      VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.MonoidObject<Cat of foo.bar.MonoidObject, F of foo.bar.MonoidObject, I of foo.bar.MonoidObject, A of foo.bar.MonoidObject>
     PROPERTY FAKE_OVERRIDE name:firstCategory visibility:public modality:ABSTRACT [fake_override,val]
       overridden:
         public abstract firstCategory: foo.bar.Category<kotlin.Any?> declared in foo.bar.TensorProduct
@@ -204,6 +200,14 @@ FILE fqName:foo.bar fileName:/category.kt
         correspondingProperty: PROPERTY FAKE_OVERRIDE name:unitObject visibility:public modality:ABSTRACT [fake_override,val]
         overridden:
           public abstract fun <get-unitObject> (): kotlin.Any? declared in foo.bar.TensorProduct
+    PROPERTY name:empty visibility:public modality:ABSTRACT [val]
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-empty> visibility:public modality:ABSTRACT returnType:kotlin.Any?
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.MonoidObject<Cat of foo.bar.MonoidObject, F of foo.bar.MonoidObject, I of foo.bar.MonoidObject, A of foo.bar.MonoidObject>
+        correspondingProperty: PROPERTY name:empty visibility:public modality:ABSTRACT [val]
+    PROPERTY name:plus visibility:public modality:ABSTRACT [val]
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-plus> visibility:public modality:ABSTRACT returnType:kotlin.Any?
+        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.MonoidObject<Cat of foo.bar.MonoidObject, F of foo.bar.MonoidObject, I of foo.bar.MonoidObject, A of foo.bar.MonoidObject>
+        correspondingProperty: PROPERTY name:plus visibility:public modality:ABSTRACT [val]
   CLASS INTERFACE name:Nat modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.Nat<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat, G of foo.bar.Nat>
     TYPE_PARAMETER name:C index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -2424,6 +2428,190 @@ FILE fqName:foo.bar fileName:/category.kt
                           CALL 'public final fun endoFunctorComposeTensor <Cat> (k: foo.bar.Category<Cat of foo.bar.endoFunctorComposeTensor>): foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> declared in foo.bar' type=foo.bar.TensorProduct<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity> origin=null
                             TYPE_ARG Cat: io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
                             ARG k: GET_VAR '$context-ArrowCategory: foo.bar.ArrowCategory declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.ArrowCategory origin=null
+                      PROPERTY name:empty visibility:public modality:OPEN [val]
+                        overridden:
+                          public abstract empty: kotlin.Any? declared in foo.bar.MonoidObject
+                        FIELD PROPERTY_BACKING_FIELD name:empty type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> visibility:private [final]
+                          EXPRESSION_BODY
+                            BLOCK type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> origin=OBJECT_LITERAL
+                              CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity, M of foo.bar.toNormalMonad>]
+                                thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad>
+                                PROPERTY name:firstFunctor visibility:public modality:OPEN [val]
+                                  overridden:
+                                    public abstract firstFunctor: foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat
+                                  FIELD PROPERTY_BACKING_FIELD name:firstFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> visibility:private [final]
+                                    EXPRESSION_BODY
+                                      CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Identity> declared in foo.bar' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> origin=null
+                                        TYPE_ARG C: io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
+                                        ARG c: GET_VAR '$context-ArrowCategory: foo.bar.ArrowCategory declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.ArrowCategory origin=null
+                                  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-firstFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity>
+                                    VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad>
+                                    correspondingProperty: PROPERTY name:firstFunctor visibility:public modality:OPEN [val]
+                                    overridden:
+                                      public abstract fun <get-firstFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat
+                                    BLOCK_BODY
+                                      RETURN type=kotlin.Nothing from='public open fun <get-firstFunctor> (): foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>'
+                                        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:firstFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> visibility:private [final]' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> origin=null
+                                          receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.<get-firstFunctor>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> origin=null
+                                PROPERTY name:secondFunctor visibility:public modality:OPEN [val]
+                                  overridden:
+                                    public abstract secondFunctor: foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, G of foo.bar.Nat> declared in foo.bar.Nat
+                                  FIELD PROPERTY_BACKING_FIELD name:secondFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> visibility:private [final]
+                                    EXPRESSION_BODY
+                                      CALL 'public final fun contextOf <A> (context: @[NoInfer] A of kotlin.contextOf): @[NoInfer] A of kotlin.contextOf declared in kotlin' type=@[NoInfer] foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
+                                        TYPE_ARG A: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad>
+                                        ARG context: GET_VAR '$context-Functor: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
+                                  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-secondFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad>
+                                    VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad>
+                                    correspondingProperty: PROPERTY name:secondFunctor visibility:public modality:OPEN [val]
+                                    overridden:
+                                      public abstract fun <get-secondFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, G of foo.bar.Nat> declared in foo.bar.Nat
+                                    BLOCK_BODY
+                                      RETURN type=kotlin.Nothing from='public open fun <get-secondFunctor> (): foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>'
+                                        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:secondFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> visibility:private [final]' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
+                                          receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.<get-secondFunctor>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> origin=null
+                                CONSTRUCTOR visibility:public returnType:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> [primary]
+                                  BLOCK_BODY
+                                    DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+                                    INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity, M of foo.bar.toNormalMonad>]' type=kotlin.Unit
+                                FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+                                  VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+                                  overridden:
+                                    public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.Nat
+                                FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+                                  overridden:
+                                    public open fun hashCode (): kotlin.Int declared in foo.bar.Nat
+                                FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+                                  overridden:
+                                    public open fun toString (): kotlin.String declared in foo.bar.Nat
+                                FUN name:get visibility:public modality:OPEN returnType:kotlin.Any? [operator]
+                                  TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad>
+                                  VALUE_PARAMETER kind:Regular name:c index:1 type:kotlin.Any?
+                                  overridden:
+                                    public abstract fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.Nat
+                                  BLOCK_BODY
+                                    RETURN type=kotlin.Nothing from='public open fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>'
+                                      FUN_EXPR type=kotlin.Function1<A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get, kotlin.Any?> origin=LAMBDA
+                                        FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
+                                          VALUE_PARAMETER kind:Regular name:a index:0 type:A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get
+                                          BLOCK_BODY
+                                            RETURN type=kotlin.Nothing from='local final fun <anonymous> (a: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get'
+                                              CALL 'public abstract fun pure <A> (a: A of foo.bar.UsualMonad.pure): kotlin.Any? declared in foo.bar.UsualMonad' type=kotlin.Any? origin=null
+                                                TYPE_ARG A: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get
+                                                ARG <this>: GET_VAR '<this>: foo.bar.UsualMonad<M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad' type=foo.bar.UsualMonad<M of foo.bar.toNormalMonad> origin=IMPLICIT_ARGUMENT
+                                                ARG a: GET_VAR 'a: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get.<anonymous>' type=A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get origin=null
+                              CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> origin=OBJECT_LITERAL
+                        FUN DEFAULT_PROPERTY_ACCESSOR name:<get-empty> visibility:public modality:OPEN returnType:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad>
+                          VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad>
+                          correspondingProperty: PROPERTY name:empty visibility:public modality:OPEN [val]
+                          overridden:
+                            public abstract fun <get-empty> (): kotlin.Any? declared in foo.bar.MonoidObject
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='public open fun <get-empty> (): foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>'
+                              GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:empty type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> visibility:private [final]' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> origin=null
+                                receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.<get-empty>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
+                      PROPERTY name:plus visibility:public modality:OPEN [val]
+                        overridden:
+                          public abstract plus: kotlin.Any? declared in foo.bar.MonoidObject
+                        FIELD PROPERTY_BACKING_FIELD name:plus type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> visibility:private [final]
+                          EXPRESSION_BODY
+                            BLOCK type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> origin=OBJECT_LITERAL
+                              CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?, M of foo.bar.toNormalMonad>]
+                                thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad>
+                                PROPERTY name:firstFunctor visibility:public modality:OPEN [val]
+                                  overridden:
+                                    public abstract firstFunctor: foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat
+                                  FIELD PROPERTY_BACKING_FIELD name:firstFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?> visibility:private [final]
+                                    EXPRESSION_BODY
+                                      CALL 'public final fun composeFunctors <C, D, E, F, G> (f: foo.bar.Functor<D of foo.bar.composeFunctors, E of foo.bar.composeFunctors, F of foo.bar.composeFunctors>, g: foo.bar.Functor<C of foo.bar.composeFunctors, D of foo.bar.composeFunctors, G of foo.bar.composeFunctors>): foo.bar.Functor<C of foo.bar.composeFunctors, E of foo.bar.composeFunctors, kotlin.Any?> declared in foo.bar' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?> origin=null
+                                        TYPE_ARG C: io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
+                                        TYPE_ARG D: io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
+                                        TYPE_ARG E: io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
+                                        TYPE_ARG F: M of foo.bar.toNormalMonad
+                                        TYPE_ARG G: M of foo.bar.toNormalMonad
+                                        ARG f: GET_VAR '$context-Functor: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
+                                        ARG g: GET_VAR '$context-Functor: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
+                                  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-firstFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?>
+                                    VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad>
+                                    correspondingProperty: PROPERTY name:firstFunctor visibility:public modality:OPEN [val]
+                                    overridden:
+                                      public abstract fun <get-firstFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat
+                                    BLOCK_BODY
+                                      RETURN type=kotlin.Nothing from='public open fun <get-firstFunctor> (): foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>'
+                                        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:firstFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?> visibility:private [final]' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?> origin=null
+                                          receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.<get-firstFunctor>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> origin=null
+                                PROPERTY name:secondFunctor visibility:public modality:OPEN [val]
+                                  overridden:
+                                    public abstract secondFunctor: foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, G of foo.bar.Nat> declared in foo.bar.Nat
+                                  FIELD PROPERTY_BACKING_FIELD name:secondFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> visibility:private [final]
+                                    EXPRESSION_BODY
+                                      CALL 'public final fun contextOf <A> (context: @[NoInfer] A of kotlin.contextOf): @[NoInfer] A of kotlin.contextOf declared in kotlin' type=@[NoInfer] foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
+                                        TYPE_ARG A: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad>
+                                        ARG context: GET_VAR '$context-Functor: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
+                                  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-secondFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad>
+                                    VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad>
+                                    correspondingProperty: PROPERTY name:secondFunctor visibility:public modality:OPEN [val]
+                                    overridden:
+                                      public abstract fun <get-secondFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, G of foo.bar.Nat> declared in foo.bar.Nat
+                                    BLOCK_BODY
+                                      RETURN type=kotlin.Nothing from='public open fun <get-secondFunctor> (): foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>'
+                                        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:secondFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> visibility:private [final]' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
+                                          receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.<get-secondFunctor>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> origin=null
+                                CONSTRUCTOR visibility:public returnType:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> [primary]
+                                  BLOCK_BODY
+                                    DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
+                                    INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?, M of foo.bar.toNormalMonad>]' type=kotlin.Unit
+                                FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
+                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+                                  VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
+                                  overridden:
+                                    public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.Nat
+                                FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
+                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+                                  overridden:
+                                    public open fun hashCode (): kotlin.Int declared in foo.bar.Nat
+                                FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
+                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
+                                  overridden:
+                                    public open fun toString (): kotlin.String declared in foo.bar.Nat
+                                FUN name:get visibility:public modality:OPEN returnType:kotlin.Any? [operator]
+                                  TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
+                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad>
+                                  VALUE_PARAMETER kind:Regular name:c index:1 type:kotlin.Any?
+                                  overridden:
+                                    public abstract fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.Nat
+                                  BLOCK_BODY
+                                    RETURN type=kotlin.Nothing from='public open fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>'
+                                      FUN_EXPR type=kotlin.Function1<kotlin.Any?, kotlin.Any?> origin=LAMBDA
+                                        FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
+                                          VALUE_PARAMETER kind:Regular name:mma index:0 type:kotlin.Any?
+                                          BLOCK_BODY
+                                            RETURN type=kotlin.Nothing from='local final fun <anonymous> (mma: kotlin.Any?): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.get'
+                                              CALL 'public abstract fun bind <A, B> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.UsualMonad.bind, kotlin.Any?>): kotlin.Any? declared in foo.bar.UsualMonad' type=kotlin.Any? origin=null
+                                                TYPE_ARG A: kotlin.Any?
+                                                TYPE_ARG B: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.get
+                                                ARG <this>(index:0): GET_VAR '<this>: foo.bar.UsualMonad<M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad' type=foo.bar.UsualMonad<M of foo.bar.toNormalMonad> origin=IMPLICIT_ARGUMENT
+                                                ARG <this>(index:1): GET_VAR 'mma: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.get.<anonymous>' type=kotlin.Any? origin=null
+                                                ARG f: FUN_EXPR type=kotlin.Function1<kotlin.Any?, kotlin.Any?> origin=LAMBDA
+                                                  FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
+                                                    VALUE_PARAMETER kind:Regular name:ma index:0 type:kotlin.Any?
+                                                    BLOCK_BODY
+                                                      RETURN type=kotlin.Nothing from='local final fun <anonymous> (ma: kotlin.Any?): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.get.<anonymous>'
+                                                        GET_VAR 'ma: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.get.<anonymous>.<anonymous>' type=kotlin.Any? origin=null
+                              CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> origin=OBJECT_LITERAL
+                        FUN DEFAULT_PROPERTY_ACCESSOR name:<get-plus> visibility:public modality:OPEN returnType:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad>
+                          VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad>
+                          correspondingProperty: PROPERTY name:plus visibility:public modality:OPEN [val]
+                          overridden:
+                            public abstract fun <get-plus> (): kotlin.Any? declared in foo.bar.MonoidObject
+                          BLOCK_BODY
+                            RETURN type=kotlin.Nothing from='public open fun <get-plus> (): foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>'
+                              GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:plus type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> visibility:private [final]' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> origin=null
+                                receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.<get-plus>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> origin=null
                       CONSTRUCTOR visibility:public returnType:foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad> [primary]
                         BLOCK_BODY
                           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
@@ -2560,174 +2748,6 @@ FILE fqName:foo.bar fileName:/category.kt
                         overridden:
                           public open fun toString (): kotlin.String declared in foo.bar.MonoidObject
                           public open fun toString (): kotlin.String declared in foo.bar.TensorProduct
-                      FUN name:empty visibility:public modality:OPEN returnType:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad>
-                        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad>
-                        overridden:
-                          public abstract fun empty (): kotlin.Any? declared in foo.bar.MonoidObject
-                        BLOCK_BODY
-                          RETURN type=kotlin.Nothing from='public open fun empty (): foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>'
-                            BLOCK type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> origin=OBJECT_LITERAL
-                              CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity, M of foo.bar.toNormalMonad>]
-                                thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad>
-                                PROPERTY name:firstFunctor visibility:public modality:OPEN [val]
-                                  overridden:
-                                    public abstract firstFunctor: foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat
-                                  FIELD PROPERTY_BACKING_FIELD name:firstFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> visibility:private [final]
-                                    EXPRESSION_BODY
-                                      CALL 'public final fun identityFunctor <C> (c: foo.bar.Category<C of foo.bar.identityFunctor>): foo.bar.Functor<C of foo.bar.identityFunctor, C of foo.bar.identityFunctor, io.github.kyay10.highkt.Identity> declared in foo.bar' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> origin=null
-                                        TYPE_ARG C: io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
-                                        ARG c: GET_VAR '$context-ArrowCategory: foo.bar.ArrowCategory declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.ArrowCategory origin=null
-                                  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-firstFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity>
-                                    VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad>
-                                    correspondingProperty: PROPERTY name:firstFunctor visibility:public modality:OPEN [val]
-                                    overridden:
-                                      public abstract fun <get-firstFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat
-                                    BLOCK_BODY
-                                      RETURN type=kotlin.Nothing from='public open fun <get-firstFunctor> (): foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>'
-                                        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:firstFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> visibility:private [final]' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity> origin=null
-                                          receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.<get-firstFunctor>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> origin=null
-                                PROPERTY name:secondFunctor visibility:public modality:OPEN [val]
-                                  overridden:
-                                    public abstract secondFunctor: foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, G of foo.bar.Nat> declared in foo.bar.Nat
-                                  FIELD PROPERTY_BACKING_FIELD name:secondFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> visibility:private [final]
-                                    EXPRESSION_BODY
-                                      CALL 'public final fun contextOf <A> (context: @[NoInfer] A of kotlin.contextOf): @[NoInfer] A of kotlin.contextOf declared in kotlin' type=@[NoInfer] foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
-                                        TYPE_ARG A: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad>
-                                        ARG context: GET_VAR '$context-Functor: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
-                                  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-secondFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad>
-                                    VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad>
-                                    correspondingProperty: PROPERTY name:secondFunctor visibility:public modality:OPEN [val]
-                                    overridden:
-                                      public abstract fun <get-secondFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, G of foo.bar.Nat> declared in foo.bar.Nat
-                                    BLOCK_BODY
-                                      RETURN type=kotlin.Nothing from='public open fun <get-secondFunctor> (): foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>'
-                                        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:secondFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> visibility:private [final]' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
-                                          receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.<get-secondFunctor>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> origin=null
-                                CONSTRUCTOR visibility:public returnType:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> [primary]
-                                  BLOCK_BODY
-                                    DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-                                    INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity, M of foo.bar.toNormalMonad>]' type=kotlin.Unit
-                                FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-                                  VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-                                  overridden:
-                                    public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.Nat
-                                FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-                                  overridden:
-                                    public open fun hashCode (): kotlin.Int declared in foo.bar.Nat
-                                FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-                                  overridden:
-                                    public open fun toString (): kotlin.String declared in foo.bar.Nat
-                                FUN name:get visibility:public modality:OPEN returnType:kotlin.Any? [operator]
-                                  TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
-                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad>
-                                  VALUE_PARAMETER kind:Regular name:c index:1 type:kotlin.Any?
-                                  overridden:
-                                    public abstract fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.Nat
-                                  BLOCK_BODY
-                                    RETURN type=kotlin.Nothing from='public open fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>'
-                                      FUN_EXPR type=kotlin.Function1<A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get, kotlin.Any?> origin=LAMBDA
-                                        FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
-                                          VALUE_PARAMETER kind:Regular name:a index:0 type:A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get
-                                          BLOCK_BODY
-                                            RETURN type=kotlin.Nothing from='local final fun <anonymous> (a: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get'
-                                              CALL 'public abstract fun pure <A> (a: A of foo.bar.UsualMonad.pure): kotlin.Any? declared in foo.bar.UsualMonad' type=kotlin.Any? origin=null
-                                                TYPE_ARG A: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get
-                                                ARG <this>: GET_VAR '<this>: foo.bar.UsualMonad<M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad' type=foo.bar.UsualMonad<M of foo.bar.toNormalMonad> origin=IMPLICIT_ARGUMENT
-                                                ARG a: GET_VAR 'a: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get.<anonymous>' type=A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>.get origin=null
-                              CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.empty.<no name provided><M of foo.bar.toNormalMonad> origin=OBJECT_LITERAL
-                      FUN name:plus visibility:public modality:OPEN returnType:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad>
-                        VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided><M of foo.bar.toNormalMonad>
-                        overridden:
-                          public abstract fun plus (): kotlin.Any? declared in foo.bar.MonoidObject
-                        BLOCK_BODY
-                          RETURN type=kotlin.Nothing from='public open fun plus (): foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>'
-                            BLOCK type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> origin=OBJECT_LITERAL
-                              CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?, M of foo.bar.toNormalMonad>]
-                                thisReceiver: VALUE_PARAMETER INSTANCE_RECEIVER kind:DispatchReceiver name:<this> type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad>
-                                PROPERTY name:firstFunctor visibility:public modality:OPEN [val]
-                                  overridden:
-                                    public abstract firstFunctor: foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat
-                                  FIELD PROPERTY_BACKING_FIELD name:firstFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?> visibility:private [final]
-                                    EXPRESSION_BODY
-                                      CALL 'public final fun composeFunctors <C, D, E, F, G> (f: foo.bar.Functor<D of foo.bar.composeFunctors, E of foo.bar.composeFunctors, F of foo.bar.composeFunctors>, g: foo.bar.Functor<C of foo.bar.composeFunctors, D of foo.bar.composeFunctors, G of foo.bar.composeFunctors>): foo.bar.Functor<C of foo.bar.composeFunctors, E of foo.bar.composeFunctors, kotlin.Any?> declared in foo.bar' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?> origin=null
-                                        TYPE_ARG C: io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
-                                        TYPE_ARG D: io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
-                                        TYPE_ARG E: io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>
-                                        TYPE_ARG F: M of foo.bar.toNormalMonad
-                                        TYPE_ARG G: M of foo.bar.toNormalMonad
-                                        ARG f: GET_VAR '$context-Functor: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
-                                        ARG g: GET_VAR '$context-Functor: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
-                                  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-firstFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?>
-                                    VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad>
-                                    correspondingProperty: PROPERTY name:firstFunctor visibility:public modality:OPEN [val]
-                                    overridden:
-                                      public abstract fun <get-firstFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, F of foo.bar.Nat> declared in foo.bar.Nat
-                                    BLOCK_BODY
-                                      RETURN type=kotlin.Nothing from='public open fun <get-firstFunctor> (): foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>'
-                                        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:firstFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?> visibility:private [final]' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?> origin=null
-                                          receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.<get-firstFunctor>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> origin=null
-                                PROPERTY name:secondFunctor visibility:public modality:OPEN [val]
-                                  overridden:
-                                    public abstract secondFunctor: foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, G of foo.bar.Nat> declared in foo.bar.Nat
-                                  FIELD PROPERTY_BACKING_FIELD name:secondFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> visibility:private [final]
-                                    EXPRESSION_BODY
-                                      CALL 'public final fun contextOf <A> (context: @[NoInfer] A of kotlin.contextOf): @[NoInfer] A of kotlin.contextOf declared in kotlin' type=@[NoInfer] foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
-                                        TYPE_ARG A: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad>
-                                        ARG context: GET_VAR '$context-Functor: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
-                                  FUN DEFAULT_PROPERTY_ACCESSOR name:<get-secondFunctor> visibility:public modality:OPEN returnType:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad>
-                                    VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad>
-                                    correspondingProperty: PROPERTY name:secondFunctor visibility:public modality:OPEN [val]
-                                    overridden:
-                                      public abstract fun <get-secondFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, G of foo.bar.Nat> declared in foo.bar.Nat
-                                    BLOCK_BODY
-                                      RETURN type=kotlin.Nothing from='public open fun <get-secondFunctor> (): foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>'
-                                        GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:secondFunctor type:foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> visibility:private [final]' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toNormalMonad> origin=null
-                                          receiver: GET_VAR '<this>: foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.<get-secondFunctor>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> origin=null
-                                CONSTRUCTOR visibility:public returnType:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> [primary]
-                                  BLOCK_BODY
-                                    DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-                                    INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?, M of foo.bar.toNormalMonad>]' type=kotlin.Unit
-                                FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN returnType:kotlin.Boolean [fake_override,operator]
-                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-                                  VALUE_PARAMETER kind:Regular name:other index:1 type:kotlin.Any?
-                                  overridden:
-                                    public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in foo.bar.Nat
-                                FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN returnType:kotlin.Int [fake_override]
-                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-                                  overridden:
-                                    public open fun hashCode (): kotlin.Int declared in foo.bar.Nat
-                                FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN returnType:kotlin.String [fake_override]
-                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:kotlin.Any
-                                  overridden:
-                                    public open fun toString (): kotlin.String declared in foo.bar.Nat
-                                FUN name:get visibility:public modality:OPEN returnType:kotlin.Any? [operator]
-                                  TYPE_PARAMETER name:A index:0 variance: superTypes:[kotlin.Any?] reified:false
-                                  VALUE_PARAMETER kind:DispatchReceiver name:<this> index:0 type:foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad>
-                                  VALUE_PARAMETER kind:Regular name:c index:1 type:kotlin.Any?
-                                  overridden:
-                                    public abstract fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.Nat
-                                  BLOCK_BODY
-                                    RETURN type=kotlin.Nothing from='public open fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>'
-                                      FUN_EXPR type=kotlin.Function1<kotlin.Any?, kotlin.Any?> origin=LAMBDA
-                                        FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
-                                          VALUE_PARAMETER kind:Regular name:mma index:0 type:kotlin.Any?
-                                          BLOCK_BODY
-                                            RETURN type=kotlin.Nothing from='local final fun <anonymous> (mma: kotlin.Any?): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.get'
-                                              CALL 'public abstract fun bind <A, B> (<this>: kotlin.Any?, f: kotlin.Function1<A of foo.bar.UsualMonad.bind, kotlin.Any?>): kotlin.Any? declared in foo.bar.UsualMonad' type=kotlin.Any? origin=null
-                                                TYPE_ARG A: kotlin.Any?
-                                                TYPE_ARG B: A of foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.get
-                                                ARG <this>(index:0): GET_VAR '<this>: foo.bar.UsualMonad<M of foo.bar.toNormalMonad> declared in foo.bar.toNormalMonad' type=foo.bar.UsualMonad<M of foo.bar.toNormalMonad> origin=IMPLICIT_ARGUMENT
-                                                ARG <this>(index:1): GET_VAR 'mma: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.get.<anonymous>' type=kotlin.Any? origin=null
-                                                ARG f: FUN_EXPR type=kotlin.Function1<kotlin.Any?, kotlin.Any?> origin=LAMBDA
-                                                  FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
-                                                    VALUE_PARAMETER kind:Regular name:ma index:0 type:kotlin.Any?
-                                                    BLOCK_BODY
-                                                      RETURN type=kotlin.Nothing from='local final fun <anonymous> (ma: kotlin.Any?): kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.get.<anonymous>'
-                                                        GET_VAR 'ma: kotlin.Any? declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>.get.<anonymous>.<anonymous>' type=kotlin.Any? origin=null
-                              CONSTRUCTOR_CALL 'public constructor <init> () declared in foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided>' type=foo.bar.toNormalMonad.<anonymous>.<no name provided>.plus.<no name provided><M of foo.bar.toNormalMonad> origin=OBJECT_LITERAL
                       PROPERTY DELEGATED_MEMBER name:firstCategory visibility:public modality:OPEN [val]
                         overridden:
                           public abstract firstCategory: foo.bar.Category<kotlin.Any?> declared in foo.bar.MonoidObject
@@ -2813,7 +2833,7 @@ FILE fqName:foo.bar fileName:/category.kt
                     TYPE_ARG T: foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toUsualMonad>
                     TYPE_ARG R: kotlin.Any?
                     ARG with: CALL 'public abstract fun <get-secondFunctor> (): foo.bar.Functor<C of foo.bar.Nat, D of foo.bar.Nat, G of foo.bar.Nat> declared in foo.bar.Nat' type=foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toUsualMonad> origin=GET_PROPERTY
-                      ARG <this>: CALL 'public abstract fun plus (): kotlin.Any? declared in foo.bar.MonoidObject' type=foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?, M of foo.bar.toUsualMonad> origin=null
+                      ARG <this>: CALL 'public abstract fun <get-plus> (): kotlin.Any? declared in foo.bar.MonoidObject' type=foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?, M of foo.bar.toUsualMonad> origin=GET_PROPERTY
                         ARG <this>: GET_VAR '<this>: foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> declared in foo.bar.toUsualMonad' type=foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> origin=IMPLICIT_ARGUMENT
                     ARG block: FUN_EXPR type=kotlin.Function1<foo.bar.Functor<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, M of foo.bar.toUsualMonad>, kotlin.Any?> origin=LAMBDA
                       FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL returnType:kotlin.Any?
@@ -2834,7 +2854,7 @@ FILE fqName:foo.bar fileName:/category.kt
                             CALL 'public abstract fun invoke (p1: P1 of kotlin.Function1): R of kotlin.Function1 declared in kotlin.Function1' type=kotlin.Any? origin=INVOKE
                               ARG <this>: CALL 'public abstract fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.Nat' type=kotlin.Function1<kotlin.Any?, kotlin.Any?> origin=GET_ARRAY_ELEMENT
                                 TYPE_ARG A: B of foo.bar.toUsualMonad.<no name provided>.bind
-                                ARG <this>: CALL 'public abstract fun plus (): kotlin.Any? declared in foo.bar.MonoidObject' type=foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?, M of foo.bar.toUsualMonad> origin=null
+                                ARG <this>: CALL 'public abstract fun <get-plus> (): kotlin.Any? declared in foo.bar.MonoidObject' type=foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, kotlin.Any?, M of foo.bar.toUsualMonad> origin=GET_PROPERTY
                                   ARG <this>: GET_VAR '<this>: foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> declared in foo.bar.toUsualMonad' type=foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> origin=IMPLICIT_ARGUMENT
                                 ARG c: CALL 'public final fun idArrow <A> (): kotlin.Function1<A of foo.bar.idArrow, A of foo.bar.idArrow> declared in foo.bar' type=kotlin.Function1<B of foo.bar.toUsualMonad.<no name provided>.bind, B of foo.bar.toUsualMonad.<no name provided>.bind> origin=null
                                   TYPE_ARG A: B of foo.bar.toUsualMonad.<no name provided>.bind
@@ -2850,7 +2870,7 @@ FILE fqName:foo.bar fileName:/category.kt
                   CALL 'public abstract fun invoke (p1: P1 of kotlin.Function1): R of kotlin.Function1 declared in kotlin.Function1' type=kotlin.Any? origin=INVOKE
                     ARG <this>: CALL 'public abstract fun get <A> (c: kotlin.Any?): kotlin.Any? declared in foo.bar.Nat' type=kotlin.Function1<kotlin.Any?, kotlin.Any?> origin=GET_ARRAY_ELEMENT
                       TYPE_ARG A: A of foo.bar.toUsualMonad.<no name provided>.pure
-                      ARG <this>: CALL 'public abstract fun empty (): kotlin.Any? declared in foo.bar.MonoidObject' type=foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> origin=null
+                      ARG <this>: CALL 'public abstract fun <get-empty> (): kotlin.Any? declared in foo.bar.MonoidObject' type=foo.bar.Nat<io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Constructor<kotlin.Function1<*, *>>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> origin=GET_PROPERTY
                         ARG <this>: GET_VAR '<this>: foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> declared in foo.bar.toUsualMonad' type=foo.bar.MonoidObject<kotlin.Any?, io.github.kyay10.highkt.Constructor<kotlin.Any?>, io.github.kyay10.highkt.Identity, M of foo.bar.toUsualMonad> origin=IMPLICIT_ARGUMENT
                       ARG c: CALL 'public final fun idArrow <A> (): kotlin.Function1<A of foo.bar.idArrow, A of foo.bar.idArrow> declared in foo.bar' type=kotlin.Function1<A of foo.bar.toUsualMonad.<no name provided>.pure, A of foo.bar.toUsualMonad.<no name provided>.pure> origin=null
                         TYPE_ARG A: A of foo.bar.toUsualMonad.<no name provided>.pure

@@ -533,9 +533,11 @@ FILE: category.kt
 
     }
     public abstract interface MonoidObject<Cat, F, I, A> : R|foo/bar/TensorProduct<Cat, F, I>| {
-        public abstract fun empty(): R|{io/github/kyay10/highkt/K2<Cat, I, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<Cat, I>, A>|
+        public abstract val empty: R|{io/github/kyay10/highkt/K2<Cat, I, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<Cat, I>, A>|
+            public get(): R|{io/github/kyay10/highkt/K2<Cat, I, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<Cat, I>, A>|
 
-        public abstract fun plus(): R|{io/github/kyay10/highkt/K2<Cat, io/github/kyay10/highkt/K<F, {foo/bar/TypePair<A, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, A>, A>>, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<Cat, io/github/kyay10/highkt/K<F, {foo/bar/TypePair<A, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, A>, A>>>, A>|
+        public abstract val plus: R|{io/github/kyay10/highkt/K2<Cat, io/github/kyay10/highkt/K<F, {foo/bar/TypePair<A, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, A>, A>>, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<Cat, io/github/kyay10/highkt/K<F, {foo/bar/TypePair<A, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, A>, A>>>, A>|
+            public get(): R|{io/github/kyay10/highkt/K2<Cat, io/github/kyay10/highkt/K<F, {foo/bar/TypePair<A, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, A>, A>>, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<Cat, io/github/kyay10/highkt/K<F, {foo/bar/TypePair<A, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, A>, A>>>, A>|
 
     }
     public final typealias Monad<C, F> = R|foo/bar/MonoidObject<foo/bar/EndoK<C>, foo/bar/FunctorComposeK, io/github/kyay10/highkt/Identity, F>|
@@ -553,13 +555,13 @@ FILE: category.kt
             }
 
             public open override fun <A> pure(a: R|A|): R|io/github/kyay10/highkt/K<M, A>| {
-                ^pure this@R|foo/bar/toUsualMonad|.R|SubstitutionOverride<foo/bar/MonoidObject.empty: R|{io/github/kyay10/highkt/K2<foo/bar/EndoK<foo/bar/Arrow>, io/github/kyay10/highkt/Identity, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/EndoK<foo/bar/Arrow>, io/github/kyay10/highkt/Identity>, M>|>|().R|SubstitutionOverride<foo/bar/Nat.get: R|{foo/bar/Component<foo/bar/Arrow, io/github/kyay10/highkt/Identity, M, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Arrow, io/github/kyay10/highkt/K<io/github/kyay10/highkt/Identity, A>>, io/github/kyay10/highkt/K<M, A>>|>|<R|A|>(R|foo/bar/idArrow|<R|A|>()).R|SubstitutionOverride<kotlin/Function1.invoke: R|io/github/kyay10/highkt/K<M, A>|>|(R|<local>/a|)
+                ^pure this@R|foo/bar/toUsualMonad|.R|SubstitutionOverride<foo/bar/MonoidObject.empty: R|{io/github/kyay10/highkt/K2<foo/bar/EndoK<foo/bar/Arrow>, io/github/kyay10/highkt/Identity, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/EndoK<foo/bar/Arrow>, io/github/kyay10/highkt/Identity>, M>|>|.R|SubstitutionOverride<foo/bar/Nat.get: R|{foo/bar/Component<foo/bar/Arrow, io/github/kyay10/highkt/Identity, M, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Arrow, io/github/kyay10/highkt/K<io/github/kyay10/highkt/Identity, A>>, io/github/kyay10/highkt/K<M, A>>|>|<R|A|>(R|foo/bar/idArrow|<R|A|>()).R|SubstitutionOverride<kotlin/Function1.invoke: R|io/github/kyay10/highkt/K<M, A>|>|(R|<local>/a|)
             }
 
             public open override fun <A, B> R|io/github/kyay10/highkt/K<M, A>|.bind(f: R|(A) -> io/github/kyay10/highkt/K<M, B>|): R|io/github/kyay10/highkt/K<M, B>| {
-                ^bind R|kotlin/context|<R|foo/bar/Functor<foo/bar/Arrow, foo/bar/Arrow, M>|, R|io/github/kyay10/highkt/K<M, B>|>(this@R|foo/bar/toUsualMonad|.R|SubstitutionOverride<foo/bar/MonoidObject.plus: R|{io/github/kyay10/highkt/K2<foo/bar/EndoK<foo/bar/Arrow>, io/github/kyay10/highkt/K<foo/bar/FunctorComposeK, {foo/bar/TypePair<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, M>, M>>, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/EndoK<foo/bar/Arrow>, io/github/kyay10/highkt/K<foo/bar/FunctorComposeK, {foo/bar/TypePair<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, M>, M>>>, M>|>|().R|SubstitutionOverride<foo/bar/Nat.secondFunctor: R|foo/bar/Functor<foo/bar/Arrow, foo/bar/Arrow, M>|>|, <L> = context(<unused var>: R|foo/bar/Functor<foo/bar/Arrow, foo/bar/Arrow, M>|) context@fun <anonymous>(): R|io/github/kyay10/highkt/K<M, B>| <inline=Inline, kind=EXACTLY_ONCE>  {
+                ^bind R|kotlin/context|<R|foo/bar/Functor<foo/bar/Arrow, foo/bar/Arrow, M>|, R|io/github/kyay10/highkt/K<M, B>|>(this@R|foo/bar/toUsualMonad|.R|SubstitutionOverride<foo/bar/MonoidObject.plus: R|{io/github/kyay10/highkt/K2<foo/bar/EndoK<foo/bar/Arrow>, io/github/kyay10/highkt/K<foo/bar/FunctorComposeK, {foo/bar/TypePair<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, M>, M>>, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/EndoK<foo/bar/Arrow>, io/github/kyay10/highkt/K<foo/bar/FunctorComposeK, {foo/bar/TypePair<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, M>, M>>>, M>|>|.R|SubstitutionOverride<foo/bar/Nat.secondFunctor: R|foo/bar/Functor<foo/bar/Arrow, foo/bar/Arrow, M>|>|, <L> = context(<unused var>: R|foo/bar/Functor<foo/bar/Arrow, foo/bar/Arrow, M>|) context@fun <anonymous>(): R|io/github/kyay10/highkt/K<M, B>| <inline=Inline, kind=EXACTLY_ONCE>  {
                     lval mapped: R|io/github/kyay10/highkt/K<M, io/github/kyay10/highkt/K<M, B>>| = context(R|<local>/<unused var>|) R|foo/bar/lift|<R|{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>|, R|{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>|, R|M|, R|A|, R|io/github/kyay10/highkt/K<M, B>|>(R|<local>/f|).R|SubstitutionOverride<kotlin/Function1.invoke: R|io/github/kyay10/highkt/K<M, io/github/kyay10/highkt/K<M, B>>|>|(this@R|foo/bar/<anonymous>.bind|)
-                    ^ this@R|foo/bar/toUsualMonad|.R|SubstitutionOverride<foo/bar/MonoidObject.plus: R|{io/github/kyay10/highkt/K2<foo/bar/EndoK<foo/bar/Arrow>, io/github/kyay10/highkt/K<foo/bar/FunctorComposeK, {foo/bar/TypePair<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, M>, M>>, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/EndoK<foo/bar/Arrow>, io/github/kyay10/highkt/K<foo/bar/FunctorComposeK, {foo/bar/TypePair<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, M>, M>>>, M>|>|().R|SubstitutionOverride<foo/bar/Nat.get: R|{foo/bar/Component<foo/bar/Arrow, io/github/kyay10/highkt/K<foo/bar/FunctorComposeK, {foo/bar/TypePair<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, M>, M>>, M, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Arrow, io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/FunctorComposeK, {foo/bar/TypePair<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, M>, M>>, A>>, io/github/kyay10/highkt/K<M, A>>|>|<R|B|>(R|foo/bar/idArrow|<R|B|>()).R|SubstitutionOverride<kotlin/Function1.invoke: R|io/github/kyay10/highkt/K<M, B>|>|(R|<local>/mapped|)
+                    ^ this@R|foo/bar/toUsualMonad|.R|SubstitutionOverride<foo/bar/MonoidObject.plus: R|{io/github/kyay10/highkt/K2<foo/bar/EndoK<foo/bar/Arrow>, io/github/kyay10/highkt/K<foo/bar/FunctorComposeK, {foo/bar/TypePair<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, M>, M>>, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/EndoK<foo/bar/Arrow>, io/github/kyay10/highkt/K<foo/bar/FunctorComposeK, {foo/bar/TypePair<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, M>, M>>>, M>|>|.R|SubstitutionOverride<foo/bar/Nat.get: R|{foo/bar/Component<foo/bar/Arrow, io/github/kyay10/highkt/K<foo/bar/FunctorComposeK, {foo/bar/TypePair<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, M>, M>>, M, A>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/Arrow, io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<foo/bar/FunctorComposeK, {foo/bar/TypePair<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/TypePaired<*, *, *>>, M>, M>>, A>>, io/github/kyay10/highkt/K<M, A>>|>|<R|B|>(R|foo/bar/idArrow|<R|B|>()).R|SubstitutionOverride<kotlin/Function1.invoke: R|io/github/kyay10/highkt/K<M, B>|>|(R|<local>/mapped|)
                 }
                 )
             }
@@ -601,54 +603,52 @@ FILE: category.kt
 
                 private final field $$delegate_0: R|foo/bar/TensorProduct<foo/bar/EndoK<foo/bar/Arrow>, foo/bar/FunctorComposeK, io/github/kyay10/highkt/Identity>| = context(R|<local>/<unused var>|) R|foo/bar/endoFunctorComposeTensor|<R|{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>|>()
 
-                public open override fun empty(): R|foo/bar/<anonymous><M>| {
-                    ^empty object : R|foo/bar/Nat<foo/bar/Arrow, foo/bar/Arrow, io/github/kyay10/highkt/Identity, M>| {
-                        private constructor(): R|foo/bar/<anonymous><M>| {
-                            super<R|kotlin/Any|>()
-                        }
+                public open override val empty: R|foo/bar/<anonymous><M>| = object : R|foo/bar/Nat<foo/bar/Arrow, foo/bar/Arrow, io/github/kyay10/highkt/Identity, M>| {
+                    private constructor(): R|foo/bar/<anonymous><M>| {
+                        super<R|kotlin/Any|>()
+                    }
 
-                        public open override val firstFunctor: R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, io/github/kyay10/highkt/Identity>| = context(R|<local>/<unused var>|) R|foo/bar/identityFunctor|<R|{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>|>()
-                            public get(): R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, io/github/kyay10/highkt/Identity>|
+                    public open override val firstFunctor: R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, io/github/kyay10/highkt/Identity>| = context(R|<local>/<unused var>|) R|foo/bar/identityFunctor|<R|{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>|>()
+                        public get(): R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, io/github/kyay10/highkt/Identity>|
 
-                        public open override val secondFunctor: R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, M>| = context(R|<local>/<unused var>|) R|kotlin/contextOf|<R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, M>|>()
-                            public get(): R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, M>|
+                    public open override val secondFunctor: R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, M>| = context(R|<local>/<unused var>|) R|kotlin/contextOf|<R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, M>|>()
+                        public get(): R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, M>|
 
-                        public open override operator fun <A> get(c: R|(A) -> A|): R|(A) -> io/github/kyay10/highkt/K<M, A>| {
-                            ^get context@fun <anonymous>(a: R|A|): R|io/github/kyay10/highkt/K<M, A>| <inline=NoInline>  {
-                                ^ this@R|foo/bar/toNormalMonad|.R|SubstitutionOverride<foo/bar/UsualMonad.pure: R|io/github/kyay10/highkt/K<M, A>|>|<R|A|>(R|<local>/a|)
-                            }
-
+                    public open override operator fun <A> get(c: R|(A) -> A|): R|(A) -> io/github/kyay10/highkt/K<M, A>| {
+                        ^get fun <anonymous>(a: R|A|): R|io/github/kyay10/highkt/K<M, A>| <inline=NoInline>  {
+                            ^ this@R|foo/bar/toNormalMonad|.R|SubstitutionOverride<foo/bar/UsualMonad.pure: R|io/github/kyay10/highkt/K<M, A>|>|<R|A|>(R|<local>/a|)
                         }
 
                     }
 
                 }
 
-                public open override fun plus(): R|foo/bar/<anonymous><M>| {
-                    ^plus object : R|foo/bar/Nat<foo/bar/Arrow, foo/bar/Arrow, foo/bar/Compose<M, M>, M>| {
-                        private constructor(): R|foo/bar/<anonymous><M>| {
-                            super<R|kotlin/Any|>()
-                        }
+                    public get(): R|foo/bar/<anonymous><M>|
 
-                        public open override val firstFunctor: R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Compose<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/Composition<*, *, *>>, M>, M>>| = context(R|<local>/<unused var>|, R|<local>/<unused var>|) R|foo/bar/composeFunctors|<R|{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>|, R|{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>|, R|{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>|, R|M|, R|M|>()
-                            public get(): R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Compose<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/Composition<*, *, *>>, M>, M>>|
+                public open override val plus: R|foo/bar/<anonymous><M>| = object : R|foo/bar/Nat<foo/bar/Arrow, foo/bar/Arrow, foo/bar/Compose<M, M>, M>| {
+                    private constructor(): R|foo/bar/<anonymous><M>| {
+                        super<R|kotlin/Any|>()
+                    }
 
-                        public open override val secondFunctor: R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, M>| = context(R|<local>/<unused var>|) R|kotlin/contextOf|<R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, M>|>()
-                            public get(): R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, M>|
+                    public open override val firstFunctor: R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Compose<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/Composition<*, *, *>>, M>, M>>| = context(R|<local>/<unused var>|, R|<local>/<unused var>|) R|foo/bar/composeFunctors|<R|{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>|, R|{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>|, R|{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>|, R|M|, R|M|>()
+                        public get(): R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Compose<M, M>=} io/github/kyay10/highkt/K<io/github/kyay10/highkt/K<io/github/kyay10/highkt/Constructor<foo/bar/Composition<*, *, *>>, M>, M>>|
 
-                        public open override operator fun <A> get(c: R|(A) -> A|): R|(io/github/kyay10/highkt/K<M, io/github/kyay10/highkt/K<M, A>>) -> io/github/kyay10/highkt/K<M, A>| {
-                            ^get context@fun <anonymous>(mma: R|io/github/kyay10/highkt/K<M, io/github/kyay10/highkt/K<M, A>>|): R|io/github/kyay10/highkt/K<M, A>| <inline=NoInline>  {
-                                ^ (this@R|foo/bar/toNormalMonad|, R|<local>/mma|).R|SubstitutionOverride<foo/bar/UsualMonad.bind: R|io/github/kyay10/highkt/K<M, B>|>|<R|io/github/kyay10/highkt/K<M, A>|, R|A|>(<L> = bind@fun <anonymous>(ma: R|io/github/kyay10/highkt/K<M, A>|): R|io/github/kyay10/highkt/K<M, A>| <inline=NoInline>  {
-                                    ^ R|<local>/ma|
-                                }
-                                )
+                    public open override val secondFunctor: R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, M>| = context(R|<local>/<unused var>|) R|kotlin/contextOf|<R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, M>|>()
+                        public get(): R|foo/bar/Functor<{foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, {foo/bar/Arrow=} io/github/kyay10/highkt/Constructor<(*) -> *>, M>|
+
+                    public open override operator fun <A> get(c: R|(A) -> A|): R|(io/github/kyay10/highkt/K<M, io/github/kyay10/highkt/K<M, A>>) -> io/github/kyay10/highkt/K<M, A>| {
+                        ^get fun <anonymous>(mma: R|io/github/kyay10/highkt/K<M, io/github/kyay10/highkt/K<M, A>>|): R|io/github/kyay10/highkt/K<M, A>| <inline=NoInline>  {
+                            ^ (this@R|foo/bar/toNormalMonad|, R|<local>/mma|).R|SubstitutionOverride<foo/bar/UsualMonad.bind: R|io/github/kyay10/highkt/K<M, B>|>|<R|io/github/kyay10/highkt/K<M, A>|, R|A|>(<L> = bind@fun <anonymous>(ma: R|io/github/kyay10/highkt/K<M, A>|): R|io/github/kyay10/highkt/K<M, A>| <inline=NoInline>  {
+                                ^ R|<local>/ma|
                             }
-
+                            )
                         }
 
                     }
 
                 }
+
+                    public get(): R|foo/bar/<anonymous><M>|
 
             }
 

@@ -277,8 +277,8 @@ fun <Cat> endoFunctorComposeTensor(): TensorProduct<EndoK<Cat>, FunctorComposeK,
   }
 
 interface MonoidObject<Cat, F, I, A> : TensorProduct<Cat, F, I> {
-  fun empty(): K2<Cat, I, A>
-  fun plus(): K2<Cat, K<F, TypePair<A, A>>, A>
+  val empty: K2<Cat, I, A>
+  val plus: K2<Cat, K<F, TypePair<A, A>>, A>
 }
 
 typealias Monad<C, F> = MonoidObject<EndoK<C>, FunctorComposeK, Identity, F>
@@ -290,10 +290,10 @@ interface UsualMonad<M> {
 }
 
 fun <M> NormalMonad<M>.toUsualMonad(): UsualMonad<M> = object : UsualMonad<M> {
-  override fun <A> pure(a: A) = empty()[idArrow<A>()](a)
-  override fun <A, B> K<M, A>.bind(f: (A) -> K<M, B>) = context(plus().secondFunctor) {
+  override fun <A> pure(a: A) = empty[idArrow<A>()](a)
+  override fun <A, B> K<M, A>.bind(f: (A) -> K<M, B>) = context(plus.secondFunctor) {
     val mapped = lift(f)(this)
-    plus()[idArrow<B>()](mapped)
+    plus[idArrow<B>()](mapped)
   }
 }
 
@@ -306,13 +306,13 @@ fun <M> UsualMonad<M>.toNormalFunctor(): Functor<Arrow, Arrow, M> = object : Fun
 fun <M> UsualMonad<M>.toNormalMonad(): NormalMonad<M> = context(toNormalFunctor(), ArrowCategory) {
   object : NormalMonad<M>,
     TensorProduct<EndoK<Arrow>, FunctorComposeK, Identity> by endoFunctorComposeTensor<Arrow>() {
-    override fun empty() = object : Nat<Arrow, Arrow, Identity, M> {
+    override val empty = object : Nat<Arrow, Arrow, Identity, M> {
       override val firstFunctor = identityFunctor<Arrow>()
       override val secondFunctor = contextOf<Functor<Arrow, Arrow, M>>()
       override fun <A> get(c: (A) -> A) = { a: A -> pure(a) }
     }
 
-    override fun plus() = object : Nat<Arrow, Arrow, Compose<M, M>, M> {
+    override val plus = object : Nat<Arrow, Arrow, Compose<M, M>, M> {
       override val firstFunctor = composeFunctors<Arrow, Arrow, Arrow, M, M>()
       override val secondFunctor = contextOf<Functor<Arrow, Arrow, M>>()
       override fun <A> get(c: (A) -> A) = { mma: K<M, K<M, A>> -> mma.bind { ma -> ma } }
