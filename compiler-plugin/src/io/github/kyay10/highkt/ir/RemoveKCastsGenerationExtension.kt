@@ -7,6 +7,8 @@ import org.jetbrains.kotlin.backend.jvm.overrides.IrJavaIncompatibilityRulesOver
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
+import org.jetbrains.kotlin.ir.declarations.IrProperty
+import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperator
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall
@@ -18,9 +20,9 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.IrTypeSystemContextImpl
 import org.jetbrains.kotlin.ir.types.impl.buildSimpleType
 import org.jetbrains.kotlin.ir.util.erasedUpperBound
-import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.ir.util.nonDispatchParameters
+import org.jetbrains.kotlin.ir.util.propertyIfAccessor
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.IrTypeTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
@@ -93,7 +95,7 @@ class FixupOverriddenFunctionsVisitor(pluginContext: IrPluginContext) : IrVisito
 
   @OptIn(UnsafeDuringIrConstructionAPI::class)
   override fun visitClass(declaration: IrClass) {
-    for ((_, functions) in declaration.functions.groupBy { it.name }) {
+    for ((_, functions) in declaration.allFunctions.groupBy { it.name }) {
       val fakeOverrides = functions.filter { it.isFakeOverride }
       val realFunctions = functions.filterNot { it.isFakeOverride }
       for (realFunction in realFunctions) {
@@ -121,7 +123,7 @@ class FixupOverriddenFunctionsVisitor(pluginContext: IrPluginContext) : IrVisito
               realFunction.overriddenSymbols += fakeOverride.overriddenSymbols
               parameterTypes = realFunction.nonDispatchParameters.map { it.type }
               returnType = realFunction.returnType
-              declaration.declarations.remove(fakeOverride)
+              declaration.declarations.remove(fakeOverride.propertyIfAccessor)
             }
 
             OverrideCompatibilityInfo.Result.CONFLICT -> Unit
@@ -135,3 +137,13 @@ class FixupOverriddenFunctionsVisitor(pluginContext: IrPluginContext) : IrVisito
     super.visitClass(declaration)
   }
 }
+
+@OptIn(UnsafeDuringIrConstructionAPI::class)
+val IrClass.allFunctions: Sequence<IrSimpleFunction>
+  get() = declarations.asSequence().flatMap {
+    when (it) {
+      is IrSimpleFunction -> listOf(it)
+      is IrProperty -> listOfNotNull(it.getter, it.setter)
+      else -> emptyList()
+    }
+  }

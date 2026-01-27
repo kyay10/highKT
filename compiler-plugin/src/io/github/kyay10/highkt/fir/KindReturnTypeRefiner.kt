@@ -80,7 +80,7 @@ class KindReturnTypeRefiner(session: FirSession) : FirExpressionResolutionExtens
     sessionHolder: SessionAndScopeSessionHolder,
     containingCallableSymbol: FirBasedSymbol<*>,
   ): List<ImplicitExtensionReceiverValue> {
-    // TODO figure out how to make resolution see the member scopes of K types so that this is unnecessary
+    // This exists as a fallback in case scope replacement ever breaks
     functionCall.replaceConeTypeOrNull(functionCall.resolvedType.applyKOrSelf())
     return emptyList()
   }
