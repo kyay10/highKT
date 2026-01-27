@@ -140,10 +140,11 @@ class FixupOverriddenFunctionsVisitor(pluginContext: IrPluginContext) : IrVisito
 
 @OptIn(UnsafeDuringIrConstructionAPI::class)
 val IrClass.allFunctions: Sequence<IrSimpleFunction>
-  get() = declarations.asSequence().flatMap {
-    when (it) {
-      is IrSimpleFunction -> listOf(it)
-      is IrProperty -> listOfNotNull(it.getter, it.setter)
-      else -> emptyList()
+  get() =
+    declarations.asSequence().flatMap {
+      when (it) {
+        is IrSimpleFunction -> listOf(it)
+        is IrProperty -> listOfNotNull(it.getter, it.setter)
+        else -> emptyList()
+      }
     }
-  }

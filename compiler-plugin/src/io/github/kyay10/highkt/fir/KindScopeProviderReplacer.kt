@@ -80,7 +80,7 @@ class KindScopeProviderReplacer(session: FirSession) : FirStatusTransformerExten
                   scopeSession,
                   ScopeSessionMap(useSiteSession, scopeSession).apply { putAll(scopeSession.scopes()) },
                 )
-              } catch(_: Exception) { }
+              } catch (_: Exception) {}
               originalDecorator(klass, declaredMemberScope, useSiteSession, scopeSession, memberRequiredPhase)
             }
           this.symbol = symbol
