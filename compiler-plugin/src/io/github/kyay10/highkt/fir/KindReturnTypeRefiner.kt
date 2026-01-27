@@ -14,6 +14,7 @@ import org.jetbrains.kotlin.fir.scopes.FirOverrideChecker
 import org.jetbrains.kotlin.fir.scopes.impl.FirStandardOverrideChecker
 import org.jetbrains.kotlin.fir.symbols.ConeTypeParameterLookupTag
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
+import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.ConeClassLikeLookupTagImpl
 import org.jetbrains.kotlin.fir.symbols.impl.FirTypeParameterSymbol
 import org.jetbrains.kotlin.fir.types.ConeCapturedType
@@ -39,6 +40,7 @@ import org.jetbrains.kotlin.fir.types.correspondingSupertypesCache
 import org.jetbrains.kotlin.fir.types.getConstructor
 import org.jetbrains.kotlin.fir.types.isNullableAny
 import org.jetbrains.kotlin.fir.types.replaceType
+import org.jetbrains.kotlin.fir.types.resolvedType
 import org.jetbrains.kotlin.fir.types.type
 import org.jetbrains.kotlin.fir.types.unwrapToSimpleTypeUsingLowerBound
 import org.jetbrains.kotlin.fir.types.variance
@@ -72,11 +74,16 @@ class KindReturnTypeRefiner(session: FirSession) : FirExpressionResolutionExtens
     session.register(FirOverrideChecker::class, FirStandardOverrideChecker(session))
   }
 
+  @OptIn(SymbolInternals::class)
   override fun addNewImplicitReceivers(
     functionCall: FirFunctionCall,
     sessionHolder: SessionAndScopeSessionHolder,
     containingCallableSymbol: FirBasedSymbol<*>,
-  ): List<ImplicitExtensionReceiverValue> = emptyList()
+  ): List<ImplicitExtensionReceiverValue> {
+    // This exists as a fallback in case scope replacement ever breaks
+    functionCall.replaceConeTypeOrNull(functionCall.resolvedType.applyKOrSelf())
+    return emptyList()
+  }
 }
 
 private fun TypeComponents(inferenceContext: ConeInferenceContext): TypeComponents =

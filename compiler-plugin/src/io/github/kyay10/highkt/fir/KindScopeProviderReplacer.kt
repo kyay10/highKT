@@ -75,10 +75,12 @@ class KindScopeProviderReplacer(session: FirSession) : FirStatusTransformerExten
         buildRegularClassCopy(symbol.fir) {
           scopeProvider =
             FirKotlinScopeProvider { klass, declaredMemberScope, useSiteSession, scopeSession, memberRequiredPhase ->
-              scopesField.set(
-                scopeSession,
-                ScopeSessionMap(useSiteSession, scopeSession).apply { putAll(scopeSession.scopes()) },
-              )
+              try {
+                scopesField.set(
+                  scopeSession,
+                  ScopeSessionMap(useSiteSession, scopeSession).apply { putAll(scopeSession.scopes()) },
+                )
+              } catch(_: Exception) { }
               originalDecorator(klass, declaredMemberScope, useSiteSession, scopeSession, memberRequiredPhase)
             }
           this.symbol = symbol
